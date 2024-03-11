@@ -98,4 +98,37 @@ class PropertyController extends Controller
         return view('property_division.sc-slc', ['stock_card' => $stock_card]);
     }
 
+    // ACCOUNTING DIVISION
+
+    public function getDataForSLC()
+    {
+        $stock_card = PropertyModel::get();
+
+        return view('accounting_division.all', ['stock_card' => $stock_card]);
+    }
+
+    public function edit_SLC(Request $request, $id)
+    {
+        // Retrieve all input data
+        $data = $request->all();
+
+        // Find the stock card by ID
+        $stockCard = PropertyModel::find($id);
+
+        // Check if the stock card exists
+        if (!$stockCard) {
+            return redirect()->back()->with('error', 'Stock Card not found.');
+        }
+
+        // Update the stock card attributes
+        $stockCard->update($data);
+
+        // Check if the update was successful
+        if ($stockCard) {
+            return redirect('/all-slc')->with('success', 'Stock Card item ' . $stockCard->stock_no . ' updated successfully.');
+        } else {
+            return redirect()->back()->with('error', 'No changes detected or failed to update item.');
+        }
+    }
+
 }

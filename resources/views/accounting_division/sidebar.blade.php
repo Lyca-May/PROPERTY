@@ -52,37 +52,15 @@
                 <ul>
                     <div class="logo">
                         <a>
-                            <img src="{{asset('assets/images/accounting.png')}}" alt="" / style="height: 90px; width: 90px;">
+                            <img src="{{asset('assets/images/accounting.png')}}" alt="" style="height: 100px; width: 100px;">
                         </a>
                         <div>
-                            <span>PROPERTY AND SUPPLIES</span>
+                            <span>ACCOUNTING</span>
                         </div>
                     </div>
                     <li class="label">Main</li>
                     <li><a class="sideba"><i class="ti-home"></i> Dashboard</a></li>
-
-                    <li><a class="sidebar-sub-toggle"><i class="ti-target"></i> Supplies Ledger Cards <span
-                        class="sidebar-collapse-icon ti-angle-down"></span></a>
-                        <ul>
-                            <li><a href="page-login.html">Form</a></li>
-                            <li><a href="page-register.html">All</a></li>
-                        </ul>
-                    </li>
-                    {{-- <li><a class="sidebar-sub-toggle" href="#"><i class="ti-layout-grid4-alt"></i> Semi-Expendable Property Cards <span class="sidebar-collapse-icon ti-angle-down"></span></a>
-                        <ul class="sidebar-dropdown">
-                            <li><a href="">Form</a></li>
-                            <li><a href="">All</a></li>
-                        </ul>
-                    </li> --}}
-
-                    {{-- <li><a class="sidebar-sub-toggle" href="#"><i class="ti-layout-grid4-alt"></i> Property, Plants, and Equipment Cards <span class="sidebar-collapse-icon ti-angle-down"></span></a>
-                        <ul class="sidebar-dropdown">
-                            <li><a href="table-basic.html">Form</a></li>
-                            <li><a href="">All</a></li>
-                            <li><a href="">PPE and PPELC</a></li>
-                        </ul>
-                    </li>--}}
-
+                    <li><a href="{{url('/all-slc')}}">View All SLC</a></li>
                     <li>
                         <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             <i class="ti-close"></i> Logout

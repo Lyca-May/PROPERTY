@@ -48,3 +48,7 @@ Route::get('/all-forms', [PropertyController::class, 'getStockCards']);
 Route::get('/view-slc/{id}', [PropertyController::class, 'viewSLC']);
 Route::post('/edit-stock-card/{id}', [PropertyController::class, 'edit_stock_card']);
 
+
+//ACCOUNTING DIVISION
+Route::get('/all-slc', [PropertyController::class, 'getDataForSLC']);
+Route::post('/edit-slc/{id}', [PropertyController::class, 'edit_SLC']);
