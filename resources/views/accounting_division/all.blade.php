@@ -63,7 +63,7 @@
 
                 {{-- <section id="main-content"> --}}
                 {{-- Top-left: Card with Add Button --}}
-                <div class="container">
+                {{-- <div class="container">
                     <div class="row">
                         <div class="col-md-12 mx-auto">
                             <a href="{{ url('/stock-card-form') }}" class="card">
@@ -72,7 +72,7 @@
                             </a>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 <hr>
 
 
@@ -97,7 +97,7 @@
                                     <h3 class="card-title">ENTITY NAME: {{ $stock_cards->entity_name }}</h3>
                                     <h3 class="card-title">FUND CLUSTERE: {{ $stock_cards->fund_cluster }}</h3>
                                     <h3 class="card-text small">ITEM NAME: {{ $stock_cards->item_name }}</h3>
-                                    <p class="card-text small">ITEMCODE/STOCK NO: {{ $stock_cards->item_no }}</p>
+                                    <p class="card-text small">ITEMCODE/STOCK NO: {{ $stock_cards->item_code }}</p>
                                 </div>
                                 <div class="go-corner" href="#">
                                     <div class="go-arrow">
@@ -112,7 +112,7 @@
                                 <!-- Added modal-custom-width class -->
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="editItemModalLabel"></h5>
+                                        <h5 class="modal-title" id="editItemModalLabel">Supplies Ledger Card</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
@@ -178,10 +178,10 @@
                                                                             </td>
                                                                             <th scope="row">Item Code:</th>
                                                                             <td>
-                                                                                <input type="text" name="item_no"
+                                                                                <input type="text" name="item_code"
                                                                                     class="form-control text-line"
                                                                                     style="padding-top: 4px; padding-bottom: 4px;"
-                                                                                    value="{{ $stock_cards->item_no }}">
+                                                                                    value="{{ $stock_cards->item_code }}">
                                                                                 <input type="hidden" name="stock_no"
                                                                                     class="form-control text-line"
                                                                                     style="padding-top: 4px; padding-bottom: 4px;"
@@ -490,37 +490,47 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-
+    @if (session('success'))
     <script>
-        // Example of using SweetAlert with a rectangle style and blue color
-        @if(session('success'))
-            Swal.fire({
-                icon: 'success',
-                title: 'Success',
-                text: '{{ session('success') }}',
-                customClass: {
-                    container: 'custom-alert-container',
-                    popup: 'custom-alert-popup',
-                    title: 'custom-alert-title',
-                    confirmButton: 'custom-alert-button'
-                }
-            });
-        @endif
-
-        @if(session('failed'))
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: '{{ session('failed') }}',
-                customClass: {
-                    container: 'custom-alert-container',
-                    popup: 'custom-alert-popup',
-                    title: 'custom-alert-title',
-                    confirmButton: 'custom-alert-button'
-                }
-            });
-        @endif
+        Swal.fire({
+            icon: 'success',
+            title: 'Success!',
+            text: '{{ session('success') }}',
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            background: '#8cc63f',
+            iconColor: '#ffffff',
+            customClass: {
+                title: 'text-white',
+                content: 'text-white'
+            }
+        });
     </script>
+@endif
+
+@if (session('failed'))
+    <script>
+        Swal.fire({
+            icon: 'failed',
+            title: 'failed!',
+            text: '{{ session('failed') }}',
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            background: '#dc3545',
+            iconColor: '#ffffff',
+            customClass: {
+                title: 'text-white',
+                content: 'text-white'
+            }
+        });
+    </script>
+@endif
     {{-- Footer --}}
     @include('footer')
 

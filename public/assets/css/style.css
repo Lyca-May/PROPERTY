@@ -828,7 +828,7 @@ a.dt-button.active:not(.disabled) {
 }
 
 .logo {
-    background: #343957;
+    background: #374386;
     display: inline-block;
     padding: 15px 0;
     text-align: center;
@@ -837,7 +837,7 @@ a.dt-button.active:not(.disabled) {
 }
 
 .logo span {
-    color: rgba(160, 180, 200, 0.85);
+    color: rgba(255, 255, 255, 0.85);
     font-size: 20px;
     font-weight: 700;
 }

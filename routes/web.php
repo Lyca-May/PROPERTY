@@ -34,7 +34,9 @@ Route::get('/dash-accounting', function () {
 Route::get('/stock-card-form', function () {
     return view('property_division.stock-card-form');
 });
-
+Route::get('/property-card-form', function () {
+    return view('property_division.property-card-form');
+});
 
 //AUTHENTICATION
 Route::post('/login', [AuthController::class, 'login'])->name('login');
@@ -42,13 +44,24 @@ Route::post('/reg-account', [AuthController::class, 'register'])->name('register
 Route::post('/forgot-account', [AuthController::class, 'resetPassword'])->name('password.reset');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-//PROPERTY DIVISION
+// PROPERTY DIVISION
+// stock card
 Route::post('/add-stock-card', [PropertyController::class, 'addStockCard'])->name('add-stock-card');
 Route::get('/all-forms', [PropertyController::class, 'getStockCards']);
 Route::get('/view-slc/{id}', [PropertyController::class, 'viewSLC']);
 Route::post('/edit-stock-card/{id}', [PropertyController::class, 'edit_stock_card']);
 
+// property card
+Route::post('/add-property-card', [PropertyController::class, 'addPropertyCard'])->name('add-property-card');
+Route::get('/all-property', [PropertyController::class, 'getPropertyCards']);
+Route::get('/view-ppelc/{id}', [PropertyController::class, 'viewPPELC']);
+Route::get('/printable-prop-page/{id}', [PropertyController::class, 'printPropPage']);
+Route::post('/edit-property-card/{id}', [PropertyController::class, 'edit_property_card']);
 
 //ACCOUNTING DIVISION
+// stock card
 Route::get('/all-slc', [PropertyController::class, 'getDataForSLC']);
 Route::post('/edit-slc/{id}', [PropertyController::class, 'edit_SLC']);
+//ppelc
+Route::get('/all-ppelc', [PropertyController::class, 'getDataForPPELC']);
+Route::post('/edit-ppelc/{id}', [PropertyController::class, 'edit_PPELC']);

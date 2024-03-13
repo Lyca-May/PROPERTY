@@ -8,7 +8,7 @@
     <title>PROPERTY AND SUPPLIES</title>
     <!-- ================= Favicon ================== -->
     <!-- Standard -->
-    <link rel="shortcut icon" href="{{asset('assets/images/property.jpg')}}">
+    <link rel="shortcut icon" href="{{ asset('assets/images/property.jpg') }}">
     <!-- Retina iPad Touch Icon-->
     <link rel="apple-touch-icon" sizes="144x144" href="http://placehold.it/144.png/000/fff">
     <!-- Retina iPhone Touch Icon-->
@@ -51,10 +51,16 @@
             <div class="nano-content">
                 <ul>
                     <div class="logo">
-                        <a>
-                            <img src="{{asset('assets/images/property.png')}}" alt="" / style="height: 90px; width: 90px;">
-                        </a>
                         <div>
+                            <br>
+                            <span>
+                            <a>
+                                <img src="{{ asset('assets/images/pns.png') }}" alt="" /
+                                    style="height: 90px; width: 90px;">
+                            </a>
+                            </span>
+                            <br>
+                            <br>
                             <span>PROPERTY AND SUPPLIES</span>
                         </div>
                     </div>
@@ -62,30 +68,40 @@
                     <li><a class="sideba"><i class="ti-home"></i> Dashboard</a></li>
 
 
-                    <li><a class="sidebar-sub-toggle" href="#"><i class="ti-layout-grid4-alt"></i> Stock Cards <span class="sidebar-collapse-icon ti-angle-down"></span></a>
+                    <li>
+                        <a class="sidebar-sub-toggle" href="#">
+                            <i class="ti-layout-grid4-alt"></i> Stock Cards
+                            <span class="sidebar-collapse-icon ti-angle-down"></span>
+                        </a>
                         <ul class="sidebar-dropdown">
-                            <li><a href="{{url('/stock-card-form')}}">Form</a></li>
-                            <li><a href="{{url('all-forms')}}">All</a></li>
+                            <li><a href="{{ url('/stock-card-form') }}">Form</a></li>
+                            <li><a href="{{ url('all-forms') }}">All</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="sidebar-sub-toggle" href="#">
+                            <i class="ti-layout-grid4-alt"></i> Semi-Expendable Cards
+                            <span class="sidebar-collapse-icon ti-angle-down"></span>
+                        </a>
+                        <ul class="sidebar-dropdown">
+                            <li><a href="{{ url('/stock-card-form') }}">Form</a></li>
+                            <li><a href="{{ url('all-forms') }}">All</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="sidebar-sub-toggle" href="#">
+                            <i class="ti-layout-grid4-alt"></i> Property Cards
+                            <span class="sidebar-collapse-icon ti-angle-down"></span>
+                        </a>
+                        <ul class="sidebar-dropdown">
+                            <li><a href="{{ url('/property-card-form') }}">Form</a></li>
+                            <li><a href="{{ url('/all-property') }}">All</a></li>
                         </ul>
                     </li>
 
-                    {{-- <li><a class="sidebar-sub-toggle" href="#"><i class="ti-layout-grid4-alt"></i> Semi-Expendable Property Cards <span class="sidebar-collapse-icon ti-angle-down"></span></a>
-                        <ul class="sidebar-dropdown">
-                            <li><a href="">Form</a></li>
-                            <li><a href="">All</a></li>
-                        </ul>
-                    </li> --}}
-
-                    {{-- <li><a class="sidebar-sub-toggle" href="#"><i class="ti-layout-grid4-alt"></i> Property, Plants, and Equipment Cards <span class="sidebar-collapse-icon ti-angle-down"></span></a>
-                        <ul class="sidebar-dropdown">
-                            <li><a href="table-basic.html">Form</a></li>
-                            <li><a href="">All</a></li>
-                            <li><a href="">PPE and PPELC</a></li>
-                        </ul>
-                    </li>--}}
-
                     <li>
-                        <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <a href="#"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             <i class="ti-close"></i> Logout
                         </a>
                     </li>
@@ -99,25 +115,42 @@
         </div>
     </div>
 
-    <script src="{{asset('assets/js/lib/jquery.min.js')}}"></script>
-    <script src="{{asset('assets/js/lib/jquery.nanoscroller.min.js')}}"></script>
-    <script src="{{asset('assets/js/lib/menubar/sidebar.js')}}"></script>
-    <script src="{{asset('assets/js/lib/preloader/pace.min.js')}}"></script>
-    <script src="{{asset('assets/js/lib/bootstrap.min.js')}}"></script>
-    <script src="{{asset('assets/js/scripts.js')}}"></script>
-    <script src="{{asset('assets/js/lib/calendar-2/moment.latest.min.js')}}"></script>
-    <script src="{{asset('assets/js/lib/calendar-2/pignose.calendar.min.js')}}"></script>
-    <script src="{{asset('assets/js/lib/calendar-2/pignose.init.js')}}"></script>
-    <script src="{{asset('assets/js/lib/weather/jquery.simpleWeather.min.js')}}"></script>
-    <script src="{{asset('assets/js/lib/weather/weather-init.js')}}"></script>
-    <script src="{{asset('assets/js/lib/circle-progress/circle-progress.min.js')}}"></script>
-    <script src="{{asset('assets/js/lib/circle-progress/circle-progress-init.js')}}"></script>
-    <script src="{{asset('assets/js/lib/chartist/chartist.min.js')}}"></script>
-    <script src="{{asset('assets/js/lib/sparklinechart/jquery.sparkline.min.js')}}"></script>
-    <script src="{{asset('assets/js/lib/sparklinechart/sparkline.init.js')}}"></script>
-    <script src="{{asset('assets/js/lib/owl-carousel/owl.carousel.min.js')}}"></script>
-    <script src="{{asset('assets/js/lib/owl-carousel/owl.carousel-init.js')}}"></script>
-    <script src="{{asset('assets/js/dashboard2.js')}}"></script>
+    <script src="{{ asset('assets/js/lib/jquery.min.js') }}"></script>
+    {{-- <script src="{{ asset('assets/js/lib/jquery.nanoscroller.min.js') }}"></script>
+    <script src="{{ asset('assets/js/lib/menubar/sidebar.js') }}"></script>
+    <script src="{{ asset('assets/js/lib/preloader/pace.min.js') }}"></script> --}}
+    <script src="{{ asset('assets/js/lib/bootstrap.min.js') }}"></script>
+    {{-- <script src="{{ asset('assets/js/scripts.js') }}"></script> --}}
+    {{-- <script src="{{ asset('assets/js/lib/calendar-2/moment.latest.min.js') }}"></script>
+    <script src="{{ asset('assets/js/lib/calendar-2/pignose.calendar.min.js') }}"></script>
+    <script src="{{ asset('assets/js/lib/calendar-2/pignose.init.js') }}"></script>
+    <script src="{{ asset('assets/js/lib/weather/jquery.simpleWeather.min.js') }}"></script>
+    <script src="{{ asset('assets/js/lib/weather/weather-init.js') }}"></script>
+    <script src="{{ asset('assets/js/lib/circle-progress/circle-progress.min.js') }}"></script>
+    <script src="{{ asset('assets/js/lib/circle-progress/circle-progress-init.js') }}"></script>
+    <script src="{{ asset('assets/js/lib/chartist/chartist.min.js') }}"></script>
+    <script src="{{ asset('assets/js/lib/sparklinechart/jquery.sparkline.min.js') }}"></script>
+    <script src="{{ asset('assets/js/lib/sparklinechart/sparkline.init.js') }}"></script>
+    <script src="{{ asset('assets/js/lib/owl-carousel/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('assets/js/lib/owl-carousel/owl.carousel-init.js') }}"></script> --}}
+    {{-- <script src="{{ asset('assets/js/dashboard2.js') }}"></script> --}}
+
+    <script>
+        $(document).ready(function() {
+            // Toggle sidebar dropdown
+            $('.sidebar-sub-toggle').click(function(e) {
+                e.preventDefault();
+                var $dropdown = $(this).next('.sidebar-dropdown');
+                if ($dropdown.is(':visible')) {
+                    $dropdown.slideUp();
+                } else {
+                    $('.sidebar-dropdown').slideUp();
+                    $dropdown.slideDown();
+                }
+            });
+        });
+    </script>
 
 </body>
+
 </html>

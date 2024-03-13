@@ -13,7 +13,7 @@
     left: 0;
     bottom: 0;
     width: 250px;
-    background: #343957;
+    background: #374386;
     /* font-size: 14px; */
     z-index: 100;
     overflow: auto;
@@ -56,7 +56,7 @@
     font-size: 14px;
     /* height: 30px; */
     line-height: 40px;
-    color: rgba(160, 180, 200, 0.55);
+    color: #374386;
     text-transform: capitalize;
     font-weight: normal;
 }
@@ -72,7 +72,7 @@
 
 .sidebar .nano-content>ul li>ul {
     display: none;
-    background: rgba(52,57,87,0.2)!important;
+    background: rgba(100, 113, 187, 0.75)!important;
 }
 
 .sidebar .nano-content>ul li.open>ul {
@@ -86,7 +86,7 @@
     padding: 10px;
     line-height: 30px;
     border-bottom: none;
-    background: #343957;
+    background: #374386;
     text-decoration: none;
     -webkit-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;

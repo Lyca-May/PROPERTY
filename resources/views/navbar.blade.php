@@ -232,7 +232,7 @@
         </div>
     </div>
     <!-- jquery vendor -->
-    <script src="assets/js/lib/jquery.min.js"></script>
+    {{-- <script src="assets/js/lib/jquery.min.js"></script> --}}
     <script src="assets/js/lib/jquery.nanoscroller.min.js"></script>
     <!-- nano scroller -->
     <script src="assets/js/lib/menubar/sidebar.js"></script>

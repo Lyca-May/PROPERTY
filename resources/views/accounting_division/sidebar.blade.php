@@ -41,6 +41,10 @@
             border-radius: 0;
             background-color: transparent;
         }
+        .stock-card-icon {
+            font-size: 24px; /* Adjust the size as needed */
+            color: #007bff; /* Adjust the color as needed */
+        }
     </style>
 </head>
 
@@ -51,16 +55,22 @@
             <div class="nano-content">
                 <ul>
                     <div class="logo">
-                        <a>
-                            <img src="{{asset('assets/images/accounting.png')}}" alt="" style="height: 100px; width: 100px;">
-                        </a>
                         <div>
+                            <br>
+                            <span>
+                            <a>
+                                <img src="{{asset('assets/images/acc.png')}}" alt="" style="height: 100px; width: 100px;">
+                            </a>
+                            </span>
+                            <br>
+                            <br>
                             <span>ACCOUNTING</span>
                         </div>
                     </div>
                     <li class="label">Main</li>
-                    <li><a class="sideba"><i class="ti-home"></i> Dashboard</a></li>
-                    <li><a href="{{url('/all-slc')}}">View All SLC</a></li>
+                    <li><a href="{{url('dash-accounting')}}" class="sideba"><i class="ti-home"></i> Dashboard</a></li>
+                    <li><a href="{{url('/all-slc')}}"> <i class="fas fa inventory"></i>View All SLC</a></li>
+                    <li><a href="{{url('/all-ppelc')}}"> <i class="fas fa inventory"></i>View All PPELC</a></li>
                     <li>
                         <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                             <i class="ti-close"></i> Logout
@@ -77,11 +87,11 @@
     </div>
 
     <script src="{{asset('assets/js/lib/jquery.min.js')}}"></script>
-    <script src="{{asset('assets/js/lib/jquery.nanoscroller.min.js')}}"></script>
+    {{-- <script src="{{asset('assets/js/lib/jquery.nanoscroller.min.js')}}"></script>
     <script src="{{asset('assets/js/lib/menubar/sidebar.js')}}"></script>
-    <script src="{{asset('assets/js/lib/preloader/pace.min.js')}}"></script>
+    <script src="{{asset('assets/js/lib/preloader/pace.min.js')}}"></script> --}}
     <script src="{{asset('assets/js/lib/bootstrap.min.js')}}"></script>
-    <script src="{{asset('assets/js/scripts.js')}}"></script>
+    {{-- <script src="{{asset('assets/js/scripts.js')}}"></script>
     <script src="{{asset('assets/js/lib/calendar-2/moment.latest.min.js')}}"></script>
     <script src="{{asset('assets/js/lib/calendar-2/pignose.calendar.min.js')}}"></script>
     <script src="{{asset('assets/js/lib/calendar-2/pignose.init.js')}}"></script>
@@ -94,7 +104,23 @@
     <script src="{{asset('assets/js/lib/sparklinechart/sparkline.init.js')}}"></script>
     <script src="{{asset('assets/js/lib/owl-carousel/owl.carousel.min.js')}}"></script>
     <script src="{{asset('assets/js/lib/owl-carousel/owl.carousel-init.js')}}"></script>
-    <script src="{{asset('assets/js/dashboard2.js')}}"></script>
+    <script src="{{asset('assets/js/dashboard2.js')}}"></script> --}}
+
+    <script>
+        $(document).ready(function() {
+            // Toggle sidebar dropdown
+            $('.sidebar-sub-toggle').click(function(e) {
+                e.preventDefault();
+                var $dropdown = $(this).next('.sidebar-dropdown');
+                if ($dropdown.is(':visible')) {
+                    $dropdown.slideUp();
+                } else {
+                    $('.sidebar-dropdown').slideUp();
+                    $dropdown.slideDown();
+                }
+            });
+        });
+    </script>
 
 
 

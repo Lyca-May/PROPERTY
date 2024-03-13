@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use App\Models\PropertyModel;
+use App\Models\PropCardModel;
 
 class PropertyController extends Controller
 {
@@ -86,7 +87,7 @@ class PropertyController extends Controller
 
         // Check if the update was successful
         if ($stockCard) {
-            return redirect('/all-forms')->with('success', 'Stock Card item ' . $stockCard->stock_no . ' updated successfully.');
+            return redirect('/all-forms')->with('success', 'Stock number ' . $stockCard->stock_no . ' updated successfully.');
         } else {
             return redirect()->back()->with('error', 'No changes detected or failed to update item.');
         }
@@ -125,7 +126,130 @@ class PropertyController extends Controller
 
         // Check if the update was successful
         if ($stockCard) {
-            return redirect('/all-slc')->with('success', 'Stock Card item ' . $stockCard->stock_no . ' updated successfully.');
+            return redirect('/all-slc')->with('success', 'Item code ' . $stockCard->item_code . ' updated successfully.');
+        } else {
+            return redirect()->back()->with('error', 'No changes detected or failed to update item.');
+        }
+    }
+
+
+
+    // PROPERTY CARD
+    public function addPropertyCard(Request $request)
+    {
+        $validatedData = $request->validate([
+            'entity_name' => 'required',
+            'fund_cluster' => 'required',
+            'prop_plant_eq' => 'required',
+            'prop_no' => 'required',
+            'description' => 'required',
+            'date' => 'required|date',
+            'reference' => 'required',
+            'receipt_qty' => 'required',
+            'receipt_unitcost' => 'required',
+            'receipt_totalcost' => 'required',
+            'repair_amount' => 'required',
+            'remarks' => 'required',
+        ], [
+            // Custom validation messages
+            'entity_name.required' => 'The entity name field is required.',
+            'fund_cluster.required' => 'The fund cluster field is required.',
+            'prop_plant_eq.required' => 'The property plant and equipment field is required.',
+            'prop_no.required' => 'The property number field is required.',
+            'description.required' => 'The description field is required.',
+            'date.required' => 'The date field is required.',
+            'date.date' => 'The date must be a valid date format.',
+            'reference.required' => 'The reference field is required.',
+            'receipt_qty.required' => 'The receipt quantity field is required.',
+            'receipt_unitcost.required' => 'The receipt unit cost field is required.',
+            'receipt_totalcost.required' => 'The receipt total cost field is required.',
+            'repair_amount.required' => 'The repair amount field is required.',
+            'remarks.required' => 'The remarks field is required.',
+        ]);
+        // Create a new instance of the model and fill it with the validated data
+        $propCard = new PropCardModel();
+        $propCard->fill($validatedData);
+
+        // Save the instance to the database
+        $propCard->save();
+
+        return redirect('/all-property')->with('success', 'Property Card ' . $propCard->prop_no . ' has been created!');
+    }
+
+    public function getPropertyCards()
+    {
+        // Fetch data using the query builder
+        $prop_card = DB::table('property_card')->get();
+
+        // You can now use $data in your view to display the fetched data
+        return view('property_division.all-prop-card', ['prop_card' => $prop_card]);
+    }
+
+    public function edit_property_card(Request $request, $id)
+    {
+        // Retrieve all input data
+        $data = $request->all();
+
+        // Find the stock card by ID
+        $propCard = PropCardModel::find($id);
+
+        // Check if the stock card exists
+        if (!$propCard) {
+            return redirect()->back()->with('error', 'Property Card not found.');
+        }
+
+        // Update the stock card attributes
+        $propCard->update($data);
+
+        // Check if the update was successful
+        if ($propCard) {
+            return redirect('/all-property')->with('success', 'Property number ' . $propCard->prop_no . ' updated successfully.');
+        } else {
+            return redirect()->back()->with('error', 'No changes detected or failed to update item.');
+        }
+    }
+
+    public function viewPPELC($id)
+    {
+        $prop_card = PropertyModel::where('id', $id)->get();
+
+        return view('property_division.pc-ppelc', ['prop_card' => $prop_card]);
+    }
+    public function printPropPage($id) {
+        // Fetch the necessary data from the database using the $id
+        $prop_cards = PropCardModel::find($id);
+
+        // Return the printable page view with the fetched data
+        return view('property_division.printable-page', compact('prop_cards'));
+    }
+
+    public function getDataForPPELC()
+    {
+        $prop_card = PropCardModel::get();
+
+        return view('accounting_division.all-ppel-card', ['prop_card' => $prop_card]);
+    }
+
+
+    public function edit_PPELC(Request $request, $id)
+    {
+        // Retrieve all input data
+        $data = $request->all();
+
+        // Find the stock card by ID
+        $prop_card = PropertyModel::find($id);
+
+        // Check if the stock card exists
+        if (!$prop_card) {
+            return redirect()->back()->with('error', 'PPELC not found.');
+        }
+
+        // Update the stock card attributes
+        $prop_card->update($data);
+
+        // Check if the update was successful
+        if ($prop_card) {
+            return redirect('/all-ppelc')->with('success', 'PPELCs Object Account Code ' . $prop_card->obj_acc_code . ' updated successfully.');
         } else {
             return redirect()->back()->with('error', 'No changes detected or failed to update item.');
         }

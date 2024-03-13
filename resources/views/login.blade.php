@@ -75,29 +75,49 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
-    <script>
-        @if(session('success'))
+
+    @if (session('success'))
+        <script>
             Swal.fire({
                 icon: 'success',
-                title: 'Success',
+                title: 'Success!',
                 text: '{{ session('success') }}',
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                background: '#8cc63f',
+                iconColor: '#ffffff',
                 customClass: {
-                    confirmButton: 'btn btn-primary'
+                    title: 'text-white',
+                    content: 'text-white'
                 }
             });
-        @endif
+        </script>
+    @endif
 
-        @if(session('failed'))
+    @if (session('failed'))
+        <script>
             Swal.fire({
-                icon: 'error',
-                title: 'Error',
+                icon: 'failed',
+                title: 'failed!',
                 text: '{{ session('failed') }}',
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                background: '#dc3545',
+                iconColor: '#ffffff',
                 customClass: {
-                    confirmButton: 'btn btn-primary'
+                    title: 'text-white',
+                    content: 'text-white'
                 }
             });
-        @endif
-    </script>
+        </script>
+    @endif
+
 
 </body>
 
