@@ -7,9 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>PROPERTY AND SUPPLIES</title>
     <!-- ================= Favicon ================== -->
-    <!-- Standard -->
-    <link rel="shortcut icon" href="{{asset('assets/images/property.jpg')}}">
-
     <style>
         .text-line {
             width: 100%;
@@ -24,45 +21,40 @@
 </head>
 
 <body>
-    @include('navbar')
-    @include('sidebar')
-    <div class="content-wrap">
-        <div class="main">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-8 p-r-0 title-margin-right">
-                        <div class="page-header">
-                            <div class="page-title">
-                                <h1>Hello, Welcome Here</h1>
+    <div id="app">
+        <div class="main-wrapper">
+            @include('navbar')
+            @include('sidebar')
+
+            <div class="main-content">
+                <section class="section">
+                    <h1 class="section-header">
+                        <div>Stock Card | Form</div>
+                    </h1>
+                    {{-- <div class="row">
+                        <div class="col-lg-4 p-l-0 title-margin-left">
+                            <div class="page-header">
+                                <div class="page-title">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item active">Stock Card Form</li>
+                                    </ol>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- /# column -->
-                    <div class="col-lg-4 p-l-0 title-margin-left">
-                        <div class="page-header">
-                            <div class="page-title">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item active">Stock Card Form</li>
-                                </ol>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /# column -->
-                </div>
-                <hr>
-                <!-- /# row -->
-                <section id="main-content">
+                    </div> --}}
+                    <hr>
+                    <!-- /# row -->
                     <div class="row">
-                        <div class="col-lg-10 mx-auto">
+                        <div class="col-lg-12 mx-auto">
                             <div class="card">
                                 <div class="card-title pr" style="text-align: center;">
                                     <h4><strong>STOCK CARD</strong></h4>
                                 </div>
-                                <div class="card-body">
+                                {{-- <div class="card-body"> --}}
                                     <form action="{{ route('add-stock-card') }}" method="POST">
                                         @csrf
-                                        <div class="card">
-                                            <div class="card-block">
+                                        {{-- <div class="card"> --}}
+                                            {{-- <div class="card-block"> --}}
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group row">
@@ -354,19 +346,22 @@
                             </div>
                         </div>
                     </div>
-
-                    @include('footer')
                 </section>
             </div>
+            @include('footer')
         </div>
     </div>
+
+
+
     <script>
         // Function to calculate receipt total cost
         function calculateReceiptTotalCost() {
             var receiptQty = parseFloat(document.getElementById("receipt_qtyy").value);
             var receiptUnitCost = parseFloat(document.getElementById("receipt_unitcost").value);
             var receiptTotalCost = receiptQty * receiptUnitCost;
-            document.getElementById("receipt_totalcost").value = receiptTotalCost.toFixed(2); // Adjust to your required precision
+            document.getElementById("receipt_totalcost").value = receiptTotalCost.toFixed(
+                2); // Adjust to your required precision
         }
 
         // Function to calculate issue total cost
@@ -374,7 +369,8 @@
             var issueQty = parseFloat(document.getElementById("issue_qty").value);
             var issueUnitCost = parseFloat(document.getElementById("issue_unitcost").value);
             var issueTotalCost = issueQty * issueUnitCost;
-            document.getElementById("issue_totalcost").value = issueTotalCost.toFixed(2); // Adjust to your required precision
+            document.getElementById("issue_totalcost").value = issueTotalCost.toFixed(
+                2); // Adjust to your required precision
         }
 
         // Attach event listeners to input fields for receipt and issue to trigger calculation
@@ -388,41 +384,39 @@
         calculateIssueTotalCost();
     </script>
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
-<script>
-    // Example of using SweetAlert with a rectangle style and blue color
-    @if(session('success'))
-        Swal.fire({
-            icon: 'success',
-            title: 'Success',
-            text: '{{ session('success') }}',
-            customClass: {
-                container: 'custom-alert-container',
-                popup: 'custom-alert-popup',
-                title: 'custom-alert-title',
-                confirmButton: 'custom-alert-button'
-            }
-        });
-    @endif
+    <script>
+        // Example of using SweetAlert with a rectangle style and blue color
+        @if (session('success'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: '{{ session('success') }}',
+                customClass: {
+                    container: 'custom-alert-container',
+                    popup: 'custom-alert-popup',
+                    title: 'custom-alert-title',
+                    confirmButton: 'custom-alert-button'
+                }
+            });
+        @endif
 
-    @if(session('failed'))
-        Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: '{{ session('failed') }}',
-            customClass: {
-                container: 'custom-alert-container',
-                popup: 'custom-alert-popup',
-                title: 'custom-alert-title',
-                confirmButton: 'custom-alert-button'
-            }
-        });
-    @endif
-</script>
-
-
+        @if (session('failed'))
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: '{{ session('failed') }}',
+                customClass: {
+                    container: 'custom-alert-container',
+                    popup: 'custom-alert-popup',
+                    title: 'custom-alert-title',
+                    confirmButton: 'custom-alert-button'
+                }
+            });
+        @endif
+    </script>
 
 </body>
 

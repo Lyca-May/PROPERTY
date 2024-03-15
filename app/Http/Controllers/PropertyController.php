@@ -66,7 +66,7 @@ class PropertyController extends Controller
         $stock_card = DB::table('sc_andslc')->get();
 
         // You can now use $data in your view to display the fetched data
-        return view('property_division.all', ['stock_card' => $stock_card]);
+        return view('property_division.stockcards', ['stock_card' => $stock_card]);
     }
 
     public function edit_stock_card(Request $request, $id)

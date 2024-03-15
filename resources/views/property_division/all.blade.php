@@ -8,7 +8,7 @@
     <title>PROPERTY AND SUPPLIES</title>
     <!-- ================= Favicon ================== -->
     <!-- Standard -->
-    <link rel="shortcut icon" href="{{asset('assets/images/property.jpg')}}">
+    <link rel="shortcut icon" href="{{ asset('assets/images/property.jpg') }}">
     <!-- ================= Favicon ================== -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
         integrity="sha512-Lg2h+7fH4FG/D9xPZv94f4jeDmhgWxVxs7g2agQF7uYUgMNHmz4vkq0CIGsYqUZkR9Tf7fDcDX5XdLnq6C9ulA=="
@@ -51,6 +51,8 @@
                 visibility: visible;
             }
         }
+
+
     </style>
 </head>
 
@@ -135,7 +137,8 @@
                                                                         style="padding-top: 4px; padding-bottom: 4px;"
                                                                         value="{{ $stock_cards->entity_name }}">
                                                                     @error('entity_name')
-                                                                        <span class="text-danger">{{ $message }}</span>
+                                                                        <span
+                                                                            class="text-danger">{{ $message }}</span>
                                                                     @enderror
                                                                 </div>
                                                             </div>
@@ -330,35 +333,60 @@
                                                                                 @enderror
                                                                             </td>
                                                                             <td>
-                                                                                <input type="text" name="receipt_qty" id="receipt_qty"
-                                                                                    class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;"
-                                                                                    value="{{ $stock_cards->receipt_qty }}" data-card-id="{{ $stock_cards->id }}">
+                                                                                <input type="text"
+                                                                                    name="receipt_qty"
+                                                                                    id="receipt_qty"
+                                                                                    class="form-control text-line"
+                                                                                    style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                    value="{{ $stock_cards->receipt_qty }}"
+                                                                                    data-card-id="{{ $stock_cards->id }}">
                                                                             </td>
                                                                             <td>
-                                                                                <input type="text" name="receipt_unitcost" id="receipt_unitcost"
-                                                                                    class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;"
-                                                                                    value="{{ $stock_cards->receipt_unitcost }}" data-card-id="{{ $stock_cards->id }}"data-card-id="{{ $stock_cards->id }}">
+                                                                                <input type="text"
+                                                                                    name="receipt_unitcost"
+                                                                                    id="receipt_unitcost"
+                                                                                    class="form-control text-line"
+                                                                                    style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                    value="{{ $stock_cards->receipt_unitcost }}"
+                                                                                    data-card-id="{{ $stock_cards->id }}"data-card-id="{{ $stock_cards->id }}">
                                                                             </td>
                                                                             <td>
-                                                                                <input type="text" name="receipt_totalcost" id="receipt_totalcost"
-                                                                                    class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;"
-                                                                                    value="{{ $stock_cards->receipt_totalcost }}" readonly data-card-id="{{ $stock_cards->id }}">
+                                                                                <input type="text"
+                                                                                    name="receipt_totalcost"
+                                                                                    id="receipt_totalcost"
+                                                                                    class="form-control text-line"
+                                                                                    style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                    value="{{ $stock_cards->receipt_totalcost }}"
+                                                                                    readonly
+                                                                                    data-card-id="{{ $stock_cards->id }}">
                                                                             </td>
                                                                             <!-- Issue section -->
                                                                             <td>
-                                                                                <input type="text" name="issue_qty" id="issue_qty"
-                                                                                    class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;"
-                                                                                    value="{{ $stock_cards->issue_qty }}" data-card-id="{{ $stock_cards->id }}">
+                                                                                <input type="text" name="issue_qty"
+                                                                                    id="issue_qty"
+                                                                                    class="form-control text-line"
+                                                                                    style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                    value="{{ $stock_cards->issue_qty }}"
+                                                                                    data-card-id="{{ $stock_cards->id }}">
                                                                             </td>
                                                                             <td>
-                                                                                <input type="text" name="issue_unitcost" id="issue_unitcost"
-                                                                                    class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;"
-                                                                                    value="{{ $stock_cards->issue_unitcost }}" data-card-id="{{ $stock_cards->id }}">
+                                                                                <input type="text"
+                                                                                    name="issue_unitcost"
+                                                                                    id="issue_unitcost"
+                                                                                    class="form-control text-line"
+                                                                                    style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                    value="{{ $stock_cards->issue_unitcost }}"
+                                                                                    data-card-id="{{ $stock_cards->id }}">
                                                                             </td>
                                                                             <td>
-                                                                                <input type="text" name="issue_totalcost" id="issue_totalcost"
-                                                                                    class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;"
-                                                                                    value="{{ $stock_cards->issue_totalcost }}" readonly data-card-id="{{ $stock_cards->id }}">
+                                                                                <input type="text"
+                                                                                    name="issue_totalcost"
+                                                                                    id="issue_totalcost"
+                                                                                    class="form-control text-line"
+                                                                                    style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                    value="{{ $stock_cards->issue_totalcost }}"
+                                                                                    readonly
+                                                                                    data-card-id="{{ $stock_cards->id }}">
                                                                             </td>
                                                                             <!-- Bal section -->
                                                                             <td>
@@ -401,12 +429,16 @@
                                             <div class="modal-footer">
                                                 <div class="col-md-6">
                                                     {{-- Button positioned to the left --}}
-                                                    <a type="button" class="btn btn-danger" href="{{url('/view-slc/'  . $stock_cards->id)}}">View Stock Ledger Card</a>
+                                                    <a type="button" class="btn btn-danger"
+                                                        href="{{ url('/view-slc/' . $stock_cards->id) }}">View Stock
+                                                        Ledger Card</a>
                                                 </div>
                                                 <div class="col-md-6 text-right">
                                                     {{-- Buttons positioned to the right --}}
-                                                    <button type="submit" class="btn btn-primary">Save Changes</button>
-                                                    <button type="submit" class="btn btn-success" onclick="window.print()">Export</button>
+                                                    <button type="submit" class="btn btn-primary">Save
+                                                        Changes</button>
+                                                    <button type="submit" class="btn btn-success"
+                                                        onclick="window.print()">Export</button>
                                                 </div>
                                             </div>
 
@@ -448,21 +480,20 @@
                                 });
                             });
                         </script>
-
-
                     @endforeach
                 </div>
                 <!-- Modal -->
 
                 <script>
-                    $(document).ready(function(){
-                        $('#search-input').on('keyup', function(){
+                    $(document).ready(function() {
+                        $('#search-input').on('keyup', function() {
                             var searchText = $(this).val().toLowerCase();
-                            $('.card-row .card2').each(function(){
+                            $('.card-row .card2').each(function() {
                                 var entityName = $(this).find('.card-title:first').text().toLowerCase();
                                 var fundCluster = $(this).find('.card-title:nth-child(2)').text().toLowerCase();
                                 var itemName = $(this).find('.card-text').text().toLowerCase();
-                                if(entityName.indexOf(searchText) === -1 && fundCluster.indexOf(searchText) === -1 && itemName.indexOf(searchText) === -1){
+                                if (entityName.indexOf(searchText) === -1 && fundCluster.indexOf(searchText) ===
+                                    -1 && itemName.indexOf(searchText) === -1) {
                                     $(this).hide();
                                 } else {
                                     $(this).show();
@@ -482,24 +513,24 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @if (session('success'))
-    <script>
-        Swal.fire({
-            icon: 'success',
-            title: 'Success!',
-            text: '{{ session('success') }}',
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            background: '#8cc63f',
-            iconColor: '#ffffff',
-            customClass: {
-                title: 'text-white',
-                content: 'text-white'
-            }
-        });
-    </script>
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: '{{ session('success') }}',
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                background: '#8cc63f',
+                iconColor: '#ffffff',
+                customClass: {
+                    title: 'text-white',
+                    content: 'text-white'
+                }
+            });
+        </script>
     @endif
 
     @if (session('failed'))

@@ -2,263 +2,158 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>PROPERTY AND SUPPLIES</title>
-    <!-- ================= Favicon ================== -->
-    <!-- Standard -->
-    <link rel="shortcut icon" href="{{asset('assets/images/property.jpg')}}">
-    <!-- Retina iPad Touch Icon-->
-    <link rel="apple-touch-icon" sizes="144x144" href="http://placehold.it/144.png/000/fff">
-    <!-- Retina iPhone Touch Icon-->
-    <link rel="apple-touch-icon" sizes="114x114" href="http://placehold.it/114.png/000/fff">
-    <!-- Standard iPad Touch Icon-->
-    <link rel="apple-touch-icon" sizes="72x72" href="http://placehold.it/72.png/000/fff">
-    <!-- Standard iPhone Touch Icon-->
-    <link rel="apple-touch-icon" sizes="57x57" href="http://placehold.it/57.png/000/fff">
-    <!-- Styles -->
-    <link href="assets/css/lib/calendar2/pignose.calendar.min.css" rel="stylesheet">
-    <link href="assets/css/lib/chartist/chartist.min.css" rel="stylesheet">
-    <link href="assets/css/lib/font-awesome.min.css" rel="stylesheet">
-    <link href="assets/css/lib/themify-icons.css" rel="stylesheet">
-    <link href="assets/css/lib/owl.carousel.min.css" rel="stylesheet" />
-    <link href="assets/css/lib/owl.theme.default.min.css" rel="stylesheet" />
-    <link href="assets/css/lib/weather-icons.css" rel="stylesheet" />
-    <link href="assets/css/lib/menubar/sidebar.css" rel="stylesheet">
-    <link href="assets/css/lib/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/css/lib/helper.css" rel="stylesheet">
-    <link href="assets/css/style.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no"
+        name="viewport">
+    <title>Dashboard &mdash; Stisla</title>
+
+    <link rel="stylesheet" href="{{ ('assets/modules/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ ('assets/modules/ionicons/css/ionicons.min.css') }}">
+    <link rel="stylesheet" href="{{ ('assets/modules/fontawesome/web-fonts-with-css/css/fontawesome-all.min.css') }}">
+
+    <link rel="stylesheet" href="{{ ('assets/modules/summernote/summernote-lite.css') }}">
+    <link rel="stylesheet" href="{{ ('assets/modules/flag-icon-css/css/flag-icon.min.css') }}">
+    <link rel="stylesheet" href="{{ ('assets/css/demo.css') }}">
+    <link rel="stylesheet" href="{{ ('assets/css/style.css') }}">
 </head>
 
 <body>
 
-    <!-- header -->
-    <div class="header">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="float-left">
-                        <div class="hamburger sidebar-toggle">
-                            <span class="line"></span>
-                            <span class="line"></span>
-                            <span class="line"></span>
+    <div class="navbar-bg"></div>
+    <nav class="navbar navbar-expand-lg main-navbar">
+        <form class="form-inline mr-auto">
+            <ul class="navbar-nav mr-3">
+                <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i
+                            class="ion ion-navicon-round"></i></a></li>
+                <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i
+                            class="ion ion-search"></i></a></li>
+            </ul>
+            {{-- <div class="search-element">
+                <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn" type="submit"><i class="ion ion-search"></i></button>
+            </div> --}}
+        </form>
+        <ul class="navbar-nav navbar-right">
+            <li class="dropdown dropdown-list-toggle"><a href="#" data-toggle="dropdown"
+                    class="nav-link notification-toggle nav-link-lg beep"><i class="ion ion-ios-bell-outline"></i></a>
+                <div class="dropdown-menu dropdown-list dropdown-menu-right">
+                    <div class="dropdown-header">Notifications
+                        <div class="float-right">
+                            <a href="#">View All</a>
                         </div>
                     </div>
-                    <div class="float-right">
-                        <div class="dropdown dib">
-                            <div class="header-icon" data-toggle="dropdown">
-                                <i class="ti-bell"></i>
-                                <div class="drop-down dropdown-menu dropdown-menu-right">
-                                    <div class="dropdown-content-heading">
-                                        <span class="text-left">Recent Notifications</span>
-                                    </div>
-                                    <div class="dropdown-content-body">
-                                        <ul>
-                                            <li>
-                                                <a href="#">
-                                                    <img class="pull-left m-r-10 avatar-img" src="assets/images/avatar/3.jpg" alt="" />
-                                                    <div class="notification-content">
-                                                        <small class="notification-timestamp pull-right">02:34
-                                                            PM</small>
-                                                        <div class="notification-heading">Mr. Soeng Souy</div>
-                                                        <div class="notification-text">5 members joined today </div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <img class="pull-left m-r-10 avatar-img" src="assets/images/avatar/3.jpg" alt="" />
-                                                    <div class="notification-content">
-                                                        <small class="notification-timestamp pull-right">02:34
-                                                            PM</small>
-                                                        <div class="notification-heading">Mariam</div>
-                                                        <div class="notification-text">likes a photo of you</div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <img class="pull-left m-r-10 avatar-img" src="assets/images/avatar/3.jpg" alt="" />
-                                                    <div class="notification-content">
-                                                        <small class="notification-timestamp pull-right">02:34
-                                                            PM</small>
-                                                        <div class="notification-heading">Tasnim</div>
-                                                        <div class="notification-text">Hi Teddy, Just wanted to let you
-                                                            ...</div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <img class="pull-left m-r-10 avatar-img" src="assets/images/avatar/3.jpg" alt="" />
-                                                    <div class="notification-content">
-                                                        <small class="notification-timestamp pull-right">02:34
-                                                            PM</small>
-                                                        <div class="notification-heading">Mr. Soeng Souy</div>
-                                                        <div class="notification-text">Hi Teddy, Just wanted to let you
-                                                            ...</div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li class="text-center">
-                                                <a href="#" class="more-link">See All</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
+                    <div class="dropdown-list-content">
+                        <a href="#" class="dropdown-item dropdown-item-unread">
+                            <img alt="image" src="{{ ('assets/img/avatar/avatar-1.jpeg') }}"
+                                class="rounded-circle dropdown-item-img">
+                            <div class="dropdown-item-desc">
+                                <b>Kusnaedi</b> has moved task <b>Fix bug header</b> to <b>Done</b>
+                                <div class="time">10 Hours Ago</div>
                             </div>
-                        </div>
-                        <div class="dropdown dib">
-                            <div class="header-icon" data-toggle="dropdown">
-                                <i class="ti-email"></i>
-                                <div class="drop-down dropdown-menu dropdown-menu-right">
-                                    <div class="dropdown-content-heading">
-                                        <span class="text-left">2 New Messages</span>
-                                        <a href="email.html">
-                                            <i class="ti-pencil-alt pull-right"></i>
-                                        </a>
-                                    </div>
-                                    <div class="dropdown-content-body">
-                                        <ul>
-                                            <li class="notification-unread">
-                                                <a href="#">
-                                                    <img class="pull-left m-r-10 avatar-img" src="assets/images/avatar/1.jpg" alt="" />
-                                                    <div class="notification-content">
-                                                        <small class="notification-timestamp pull-right">02:34
-                                                            PM</small>
-                                                        <div class="notification-heading">Michael Qin</div>
-                                                        <div class="notification-text">Hi Teddy, Just wanted to let you
-                                                            ...</div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li class="notification-unread">
-                                                <a href="#">
-                                                    <img class="pull-left m-r-10 avatar-img" src="assets/images/avatar/2.jpg" alt="" />
-                                                    <div class="notification-content">
-                                                        <small class="notification-timestamp pull-right">02:34
-                                                            PM</small>
-                                                        <div class="notification-heading">Mr. Soeng Souy</div>
-                                                        <div class="notification-text">Hi Teddy, Just wanted to let you
-                                                            ...</div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <img class="pull-left m-r-10 avatar-img" src="assets/images/avatar/3.jpg" alt="" />
-                                                    <div class="notification-content">
-                                                        <small class="notification-timestamp pull-right">02:34
-                                                            PM</small>
-                                                        <div class="notification-heading">Michael Qin</div>
-                                                        <div class="notification-text">Hi Teddy, Just wanted to let you
-                                                            ...</div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <img class="pull-left m-r-10 avatar-img" src="assets/images/avatar/2.jpg" alt="" />
-                                                    <div class="notification-content">
-                                                        <small class="notification-timestamp pull-right">02:34
-                                                            PM</small>
-                                                        <div class="notification-heading">Mr. Soeng Souy</div>
-                                                        <div class="notification-text">Hi Teddy, Just wanted to let you
-                                                            ...</div>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li class="text-center">
-                                                <a href="#" class="more-link">See All</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
+                        </a>
+                        <a href="#" class="dropdown-item dropdown-item-unread">
+                            <img alt="image" src="{{ ('assets/img/avatar/avatar-2.jpeg') }}""
+                                class="rounded-circle dropdown-item-img">
+                            <div class="dropdown-item-desc">
+                                <b>Ujang Maman</b> has moved task <b>Fix bug footer</b> to <b>Progress</b>
+                                <div class="time">12 Hours Ago</div>
                             </div>
-                        </div>
-                        <div class="dropdown dib">
-                            <div class="header-icon" data-toggle="dropdown">
-                                <span class="user-avatar">Soeng Souy
-                                    <i class="ti-angle-down f-s-10"></i>
-                                </span>
-                                <div class="drop-down dropdown-profile dropdown-menu dropdown-menu-right">
-                                    <div class="dropdown-content-heading">
-                                        <span class="text-left">Upgrade Now</span>
-                                        <p class="trial-day">30 Days Trail</p>
-                                    </div>
-                                    <div class="dropdown-content-body">
-                                        <ul>
-                                            <li>
-                                                <a href="#">
-                                                    <i class="ti-user"></i>
-                                                    <span>Profile</span>
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="#">
-                                                    <i class="ti-email"></i>
-                                                    <span>Inbox</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <i class="ti-settings"></i>
-                                                    <span>Setting</span>
-                                                </a>
-                                            </li>
-
-                                            <li>
-                                                <a href="#">
-                                                    <i class="ti-lock"></i>
-                                                    <span>Lock Screen</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <i class="ti-power-off"></i>
-                                                    <span>Logout</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <img alt="image" src="{{ ('assets/img/avatar/avatar-3.jpeg') }}"
+                                class="rounded-circle dropdown-item-img">
+                            <div class="dropdown-item-desc">
+                                <b>Agung Ardiansyah</b> has moved task <b>Fix bug sidebar</b> to <b>Done</b>
+                                <div class="time">12 Hours Ago</div>
                             </div>
-                        </div>
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <img alt="image" src="{{ ('assets/img/avatar/avatar-4.jpeg') }}"
+                                class="rounded-circle dropdown-item-img">
+                            <div class="dropdown-item-desc">
+                                <b>Ardian Rahardiansyah</b> has moved task <b>Fix bug navbar</b> to <b>Done</b>
+                                <div class="time">16 Hours Ago</div>
+                            </div>
+                        </a>
+                        <a href="#" class="dropdown-item">
+                            <img alt="image" src="{{ ('assets/img/avatar/avatar-5.jpeg') }}"
+                                class="rounded-circle dropdown-item-img">
+                            <div class="dropdown-item-desc">
+                                <b>Alfa Zulkarnain</b> has moved task <b>Add logo</b> to <b>Done</b>
+                                <div class="time">Yesterday</div>
+                            </div>
+                        </a>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <!-- jquery vendor -->
-    {{-- <script src="assets/js/lib/jquery.min.js"></script> --}}
-    <script src="assets/js/lib/jquery.nanoscroller.min.js"></script>
-    <!-- nano scroller -->
-    <script src="assets/js/lib/menubar/sidebar.js"></script>
-    <script src="assets/js/lib/preloader/pace.min.js"></script>
-    <!-- sidebar -->
-
-    <script src="assets/js/lib/bootstrap.min.js"></script>
-    <script src="assets/js/scripts.js"></script>
-    <!-- bootstrap -->
-
-    <script src="assets/js/lib/calendar-2/moment.latest.min.js"></script>
-    <script src="assets/js/lib/calendar-2/pignose.calendar.min.js"></script>
-    <script src="assets/js/lib/calendar-2/pignose.init.js"></script>
+            </li>
+            <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg">
+                    <i class="ion ion-android-person d-lg-none"></i>
+                    <div class="d-sm-none d-lg-inline-block">Hi, Ujang Maman</div>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a href="profile.html" class="dropdown-item has-icon">
+                        <i class="ion ion-android-person"></i> Profile
+                    </a>
+                    <a href="#" class="dropdown-item has-icon">
+                        <i class="ion ion-log-out"></i> Logout
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </nav>
 
 
-    <script src="assets/js/lib/weather/jquery.simpleWeather.min.js"></script>
-    <script src="assets/js/lib/weather/weather-init.js"></script>
-    <script src="assets/js/lib/circle-progress/circle-progress.min.js"></script>
-    <script src="assets/js/lib/circle-progress/circle-progress-init.js"></script>
-    <script src="assets/js/lib/chartist/chartist.min.js"></script>
-    <script src="assets/js/lib/sparklinechart/jquery.sparkline.min.js"></script>
-    <script src="assets/js/lib/sparklinechart/sparkline.init.js"></script>
-    <script src="assets/js/lib/owl-carousel/owl.carousel.min.js"></script>
-    <script src="assets/js/lib/owl-carousel/owl.carousel-init.js"></script>
-    <!-- scripit init-->
-    <script src="assets/js/dashboard2.js"></script>
+    <script src="{{ ('assets/modules/jquery.min.js') }}"></script>
+    <script src="{{ ('assets/modules/popper.js') }}"></script>
+    <script src="{{ ('assets/modules/tooltip.js') }}"></script>
+    <script src="{{ ('assets/modules/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ ('assets/modules/nicescroll/jquery.nicescroll.min.js') }}"></script>
+    <script src="{{ ('assets/modules/scroll-up-bar/assets/scroll-up-bar.min.js') }}"></script>
+    <script src="{{ ('assets/js/sa-functions.js') }}"></script>
+
+    <script src="{{ ('assets/modules/chart.min.js') }}"></script>
+    <script src="{{ ('assets/modules/summernote/summernote-lite.js') }}"></script>
+
+    <script>
+        var ctx = document.getElementById("myChart").getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+                datasets: [{
+                    label: 'Statistics',
+                    data: [460, 458, 330, 502, 430, 610, 488],
+                    borderWidth: 2,
+                    backgroundColor: 'rgb(87,75,144)',
+                    borderColor: 'rgb(87,75,144)',
+                    borderWidth: 2.5,
+                    pointBackgroundColor: '#ffffff',
+                    pointRadius: 4
+                }]
+            },
+            options: {
+                legend: {
+                    display: false
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            stepSize: 150
+                        }
+                    }],
+                    xAxes: [{
+                        gridLines: {
+                            display: false
+                        }
+                    }]
+                },
+            }
+        });
+    </script>
+    <script src="{{ ('assets/js/scripts.js') }}"></script>
+    <script src="{{ ('assets/js/custom.js') }}"></script>
+    <script src="{{ ('assets/js/demo.js') }}"></script>
 </body>
 
 </html>
