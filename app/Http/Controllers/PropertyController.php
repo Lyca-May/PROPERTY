@@ -50,22 +50,15 @@ class PropertyController extends Controller
             'no_of_days.required' => 'The number of days field is required.'
         ]);
 
-        // Create a new instance of the model and fill it with the validated data
         $scAndSlc = new PropertyModel();
         $scAndSlc->fill($validatedData);
-
-        // Save the instance to the database
         $scAndSlc->save();
-
-        // Redirect the user to a success page or somewhere else
-        return redirect()->back()->with('success', 'Stock Card has been created!');
+        return redirect('/all-forms')->with('success', 'Stock Card has been created!');
     }
+
     public function getStockCards()
     {
-        // Fetch data using the query builder
         $stock_card = DB::table('sc_andslc')->get();
-
-        // You can now use $data in your view to display the fetched data
         return view('property_division.stockcards', ['stock_card' => $stock_card]);
     }
 
@@ -92,6 +85,12 @@ class PropertyController extends Controller
             return redirect()->back()->with('error', 'No changes detected or failed to update item.');
         }
     }
+
+    public function printStockPage($id) {
+        $stock_cards = PropertyModel::find($id);
+        return view('property_division.printable-stock-page', compact('stock_cards'));
+    }
+
     public function viewSLC($id)
     {
         $stock_card = PropertyModel::where('id', $id)->get();
@@ -100,39 +99,26 @@ class PropertyController extends Controller
     }
 
     // ACCOUNTING DIVISION
-
     public function getDataForSLC()
     {
         $stock_card = PropertyModel::get();
-
         return view('accounting_division.all', ['stock_card' => $stock_card]);
     }
 
     public function edit_SLC(Request $request, $id)
     {
-        // Retrieve all input data
         $data = $request->all();
-
-        // Find the stock card by ID
         $stockCard = PropertyModel::find($id);
-
-        // Check if the stock card exists
         if (!$stockCard) {
-            return redirect()->back()->with('error', 'Stock Card not found.');
+            return redirect()->back()->with('failed', 'Stock Card not found.');
         }
-
-        // Update the stock card attributes
         $stockCard->update($data);
-
-        // Check if the update was successful
         if ($stockCard) {
             return redirect('/all-slc')->with('success', 'Item code ' . $stockCard->item_code . ' updated successfully.');
         } else {
-            return redirect()->back()->with('error', 'No changes detected or failed to update item.');
+            return redirect()->back()->with('failed', 'No changes detected or failed to update item.');
         }
     }
-
-
 
     // PROPERTY CARD
     public function addPropertyCard(Request $request)
@@ -148,10 +134,11 @@ class PropertyController extends Controller
             'receipt_qty' => 'required',
             'receipt_unitcost' => 'required',
             'receipt_totalcost' => 'required',
+            'issue_qty' => 'required',
+            'issue_office_officer' => 'required',
             'repair_amount' => 'required',
             'remarks' => 'required',
         ], [
-            // Custom validation messages
             'entity_name.required' => 'The entity name field is required.',
             'fund_cluster.required' => 'The fund cluster field is required.',
             'prop_plant_eq.required' => 'The property plant and equipment field is required.',
@@ -166,11 +153,9 @@ class PropertyController extends Controller
             'repair_amount.required' => 'The repair amount field is required.',
             'remarks.required' => 'The remarks field is required.',
         ]);
-        // Create a new instance of the model and fill it with the validated data
+
         $propCard = new PropCardModel();
         $propCard->fill($validatedData);
-
-        // Save the instance to the database
         $propCard->save();
 
         return redirect('/all-property')->with('success', 'Property Card ' . $propCard->prop_no . ' has been created!');
@@ -178,30 +163,21 @@ class PropertyController extends Controller
 
     public function getPropertyCards()
     {
-        // Fetch data using the query builder
         $prop_card = DB::table('property_card')->get();
-
-        // You can now use $data in your view to display the fetched data
-        return view('property_division.all-prop-card', ['prop_card' => $prop_card]);
+        return view('property_division.propertycards', ['prop_card' => $prop_card]);
     }
 
     public function edit_property_card(Request $request, $id)
     {
-        // Retrieve all input data
         $data = $request->all();
-
-        // Find the stock card by ID
         $propCard = PropCardModel::find($id);
 
-        // Check if the stock card exists
         if (!$propCard) {
             return redirect()->back()->with('error', 'Property Card not found.');
         }
 
-        // Update the stock card attributes
         $propCard->update($data);
 
-        // Check if the update was successful
         if ($propCard) {
             return redirect('/all-property')->with('success', 'Property number ' . $propCard->prop_no . ' updated successfully.');
         } else {
@@ -212,21 +188,16 @@ class PropertyController extends Controller
     public function viewPPELC($id)
     {
         $prop_card = PropertyModel::where('id', $id)->get();
-
         return view('property_division.pc-ppelc', ['prop_card' => $prop_card]);
     }
     public function printPropPage($id) {
-        // Fetch the necessary data from the database using the $id
         $prop_cards = PropCardModel::find($id);
-
-        // Return the printable page view with the fetched data
         return view('property_division.printable-page', compact('prop_cards'));
     }
 
     public function getDataForPPELC()
     {
         $prop_card = PropCardModel::get();
-
         return view('accounting_division.all-ppel-card', ['prop_card' => $prop_card]);
     }
 

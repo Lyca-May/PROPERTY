@@ -6,7 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>PROPERTY AND SUPPLIES</title>
-    <!-- ================= Favicon ================== -->
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        integrity="sha512-Lg2h+7fH4FG/D9xPZv94f4jeDmhgWxVxs7g2agQF7uYUgMNHmz4vkq0CIGsYqUZkR9Tf7fDcDX5XdLnq6C9ulA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        integrity="sha512-Lg2h+7fH4FG/D9xPZv94f4jeDmhgWxVxs7g2agQF7uYUgMNHmz4vkq0CIGsYqUZkR9Tf7fDcDX5XdLnq6C9ulA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 </head>
 
 <body>
@@ -36,7 +45,7 @@
                                         role="tab" aria-controls="contact" aria-selected="false">Contact</a>
                                 </li>
                             </ul>
-                            
+
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="home3" role="tabpanel"
                                     aria-labelledby="home-tab3">
@@ -68,23 +77,23 @@
                                         @foreach ($stock_card as $stock_cards)
                                             <div class="col-lg-3 col-md-6 col-sm-12 mb-12">
                                                 {{-- <div class="card"> --}}
-                                                    <!-- Modal trigger element -->
-                                                    <a class="card2" href="#" data-toggle="modal"
-                                                        data-target="#editItemModal{{ $stock_cards->id }}">
-                                                        <div class="card-body">
-                                                            <h3 class="card-title">ENTITY NAME:
-                                                                {{ $stock_cards->entity_name }}</h3>
-                                                            <h3 class="card-title">FUND CLUSTER:
-                                                                {{ $stock_cards->fund_cluster }}</h3>
-                                                            <h3 class="card-text small">ITEM NAME:
-                                                                {{ $stock_cards->item_name }}</h3>
-                                                            <p class="card-text small">ITEMCODE/STOCK NO:
-                                                                {{ $stock_cards->stock_no }}</p>
-                                                        </div>
-                                                        <div class="go-corner" href="#">
-                                                            <div class="go-arrow">→</div>
-                                                        </div>
-                                                    </a>
+                                                <!-- Modal trigger element -->
+                                                <a class="card2" href="#" data-toggle="modal"
+                                                    data-target="#editItemModal{{ $stock_cards->id }}">
+                                                    <div class="card-body">
+                                                        <h3 class="card-title">ENTITY NAME:
+                                                            {{ $stock_cards->entity_name }}</h3>
+                                                        <h3 class="card-title">FUND CLUSTER:
+                                                            {{ $stock_cards->fund_cluster }}</h3>
+                                                        <h3 class="card-text small">ITEM NAME:
+                                                            {{ $stock_cards->item_name }}</h3>
+                                                        <p class="card-text small">ITEMCODE/STOCK NO:
+                                                            {{ $stock_cards->stock_no }}</p>
+                                                    </div>
+                                                    <div class="go-corner" href="#">
+                                                        <div class="go-arrow">→</div>
+                                                    </div>
+                                                </a>
                                                 {{-- </div> --}}
                                             </div>
 
@@ -470,18 +479,20 @@
                                                                         <button type="submit"
                                                                             class="btn btn-primary">Save
                                                                             Changes</button>
-                                                                        <button type="submit" class="btn btn-success"
-                                                                            onclick="window.print()">Export</button>
+                                                                            <button type="button"
+                                                                            onclick="navigateToPrintablePage()"
+                                                                            class="btn btn-success ">Preview</button>
                                                                     </div>
                                                                 </div>
-
                                                             </form>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        @endforeach
+
+                                            @endforeach
                                     </div>
+
                                 </div>
                                 <div class="tab-pane fade" id="profile3" role="tabpanel"
                                     aria-labelledby="profile-tab3">
@@ -556,6 +567,16 @@
 
 
     <script>
+        // Function to navigate to the printable page
+        function navigateToPrintablePage() {
+            // Assuming 'prop_cards_id' is the parameter to be passed
+            var stock_cards_id = '{{ $stock_cards->id }}';
+            // Navigate to the printable page
+            window.location.href = '/printable-stock-page/' + stock_cards_id;
+        }
+    </script>
+
+    <script>
         $(document).ready(function() {
             $('#search-input').on('keyup', function() {
                 var searchText = $(this).val().toLowerCase();
@@ -574,6 +595,10 @@
         });
     </script>
 
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>

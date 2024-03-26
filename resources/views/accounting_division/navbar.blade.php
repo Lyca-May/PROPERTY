@@ -35,7 +35,7 @@
         <ul class="navbar-nav navbar-right">
             <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg">
                     <i class="ion ion-android-person d-lg-none"></i>
-                    <div class="d-sm-none d-lg-inline-block">Welcome, Admin Property!</div>
+                    <div class="d-sm-none d-lg-inline-block">Welcome, Accounting Division!</div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right">
                     <a href="#"  class="dropdown-item has-icon" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

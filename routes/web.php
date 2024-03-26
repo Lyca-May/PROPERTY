@@ -47,12 +47,11 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 // PROPERTY DIVISION
 // stock card
 Route::post('/add-stock-card', [PropertyController::class, 'addStockCard'])->name('add-stock-card');
-    // Route::get('/stockcards', function () {
-    //     return view('property_division.stockcards');
-    // });
 Route::get('/all-forms', [PropertyController::class, 'getStockCards']);
 Route::get('/view-slc/{id}', [PropertyController::class, 'viewSLC']);
+Route::get('/printable-stock-page/{id}', [PropertyController::class, 'printStockPage']);
 Route::post('/edit-stock-card/{id}', [PropertyController::class, 'edit_stock_card']);
+
 
 // property card
 Route::post('/add-property-card', [PropertyController::class, 'addPropertyCard'])->name('add-property-card');

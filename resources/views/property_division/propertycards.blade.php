@@ -5,12 +5,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>View PPELC | ACCOUNTING DIVISION</title>
+    <title>PROPERTY AND SUPPLIES</title>
 
 
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
         integrity="sha512-Lg2h+7fH4FG/D9xPZv94f4jeDmhgWxVxs7g2agQF7uYUgMNHmz4vkq0CIGsYqUZkR9Tf7fDcDX5XdLnq6C9ulA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -19,46 +18,44 @@
         integrity="sha512-Lg2h+7fH4FG/D9xPZv94f4jeDmhgWxVxs7g2agQF7uYUgMNHmz4vkq0CIGsYqUZkR9Tf7fDcDX5XdLnq6C9ulA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-        <style>
-            /* Make table responsive */
-.table-responsive {
-    overflow-x: auto;
-}
+    <style>
+        .table-responsive {
+            overflow-x: auto;
+        }
 
-/* Make table columns resizable */
-.table-resizable th {
-    position: relative;
-}
+        /* Make table columns resizable */
+        .table-resizable th {
+            position: relative;
+        }
 
-.table-resizable th::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: -5px;
-    bottom: 0;
-    width: 10px;
-    cursor: col-resize;
-    z-index: 10;
-    background-color: transparent;
-}
+        .table-resizable th::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: -5px;
+            bottom: 0;
+            width: 10px;
+            cursor: col-resize;
+            z-index: 10;
+            background-color: transparent;
+        }
 
-.table-resizable th:hover::after {
-    background-color: #f0f0f0;
-}
-
-        </style>
+        .table-resizable th:hover::after {
+            background-color: #f0f0f0;
+        }
+    </style>
 </head>
 
 <body>
     <div id="app">
         <div class="main-wrapper">
-            @include('accounting_division.navbar')
-            @include('accounting_division.sidebar')
+            @include('navbar')
+            @include('sidebar')
 
             <div class="main-content">
                 <section class="section">
                     <h1 class="section-header">
-                        <div>PPELC | Overview</div>
+                        <div>Property Cards | Overview</div>
                     </h1>
                     <div class="row">
                         <div class="card-body">
@@ -67,29 +64,30 @@
                                     <a class="nav-link active" id="home-tab3" data-toggle="tab" href="#home3"
                                         role="tab" aria-controls="home" aria-selected="true">All Cards</a>
                                 </li>
-                                {{-- <li class="nav-item">
+                                <li class="nav-item">
                                     <a class="nav-link" id="profile-tab3" data-toggle="tab" href="#profile3"
                                         role="tab" aria-controls="profile" aria-selected="false">New Form</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="contact-tab3" data-toggle="tab" href="#contact3"
                                         role="tab" aria-controls="contact" aria-selected="false">Contact</a>
-                                </li> --}}
+                                </li>
                             </ul>
 
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="home3" role="tabpanel"
                                     aria-labelledby="home-tab3">
-                                    {{-- <div class="container">
+                                    <div class="container">
                                         <div class="row">
                                             <div class="col-md-12 mx-auto">
                                                 <a href="{{ url('/property-card-form') }}" class="card">
-                                                    <div class="card-body text-center" style="font-size: 20px">+ Add new property card
+                                                    <div class="card-body text-center" style="font-size: 20px">+ Add new
+                                                        property card
                                                     </div>
                                                 </a>
                                             </div>
                                         </div>
-                                    </div> --}}
+                                    </div>
                                     <hr>
 
                                     <div class="col-md-12 d-flex justify-content-end">
@@ -112,11 +110,14 @@
                                                 <a class="card2" href="#" data-toggle="modal"
                                                     data-target="#editItemModal{{ $prop_cards->id }}">
                                                     <div class="card-body">
-                                                        <h3 class="card-title">ENTITY NAME: {{ $prop_cards->entity_name }}</h3>
-                                                        <h3 class="card-title">FUND CLUSTERE: {{ $prop_cards->fund_cluster }}</h3>
-                                                        <h3 class="card-text small">NAME: {{ $prop_cards->prop_plant_eq }}</h3>
+                                                        <h3 class="card-title">ENTITY NAME:
+                                                            {{ $prop_cards->entity_name }}</h3>
+                                                        <h3 class="card-title">FUND CLUSTERE:
+                                                            {{ $prop_cards->fund_cluster }}</h3>
+                                                        <h3 class="card-text small">NAME:
+                                                            {{ $prop_cards->prop_plant_eq }}</h3>
                                                         <p class="card-text small">Property No/Object Account Code:
-                                                            {{ $prop_cards->obj_acc_code }}</p>
+                                                            {{ $prop_cards->prop_no }}</p>
                                                     </div>
                                                     <div class="go-corner" href="#">
                                                         <div class="go-arrow">
@@ -125,34 +126,40 @@
                                                     </div>
                                                 </a>
                                             </div>
-                                            <div class="modal fade" id="editItemModal{{ $prop_cards->id }}" tabindex="-1" role="dialog"
-                                                aria-labelledby="editItemModalLabel" aria-hidden="true">
+                                            <div class="modal fade" id="editItemModal{{ $prop_cards->id }}"
+                                                tabindex="-1" role="dialog" aria-labelledby="editItemModalLabel"
+                                                aria-hidden="true">
                                                 <div class="modal-dialog modal-lg modal-custom-width" role="document">
-                                                    <!-- Added modal-custom-width class -->
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="editItemModalLabel">View or Edit PPELC</h5>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <h5 class="modal-title" id="editItemModalLabel">View or Edit
+                                                                Property Card</h5>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
 
                                                         <div class="modal-body">
-                                                            <form action="{{ url('/edit-ppel-card/' . $prop_cards->id) }}" method="POST">
+                                                            <form
+                                                                action="{{ url('/edit-property-card/' . $prop_cards->id) }}"
+                                                                method="POST">
                                                                 @csrf
                                                                 <div id="print-content" class="modal-body">
                                                                     <div class="card-block">
                                                                         <div class="row">
                                                                             <div class="col-md-6">
                                                                                 <div class="form-group row">
-                                                                                    <label class="col-md-6 col-form-label">
+                                                                                    <label
+                                                                                        class="col-md-6 col-form-label">
                                                                                         Entity Name
                                                                                     </label>
                                                                                     <div class="col-md-6">
-                                                                                        <input type="text" name="entity_name"
+                                                                                        <input type="text"
+                                                                                            name="entity_name"
                                                                                             class="form-control text-line"
                                                                                             style="padding-top: 4px; padding-bottom: 4px;"
-                                                                                            value="{{ $prop_cards->entity_name }}" readonly>
+                                                                                            value="{{ $prop_cards->entity_name }}">
                                                                                         @error('entity_name')
                                                                                             <span
                                                                                                 class="text-danger">{{ $message }}</span>
@@ -162,14 +169,16 @@
                                                                             </div>
                                                                             <div class="col-md-6">
                                                                                 <div class="form-group row">
-                                                                                    <label class="col-md-6 col-form-label">
+                                                                                    <label
+                                                                                        class="col-md-6 col-form-label">
                                                                                         Fund Cluster
                                                                                     </label>
                                                                                     <div class="col-md-6">
-                                                                                        <input type="text" name="fund_cluster"
+                                                                                        <input type="text"
+                                                                                            name="fund_cluster"
                                                                                             class="form-control text-line"
                                                                                             style="padding-top: 4px; padding-bottom: 4px;"
-                                                                                            value="{{ $prop_cards->fund_cluster }}" readonly>
+                                                                                            value="{{ $prop_cards->fund_cluster }}">
                                                                                         @error('fund_cluster')
                                                                                             <span
                                                                                                 class="text-danger">{{ $message }}</span>
@@ -182,76 +191,57 @@
                                                                         <div class="col-lg-12">
                                                                             <div class="card-body">
                                                                                 <div class="table-responsive">
-                                                                                    <table class="table table-bordered">
+                                                                                    <table
+                                                                                        class="table table-bordered">
                                                                                         <tbody>
                                                                                             <tr>
-                                                                                                <th scope="row">Property,Plant &
+                                                                                                <th scope="row">
+                                                                                                    Property,Plant &
                                                                                                     Equipment:</th>
                                                                                                 <td>
-                                                                                                    <input type="text"
+                                                                                                    <input
+                                                                                                        type="text"
                                                                                                         name="prop_plant_eq"
                                                                                                         class="form-control text-line"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
-                                                                                                        value="{{ $prop_cards->prop_plant_eq }}" readonly>
+                                                                                                        value="{{ $prop_cards->prop_plant_eq }}">
                                                                                                     @error('prop_plant_eq')
                                                                                                         <span
                                                                                                             class="text-danger">{{ $message }}</span>
                                                                                                     @enderror
                                                                                                 </td>
-                                                                                                <th scope="row">Object Account Code:</th>
+                                                                                                <th scope="row">
+                                                                                                    Property Number:
+                                                                                                </th>
                                                                                                 <td>
-                                                                                                    <input type="text" name="obj_acc_code"
+                                                                                                    <input
+                                                                                                        type="text"
+                                                                                                        name="prop_no"
                                                                                                         class="form-control text-line"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
-                                                                                                        value="{{ $prop_cards->obj_acc_code }}"">
-                                                                                                    @error('obj_acc_code')
+                                                                                                        value="{{ $prop_cards->prop_no }}"">
+                                                                                                    @error('prop_no')
                                                                                                         <span
                                                                                                             class="text-danger">{{ $message }}</span>
                                                                                                     @enderror
                                                                                                 </td>
-                                                                                                    <th scope="row">Rate of Depreciation:
-                                                                                                    </th>
-                                                                                                    <td>
-                                                                                                        <input type="text"
-                                                                                                            name="description"
-                                                                                                            class="form-control text-line"
-                                                                                                            style="padding-top: 4px; padding-bottom: 4px;"
-                                                                                                            value="{{ $prop_cards->rate_of_dep }}">
-                                                                                                        @error('description')
-                                                                                                            <span
-                                                                                                                class="text-danger">{{ $message }}</span>
-                                                                                                        @enderror
-                                                                                                    </td>
                                                                                             </tr>
                                                                                             <tr>
-                                                                                                <th scope="row">Description:
+                                                                                                <th scope="row">
+                                                                                                    Description:
                                                                                                 </th>
                                                                                                 <td>
-                                                                                                    <input type="text"
+                                                                                                    <input
+                                                                                                        type="text"
                                                                                                         name="description"
                                                                                                         class="form-control text-line"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
-                                                                                                        value="{{ $prop_cards->description }}" readonly>
+                                                                                                        value="{{ $prop_cards->description }}">
                                                                                                     @error('description')
                                                                                                         <span
                                                                                                             class="text-danger">{{ $message }}</span>
                                                                                                     @enderror
                                                                                                 </td>
-                                                                                                    <th scope="row">Estimated Useful Life:
-                                                                                                    </th>
-                                                                                                    <td>
-                                                                                                        <input type="text"
-                                                                                                            name="est_useful_life"
-                                                                                                            class="form-control text-line"
-                                                                                                            style="padding-top: 4px; padding-bottom: 4px;"
-                                                                                                            value="{{ $prop_cards->est_useful_life }}">
-                                                                                                        @error('est_useful_life')
-                                                                                                            <span
-                                                                                                                class="text-danger">{{ $message }}</span>
-                                                                                                        @enderror
-                                                                                                    </td>
-                                                                                                </td>
-                                                                                            </tr>
                                                                                         </tbody>
                                                                                     </table>
                                                                                 </div>
@@ -260,58 +250,85 @@
                                                                         <div class="col-lg-12">
                                                                             <div class="card-body">
                                                                                 <div class="table-responsive">
-                                                                                    <table class="table table-bordered table-resizable" style="font-size: 10px">
+                                                                                    <table
+                                                                                        class="table table-bordered table-resizable"
+                                                                                        style="font-size: 10px">
                                                                                         <thead>
                                                                                             <tr>
-                                                                                                <th scope="col" colspan="2"></th>
-                                                                                                <th scope="col" colspan="3"
-                                                                                                    style="text-align: center;">RECEIPT
+                                                                                                <th scope="col"
+                                                                                                    colspan="2">
                                                                                                 </th>
-                                                                                                <th scope="col" colspan="2"
-                                                                                                    style="text-align: center;"></th>
-                                                                                                <th scope="col" colspan="2"
-                                                                                                    style="text-align: center;"></th>
-                                                                                                <th scope="col" colspan="2"
-                                                                                                    style="text-align: center;">REPAIR HISTORY</th>
+                                                                                                <th scope="col"
+                                                                                                    colspan="3"
+                                                                                                    style="text-align: center;">
+                                                                                                    RECEIPT
+                                                                                                </th>
+                                                                                                <th scope="col"
+                                                                                                    colspan="2"
+                                                                                                    style="text-align: center;">
+                                                                                                    ISSUE/TRANSFER/DISPOSAL
+                                                                                                </th>
+                                                                                                <th scope="col"
+                                                                                                    colspan="1"
+                                                                                                    style="text-align: center;">
+                                                                                                    BALANCE
+                                                                                                </th>
+                                                                                                <th scope="col"
+                                                                                                    colspan="2"
+                                                                                                    style="text-align: center;">
+                                                                                                </th>
                                                                                             </tr>
                                                                                             <tr>
                                                                                                 <th scope="col"
-                                                                                                    style="text-align: center;">DATE</th>
+                                                                                                    style="text-align: center;">
+                                                                                                    DATE</th>
                                                                                                 <th scope="col"
-                                                                                                    style="text-align: center;">REFERENCE
+                                                                                                    style="text-align: center;">
+                                                                                                    REFERENCE
                                                                                                 </th>
                                                                                                 <th scope="col"
-                                                                                                    style="text-align: center;">QTY</th>
-                                                                                                <th scope="col"
-                                                                                                    style="text-align: center;">UNIT COST
+                                                                                                    style="text-align: center;">
+                                                                                                    QTY
                                                                                                 </th>
                                                                                                 <th scope="col"
-                                                                                                    style="text-align: center;">TOTAL COST
+                                                                                                    style="text-align: center;">
+                                                                                                    UNIT COST
                                                                                                 </th>
                                                                                                 <th scope="col"
-                                                                                                    style="text-align: center;">ACCUMULATED DEPRECIATION</th>
-                                                                                                <th scope="col"
-                                                                                                    style="text-align: center;">ACCUMULATED IMAPAIRMENT LOSSES</th>
-                                                                                                <th scope="col"
-                                                                                                    style="text-align: center;">ISSUE/TRANSFERS/ <br>ADJUSTMENT/S</th>
-                                                                                                <th scope="col"
-                                                                                                    style="text-align: center;">ADJUSTED COST</th>
-                                                                                                <th scope="col"
-                                                                                                    style="text-align: center;">NATURE OF REPAIR
+                                                                                                    style="text-align: center;">
+                                                                                                    TOTAL COST
                                                                                                 </th>
                                                                                                 <th scope="col"
-                                                                                                    style="text-align: center;">AMOUNT
+                                                                                                    style="text-align: center;">
+                                                                                                    QTY
+                                                                                                </th>
+                                                                                                <th scope="col"
+                                                                                                    style="text-align: center;">
+                                                                                                    OFFICE
+                                                                                                    OFFICER</th>
+                                                                                                <th scope="col"
+                                                                                                    style="text-align: center;">
+                                                                                                    QTY
+                                                                                                </th>
+                                                                                                <th scope="col"
+                                                                                                    style="text-align: center;">
+                                                                                                    AMOUNT</th>
+                                                                                                <th scope="col"
+                                                                                                    style="text-align: center;">
+                                                                                                    REMARKS
                                                                                                 </th>
                                                                                             </tr>
                                                                                         </thead>
                                                                                         <tbody>
                                                                                             <tr>
                                                                                                 <td>
-                                                                                                    <input type="date" name="date"
+                                                                                                    <input
+                                                                                                        type="date"
+                                                                                                        name="date"
                                                                                                         class="form-control text-line"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                         placeholder=""
-                                                                                                        value="{{ $prop_cards->date }}" readonly>
+                                                                                                        value="{{ $prop_cards->date }}">
                                                                                                     @error('date')
                                                                                                         <span
                                                                                                             class="text-danger">{{ $message }}</span>
@@ -319,119 +336,116 @@
                                                                                                 </td>
                                                                                                 <td>
                                                                                                     <textarea type="text" name="reference" class="form-control text-line"
-                                                                                                        style="padding-top: 4px; padding-bottom: 4px;" placeholder="@error('reference') {{ $message }} @enderror"
-                                                                                                        readonly>{{ $prop_cards->reference }}</textarea>
+                                                                                                        style="padding-top: 4px; padding-bottom: 4px;" placeholder="@error('reference') {{ $message }} @enderror">{{ $prop_cards->reference }}</textarea>
                                                                                                     @error('reference')
                                                                                                         <span
                                                                                                             class="text-danger">{{ $message }}</span>
                                                                                                     @enderror
                                                                                                 </td>
                                                                                                 <td>
-                                                                                                    <input type="text"
+                                                                                                    <input
+                                                                                                        type="text"
                                                                                                         name="receipt_qty"
                                                                                                         id="receipt_qtyy"
                                                                                                         class="form-control text-line"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                         value="{{ $prop_cards->receipt_qty }}"
-                                                                                                        placeholder="" readonly>
+                                                                                                        placeholder="">
                                                                                                     @error('receipt_qty')
                                                                                                         <span
                                                                                                             class="text-danger">{{ $message }}</span>
                                                                                                     @enderror
                                                                                                 </td>
                                                                                                 <td>
-                                                                                                    <input type="text"
+                                                                                                    <input
+                                                                                                        type="text"
                                                                                                         name="receipt_unitcost"
                                                                                                         id="receipt_unitcost"
                                                                                                         class="form-control text-line"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                         value="{{ $prop_cards->receipt_unitcost }}"
-                                                                                                        placeholder="" readonly>
+                                                                                                        placeholder="">
                                                                                                     @error('receipt_unitcost')
                                                                                                         <span
                                                                                                             class="text-danger">{{ $message }}</span>
                                                                                                     @enderror
                                                                                                 </td>
                                                                                                 <td>
-                                                                                                    <input type="text"
+                                                                                                    <input
+                                                                                                        type="text"
                                                                                                         name="receipt_totalcost"
                                                                                                         id="receipt_totalcost"
                                                                                                         class="form-control text-line"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                         placeholder=""
                                                                                                         value="{{ $prop_cards->receipt_totalcost }}"
-                                                                                                        >
+                                                                                                        readonly>
                                                                                                     @error('receipt_totalcost')
                                                                                                         <span
                                                                                                             class="text-danger">{{ $message }}</span>
                                                                                                     @enderror
                                                                                                 </td>
                                                                                                 <td>
-                                                                                                    <input type="text" name="accumalated_dep"
+                                                                                                    <input
+                                                                                                        type="text"
+                                                                                                        name="issue_qty"
                                                                                                         id="issue_qty"
                                                                                                         class="form-control text-line"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                         placeholder=""
-                                                                                                        value="{{ $prop_cards->accumalated_dep }}">
+                                                                                                        value="{{ $prop_cards->issue_qty }}">
                                                                                                     @error('issue_qty')
                                                                                                         <span
                                                                                                             class="text-danger">{{ $message }}</span>
                                                                                                     @enderror
                                                                                                 </td>
                                                                                                 <td>
-                                                                                                    <input type="text"
-                                                                                                        name="accumulated_impairment_losses"
+                                                                                                    <input
+                                                                                                        type="text"
+                                                                                                        name="issue_office_officer"
                                                                                                         id="issue_office_officer"
                                                                                                         class="form-control text-line"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                         placeholder=""
-                                                                                                        value="{{ $prop_cards->accumulated_impairment_losses }}">
+                                                                                                        value="{{ $prop_cards->issue_office_officer }}">
                                                                                                     @error('issue_office_officer')
                                                                                                         <span
                                                                                                             class="text-danger">{{ $message }}</span>
                                                                                                     @enderror
                                                                                                 </td>
                                                                                                 <td>
-                                                                                                    <input type="text" name="issue_transfers_adjustments"
+                                                                                                    <input
+                                                                                                        type="text"
+                                                                                                        name="bal_qty"
                                                                                                         id=""
                                                                                                         class="form-control text-line"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                         placeholder=""
-                                                                                                        value="{{ $prop_cards->issue_transfers_adjustments }}">
+                                                                                                        readonly
+                                                                                                        value="{{ $prop_cards->bal_qty }}">
                                                                                                     @error('bal_qty')
                                                                                                         <span
                                                                                                             class="text-danger">{{ $message }}</span>
                                                                                                     @enderror
                                                                                                 </td>
                                                                                                 <td>
-                                                                                                    <input type="text"
-                                                                                                        name="adjusted_code"
+                                                                                                    <input
+                                                                                                        type="text"
+                                                                                                        name="repair_amount"
                                                                                                         class="form-control text-line"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                         placeholder=""
-                                                                                                        value="{{ $prop_cards->adjusted_code }}">
-                                                                                                    @error('adjusted_code')
+                                                                                                        value="{{ $prop_cards->repair_amount }}">
+                                                                                                    @error('repair_amount')
                                                                                                         <span
                                                                                                             class="text-danger">{{ $message }}</span>
                                                                                                     @enderror
                                                                                                 </td>
 
                                                                                                 <td>
-                                                                                                    <textarea type="text" name="repair_nature"
-                                                                                                        class="form-control text-line"
-                                                                                                        style="padding-top: 4px; padding-bottom: 4px;"
-                                                                                                        placeholder="">{{ $prop_cards->repair_nature }}</textarea>
-                                                                                                    @error('repair_nature')
-                                                                                                        <span
-                                                                                                            class="text-danger">{{ $message }}</span>
-                                                                                                    @enderror
-                                                                                                </td>
-                                                                                                <td>
-                                                                                                    <input type="text" name="repair_amount"
-                                                                                                        class="form-control text-line"
-                                                                                                        style="padding-top: 4px; padding-bottom: 4px;"
-                                                                                                        placeholder="" readonly></input>
-                                                                                                    @error('repair_amount')
+                                                                                                    <textarea type="text" name="remarks" class="form-control text-line"
+                                                                                                        style="padding-top: 4px; padding-bottom: 4px;" placeholder="">{{ $prop_cards->remarks }}</textarea>
+                                                                                                    @error('remarks')
                                                                                                         <span
                                                                                                             class="text-danger">{{ $message }}</span>
                                                                                                     @enderror
@@ -445,52 +459,27 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    {{-- <div class="col-md-6">
+                                                                    <div class="col-md-6">
+                                                                        {{-- Button positioned to the left --}}
                                                                         <a type="button" class="btn btn-danger"
-                                                                            href="{{ url('/view-ppelc/' . $prop_cards->id) }}">View PPE Ledger Card</a>
-                                                                    </div> --}}
+                                                                            href="{{ url('/view-ppelc/' . $prop_cards->id) }}">View
+                                                                            PPE Ledger Card</a>
+                                                                    </div>
                                                                     <div class="col-md-6 text-right">
                                                                         {{-- Buttons positioned to the right --}}
-                                                                        <button type="submit" class="btn btn-primary">Save
+                                                                        <button type="submit"
+                                                                            class="btn btn-primary">Save
                                                                             Changes</button>
-                                                                            <button type="button" onclick="navigateToPrintablePage()" class="btn btn-success ">Preview</button>
-
+                                                                        <button type="button"
+                                                                            onclick="navigateToPrintablePage()"
+                                                                            class="btn btn-success ">Preview</button>
                                                                     </div>
                                                                 </div>
-
                                                             </form>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-
-                                            <script>
-                                                // Function to calculate receipt total cost
-                                                function calculateReceiptTotalCost() {
-                                                    var receiptQty = parseFloat(document.getElementById("receipt_qtyy").value);
-                                                    var receiptUnitCost = parseFloat(document.getElementById("receipt_unitcost").value);
-                                                    var receiptTotalCost = receiptQty * receiptUnitCost;
-                                                    document.getElementById("receipt_totalcost").value = receiptTotalCost.toFixed(2); // Adjust to your required precision
-                                                }
-
-                                                // Function to calculate issue total cost
-                                                function calculateIssueTotalCost() {
-                                                    var issueQty = parseFloat(document.getElementById("issue_qty").value);
-                                                    var issueUnitCost = parseFloat(document.getElementById("issue_unitcost").value);
-                                                    var issueTotalCost = issueQty * issueUnitCost;
-                                                    document.getElementById("issue_totalcost").value = issueTotalCost.toFixed(2); // Adjust to your required precision
-                                                }
-
-                                                // Attach event listeners to input fields for receipt and issue to trigger calculation
-                                                document.getElementById("receipt_qtyy").addEventListener("input", calculateReceiptTotalCost);
-                                                document.getElementById("receipt_unitcost").addEventListener("input", calculateReceiptTotalCost);
-                                                document.getElementById("issue_qty").addEventListener("input", calculateIssueTotalCost);
-                                                document.getElementById("issue_unitcost").addEventListener("input", calculateIssueTotalCost);
-
-                                                // Calculate on initial load if values are present
-                                                calculateReceiptTotalCost();
-                                                calculateIssueTotalCost();
-                                            </script>
                                         @endforeach
                                     </div>
                                 </div>
@@ -514,15 +503,10 @@
                             </div>
                         </div>
                     </div>
-
             </div>
             </section>
         </div>
 
-
-          <!-- Bootstrap JavaScript and jQuery -->
-          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
         <script>
             // Function to calculate receipt total cost
@@ -557,35 +541,6 @@
         <!-- Modal -->
 
         <script>
-            document.addEventListener('DOMContentLoaded', function () {
-    const tables = document.querySelectorAll('.table-resizable');
-
-    tables.forEach(table => {
-        let ths = table.querySelectorAll('th');
-        let startX, startWidth;
-
-        ths.forEach(th => {
-            th.addEventListener('mousedown', function (event) {
-                startX = event.pageX;
-                startWidth = th.offsetWidth;
-
-                document.addEventListener('mousemove', onMouseMove);
-                document.addEventListener('mouseup', () => {
-                    document.removeEventListener('mousemove', onMouseMove);
-                });
-            });
-
-            function onMouseMove(event) {
-                const diffX = event.pageX - startX;
-                th.style.width = startWidth + diffX + 'px';
-            }
-        });
-    });
-});
-
-        </script>
-
-        <script>
             $(document).ready(function() {
                 $('#search-input').on('keyup', function() {
                     var searchText = $(this).val().toLowerCase();
@@ -603,6 +558,11 @@
                 });
             });
         </script>
+
+
+        <!-- Bootstrap JavaScript and jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         @if (session('success'))
@@ -656,6 +616,35 @@
                 window.location.href = '/printable-prop-page/' + prop_cards_id;
             }
         </script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const tables = document.querySelectorAll('.table-resizable');
+
+                tables.forEach(table => {
+                    let ths = table.querySelectorAll('th');
+                    let startX, startWidth;
+
+                    ths.forEach(th => {
+                        th.addEventListener('mousedown', function(event) {
+                            startX = event.pageX;
+                            startWidth = th.offsetWidth;
+
+                            document.addEventListener('mousemove', onMouseMove);
+                            document.addEventListener('mouseup', () => {
+                                document.removeEventListener('mousemove', onMouseMove);
+                            });
+                        });
+
+                        function onMouseMove(event) {
+                            const diffX = event.pageX - startX;
+                            th.style.width = startWidth + diffX + 'px';
+                        }
+                    });
+                });
+            });
+        </script>
+
         {{-- Footer --}}
         @include('footer')
 

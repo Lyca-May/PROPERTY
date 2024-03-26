@@ -23,7 +23,7 @@
             <ul class="sidebar-menu">
                 <li class="menu-header">Dashboard</li>
                 <li class="active">
-                    <a href="index.html"><i class="ion ion-speedometer"></i><span>Dashboard</span></a>
+                    <a href="{{ url ('/dash-prop')}}"><i class="ion ion-speedometer"></i><span>Dashboard</span></a>
                 </li>
 
                 <li class="menu-header">Components</li>
@@ -45,7 +45,7 @@
                     <a href="chartjs.html"><i class="ion ion-stats-bars"></i><span>Semi-Expendable Cards</span></a>
                 </li>
                 <li>
-                    <a href="simple.html"><i class="ion ion-ios-location-outline"></i><span>
+                    <a href="{{ url ('/all-property')}}"><i class="ion ion-ios-location-outline"></i><span>
                             Property Cards</span></a>
                 </li>
 

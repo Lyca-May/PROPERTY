@@ -1,11 +1,11 @@
 /**
  * Stisla
  * Stisla is a Bootstrap 4 Admin Template
- * 
+ *
  * @author Kodinger
  * @url http://stisla.multinity.com
  * @license MIT License
- * 
+ *
  */
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700');
 
@@ -433,13 +433,13 @@ body.sidebar-gone .main-content {
 	float: left;
 	margin-right: 10px;
     /* display: flex; */
-   
+
 }
 .main-sidebar .sidebar-user .sidebar-user-picture img {
     width: 100px; /* Increase the width as desired */
 	height: 70px; /* Set the height to maintain aspect ratio */
 	border-radius: 50%;
-    
+
 
 }
 .main-sidebar .sidebar-user .sidebar-user-details .user-name {
@@ -618,7 +618,7 @@ body.sidebar-gone .main-content {
 /*section*/
 .section {
 	position: relative;
-	z-index: 1;
+	/* z-index: 1; */
 }
 .section .section-header {
 	background-color: #fff;
@@ -1035,7 +1035,7 @@ div.dataTables_wrapper div.dataTables_processing {
 /*login*/
 .login-brand {
 	margin: 20px 0;
-	margin-bottom: 40px;
+	margin-bottom: 10px;
 	font-size: 24px;
 	text-transform: uppercase;
 	letter-spacing: 4px;
@@ -1298,6 +1298,14 @@ table tr:hover .table-links {
 	-webkit-box-shadow: 0 0 40px rgba(0, 0, 0, .05);
 	        box-shadow: 0 0 40px rgba(0, 0, 0, .05);
 }
+
+
+.modal-custom-width {
+    max-width: 1400px; /* Adjust the width as needed */
+    width: 90%; /* You can also use percentage for responsive design */
+}
+
+
 /* end modal */
 
 /* profile widget */
@@ -1498,7 +1506,7 @@ table tr:hover .table-links {
 	width: auto;
 	display: inline-block;
 	font-size: 12px;
-}	
+}
 .card-chat .chat-content .chat-item .chat-details .chat-text img {
 	max-width: 100%;
 	margin-bottom: 10px;
@@ -2174,7 +2182,7 @@ table tr:hover .table-links {
 	.weather .weather-desc {
 		margin-left: 0;
 	}
-	
+
 	.statistic-details {
 		-ms-flex-wrap: wrap;
 		    flex-wrap: wrap;
@@ -2402,7 +2410,7 @@ table tr:hover .table-links {
     text-decoration: none;
     z-index: 0;
     overflow: hidden;
-    /* border: 1px solid #574B90; */
+    border: 1px solid #574B90;
     height: 180px; /* Fixed height for all cards */
 
     &:hover {

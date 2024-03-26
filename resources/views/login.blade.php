@@ -1,55 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <style>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" name="viewport">
+  <title> Login | Property and Supplies System </title>
+
+  <link rel="stylesheet" href="{{ asset ('assets/modules/bootstrap/css/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ asset ('assets/modules/ionicons/css/ionicons.min.css') }}">
+  <link rel="stylesheet" href="{{ asset ('assets/modules/fontawesome/web-fonts-with-css/css/fontawesome-all.min.css') }}">
+
+  <link rel="stylesheet" href="{{ asset ('assets/css/demo.css') }}">
+  <link rel="stylesheet" href="{{ asset ('assets/css/style.css') }}">
+
+   <style>
         body {
-            background-image: url('https://www.bfar.da.gov.ph/wp-content/uploads/2023/01/Bfar-Banner-2023.jpg');
+            background-image: url('/assets/img/bg_bfar.png');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
         }
 
-        body {
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-        }
-
-        .card {
-            width: 550px;
-        }
     </style>
 </head>
 
 <body>
+  <div id="app">
+    <section class="section">
+      <div class="container mt-5">
+        <div class="row">
+          <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-6 ">
+            <div class="card card-primary">
+                <div class="login-brand">
+                    <img style="width:100px; height:70px" alt="image" src="{{ asset('assets/img/BFAR_LOGO.png') }}">
+                </div>
+              <div class="card-header" style="text-align: center"><h6>LOGIN TO YOUR ACCOUNT</h6></div>
 
-    <div class="card">
-        <div class="card-body">
-            <h3 class="card-title text-center mb-4">Administrator Login</h3>
-            <form method="post" action="{{ route('login') }}">
-                @csrf <!-- CSRF protection -->
-                <div class="form-group">
+              <div class="card-body">
+                <form method="POST" action="{{ route('login') }}">
+                    @csrf <!-- CSRF protection -->
+                  <div class="form-group">
                     <label for="username">Username</label>
-                    <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" value="{{ old('username') }}">
+                    <input id="username" type="text" class="form-control" name="username" tabindex="1"  placeholder="Enter username" value="{{ old('username') }}">
                     @error('username')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Enter password">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="password" class="d-block">Password
+
+                    </label>
+                    <input id="password" type="password" class="form-control" name="password" tabindex="2" id="password" name="password" placeholder="Enter password">
                     @error('password')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
-                </div>
-                <div class="form-group">
+                  </div>
+
+                  <div class="form-group">
                     <label for="role">Role</label>
                     <select class="form-control" id="role" name="role">
                         <option value="PROPERTY">PROPERTY DIVISION</option>
@@ -58,67 +65,41 @@
                     @error('role')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
-                </div>
-                <button type="submit" class="btn btn-primary btn-block">Login</button>
-                <div class="text-center mt-3">
-                    <a href="{{ url('/forgot-pass') }}">Forgot Password?</a>
-                </div>
-            </form>
+                  </div>
+                  <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block" tabindex="4">
+                      Login
+                    </button>
+                  </div>
+                  <div style="text-align: center">
+                    <a href="{{ url('/forgot-pass') }}">
+                      Forgot Password?
+                    </a>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            <div class="simple-footer" style="color: rgb(60, 11, 96)">
+            <b>  Copyright &copy; Property Unit System 2024 </b>
+            </div>
+          </div>
         </div>
-    </div>
+      </div>
+    </section>
+  </div>
 
+  <script src="{{ asset ('assets/modules/jquery.min.js') }}"></script>
+  <script src="{{ asset ('assets/modules/popper.js') }}"></script>
+  <script src="{{ asset ('assets/modules/tooltip.js') }}"></script>
+  <script src="{{ asset ('assets/modules/bootstrap/js/bootstrap.min.js') }}"></script>
+  <script src="{{ asset ('assets/modules/nicescroll/jquery.nicescroll.min.js') }}"></script>
+  <script src="{{ asset ('assets/modules/moment.min.js') }}"></script>
+  <script src="{{ asset ('assets/modules/scroll-up-bar/dist/scroll-up-bar.min.js') }}"></script>
+  <script src="{{ asset ('assets/js/sa-functions.js') }}"></script>
 
-    <!-- Bootstrap JS and dependencies -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-
-
-    @if (session('success'))
-        <script>
-            Swal.fire({
-                icon: 'success',
-                title: 'Success!',
-                text: '{{ session('success') }}',
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true,
-                background: '#8cc63f',
-                iconColor: '#ffffff',
-                customClass: {
-                    title: 'text-white',
-                    content: 'text-white'
-                }
-            });
-        </script>
-    @endif
-
-    @if (session('failed'))
-        <script>
-            Swal.fire({
-                icon: 'failed',
-                title: 'failed!',
-                text: '{{ session('failed') }}',
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true,
-                background: '#dc3545',
-                iconColor: '#ffffff',
-                customClass: {
-                    title: 'text-white',
-                    content: 'text-white'
-                }
-            });
-        </script>
-    @endif
-
-
+  <script src="{{ asset ('assets/js/scripts.js') }}"></script>
+  <script src="{{ asset ('assets/js/custom.js') }}"></script>
+  {{-- <script src="{{ asset ('assets/js/demo.js') }}"></script> --}}
 </body>
-
 </html>
