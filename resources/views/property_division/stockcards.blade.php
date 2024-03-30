@@ -490,6 +490,16 @@
                                                 </div>
                                             </div>
 
+                                            
+    <script>
+        // Function to navigate to the printable page
+        function navigateToPrintablePage() {
+            // Assuming 'prop_cards_id' is the parameter to be passed
+            var stock_cards_id = '{{ $stock_cards->id }}';
+            // Navigate to the printable page
+            window.location.href = '/printable-stock-page/' + stock_cards_id;
+        }
+    </script>
                                             @endforeach
                                     </div>
 
@@ -566,15 +576,6 @@
     </div>
 
 
-    <script>
-        // Function to navigate to the printable page
-        function navigateToPrintablePage() {
-            // Assuming 'prop_cards_id' is the parameter to be passed
-            var stock_cards_id = '{{ $stock_cards->id }}';
-            // Navigate to the printable page
-            window.location.href = '/printable-stock-page/' + stock_cards_id;
-        }
-    </script>
 
     <script>
         $(document).ready(function() {
