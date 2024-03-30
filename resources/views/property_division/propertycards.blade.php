@@ -328,17 +328,16 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="modal-footer">
+                                                            <br>
+                                                            <div class="row">
                                                                 <div class="col-md-6">
                                                                     {{-- Button positioned to the left --}}
-                                                                    <a type="button" class="btn btn-danger" href="{{ url('/view-ppelc/' . $prop_cards->id) }}">View
-                                                                        PPE Ledger Card</a>
+                                                                    <a type="button" class="btn btn-danger" href="{{ url('/view-ppelc/' . $prop_cards->id) }}">View PPE Ledger Card</a>
                                                                 </div>
                                                                 <div class="col-md-6 text-right">
                                                                     {{-- Buttons positioned to the right --}}
-                                                                    <button type="submit" class="btn btn-primary">Save
-                                                                        Changes</button>
-                                                                    <button type="button" onclick="navigateToPrintablePage()" class="btn btn-success ">Preview</button>
+                                                                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                                                                    <button type="button" onclick="navigateToPrintablePage()" class="btn btn-success">Preview</button>
                                                                 </div>
                                                             </div>
                                                         </form>
@@ -444,7 +443,8 @@
             Swal.fire({
                 icon: 'success',
                 title: 'Success!',
-                text: '{{ session('success') }}',
+                text: '{{ session('
+                success ') }}',
                 toast: true,
                 position: 'top-end',
                 showConfirmButton: false,
@@ -465,7 +465,8 @@
             Swal.fire({
                 icon: 'failed',
                 title: 'failed!',
-                text: '{{ session('failed') }}',
+                text: '{{ session('
+                failed ') }}',
                 toast: true,
                 position: 'top-end',
                 showConfirmButton: false,
@@ -517,4 +518,5 @@
     </div>
     </div>
 </body>
+
 </html>

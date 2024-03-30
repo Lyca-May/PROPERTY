@@ -467,7 +467,8 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="modal-footer">
+                                                                <br>
+                                                                <div class="row">
                                                                     <div class="col-md-6">
                                                                         {{-- Button positioned to the left --}}
                                                                         <a type="button" class="btn btn-danger"

@@ -116,10 +116,12 @@
 <body>
 
     <div class="card-header">
-        <div class="card">
-            <div>
+        <br>
+        <div>
                 <a href="{{ url ('/all-property')}}"> <button class="btn btn-primary no-print"> <small><< </small>back</button></a>
             </div>
+            <br>
+        <div class="card">
             <div class="row">
                 <div class="card-body">
                     <div class="row">
@@ -384,13 +386,11 @@
                                             </div>
                                         </div>
                                     </form>
-                            {{-- </div> --}}
-                            <br>
+                           </div>
                             </table>
-                            <div class="btn-print no-print" style="margin-left:750px">
-                                <button onclick="window.print()" class="btn btn-success">Print Report</button>
-                            </div>
-
+                            <div class="btn-print no-print" style="display: flex; justify-content: center;">
+                                    <button onclick="window.print()" class="btn btn-success">Print Report</button>
+                                </div>
                         </div>
                     </div>
                 </div>
