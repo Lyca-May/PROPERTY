@@ -25,9 +25,7 @@ Route::get('/forgot-pass', function () {
     return view('forgot-pass');
 });
 
-Route::get('/dash-prop', function () {
-    return view('property_division.dash-prop');
-});
+Route::get('/dash-prop', [PropertyController::class , 'countCard']);
 Route::get('/dash-accounting', function () {
     return view('accounting_division.dash-accounting');
 });

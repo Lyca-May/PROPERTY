@@ -434,39 +434,36 @@
                                                                                                     <input
                                                                                                         type="text"
                                                                                                         name="bal_qty"
-                                                                                                        class="form-control text-line"
+                                                                                                        class="form-control text-line bal-qty"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                         value="{{ $stock_cards->bal_qty }}"
                                                                                                         placeholder="">
                                                                                                     @error('bal_qty')
-                                                                                                        <span
-                                                                                                            class="text-danger">{{ $message }}</span>
+                                                                                                        <span class="text-danger">{{ $message }}</span>
                                                                                                     @enderror
                                                                                                 </td>
                                                                                                 <td>
                                                                                                     <input
                                                                                                         type="text"
                                                                                                         name="bal_unitcost"
-                                                                                                        class="form-control text-line"
+                                                                                                        class="form-control text-line bal-unitcost"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                         value="{{ $stock_cards->bal_unitcost }}"
                                                                                                         placeholder="">
                                                                                                     @error('bal_unitcost')
-                                                                                                        <span
-                                                                                                            class="text-danger">{{ $message }}</span>
+                                                                                                        <span class="text-danger">{{ $message }}</span>
                                                                                                     @enderror
                                                                                                 </td>
                                                                                                 <td>
                                                                                                     <input
                                                                                                         type="text"
                                                                                                         name="bal_totalcost"
-                                                                                                        class="form-control text-line"
+                                                                                                        class="form-control text-line bal-totalcost"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                         value="{{ $stock_cards->bal_totalcost }}"
-                                                                                                        placeholder="">
+                                                                                                        readonly>
                                                                                                     @error('bal_totalcost')
-                                                                                                        <span
-                                                                                                            class="text-danger">{{ $message }}</span>
+                                                                                                        <span class="text-danger">{{ $message }}</span>
                                                                                                     @enderror
                                                                                                 </td>
                                                                                                 <td>
@@ -506,6 +503,30 @@
                                                 </div>
                                             </div>
                                         @endforeach
+                                        <script>
+                                            // Select balance input fields
+                                            const balInputs = document.querySelectorAll('.bal-qty, .bal-unitcost');
+
+                                            // Add event listener for each balance input field
+                                            balInputs.forEach(input => {
+                                                input.addEventListener('input', updateBalTotalCost);
+                                            });
+
+                                            function updateBalTotalCost(event) {
+                                                // Get the parent row of the input field
+                                                const parentRow = event.target.closest('tr');
+
+                                                // Get the quantity and unit cost values within the parent row
+                                                const qty = parseFloat(parentRow.querySelector('[name="bal_qty"]').value);
+                                                const unitCost = parseFloat(parentRow.querySelector('[name="bal_unitcost"]').value);
+
+                                                // Calculate the total cost
+                                                const totalCost = qty * unitCost;
+
+                                                // Update the total cost field within the parent row with the calculated value
+                                                parentRow.querySelector('[name="bal_totalcost"]').value = isNaN(totalCost) ? '' : totalCost.toFixed(2);
+                                            }
+                                        </script>
                                     </div>
 
                                 </div>
@@ -532,65 +553,8 @@
             </div>
             </section>
         </div>
-
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-        @if (session('success'))
-            <script>
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Success!',
-                    text: '{{ session('success') }}',
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 3000,
-                    timerProgressBar: true,
-                    background: '#8cc63f',
-                    iconColor: '#ffffff',
-                    customClass: {
-                        title: 'text-white',
-                        content: 'text-white'
-                    }
-                });
-            </script>
-        @endif
-
-        @if (session('failed'))
-            <script>
-                Swal.fire({
-                    icon: 'failed',
-                    title: 'failed!',
-                    text: '{{ session('failed') }}',
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 3000,
-                    timerProgressBar: true,
-                    background: '#dc3545',
-                    iconColor: '#ffffff',
-                    customClass: {
-                        title: 'text-white',
-                        content: 'text-white'
-                    }
-                });
-            </script>
-        @endif
-
-        @include('footer')
     </div>
     </div>
-
-
-    {{-- <script>
-        // Function to navigate to the printable page
-        function navigateToPrintablePage() {
-            // Assuming 'prop_cards_id' is the parameter to be passed
-            var prop_cards_id = '{{ $prop_cards->id }}';
-            // Navigate to the printable page
-            window.location.href = '/printable-prop-page/' + prop_cards_id;
-        }
-    </script> --}}
-
     <script>
         $(document).ready(function() {
             $('#search-input').on('keyup', function() {
@@ -609,6 +573,50 @@
             });
         });
     </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: '{{ session('success') }}',
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                background: '#8cc63f',
+                iconColor: '#ffffff',
+                customClass: {
+                    title: 'text-white',
+                    content: 'text-white'
+                }
+            });
+        </script>
+    @endif
+
+    @if (session('failed'))
+        <script>
+            Swal.fire({
+                icon: 'failed',
+                title: 'failed!',
+                text: '{{ session('failed') }}',
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                background: '#dc3545',
+                iconColor: '#ffffff',
+                customClass: {
+                    title: 'text-white',
+                    content: 'text-white'
+                }
+            });
+        </script>
+    @endif
+
 
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

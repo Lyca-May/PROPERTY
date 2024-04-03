@@ -388,38 +388,48 @@
     </script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-
-<script>
-    // Example of using SweetAlert with a rectangle style and blue color
-    @if(session('success'))
+@if (session('success'))
+    <script>
         Swal.fire({
             icon: 'success',
-            title: 'Success',
+            title: 'Success!',
             text: '{{ session('success') }}',
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            background: '#8cc63f',
+            iconColor: '#ffffff',
             customClass: {
-                container: 'custom-alert-container',
-                popup: 'custom-alert-popup',
-                title: 'custom-alert-title',
-                confirmButton: 'custom-alert-button'
+                title: 'text-white',
+                content: 'text-white'
             }
         });
-    @endif
+    </script>
+@endif
 
-    @if(session('failed'))
+@if (session('failed'))
+    <script>
         Swal.fire({
-            icon: 'error',
-            title: 'Error',
+            icon: 'failed',
+            title: 'failed!',
             text: '{{ session('failed') }}',
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            background: '#dc3545',
+            iconColor: '#ffffff',
             customClass: {
-                container: 'custom-alert-container',
-                popup: 'custom-alert-popup',
-                title: 'custom-alert-title',
-                confirmButton: 'custom-alert-button'
+                title: 'text-white',
+                content: 'text-white'
             }
         });
-    @endif
-</script>
+    </script>
+@endif
+
 
 
 

@@ -361,8 +361,7 @@
                                                                                                     <input
                                                                                                         type="text"
                                                                                                         name="receipt_qty"
-                                                                                                        id="receipt_qty"
-                                                                                                        class="form-control text-line"
+                                                                                                        class="form-control text-line receipt-input"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                         value="{{ $stock_cards->receipt_qty }}"
                                                                                                         data-card-id="{{ $stock_cards->id }}">
@@ -371,30 +370,28 @@
                                                                                                     <input
                                                                                                         type="text"
                                                                                                         name="receipt_unitcost"
-                                                                                                        id="receipt_unitcost"
-                                                                                                        class="form-control text-line"
+                                                                                                        class="form-control text-line receipt-input"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                         value="{{ $stock_cards->receipt_unitcost }}"
-                                                                                                        data-card-id="{{ $stock_cards->id }}"data-card-id="{{ $stock_cards->id }}">
+                                                                                                        data-card-id="{{ $stock_cards->id }}">
                                                                                                 </td>
                                                                                                 <td>
                                                                                                     <input
                                                                                                         type="text"
                                                                                                         name="receipt_totalcost"
-                                                                                                        id="receipt_totalcost"
-                                                                                                        class="form-control text-line"
+                                                                                                        class="form-control text-line receipt-total"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                         value="{{ $stock_cards->receipt_totalcost }}"
                                                                                                         readonly
                                                                                                         data-card-id="{{ $stock_cards->id }}">
                                                                                                 </td>
+
                                                                                                 <!-- Issue section -->
                                                                                                 <td>
                                                                                                     <input
                                                                                                         type="text"
                                                                                                         name="issue_qty"
-                                                                                                        id="issue_qty"
-                                                                                                        class="form-control text-line"
+                                                                                                        class="form-control text-line issue-input"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                         value="{{ $stock_cards->issue_qty }}"
                                                                                                         data-card-id="{{ $stock_cards->id }}">
@@ -403,8 +400,7 @@
                                                                                                     <input
                                                                                                         type="text"
                                                                                                         name="issue_unitcost"
-                                                                                                        id="issue_unitcost"
-                                                                                                        class="form-control text-line"
+                                                                                                        class="form-control text-line issue-input"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                         value="{{ $stock_cards->issue_unitcost }}"
                                                                                                         data-card-id="{{ $stock_cards->id }}">
@@ -413,8 +409,7 @@
                                                                                                     <input
                                                                                                         type="text"
                                                                                                         name="issue_totalcost"
-                                                                                                        id="issue_totalcost"
-                                                                                                        class="form-control text-line"
+                                                                                                        class="form-control text-line issue-total"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                         value="{{ $stock_cards->issue_totalcost }}"
                                                                                                         readonly
@@ -480,7 +475,7 @@
                                                                         <button type="submit"
                                                                             class="btn btn-primary">Save
                                                                             Changes</button>
-                                                                            <button type="button"
+                                                                        <button type="button"
                                                                             onclick="navigateToPrintablePage()"
                                                                             class="btn btn-success ">Preview</button>
                                                                     </div>
@@ -490,18 +485,65 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <script>
+                                                // Function to navigate to the printable page
+                                                function navigateToPrintablePage() {
+                                                    // Assuming 'prop_cards_id' is the parameter to be passed
+                                                    var stock_cards_id = '{{ $stock_cards->id }}';
+                                                    // Navigate to the printable page
+                                                    window.location.href = '/printable-stock-page/' + stock_cards_id;
+                                                }
+                                            </script>
+                                        @endforeach
 
-                                            
-    <script>
-        // Function to navigate to the printable page
-        function navigateToPrintablePage() {
-            // Assuming 'prop_cards_id' is the parameter to be passed
-            var stock_cards_id = '{{ $stock_cards->id }}';
-            // Navigate to the printable page
-            window.location.href = '/printable-stock-page/' + stock_cards_id;
-        }
-    </script>
-                                            @endforeach
+                                        <script>
+                                            // Select all receipt input fields within each tbody
+                                            const tbodyReceiptInputs = document.querySelectorAll('tbody input.receipt-input');
+
+                                            // Add event listener for each receipt input field
+                                            tbodyReceiptInputs.forEach(input => {
+                                                input.addEventListener('input', updateTotalCost);
+                                            });
+
+                                            function updateTotalCost(event) {
+                                                // Get the parent row of the input field
+                                                const parentRow = event.target.closest('tr');
+
+                                                // Get the quantity and unit cost values within the parent row
+                                                const qty = parseFloat(parentRow.querySelector('[name="receipt_qty"]').value);
+                                                const unitCost = parseFloat(parentRow.querySelector('[name="receipt_unitcost"]').value);
+
+                                                // Calculate the total cost
+                                                const totalCost = qty * unitCost;
+
+                                                // Update the total cost field within the parent row with the calculated value
+                                                parentRow.querySelector('[name="receipt_totalcost"]').value = totalCost.toFixed(2);
+                                            }
+                                        </script>
+                                        <script>
+                                            // Select all issue input fields within each tbody
+                                            const tbodyIssueInputs = document.querySelectorAll('tbody input.issue-input');
+
+                                            // Add event listener for each issue input field
+                                            tbodyIssueInputs.forEach(input => {
+                                                input.addEventListener('input', updateIssueTotalCost);
+                                            });
+
+                                            function updateIssueTotalCost(event) {
+                                                // Get the parent row of the input field
+                                                const parentRow = event.target.closest('tr');
+
+                                                // Get the quantity and unit cost values within the parent row
+                                                const qty = parseFloat(parentRow.querySelector('[name="issue_qty"]').value);
+                                                const unitCost = parseFloat(parentRow.querySelector('[name="issue_unitcost"]').value);
+
+                                                // Calculate the total cost
+                                                const totalCost = qty * unitCost;
+
+                                                // Update the total cost field within the parent row with the calculated value
+                                                parentRow.querySelector('[name="issue_totalcost"]').value = totalCost.toFixed(2);
+                                            }
+                                        </script>
                                     </div>
 
                                 </div>

@@ -334,39 +334,49 @@
         calculateIssueTotalCost();
     </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@if (session('success'))
     <script>
-        // Example of using SweetAlert with a rectangle style and blue color
-        @if (session('success'))
-            Swal.fire({
-                icon: 'success',
-                title: 'Success',
-                text: '{{ session('success') }}',
-                customClass: {
-                    container: 'custom-alert-container',
-                    popup: 'custom-alert-popup',
-                    title: 'custom-alert-title',
-                    confirmButton: 'custom-alert-button'
-                }
-            });
-        @endif
-
-        @if (session('failed'))
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: '{{ session('failed') }}',
-                customClass: {
-                    container: 'custom-alert-container',
-                    popup: 'custom-alert-popup',
-                    title: 'custom-alert-title',
-                    confirmButton: 'custom-alert-button'
-                }
-            });
-        @endif
+        Swal.fire({
+            icon: 'success',
+            title: 'Success!',
+            text: '{{ session('success') }}',
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            background: '#8cc63f',
+            iconColor: '#ffffff',
+            customClass: {
+                title: 'text-white',
+                content: 'text-white'
+            }
+        });
     </script>
+@endif
+
+@if (session('failed'))
+    <script>
+        Swal.fire({
+            icon: 'failed',
+            title: 'failed!',
+            text: '{{ session('failed') }}',
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            background: '#dc3545',
+            iconColor: '#ffffff',
+            customClass: {
+                title: 'text-white',
+                content: 'text-white'
+            }
+        });
+    </script>
+@endif
+
 
 </body>
 
