@@ -42,12 +42,13 @@
                     <a href="{{ url ('/all-forms')}}"><i class="ion ion-clipboard"></i><span>Stock Cards</span></a>
                 </li>
                 <li>
-                    <a href="chartjs.html"><i class="ion ion-stats-bars"></i><span>Semi-Expendable Cards</span></a>
-                </li>
-                <li>
                     <a href="{{ url ('/all-property')}}"><i class="ion ion-ios-location-outline"></i><span>
                             Property Cards</span></a>
                 </li>
+                <li>
+                    <a href="{{ url ('/all-semi-expandable') }}"><i class="ion ion-stats-bars"></i><span>Semi-Expendable Cards</span></a>
+                </li>
+              
 
                 <li class="menu-header">More</li>
                 <li>

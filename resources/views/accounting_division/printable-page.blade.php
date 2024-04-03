@@ -47,8 +47,8 @@
             .no-print {
                 display: none !important;
                 text-align: center;
-
-
+                
+                
             }
 
             .print-content {
@@ -56,7 +56,7 @@
             }
 
             .table {
-                width: 120%;
+                width: 100%;
 
             }
 
@@ -117,7 +117,7 @@
     <div class="card-header">
         <br>
         <div>
-            <a href="{{ url ('/all-property')}}"> <button class="btn btn-primary no-print"> <small>
+            <a href="{{ url ('/all-ppelc')}}"> <button class="btn btn-primary no-print"> <small>
                         << </small>back</button></a>
         </div>
         <br>

@@ -8,7 +8,7 @@
     <title>View PPELC | ACCOUNTING DIVISION</title>
 
 
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
@@ -17,7 +17,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
         integrity="sha512-Lg2h+7fH4FG/D9xPZv94f4jeDmhgWxVxs7g2agQF7uYUgMNHmz4vkq0CIGsYqUZkR9Tf7fDcDX5XdLnq6C9ulA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+        crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
 
         <style>
             /* Make table responsive */
@@ -67,20 +67,20 @@
                                     <a class="nav-link active" id="home-tab3" data-toggle="tab" href="#home3"
                                         role="tab" aria-controls="home" aria-selected="true">All Cards</a>
                                 </li>
-                                {{-- <li class="nav-item">
+                                <!-- {{-- <li class="nav-item">
                                     <a class="nav-link" id="profile-tab3" data-toggle="tab" href="#profile3"
                                         role="tab" aria-controls="profile" aria-selected="false">New Form</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" id="contact-tab3" data-toggle="tab" href="#contact3"
                                         role="tab" aria-controls="contact" aria-selected="false">Contact</a>
-                                </li> --}}
+                                </li> --}} -->
                             </ul>
 
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="home3" role="tabpanel"
                                     aria-labelledby="home-tab3">
-                                    {{-- <div class="container">
+                                    <!-- {{-- <div class="container">
                                         <div class="row">
                                             <div class="col-md-12 mx-auto">
                                                 <a href="{{ url('/property-card-form') }}" class="card">
@@ -89,7 +89,7 @@
                                                 </a>
                                             </div>
                                         </div>
-                                    </div> --}}
+                                    </div> --}} -->
                                     <hr>
 
                                     <div class="col-md-12 d-flex justify-content-end">
@@ -454,7 +454,6 @@
                                                                         <button type="submit" class="btn btn-primary">Save
                                                                             Changes</button>
                                                                             <button type="button" onclick="navigateToPrintablePage()" class="btn btn-success ">Preview</button>
-
                                                                     </div>
                                                                 </div>
 
@@ -521,8 +520,8 @@
 
 
           <!-- Bootstrap JavaScript and jQuery -->
-          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+          <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
 
         <script>
             // Function to calculate receipt total cost
@@ -653,7 +652,7 @@
                 // Assuming 'prop_cards_id' is the parameter to be passed
                 var prop_cards_id = '{{ $prop_cards->id }}';
                 // Navigate to the printable page
-                window.location.href = '/printable-prop-page/' + prop_cards_id;
+                window.location.href = '/printable-prop-pageAcc/' + prop_cards_id;
             }
         </script>
         {{-- Footer --}}

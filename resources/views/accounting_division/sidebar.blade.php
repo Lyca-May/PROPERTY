@@ -45,7 +45,7 @@
                     <a href="{{url('/all-ppelc')}}"><i class="ion ion-stats-bars"></i><span>View All PPELC</span></a>
                 </li>
                 <li>
-                    <a href="{{url('/all-ppelc')}}"><i class="ion ion-ios-location-outline"></i><span style="font-size:11px">
+                    <a href="{{url ('/all-semi-expandable-ledger') }}"><i class="ion ion-ios-location-outline"></i><span style="font-size:11px">
                             Semi Expandable Ledger Card</span></a>
                 </li>
 

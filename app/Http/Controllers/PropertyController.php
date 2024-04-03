@@ -91,6 +91,11 @@ class PropertyController extends Controller
         return view('property_division.printable-stock-page', compact('stock_cards'));
     }
 
+    public function printStockPageAcc($id) {
+        $stock_cards = PropertyModel::find($id);
+        return view('accounting_division.printable-stock-page', compact('stock_cards'));
+    }
+
     public function viewSLC($id)
     {
         $stock_card = PropertyModel::where('id', $id)->get();
@@ -161,6 +166,51 @@ class PropertyController extends Controller
         return redirect('/all-property')->with('success', 'Property Card ' . $propCard->prop_no . ' has been created!');
     }
 
+
+    // //SEMI EXPANDABLE CARD
+    // public function addSemi()
+    // {
+    //     $validatedData = $request->validate([
+    //         'entity_name' => 'required',
+    //         'fund_cluster' => 'required',
+    //         'prop_plant_eq' => 'required',
+    //         'prop_no' => 'required',
+    //         'description' => 'required',
+    //         'date' => 'required|date',
+    //         'reference' => 'required',
+    //         'receipt_qty' => 'required',
+    //         'receipt_unitcost' => 'required',
+    //         'receipt_totalcost' => 'required',
+    //         'issue_qty' => 'required',
+    //         'issue_office_officer' => 'required',
+    //         'repair_amount' => 'required',
+    //         'remarks' => 'required',
+    //     ], [
+    //         'entity_name.required' => 'The entity name field is required.',
+    //         'fund_cluster.required' => 'The fund cluster field is required.',
+    //         'prop_plant_eq.required' => 'The property plant and equipment field is required.',
+    //         'prop_no.required' => 'The property number field is required.',
+    //         'description.required' => 'The description field is required.',
+    //         'date.required' => 'The date field is required.',
+    //         'date.date' => 'The date must be a valid date format.',
+    //         'reference.required' => 'The reference field is required.',
+    //         'receipt_qty.required' => 'The receipt quantity field is required.',
+    //         'receipt_unitcost.required' => 'The receipt unit cost field is required.',
+    //         'receipt_totalcost.required' => 'The receipt total cost field is required.',
+    //         'repair_amount.required' => 'The repair amount field is required.',
+    //         'remarks.required' => 'The remarks field is required.',
+    //     ]);
+
+    //     $propCard = new PropCardModel();
+    //     $propCard->fill($validatedData);
+    //     $propCard->save();
+
+    //     return redirect('/all-property')->with('success', 'Property Card ' . $propCard->prop_no . ' has been created!');
+    // }
+
+    // }
+
+
     public function getPropertyCards()
     {
         $prop_card = DB::table('property_card')->get();
@@ -187,8 +237,12 @@ class PropertyController extends Controller
 
     public function viewPPELC($id)
     {
-        $prop_card = PropertyModel::where('id', $id)->get();
+        $prop_card = PropCardModel::where('id', $id)->get();
         return view('property_division.pc-ppelc', ['prop_card' => $prop_card]);
+    }
+    public function printPropPageAcc($id) {
+        $prop_cards = PropCardModel::find($id);
+        return view('accounting_division.printable-page', compact('prop_cards'));
     }
     public function printPropPage($id) {
         $prop_cards = PropCardModel::find($id);

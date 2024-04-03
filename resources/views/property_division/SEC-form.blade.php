@@ -29,54 +29,57 @@
     <div class="main-content">
         <section class="section">
             <h1 class="section-header">
-                <div>Stock Card | Form</div>
+                <div>Semi - Expendable Ledger Card | Form</div>
             </h1>
-
             <hr>
 
             <div>
-                <a href="{{ url ('/all-forms')}}"> <button class="btn btn-primary btn-sm no-print"> <small>
-                            << </small>back</button></a>
+                <a href="{{ url ('/all-semi-expandable')}}"> <button class="btn btn-primary btn-sm no-print"> <small>
+                            <<</small>back</button></a>
             </div>
-
+            <!-- /# row -->
             <div class="row">
                 <div class="col-lg-12 mx-auto">
                     <div class="card">
                         <div class="card-title pr" style="text-align: center;">
-                            <h4><strong>STOCK CARD</strong></h4>
+                            <h4><strong>SEMI - EXPENDABLE LEDGER CARD</strong></h4>
                         </div>
                         <br>
+                        {{-- <div class="card-body"> --}}
                         <form action="{{ route('add-stock-card') }}" method="POST">
                             @csrf
+                            {{-- <div class="card"> --}}
+                            {{-- <div class="card-block"> --}}
                             <div class="col-md-12">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group row">
-                                            <label class="col-md-4 col-form-label">
-                                                Entity Name
-                                            </label>
-                                            <div class="col-md-6">
-                                                <input type="text" name="entity_name" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px; width:280px" placeholder="">
-                                                @error('entity_name')
-                                                <span class="text-danger">{{ $message }}</span>
-                                                @enderror
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group row">
-                                            <label class="col-md-4 col-form-label">
-                                                Fund Cluster
-                                            </label>
-                                            <div class="col-md-6">
-                                                <input type="text" name="fund_cluster" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px; width:280px" placeholder="">
-                                                @error('fund_cluster')
-                                                <span class="text-danger">{{ $message }}</span>
-                                                @enderror
-                                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="col-md-4 col-form-label">
+                                            Entity Name
+                                        </label>
+                                        <div class="col-md-6">
+                                            <input type="text" name="entity_name" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;width: 300px" placeholder="">
+                                            @error('entity_name')
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="col-md-4 col-form-label">
+                                            Fund Cluster
+                                        </label>
+                                        <div class="col-md-6">
+                                            <input type="text" name="fund_cluster" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;width: 300px" placeholder="">
+                                            @error('fund_cluster')
+                                            <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             </div>
 
                             <div class="col-lg-12">
@@ -85,14 +88,14 @@
                                         <table class="table table-bordered">
                                             <tbody>
                                                 <tr>
-                                                    <th scope="row">Item:</th>
+                                                    <th scope="row">Semi-expendable Property:</th>
                                                     <td>
                                                         <input type="text" name="item_name" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">
                                                         @error('item_name')
                                                         <span class="text-danger">{{ $message }}</span>
                                                         @enderror
                                                     </td>
-                                                    <th scope="row">Stock No:</th>
+                                                    <th scope="row">Semi-expendable Property Number:</th>
                                                     <td>
                                                         <input type="text" name="stock_no" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">
                                                         @error('stock_no')
@@ -105,22 +108,6 @@
                                                     <td>
                                                         <input type="text" name="description" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">
                                                         @error('description')
-                                                        <span class="text-danger">{{ $message }}</span>
-                                                        @enderror
-                                                    </td>
-                                                    <th scope="row">Re-Order Point</th>
-                                                    <td>
-                                                        <input type="text" name="reorder_point" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">
-                                                        @error('reorder_point')
-                                                        <span class="text-danger">{{ $message }}</span>
-                                                        @enderror
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">Unit of Measurement:</th>
-                                                    <td>
-                                                        <input type="text" name="unit_of_measurement" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">
-                                                        @error('unit_of_measurement')
                                                         <span class="text-danger">{{ $message }}</span>
                                                         @enderror
                                                     </td>
@@ -138,35 +125,29 @@
                                                 <tr>
                                                     <th scope="col" colspan="2"></th>
                                                     <th scope="col" colspan="3" style="text-align: center;">
-                                                        RECEIPT</th>
-                                                    <th scope="col" colspan="3" style="text-align: center;">ISSUE
-                                                    </th>
-                                                    <th scope="col" colspan="3" style="text-align: center;">
-                                                        BALANCE</th>
-                                                    <th scope="col" colspan="3" style="text-align: center;"></th>
+                                                        Receipt</th>
+                                                    <th scope="col" colspan="3" style="text-align: center;">Issue/Transfer/Disposal</th>
+                                                    <th scope="col" colspan="1" style="text-align: center;">Balance</th>
+                                                    <th scope="col" colspan="2"></th>
+
                                                 </tr>
-                                                <tr>
-                                                    <th scope="col" style="text-align: center;">DATE</th>
-                                                    <th scope="col" style="text-align: center;">REFERENCE
+                                                <tr style="font-size:12px;">
+                                                    <th scope="col" style="text-align: center;">Date</th>
+                                                    <th scope="col" style="text-align: center;">Reference
                                                     </th>
-                                                    <th scope="col" style="text-align: center;">QTY</th>
-                                                    <th scope="col" style="text-align: center;">UNIT COST
+                                                    <th scope="col" style="text-align: center;">Qty</th>
+                                                    <th scope="col" style="text-align: center;">Unit Cost
                                                     </th>
-                                                    <th scope="col" style="text-align: center;">TOTAL COST
+                                                    <th scope="col" style="text-align: center;">Total Cost
+                                                    <th scope="col" style="text-align: center;">Item Number</th>
+                                                    <th scope="col" style="text-align: center;">Qty</th>
+                                                    <th scope="col" style="text-align: center;">Office Officer
                                                     </th>
-                                                    <th scope="col" style="text-align: center;">QTY</th>
-                                                    <th scope="col" style="text-align: center;">UNIT COST
+                                                    <th scope="col" style="text-align: center;">Qty
                                                     </th>
-                                                    <th scope="col" style="text-align: center;">TOTAL COST
-                                                    </th>
-                                                    <th scope="col" style="text-align: center;">QTY</th>
-                                                    <th scope="col" style="text-align: center;">UNIT COST
-                                                    </th>
-                                                    <th scope="col" style="text-align: center;">TOTAL COST
-                                                    </th>
-                                                    <th scope="col" style="text-align: center;">NO OF DAYS
-                                                        TO
-                                                        CONSUME</th>
+                                                    <th scope="col" style="text-align: center;">Amount</th>
+                                                    <th scope="col" style="text-align: center;">Remarks</th>
+
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -226,14 +207,9 @@
                                                         <input type="text" name="" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="" readonly>
                                                     </td>
                                                     <td>
-                                                        <input type="text" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="" readonly>
+                                                        <input type="text" name="" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="" readonly>
                                                     </td>
-                                                    <td>
-                                                        <input type="text" name="no_of_days" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">
-                                                        @error('no_of_days')
-                                                        <span class="text-danger">{{ $message }}</span>
-                                                        @enderror
-                                                    </td>
+
                                                 </tr>
                                             </tbody>
 

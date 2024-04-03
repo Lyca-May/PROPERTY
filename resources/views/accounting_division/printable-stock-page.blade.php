@@ -91,7 +91,7 @@
     <div class="card-header">
         <br>
         <div>
-            <a href="{{ url ('/all-forms')}}"> <button class="btn btn-primary no-print"> <small>
+            <a href="{{ url ('/all-slc')}}"> <button class="btn btn-primary no-print"> <small>
                         << </small>back</button></a>
         </div>
         <br>
@@ -209,8 +209,8 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-12">
-                                                    <div class="card-body">
+                                                <!-- <div class="col-lg-12"> -->
+                                                    <!-- <div class="card-body"> -->
                                                         <div class="table-responsive">
                                                             <table class="table table-bordered">
                                                                 <thead>
@@ -303,13 +303,22 @@
                                                                         </td>
                                                                         <!-- Bal section -->
                                                                         <td>
-                                                                            <input type="text" name="" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="" readonly>
+                                                                            <input type="text" name="bal_qty" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" value="{{ $stock_cards->bal_qty }}" placeholder="">
+                                                                            @error('bal_qty')
+                                                                            <span class="text-danger">{{ $message }}</span>
+                                                                            @enderror
                                                                         </td>
                                                                         <td>
-                                                                            <input type="text" name="" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="" readonly>
+                                                                            <input type="text" name="bal_unitcost" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" value="{{ $stock_cards->bal_unitcost }}" placeholder="">
+                                                                            @error('bal_unitcost')
+                                                                            <span class="text-danger">{{ $message }}</span>
+                                                                            @enderror
                                                                         </td>
                                                                         <td>
-                                                                            <input type="text" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="" readonly>
+                                                                            <input type="text" name="bal_totalcost" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" value="{{ $stock_cards->bal_totalcost }}" placeholder="">
+                                                                            @error('bal_totalcost')
+                                                                            <span class="text-danger">{{ $message }}</span>
+                                                                            @enderror
                                                                         </td>
                                                                         <td>
                                                                             <input type="text" name="no_of_days" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" value="{{ $stock_cards->no_of_days }}">
@@ -321,8 +330,8 @@
                                                                 </tbody>
                                                             </table>
                                                         </div>
-                                                    </div>
-                                                </div>
+                                                    <!-- </div> -->
+                                                <!-- </div> -->
                                             </div>
                                         </div>
                                     </form>

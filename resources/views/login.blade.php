@@ -56,7 +56,7 @@
                     @enderror
                   </div>
 
-                  <div class="form-group">
+                  <!-- <div class="form-group">
                     <label for="role">Role</label>
                     <select class="form-control" id="role" name="role">
                         <option value="PROPERTY">PROPERTY DIVISION</option>
@@ -65,7 +65,7 @@
                     @error('role')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
-                  </div>
+                  </div> -->
                   <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-block" tabindex="4">
                       Login
