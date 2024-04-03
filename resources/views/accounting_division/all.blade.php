@@ -493,8 +493,8 @@
                                                                         <button type="submit"
                                                                             class="btn btn-primary">Save
                                                                             Changes</button>
-                                                                        <button type="submit" class="btn btn-success"
-                                                                            onclick="window.print()">Export</button>
+                                                                        {{-- <button type="submit" class="btn btn-success"
+                                                                            onclick="window.print()">Export</button> --}}
                                                                     </div>
                                                                 </div>
                                                             </form>

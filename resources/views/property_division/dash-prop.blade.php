@@ -31,7 +31,7 @@
                                         <h4>Total Stock Cards</h4>
                                     </div>
                                     <div class="card-body">
-                                        {{$stockCards}}
+                                        {{ $stockCards }}
                                     </div>
                                 </div>
                             </div>
@@ -46,7 +46,7 @@
                                         <h4>Total Stock Ledger Cards</h4>
                                     </div>
                                     <div class="card-body">
-                                        {{$stockLedgerCards}}
+                                        {{ $stockLedgerCards }}
                                     </div>
                                 </div>
                             </div>
@@ -61,7 +61,7 @@
                                         <h4>Total PPEC</h4>
                                     </div>
                                     <div class="card-body">
-                                        {{$PPEC}}
+                                        {{ $PPEC }}
                                     </div>
                                 </div>
                             </div>
@@ -76,7 +76,7 @@
                                         <h4>Total PPELC</h4>
                                     </div>
                                     <div class="card-body">
-                                        {{$PPELC}}
+                                        {{ $PPELC }}
                                     </div>
                                 </div>
                             </div>
@@ -126,7 +126,8 @@
                         <div class="col-lg-4 col-md-12 col-12 col-sm-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h4>Chart</h4>
+                                    <h4>Visualization</h4>
+                                    <canvas id="myDoughnutChart" width="400" height="200"></canvas>
                                 </div>
 
                             </div>
@@ -136,6 +137,9 @@
             </div>
             </section>
         </div>
+
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         @if (session('success'))
             <script>
@@ -180,9 +184,61 @@
         @endif
 
         @include('footer')
-    </div>
-    </div>
 
+        <script>
+            // Usage
+            const labels = ['Stock Cards', 'Stock Ledger Cards', 'PPEC', 'PPELC'];
+            const counts = [<?php echo $stockCards; ?>, <?php echo $stockLedgerCards; ?>, <?php echo $PPEC; ?>, <?php echo $PPELC; ?>];
+
+            createDoughnutChart(labels, counts);
+
+            function createDoughnutChart(labels, counts) {
+                const backgroundColors = [
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(54, 162, 235, 0.5)',
+                    'rgba(255, 206, 86, 0.5)',
+                    'rgba(75, 192, 192, 0.5)'
+                ];
+
+                const borderColor = [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)'
+                ];
+
+                const config = {
+                    type: 'doughnut',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Count',
+                            data: counts,
+                            backgroundColor: backgroundColors,
+                            borderColor: borderColor,
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        plugins: {
+                            legend: {
+                                position: 'right',
+                            },
+                            title: {
+                                display: true,
+                                text: 'Card Counts'
+                            }
+                        }
+                    }
+                };
+
+                const ctx = document.getElementById('myDoughnutChart').getContext('2d');
+                new Chart(ctx, config);
+            }
+        </script>
+
+    </div>
+    </div>
 </body>
 
 </html>

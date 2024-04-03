@@ -237,7 +237,7 @@
                                                                             <input type="text" name="" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="" readonly>
                                                                         </td>
                                                                         <td colspan="2">
-                                                                            <input type="text" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px; font-size:15px; font-weight:100;" placeholder="FOR ACCOUNTING" readonly>
+                                                                            <input type="text" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px; font-size:15px; font-weight:100;" readonly>
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
@@ -434,13 +434,13 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <td>
-                                                                            <input type="text" name="" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="" readonly>
+                                                                            <input type="text" name="" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="" value="{{ $stock_cards->bal_qty }}" readonly>
                                                                         </td>
                                                                         <td colspan="2">
-                                                                            <input type="text" name="" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="" readonly>
+                                                                            <input type="text" name="" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="" value="{{ $stock_cards->bal_unitcost }}" readonly>
                                                                         </td>
                                                                         <td colspan="2">
-                                                                            <input type="text" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="" readonly>
+                                                                            <input type="text" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="" value="{{ $stock_cards->bal_totalcost }}" readonly>
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
