@@ -231,7 +231,7 @@ class PropertyController extends Controller
         if ($propCard) {
             return redirect('/all-property')->with('success', 'Property number ' . $propCard->prop_no . ' updated successfully.');
         } else {
-            return redirect()->back()->with('error', 'No changes detected or failed to update item.');
+            return redirect()->back()->with('failed', 'No changes detected or failed to update item.');
         }
     }
 
@@ -280,4 +280,21 @@ class PropertyController extends Controller
         }
     }
 
+    public function countCard(){
+
+        $stockCards = PropertyModel::count();
+        $stockLedgerCards = PropertyModel::whereNotNull('bal_qty')->whereNotNull('bal_unitcost')->whereNotNull('bal_totalcost')->count();
+        $PPEC= PropCardModel::count();
+        $PPELC = PropCardModel::whereNotNull('obj_acc_code')
+        ->whereNotNull('est_useful_life')
+        ->whereNotNull('rate_of_dep')
+        ->whereNotNull('accumulated_dep')
+        ->whereNotNull('accumulated_impairment_losses')
+        ->whereNotNull('issue_transfers_adjustments')
+        ->whereNotNull('adjusted_code')
+        ->whereNotNull('repair_nature')
+        ->count();
+
+        return view('property_division.dash-prop' , compact('stockCards', 'stockLedgerCards', 'PPEC', 'PPELC'));
+    }
 }

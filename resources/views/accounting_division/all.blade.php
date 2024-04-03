@@ -142,206 +142,353 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="col-lg-12">
-                                                            <div class="card-body">
-                                                                <div class="table-responsive">
-                                                                    <table class="table table-bordered">
-                                                                        <tbody>
-                                                                            <tr>
-                                                                                <th scope="row">
-                                                                                    Item:</th>
-                                                                                <td>
-                                                                                    <input type="text" name="item_name" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" value="{{ $stock_cards->item_name }}" readonly>
-                                                                                    @error('item_name')
-                                                                                    <span class="text-danger">{{ $message }}</span>
-                                                                                    @enderror
-                                                                                </td>
-                                                                                <th scope="row">Item
-                                                                                    Code:</th>
-                                                                                <td>
-                                                                                    <input type="text" name="item_code" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" value="{{ $stock_cards->item_code }}">
-                                                                                    <input type="hidden" name="stock_no" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" value="{{ $stock_cards->stock_no }}">
-                                                                                    @error('stock_no')
-                                                                                    <span class="text-danger">{{ $message }}</span>
-                                                                                    @enderror
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <th scope="row">
-                                                                                    Description:
-                                                                                </th>
-                                                                                <td>
-                                                                                    <input type="text" name="description" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" value="{{ $stock_cards->description }}" readonly>
-                                                                                    @error('description')
-                                                                                    <span class="text-danger">{{ $message }}</span>
-                                                                                    @enderror
-                                                                                </td>
-                                                                                <th scope="row">
-                                                                                    Re-Order Point
-                                                                                </th>
-                                                                                <td>
-                                                                                    <input type="text" name="reorder_point" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" value="{{ $stock_cards->reorder_point }}" readonly>
-                                                                                    @error('reorder_point')
-                                                                                    <span class="text-danger">{{ $message }}</span>
-                                                                                    @enderror
-                                                                                </td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <th scope="row">Unit
-                                                                                    of
-                                                                                    Measurement:
-                                                                                </th>
-                                                                                <td>
-                                                                                    <input type="text" name="unit_of_measurement" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" value="{{ $stock_cards->unit_of_measurement }}" readonly>
-                                                                                    @error('unit_of_measurement')
-                                                                                    <span class="text-danger">{{ $message }}</span>
-                                                                                    @enderror
-                                                                                </td>
-                                                                            </tr>
-                                                                        </tbody>
-                                                                    </table>
+                                                                        <div class="col-lg-12">
+                                                                            <div class="card-body">
+                                                                                <div class="table-responsive">
+                                                                                    <table
+                                                                                        class="table table-bordered">
+                                                                                        <tbody>
+                                                                                            <tr>
+                                                                                                <th scope="row">
+                                                                                                    Item:</th>
+                                                                                                <td>
+                                                                                                    <input
+                                                                                                        type="text"
+                                                                                                        name="item_name"
+                                                                                                        class="form-control text-line"
+                                                                                                        style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                                        value="{{ $stock_cards->item_name }}"
+                                                                                                        readonly>
+                                                                                                    @error('item_name')
+                                                                                                        <span
+                                                                                                            class="text-danger">{{ $message }}</span>
+                                                                                                    @enderror
+                                                                                                </td>
+                                                                                                <th scope="row">Item
+                                                                                                    Code:</th>
+                                                                                                <td>
+                                                                                                    <input
+                                                                                                        type="text"
+                                                                                                        name="item_code"
+                                                                                                        class="form-control text-line"
+                                                                                                        style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                                        value="{{ $stock_cards->item_code }}">
+                                                                                                    <input
+                                                                                                        type="hidden"
+                                                                                                        name="stock_no"
+                                                                                                        class="form-control text-line"
+                                                                                                        style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                                        value="{{ $stock_cards->stock_no }}">
+                                                                                                    @error('stock_no')
+                                                                                                        <span
+                                                                                                            class="text-danger">{{ $message }}</span>
+                                                                                                    @enderror
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <th scope="row">
+                                                                                                    Description:
+                                                                                                </th>
+                                                                                                <td>
+                                                                                                    <input
+                                                                                                        type="text"
+                                                                                                        name="description"
+                                                                                                        class="form-control text-line"
+                                                                                                        style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                                        value="{{ $stock_cards->description }}"
+                                                                                                        readonly>
+                                                                                                    @error('description')
+                                                                                                        <span
+                                                                                                            class="text-danger">{{ $message }}</span>
+                                                                                                    @enderror
+                                                                                                </td>
+                                                                                                <th scope="row">
+                                                                                                    Re-Order Point
+                                                                                                </th>
+                                                                                                <td>
+                                                                                                    <input
+                                                                                                        type="text"
+                                                                                                        name="reorder_point"class="form-control text-line"
+                                                                                                        style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                                        value="{{ $stock_cards->reorder_point }}"
+                                                                                                        readonly>
+                                                                                                    @error('reorder_point')
+                                                                                                        <span
+                                                                                                            class="text-danger">{{ $message }}</span>
+                                                                                                    @enderror
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <th scope="row">Unit
+                                                                                                    of
+                                                                                                    Measurement:
+                                                                                                </th>
+                                                                                                <td>
+                                                                                                    <input
+                                                                                                        type="text"
+                                                                                                        name="unit_of_measurement"
+                                                                                                        class="form-control text-line"
+                                                                                                        style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                                        value="{{ $stock_cards->unit_of_measurement }}"
+                                                                                                        readonly>
+                                                                                                    @error('unit_of_measurement')
+                                                                                                        <span
+                                                                                                            class="text-danger">{{ $message }}</span>
+                                                                                                    @enderror
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-12">
+                                                                            <div class="card-body">
+                                                                                <div class="table-responsive">
+                                                                                    <table
+                                                                                        class="table table-bordered">
+                                                                                        <thead>
+                                                                                            <tr>
+                                                                                                <th scope="col"
+                                                                                                    colspan="2">
+                                                                                                </th>
+                                                                                                <th scope="col"
+                                                                                                    colspan="3"
+                                                                                                    style="text-align: center;">
+                                                                                                    RECEIPT
+                                                                                                </th>
+                                                                                                <th scope="col"
+                                                                                                    colspan="3"
+                                                                                                    style="text-align: center;">
+                                                                                                    ISSUE</th>
+                                                                                                <th scope="col"
+                                                                                                    colspan="3"
+                                                                                                    style="text-align: center;">
+                                                                                                    BALANCE
+                                                                                                </th>
+                                                                                                <th scope="col"
+                                                                                                    colspan="3"
+                                                                                                    style="text-align: center;">
+                                                                                                </th>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                <th scope="col"
+                                                                                                    style="text-align: center;">
+                                                                                                    DATE</th>
+                                                                                                <th scope="col"
+                                                                                                    style="text-align: center;">
+                                                                                                    REFERENCE
+                                                                                                </th>
+                                                                                                <th scope="col"
+                                                                                                    style="text-align: center;">
+                                                                                                    QTY
+                                                                                                </th>
+                                                                                                <th scope="col"
+                                                                                                    style="text-align: center;">
+                                                                                                    UNIT COST
+                                                                                                </th>
+                                                                                                <th scope="col"
+                                                                                                    style="text-align: center;">
+                                                                                                    TOTAL COST
+                                                                                                </th>
+                                                                                                <th scope="col"
+                                                                                                    style="text-align: center;">
+                                                                                                    QTY
+                                                                                                </th>
+                                                                                                <th scope="col"
+                                                                                                    style="text-align: center;">
+                                                                                                    UNIT COST
+                                                                                                </th>
+                                                                                                <th scope="col"
+                                                                                                    style="text-align: center;">
+                                                                                                    TOTAL COST
+                                                                                                </th>
+                                                                                                <th scope="col"
+                                                                                                    style="text-align: center;">
+                                                                                                    QTY
+                                                                                                </th>
+                                                                                                <th scope="col"
+                                                                                                    style="text-align: center;">
+                                                                                                    UNIT COST
+                                                                                                </th>
+                                                                                                <th scope="col"
+                                                                                                    style="text-align: center;">
+                                                                                                    TOTAL COST
+                                                                                                </th>
+                                                                                                <th scope="col"
+                                                                                                    style="text-align: center;">
+                                                                                                    NO
+                                                                                                    OF DAYS
+                                                                                                    TO
+                                                                                                    CONSUME</th>
+                                                                                            </tr>
+                                                                                        </thead>
+                                                                                        <tbody>
+                                                                                            <tr>
+                                                                                                <td>
+                                                                                                    <input
+                                                                                                        type="date"
+                                                                                                        name="date"
+                                                                                                        class="form-control text-line"
+                                                                                                        style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                                        value="{{ $stock_cards->date }}"
+                                                                                                        readonly>
+                                                                                                    @error('date')
+                                                                                                        <span
+                                                                                                            class="text-danger">{{ $message }}</span>
+                                                                                                    @enderror
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <input
+                                                                                                        type="text"
+                                                                                                        name="reference"
+                                                                                                        class="form-control text-line"
+                                                                                                        style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                                        value="{{ $stock_cards->reference }}"
+                                                                                                        readonly>
+                                                                                                    @error('reference')
+                                                                                                        <span
+                                                                                                            class="text-danger">{{ $message }}</span>
+                                                                                                    @enderror
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <input
+                                                                                                        type="text"
+                                                                                                        name="receipt_qty"
+                                                                                                        id="receipt_qty"
+                                                                                                        class="form-control text-line"
+                                                                                                        style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                                        value="{{ $stock_cards->receipt_qty }}"
+                                                                                                        readonly>
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <input
+                                                                                                        type="text"
+                                                                                                        name="receipt_unitcost"
+                                                                                                        id="receipt_unitcost"
+                                                                                                        class="form-control text-line"
+                                                                                                        style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                                        value="{{ $stock_cards->receipt_unitcost }}"
+                                                                                                        readonly>
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <input
+                                                                                                        type="text"
+                                                                                                        name="receipt_totalcost"
+                                                                                                        id="receipt_totalcost"
+                                                                                                        class="form-control text-line"
+                                                                                                        style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                                        value="{{ $stock_cards->receipt_totalcost }}"
+                                                                                                        readonly>
+                                                                                                </td>
+                                                                                                <!-- Issue section -->
+                                                                                                <td>
+                                                                                                    <input
+                                                                                                        type="text"
+                                                                                                        name="issue_qty"
+                                                                                                        id="issue_qty"
+                                                                                                        class="form-control text-line"
+                                                                                                        style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                                        value="{{ $stock_cards->issue_qty }}"
+                                                                                                        readonly>
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <input
+                                                                                                        type="text"
+                                                                                                        name="issue_unitcost"
+                                                                                                        id="issue_unitcost"
+                                                                                                        class="form-control text-line"
+                                                                                                        style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                                        value="{{ $stock_cards->issue_unitcost }}"
+                                                                                                        readonly>
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <input
+                                                                                                        type="text"
+                                                                                                        name="issue_totalcost"
+                                                                                                        id="issue_totalcost"
+                                                                                                        class="form-control text-line"
+                                                                                                        style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                                        value="{{ $stock_cards->issue_totalcost }}"
+                                                                                                        readonly>
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <input
+                                                                                                        type="text"
+                                                                                                        name="bal_qty"
+                                                                                                        class="form-control text-line"
+                                                                                                        style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                                        value="{{ $stock_cards->bal_qty }}"
+                                                                                                        placeholder="">
+                                                                                                    @error('bal_qty')
+                                                                                                        <span
+                                                                                                            class="text-danger">{{ $message }}</span>
+                                                                                                    @enderror
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <input
+                                                                                                        type="text"
+                                                                                                        name="bal_unitcost"
+                                                                                                        class="form-control text-line"
+                                                                                                        style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                                        value="{{ $stock_cards->bal_unitcost }}"
+                                                                                                        placeholder="">
+                                                                                                    @error('bal_unitcost')
+                                                                                                        <span
+                                                                                                            class="text-danger">{{ $message }}</span>
+                                                                                                    @enderror
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <input
+                                                                                                        type="text"
+                                                                                                        name="bal_totalcost"
+                                                                                                        class="form-control text-line"
+                                                                                                        style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                                        value="{{ $stock_cards->bal_totalcost }}"
+                                                                                                        placeholder="">
+                                                                                                    @error('bal_totalcost')
+                                                                                                        <span
+                                                                                                            class="text-danger">{{ $message }}</span>
+                                                                                                    @enderror
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <input
+                                                                                                        type="text"
+                                                                                                        name="no_of_days"
+                                                                                                        class="form-control text-line"
+                                                                                                        style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                                        value="{{ $stock_cards->no_of_days }}"
+                                                                                                        readonly>
+                                                                                                    @error('no_of_days')
+                                                                                                        <span
+                                                                                                            class="text-danger">{{ $message }}</span>
+                                                                                                    @enderror
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-12">
-                                                            <div class="card-body">
-                                                                <div class="table-responsive">
-                                                                    <table class="table table-bordered">
-                                                                        <thead>
-                                                                            <tr>
-                                                                                <th scope="col" colspan="2">
-                                                                                </th>
-                                                                                <th scope="col" colspan="3" style="text-align: center;">
-                                                                                    RECEIPT
-                                                                                </th>
-                                                                                <th scope="col" colspan="3" style="text-align: center;">
-                                                                                    ISSUE</th>
-                                                                                <th scope="col" colspan="3" style="text-align: center;">
-                                                                                    BALANCE
-                                                                                </th>
-                                                                                <th scope="col" colspan="3" style="text-align: center;">
-                                                                                </th>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <th scope="col" style="text-align: center;">
-                                                                                    DATE</th>
-                                                                                <th scope="col" style="text-align: center;">
-                                                                                    REFERENCE
-                                                                                </th>
-                                                                                <th scope="col" style="text-align: center;">
-                                                                                    QTY
-                                                                                </th>
-                                                                                <th scope="col" style="text-align: center;">
-                                                                                    UNIT COST
-                                                                                </th>
-                                                                                <th scope="col" style="text-align: center;">
-                                                                                    TOTAL COST
-                                                                                </th>
-                                                                                <th scope="col" style="text-align: center;">
-                                                                                    QTY
-                                                                                </th>
-                                                                                <th scope="col" style="text-align: center;">
-                                                                                    UNIT COST
-                                                                                </th>
-                                                                                <th scope="col" style="text-align: center;">
-                                                                                    TOTAL COST
-                                                                                </th>
-                                                                                <th scope="col" style="text-align: center;">
-                                                                                    QTY
-                                                                                </th>
-                                                                                <th scope="col" style="text-align: center;">
-                                                                                    UNIT COST
-                                                                                </th>
-                                                                                <th scope="col" style="text-align: center;">
-                                                                                    TOTAL COST
-                                                                                </th>
-                                                                                <th scope="col" style="text-align: center;">
-                                                                                    NO
-                                                                                    OF DAYS
-                                                                                    TO
-                                                                                    CONSUME</th>
-                                                                            </tr>
-                                                                        </thead>
-                                                                        <tbody>
-                                                                            <tr>
-                                                                                <td>
-                                                                                    <input type="date" name="date" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" value="{{ $stock_cards->date }}" readonly>
-                                                                                    @error('date')
-                                                                                    <span class="text-danger">{{ $message }}</span>
-                                                                                    @enderror
-                                                                                </td>
-                                                                                <td>
-                                                                                    <input type="text" name="reference" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" value="{{ $stock_cards->reference }}" readonly>
-                                                                                    @error('reference')
-                                                                                    <span class="text-danger">{{ $message }}</span>
-                                                                                    @enderror
-                                                                                </td>
-                                                                                <td>
-                                                                                    <input type="text" name="receipt_qty" id="receipt_qty" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" value="{{ $stock_cards->receipt_qty }}" readonly>
-                                                                                </td>
-                                                                                <td>
-                                                                                    <input type="text" name="receipt_unitcost" id="receipt_unitcost" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" value="{{ $stock_cards->receipt_unitcost }}" readonly>
-                                                                                </td>
-                                                                                <td>
-                                                                                    <input type="text" name="receipt_totalcost" id="receipt_totalcost" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" value="{{ $stock_cards->receipt_totalcost }}" readonly>
-                                                                                </td>
-                                                                                <!-- Issue section -->
-                                                                                <td>
-                                                                                    <input type="text" name="issue_qty" id="issue_qty" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" value="{{ $stock_cards->issue_qty }}" readonly>
-                                                                                </td>
-                                                                                <td>
-                                                                                    <input type="text" name="issue_unitcost" id="issue_unitcost" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" value="{{ $stock_cards->issue_unitcost }}" readonly>
-                                                                                </td>
-                                                                                <td>
-                                                                                    <input type="text" name="issue_totalcost" id="issue_totalcost" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" value="{{ $stock_cards->issue_totalcost }}" readonly>
-                                                                                </td>
-                                                                                <td>
-                                                                                    <input type="text" name="bal_qty" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" value="{{ $stock_cards->bal_qty }}" placeholder="">
-                                                                                    @error('bal_qty')
-                                                                                    <span class="text-danger">{{ $message }}</span>
-                                                                                    @enderror
-                                                                                </td>
-                                                                                <td>
-                                                                                    <input type="text" name="bal_unitcost" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" value="{{ $stock_cards->bal_unitcost }}" placeholder="">
-                                                                                    @error('bal_unitcost')
-                                                                                    <span class="text-danger">{{ $message }}</span>
-                                                                                    @enderror
-                                                                                </td>
-                                                                                <td>
-                                                                                    <input type="text" name="bal_totalcost" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" value="{{ $stock_cards->bal_totalcost }}" placeholder="">
-                                                                                    @error('bal_totalcost')
-                                                                                    <span class="text-danger">{{ $message }}</span>
-                                                                                    @enderror
-                                                                                </td>
-                                                                                <td>
-                                                                                    <input type="text" name="no_of_days" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" value="{{ $stock_cards->no_of_days }}" readonly>
-                                                                                    @error('no_of_days')
-                                                                                    <span class="text-danger">{{ $message }}</span>
-                                                                                    @enderror
-                                                                                </td>
-                                                                            </tr>
-                                                                        </tbody>
-                                                                    </table>
+                                                                <div class="modal-footer">
+                                                                    <div class="col-md-6 text-right">
+                                                                        {{-- Buttons positioned to the right --}}
+                                                                        <button type="submit"
+                                                                            class="btn btn-primary">Save
+                                                                            Changes</button>
+                                                                        <button type="submit" class="btn btn-success"
+                                                                            onclick="window.print()">Export</button>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
+                                                            </form>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="modal-footer">
-                                                    <div class="col-md-6 text-right">
-                                                        {{-- Buttons positioned to the right --}}
-                                                        <button type="submit" class="btn btn-primary">Save
-                                                            Changes</button>
-                                                        <button type="button" onclick="navigateToPrintablePage()" class="btn btn-success ">Preview</button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
+                                            </div>
+                                        @endforeach
                                     </div>
-                                </div>
-                            </div>
-                            @endforeach
-                        </div>
 
                     </div>
                     <div class="tab-pane fade" id="profile3" role="tabpanel" aria-labelledby="profile-tab3">
@@ -362,69 +509,67 @@
         </div>
     </div>
 
-    </div>
-    </section>
-    </div>
+            </div>
+            </section>
+        </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    @if (session('success'))
-    <script>
-        Swal.fire({
-            icon: 'success',
-            title: 'Success!',
-            text: '{{ session('
-            success ') }}',
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            background: '#8cc63f',
-            iconColor: '#ffffff',
-            customClass: {
-                title: 'text-white',
-                content: 'text-white'
-            }
-        });
-    </script>
-    @endif
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        @if (session('success'))
+            <script>
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success!',
+                    text: '{{ session('success') }}',
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    background: '#8cc63f',
+                    iconColor: '#ffffff',
+                    customClass: {
+                        title: 'text-white',
+                        content: 'text-white'
+                    }
+                });
+            </script>
+        @endif
 
-    @if (session('failed'))
-    <script>
-        Swal.fire({
-            icon: 'failed',
-            title: 'failed!',
-            text: '{{ session('
-            failed ') }}',
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            background: '#dc3545',
-            iconColor: '#ffffff',
-            customClass: {
-                title: 'text-white',
-                content: 'text-white'
-            }
-        });
-    </script>
-    @endif
+        @if (session('failed'))
+            <script>
+                Swal.fire({
+                    icon: 'failed',
+                    title: 'failed!',
+                    text: '{{ session('failed') }}',
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    background: '#dc3545',
+                    iconColor: '#ffffff',
+                    customClass: {
+                        title: 'text-white',
+                        content: 'text-white'
+                    }
+                });
+            </script>
+        @endif
 
-    @include('footer')
+        @include('footer')
     </div>
     </div>
 
 
-    <script>
+    {{-- <script>
         // Function to navigate to the printable page
         function navigateToPrintablePage() {
             // Assuming 'prop_cards_id' is the parameter to be passed
-            var stock_cards_id = '{{ $stock_cards->id }}';
+            var prop_cards_id = '{{ $prop_cards->id }}';
             // Navigate to the printable page
-            window.location.href = '/printable-stock-pageAcc/' + stock_cards_id;
+            window.location.href = '/printable-prop-page/' + prop_cards_id;
         }
-    </script>
+    </script> --}}
 
     <script>
         $(document).ready(function() {

@@ -24,11 +24,13 @@ class PropCardModel extends Model
         'bal_qty',
         'repair_amount',
         'remarks',
+        'receipt_unitcost',
+        'receipt_totalcost',
+
+        // accounting
         'obj_acc_code',
         'est_useful_life',
         'rate_of_dep',
-        'receipt_unitcost',
-        'receipt_totalcost',
         'accumulated_dep',
         'accumulated_impairment_losses',
         'issue_transfers_adjustments',

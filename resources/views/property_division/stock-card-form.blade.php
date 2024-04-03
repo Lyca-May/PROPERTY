@@ -287,41 +287,40 @@
         calculateIssueTotalCost();
     </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@if (session('success'))
     <script>
         // Example of using SweetAlert with a rectangle style and blue color
-        @if(session('success'))
-        Swal.fire({
-            icon: 'success',
-            title: 'Success',
-            text: '{{ session('
-            success ') }}',
-            customClass: {
-                container: 'custom-alert-container',
-                popup: 'custom-alert-popup',
-                title: 'custom-alert-title',
-                confirmButton: 'custom-alert-button'
-            }
-        });
+        @if (session('success'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: '{{ session('success') }}',
+                customClass: {
+                    container: 'custom-alert-container',
+                    popup: 'custom-alert-popup',
+                    title: 'custom-alert-title',
+                    confirmButton: 'custom-alert-button'
+                }
+            });
         @endif
 
-        @if(session('failed'))
-        Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: '{{ session('
-            failed ') }}',
-            customClass: {
-                container: 'custom-alert-container',
-                popup: 'custom-alert-popup',
-                title: 'custom-alert-title',
-                confirmButton: 'custom-alert-button'
-            }
-        });
+        @if (session('failed'))
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: '{{ session('failed') }}',
+                customClass: {
+                    container: 'custom-alert-container',
+                    popup: 'custom-alert-popup',
+                    title: 'custom-alert-title',
+                    confirmButton: 'custom-alert-button'
+                }
+            });
         @endif
     </script>
+@endif
+
 
 </body>
 
