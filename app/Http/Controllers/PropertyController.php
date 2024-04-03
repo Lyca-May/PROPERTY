@@ -262,7 +262,7 @@ class PropertyController extends Controller
         $data = $request->all();
 
         // Find the stock card by ID
-        $prop_card = PropertyModel::find($id);
+        $prop_card = PropCardModel::find($id);
 
         // Check if the stock card exists
         if (!$prop_card) {
@@ -276,7 +276,7 @@ class PropertyController extends Controller
         if ($prop_card) {
             return redirect('/all-ppelc')->with('success', 'PPELCs Object Account Code ' . $prop_card->obj_acc_code . ' updated successfully.');
         } else {
-            return redirect()->back()->with('error', 'No changes detected or failed to update item.');
+            return redirect()->back()->with('failed', 'No changes detected or failed to update item.');
         }
     }
 

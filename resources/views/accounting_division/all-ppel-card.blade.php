@@ -236,11 +236,11 @@
                                                                                                 <td>
                                                                                                     <input
                                                                                                         type="text"
-                                                                                                        name="description"
+                                                                                                        name="rate_of_dep"
                                                                                                         class="form-control text-line"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                         value="{{ $prop_cards->rate_of_dep }}">
-                                                                                                    @error('description')
+                                                                                                    @error('rate_of_dep')
                                                                                                         <span
                                                                                                             class="text-danger">{{ $message }}</span>
                                                                                                     @enderror
@@ -433,12 +433,12 @@
                                                                                                 <td>
                                                                                                     <input
                                                                                                         type="text"
-                                                                                                        name="accumalated_dep"
+                                                                                                        name="accumulated_dep"
                                                                                                         id="issue_qty"
                                                                                                         class="form-control text-line"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                         placeholder=""
-                                                                                                        value="{{ $prop_cards->accumalated_dep }}">
+                                                                                                        value="{{ $prop_cards->accumulated_dep }}">
                                                                                                     @error('issue_qty')
                                                                                                         <span
                                                                                                             class="text-danger">{{ $message }}</span>
@@ -485,7 +485,6 @@
                                                                                                             class="text-danger">{{ $message }}</span>
                                                                                                     @enderror
                                                                                                 </td>
-
                                                                                                 <td>
                                                                                                     <textarea type="text" name="repair_nature" class="form-control text-line"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;" placeholder="">{{ $prop_cards->repair_nature }}</textarea>
@@ -524,7 +523,6 @@
 
                                                                     </div>
                                                                 </div>
-
                                                             </form>
                                                         </div>
                                                     </div>
