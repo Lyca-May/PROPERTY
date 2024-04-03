@@ -70,7 +70,6 @@ Route::get('/all-slc', [PropertyController::class, 'getDataForSLC']);
 Route::post('/edit-slc/{id}', [PropertyController::class, 'edit_SLC']);
 //ppelc
 Route::get('/all-ppelc', [PropertyController::class, 'getDataForPPELC']);
-// <<<<<<< Updated upstream
 Route::post('/edit-ppelc/{id}', [PropertyController::class, 'edit_PPELC']);
 
 // semi-expandable ledger card

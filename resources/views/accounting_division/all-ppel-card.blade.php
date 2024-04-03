@@ -144,7 +144,7 @@
 
                                                         <div class="modal-body">
                                                             <form
-                                                                action="{{ url('/edit-ppel-card/' . $prop_cards->id) }}"
+                                                                action="{{ url('/edit-ppelc-card/' . $prop_cards->id) }}"
                                                                 method="POST">
                                                                 @csrf
                                                                 <div id="print-content" class="modal-body">
