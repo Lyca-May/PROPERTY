@@ -81,7 +81,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-6 col-12">
+                        <div class="col-lg-6 col-md-6 col-12">
                             <div class="card card-sm-3">
                                 <div class="card-icon bg-warning">
                                     <i class="ion ion-paper-airplane"></i>
@@ -96,7 +96,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-6 col-12">
+                        <div class="col-lg-6 col-md-6 col-12">
                             <div class="card card-sm-3">
                                 <div class="card-icon bg-warning">
                                     <i class="ion ion-paper-airplane"></i>

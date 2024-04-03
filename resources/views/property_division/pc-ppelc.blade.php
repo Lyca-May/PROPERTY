@@ -27,7 +27,7 @@
         .smaller-font th,
         .smaller-font td,
         .smaller-font input {
-            font-size: 12px;
+            font-size: 10px;
             /* Adjust the font size as needed */
         }
 
@@ -68,7 +68,7 @@
                                         <img src="{{ asset('assets/img/BFAR_LOGO.png') }}" alt="generic business logo" style="width: 80px; max-height: 60px" />
                                         <img src="{{ asset('assets/img/newphil.png') }}" alt="generic business logo" style="width: 70px; max-height: 70px" />
                                     </div>
-                                    <h4 style="text-align: center"><b> PROPERTY CARD</b></h4>
+                                    <h5 style="text-align: center">PROPERTY CARD</h5>
                                     <div class="table-responsive">
                                         @foreach ($prop_card as $prop_cards)
                                         <form action="" method="POST">
@@ -200,7 +200,7 @@
                                                                             <input type="text" name="issue_office_officer" id="issue_office_officer" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" value="{{ $prop_cards->issue_office_officer }}">
                                                                         </td>
                                                                         <td colspan="2">
-                                                                            <input type="text" name="bal_qty" id="bal_qty" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" value="{{ $prop_cards->bal_qty }}">
+                                                                            <input type="text" name="bal_qty" id="bal_qty" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" value="{{ $prop_cards->bal_qty }}" readonly>
                                                                         </td>
 
                                                                     </tr>
@@ -240,7 +240,7 @@
                                         <img src="{{ asset('assets/img/BFAR_LOGO.png') }}" alt="generic business logo" style="width: 80px; max-height: 60px" />
                                         <img src="{{ asset('assets/img/newphil.png') }}" alt="generic business logo" style="width: 70px; max-height: 70px" />
                                     </div>
-                                    <h4 style="text-align: center"><b> SUPPLIES LEDGER CARD </b></h4>
+                                    <h5 style="text-align: center"> PROPERTY, PLANTS & EQUIPMENTS LEDGER CARD </h5>
                                     <div class="table-responsive">
                                         @foreach ($prop_card as $prop_cards)
                                         <form action="" method="POST">
@@ -317,7 +317,7 @@
                                                     <div class="card-body">
                                                         <div class="table-responsive">
                                                             <table class="table table-bordered smaller-font">
-                                                                <thead>
+                                                            <thead>
                                                                     <tr>
                                                                         <th scope="col" colspan="2"></th>
                                                                         <th scope="col" colspan="3" style="text-align: center; font-size: 15px;">Receipt</th>
@@ -333,61 +333,66 @@
                                                                 <tbody>
                                                                     <tr>
                                                                         <td>
-                                                                            <input type="date" name="date" class="form-control text-line date-input" style="padding-top: 4px; padding-bottom: 4px; white-space: normal; width: 150px;" value="{{ $prop_cards->date }}" readonly>
+                                                                            <input type="date" name="date" class="form-control text-line date-input" style="padding-top: 4px; padding-bottom: 4px; white-space: normal; width: 150px;" value="{{ $prop_cards->date }}">
                                                                             @error('date')
                                                                             <span class="text-danger">{{ $message }}</span>
                                                                             @enderror
                                                                         </td>
                                                                         <td>
-                                                                            <input type="text" name="reference" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" value="{{ $prop_cards->reference }}" readonly>
+                                                                            <input type="text" name="reference" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" value="{{ $prop_cards->reference }}">
                                                                             @error('reference')
                                                                             <span class="text-danger">{{ $message }}</span>
                                                                             @enderror
                                                                         </td>
                                                                         <td>
-                                                                            <input type="text" name="receipt_qty" id="receipt_qty" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" value="{{ $prop_cards->receipt_qty }}" readonly>
+                                                                            <input type="text" name="receipt_qty" id="receipt_qty" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" value="{{ $prop_cards->receipt_qty }}">
                                                                         </td>
                                                                         <td>
-                                                                            <input type="text" name="receipt_unitcost" id="receipt_unitcost" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" value="{{ $prop_cards->receipt_unitcost }}" readonly>
+                                                                            <input type="text" name="receipt_unitcost" id="receipt_unitcost" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" value="{{ $prop_cards->receipt_unitcost }}">
                                                                         </td>
                                                                         <td>
                                                                             <input type="text" name="receipt_totalcost" id="receipt_totalcost" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" value="{{ $prop_cards->receipt_totalcost }}" readonly>
                                                                         </td>
                                                                     </tr>
                                                                     <!-- Issue section -->
+
                                                                     <tr>
-                                                                        <th colspan="3" style="text-align: center; font-size: 15px;">Issue/Transfer/Disposal</th>
-                                                                        <th colspan="3" style="text-align: center; font-size: 15px;">Balance</th>
+                                                                        <th colspan="5" style="text-align: center; font-size: 15px;"></th>
+                                                                       
                                                                     </tr>
                                                                     <tr>
-                                                                        <th scope="col" style="text-align: center;">Qty</th>
-                                                                        <th colspan="2" scope="col" style="text-align: center;">Office Officer</th>
-                                                                        <th colspan="2" scope="col" style="text-align: center;">Qty</th>
+                                                                        <th scope="col" style="text-align: center;">Accumulated Depreciation</th>
+                                                                        <th colspan="1" scope="col" style="text-align: center;">Accumulated Impairment Losses</th>
+                                                                        <th colspan="1" scope="col" style="text-align: center;">Issue / Transfers/ Adjustment(s)</th>
+                                                                        <th colspan="2" scope="col" style="text-align: center;">Adjusted Cost</th>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td>
-                                                                            <input type="text" name="issue_qty" id="issue_qty" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" value="{{ $prop_cards->issue_qty }}" readonly>
+                                                                        <td colspan="1">
+                                                                            <input type="text" name="accumulated_dep" id="accumulated_dep" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" value="{{ $prop_cards->accumulated_dep }}" readonly>
+                                                                        </td>
+                                                                        <td colspan="1">
+                                                                            <input type="text" name="accumulated_impairment_losses" id="accumulated_impairment_losses" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" value="{{ $prop_cards->accumulated_impairment_losses }}" readonly>
+                                                                        </td>
+                                                                        <td colspan="1">
+                                                                            <input type="text" name="issue_transfers_adjustments " id="issue_transfers_adjustments " class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" value="{{ $prop_cards->issue_transfers_adjustments }}" readonly>
                                                                         </td>
                                                                         <td colspan="2">
-                                                                            <input type="text" name="issue_office_officer" id="issue_office_officer" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" value="{{ $prop_cards->issue_office_officer }}" readonly>
-                                                                        </td>
-                                                                        <td colspan="2">
-                                                                            <input type="text" name="bal_qty" id="bal_qty" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" value="{{ $prop_cards->bal_qty }}" readonly>
+                                                                            <input type="text" name="adjusted_code" id="adjusted_code" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" value="{{ $prop_cards->adjusted_code }}" readonly>
                                                                         </td>
 
                                                                     </tr>
 
                                                                     <tr>
-                                                                        <th colspan="2" scope="col" style="text-align: center;">Amount</th>
-                                                                        <th colspan="3" scope="col" style="text-align: center;">Remarks</th>
+                                                                        <th colspan="2" scope="col" style="text-align: center;">Nature of Repair</th>
+                                                                        <th colspan="3" scope="col" style="text-align: center;">Amount</th>
                                                                     </tr>
                                                                     <tr>
 
                                                                         <td colspan="2">
-                                                                            <input type="text" name="repair_amount" id="repair_amount" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" value="{{ $prop_cards->repair_amount }}" readonly>
+                                                                            <input type="text" name="repair_nature" id="repair_nature" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" value="{{ $prop_cards->repair_nature }}" readonly>
                                                                         </td>
                                                                         <td colspan="3">
-                                                                            <input type="text" name="remarks" id="remarks" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px; font-size:15px; font-weight:100;" value="{{ $prop_cards->remarks }}" readonly>
+                                                                            <input type="text" name="repair_amount" id="repair_amount" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px; font-size:15px; font-weight:100;" value="{{ $prop_cards->repair_amount }}" readonly>
                                                                         </td>
                                                                     </tr>
 

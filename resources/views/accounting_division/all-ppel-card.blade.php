@@ -144,7 +144,7 @@
 
                                                         <div class="modal-body">
                                                             <form
-                                                                action="{{ url('/edit-ppel-card/' . $prop_cards->id) }}"
+                                                                action="{{ url('/edit-ppelc-card/' . $prop_cards->id) }}"
                                                                 method="POST">
                                                                 @csrf
                                                                 <div id="print-content" class="modal-body">
@@ -236,7 +236,7 @@
                                                                                                 <td>
                                                                                                     <input
                                                                                                         type="text"
-                                                                                                        name="description"
+                                                                                                        name="rate_of_dep"
                                                                                                         class="form-control text-line"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                         value="{{ $prop_cards->rate_of_dep }}">
@@ -433,12 +433,12 @@
                                                                                                 <td>
                                                                                                     <input
                                                                                                         type="text"
-                                                                                                        name="accumalated_dep"
+                                                                                                        name="accumulated_dep"
                                                                                                         id="issue_qty"
                                                                                                         class="form-control text-line"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                         placeholder=""
-                                                                                                        value="{{ $prop_cards->accumalated_dep }}">
+                                                                                                        value="{{ $prop_cards->accumulated_dep }}">
                                                                                                     @error('issue_qty')
                                                                                                         <span
                                                                                                             class="text-danger">{{ $message }}</span>

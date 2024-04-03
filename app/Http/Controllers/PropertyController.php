@@ -262,7 +262,7 @@ class PropertyController extends Controller
         $data = $request->all();
 
         // Find the stock card by ID
-        $prop_card = PropertyModel::find($id);
+        $prop_card = PropCardModel::find($id);
 
         // Check if the stock card exists
         if (!$prop_card) {
