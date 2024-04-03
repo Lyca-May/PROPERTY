@@ -45,13 +45,11 @@
                             <h4><strong>SEMI - EXPENDABLE LEDGER CARD</strong></h4>
                         </div>
                         <br>
-                        {{-- <div class="card-body"> --}}
+               
                         <form action="{{ route('add-stock-card') }}" method="POST">
                             @csrf
-                            {{-- <div class="card"> --}}
-                            {{-- <div class="card-block"> --}}
+                         
                             <div class="col-md-12">
-
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group row">
