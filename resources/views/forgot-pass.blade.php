@@ -1,69 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forgot Account Page</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <style>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" name="viewport">
+  <title> Login | Property and Supplies System </title>
+
+  <link rel="stylesheet" href="{{ asset ('assets/modules/bootstrap/css/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ asset ('assets/modules/ionicons/css/ionicons.min.css') }}">
+  <link rel="stylesheet" href="{{ asset ('assets/modules/fontawesome/web-fonts-with-css/css/fontawesome-all.min.css') }}">
+
+  <link rel="stylesheet" href="{{ asset ('assets/css/demo.css') }}">
+  <link rel="stylesheet" href="{{ asset ('assets/css/style.css') }}">
+
+   <style>
         body {
-            background-image: url('https://www.bfar.da.gov.ph/wp-content/uploads/2023/01/Bfar-Banner-2023.jpg');
+            background-image: url('/assets/img/bg_bfar.png');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
         }
 
-        body {
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-        }
-
-        .card {
-            width: 550px;
-        }
     </style>
 </head>
 
 <body>
+  <div id="app">
+    <section class="section">
+      <div class="container mt-5">
+        <div class="row">
+          <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-6 ">
+            <div class="card card-primary">
+                <div class="login-brand">
+                    <img style="width:100px; height:70px" alt="image" src="{{ asset('assets/img/BFAR_LOGO.png') }}">
+                </div>
+              <div class="card-header" style="text-align: center"><h6>FORGET ACCOUNT</h6></div>
 
-    <div class="card">
-        <div class="card-body">
-            <h3 class="card-title text-center mb-4">Forgot Account</h3>
-            <form method="post" action="{{ route('password.reset') }}">
-                @csrf <!-- CSRF protection -->
-                <div class="form-group">
+              <div class="card-body">
+                <form method="POST" action="{{ route('password.reset') }}">
+                    @csrf <!-- CSRF protection -->
+                  <div class="form-group">
                     <label for="username">Username</label>
-                    <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username" value="{{ old('username') }}">
+                    <input id="username" type="text" class="form-control" name="username" tabindex="1"  placeholder="Enter username" value="{{ old('username') }}">
                     @error('username')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
-                </div>
-                <div class="form-group">
-                    <label for="new_password">New Password</label>
-                    <input type="password" class="form-control" id="new_password" name="new_password" placeholder="Enter your new password">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="password" class="d-block">New Password
+                    </label>
+                    <input  type="password" class="form-control" name="new_password" tabindex="2" id="new_password"  placeholder="Enter new password">
                     @error('new_password')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
-                </div>
-                <div class="form-group">
-                    <label for="confirm_password">Confirm Password</label>
-                    <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm your new password">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="password" class="d-block">Confirm Password
+                    </label>
+                    <input  type="password" class="form-control" name="confirm_password" tabindex="2" id="confirm_password"  placeholder="Enter password">
                     @error('confirm_password')
                         <span class="text-danger">{{ $message }}</span>
                     @enderror
-                </div>
-                <button type="submit" class="btn btn-primary btn-block">Reset Password</button>
-            </form>
+                  </div>
+
+               
+                  <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block" tabindex="4">
+                      Change Password
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="simple-footer" style="color: rgb(60, 11, 96)">
+            <b>  Copyright &copy; Property Unit System 2024 </b>
+            </div>
+          </div>
         </div>
-    </div>
+      </div>
+    </section>
+  </div>
 
 
-    <!-- Bootstrap JS and dependencies -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
@@ -97,5 +118,5 @@
     </script>
 
 </body>
-
 </html>
+
