@@ -25,10 +25,9 @@ Route::get('/forgot-pass', function () {
     return view('forgot-pass');
 });
 
+Route::get('/dash-accounting', [PropertyController::class , 'countCardAccounting']);
 Route::get('/dash-prop', [PropertyController::class , 'countCard']);
-Route::get('/dash-accounting', function () {
-    return view('accounting_division.dash-accounting');
-});
+
 Route::get('/stock-card-form', function () {
     return view('property_division.stock-card-form');
 });
@@ -50,6 +49,7 @@ Route::get('/view-slc/{id}', [PropertyController::class, 'viewSLC']);
 Route::get('/printable-stock-page/{id}', [PropertyController::class, 'printStockPage']);
 Route::get('/printable-stock-pageAcc/{id}', [PropertyController::class, 'printStockPageAcc']);
 Route::post('/edit-stock-card/{id}', [PropertyController::class, 'edit_stock_card']);
+Route::post('/clicked-stock-card/{id}', [PropertyController::class, 'clickSC']);
 
 // property card
 Route::post('/add-property-card', [PropertyController::class, 'addPropertyCard'])->name('add-property-card');
@@ -58,11 +58,14 @@ Route::get('/view-ppelc/{id}', [PropertyController::class, 'viewPPELC']);
 Route::get('/printable-prop-page/{id}', [PropertyController::class, 'printPropPage']);
 Route::get('/printable-prop-pageAcc/{id}', [PropertyController::class, 'printPropPageAcc']);
 Route::post('/edit-property-card/{id}', [PropertyController::class, 'edit_property_card']);
+Route::post('clicked-sep/{id}', [PropertyController::class, 'clickSep']);
 
 // semi-expandable card
-Route::post('/add-semi-card', [PropertyController::class, 'addSemi'])->name('add-semi-card');
-Route::view('/all-semi-expandable', 'property_division.SEC');
+Route::post('/add-semi-card', [PropertyController::class, 'addSemiPropertyCard'])->name('add-sep-card');
+Route::get('/all-semi-expandable', [PropertyController::class, 'getDataForSEPC']);
 Route::view('/sec-form', 'property_division.SEC-form');
+Route::post('/edit-sep-card/{id}', [PropertyController::class, 'edit_sep_card']);
+Route::post('/clicked-property-card/{id}', [PropertyController::class, 'clickPc']);
 
 //ACCOUNTING DIVISION
 // stock card
@@ -70,8 +73,8 @@ Route::get('/all-slc', [PropertyController::class, 'getDataForSLC']);
 Route::post('/edit-slc/{id}', [PropertyController::class, 'edit_SLC']);
 //ppelc
 Route::get('/all-ppelc', [PropertyController::class, 'getDataForPPELC']);
-Route::post('/edit-ppelc/{id}', [PropertyController::class, 'edit_PPELC']);
+Route::post('/edit-ppelc-card/{id}', [PropertyController::class, 'edit_PPELC']);
 
 // semi-expandable ledger card
-Route::view('/all-semi-expandable-ledger', 'accounting_division.SELC');
+Route::get('/all-semi-expandable-ledger', [PropertyController::class, 'getDataForSELC']);
 

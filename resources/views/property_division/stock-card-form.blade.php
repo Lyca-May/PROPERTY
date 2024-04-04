@@ -46,7 +46,7 @@
                             <h4><strong>STOCK CARD</strong></h4>
                         </div>
                         <br>
-                        <form action="{{ route('add-stock-card') }}" method="POST">
+                        <form id="myForm"  action="{{ route('add-stock-card') }}" method="POST">
                             @csrf
                             <div class="col-md-12">
                                 <div class="row">
@@ -248,6 +248,40 @@
                                 </div>
                             </div>
                         </form>
+                        <script>
+                            function submitForm() {
+                                // Get the form element
+                                var form = document.getElementById("myForm");
+
+                                // Serialize form data to send it via AJAX
+                                var formData = new FormData(form);
+
+                                // Create a new XMLHttpRequest object
+                                var xhr = new XMLHttpRequest();
+
+                                // Set up the request
+                                xhr.open("POST", form.action, true);
+
+                                // Set the request headers if needed
+                                // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+                                // Define what happens on successful data submission
+                                xhr.onload = function () {
+                                    // Handle response here, if needed
+                                    console.log(xhr.responseText);
+                                    // You can redirect the user or perform any other action here
+                                };
+
+                                // Define what happens in case of error
+                                xhr.onerror = function () {
+                                    // Handle error here, if needed
+                                    console.error('Request failed');
+                                };
+
+                                // Send the form data
+                                xhr.send(formData);
+                            }
+                        </script>
                     </div>
                 </div>
             </div>

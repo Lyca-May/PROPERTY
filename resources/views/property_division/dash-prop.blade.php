@@ -91,7 +91,7 @@
                                         <h4>TOTAL Semi-Expendable Cards</h4>
                                     </div>
                                     <div class="card-body">
-                                        1,201
+                                        {{ $sepCards }}
                                     </div>
                                 </div>
                             </div>
@@ -119,9 +119,46 @@
                                     <h4>Recent Added Cards</h4>
                                 </div>
                                 <div class="card-body">
-
+                                    @if ($semiCardRecent != null)
+                                        <form action="{{ url('/clicked-sep/' . $semiCardRecent->id) }}" method="POST" id="form-sep">
+                                            @csrf
+                                            <div class="recent-card" onclick="submitForm('form-sep')">
+                                                <p>
+                                                    {{ $semiCardRecent->sep_name }} with number {{ $semiCardRecent->sep_no }} has been added!
+                                                </p>
+                                            </div>
+                                        </form>
+                                    @endif
+                                    @if ($stockCardRecent != null)
+                                        <form action="{{ url('/clicked-stock-card/' . $stockCardRecent->id) }}" method="POST" id="form-stock">
+                                            @csrf
+                                            <div class="recent-card" onclick="submitForm('form-stock')">
+                                                <p>
+                                                    {{ $stockCardRecent->item_name }} with code {{ $stockCardRecent->item_code }} has been added!
+                                                </p>
+                                            </div>
+                                        </form>
+                                    @endif
+                                    @if ($propCardRecent != null)
+                                        <form action="{{ url('/clicked-property-card/' . $propCardRecent->id) }}" method="POST" id="form-property">
+                                            @csrf
+                                            <div class="recent-card" onclick="submitForm('form-property')">
+                                                <p>
+                                                    {{ $propCardRecent->prop_plant_eq }} with number {{ $propCardRecent->prop_no }} has been added!
+                                                </p>
+                                            </div>
+                                        </form>
+                                    @endif
                                 </div>
                             </div>
+
+                            <script>
+                                function submitForm(formId) {
+                                    document.getElementById(formId).submit();
+                                }
+                            </script>
+
+
                         </div>
                         <div class="col-lg-4 col-md-12 col-12 col-sm-12">
                             <div class="card">
@@ -129,16 +166,12 @@
                                     <h4>Visualization</h4>
                                     <canvas id="myDoughnutChart" width="400" height="200"></canvas>
                                 </div>
-
                             </div>
                         </div>
                     </div>
-
             </div>
             </section>
         </div>
-
-
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         @if (session('success'))
@@ -187,25 +220,30 @@
 
         <script>
             // Usage
-            const labels = ['Stock Cards', 'Stock Ledger Cards', 'PPEC', 'PPELC'];
-            const counts = [<?php echo $stockCards; ?>, <?php echo $stockLedgerCards; ?>, <?php echo $PPEC; ?>, <?php echo $PPELC; ?>];
+            const labels = ['Stock Cards', 'Stock Ledger Cards', 'PPEC', 'PPELC', 'Semi-Expendable'];
+            const counts = [<?php echo $stockCards; ?>, <?php echo $stockLedgerCards; ?>, <?php echo $PPEC; ?>, <?php echo $PPELC; ?>,
+                <?php echo $sepCards; ?>
+            ];
 
             createDoughnutChart(labels, counts);
 
             function createDoughnutChart(labels, counts) {
                 const backgroundColors = [
-                    'rgba(255, 99, 132, 0.5)',
-                    'rgba(54, 162, 235, 0.5)',
-                    'rgba(255, 206, 86, 0.5)',
-                    'rgba(75, 192, 192, 0.5)'
+                    'rgba(255, 99, 132, 0.7)', // Red
+                    'rgba(54, 162, 235, 0.7)', // Blue
+                    'rgba(255, 206, 86, 0.7)', // Yellow
+                    'rgba(75, 192, 192, 0.7)', // Cyan
+                    'rgba(153, 102, 255, 0.7)' // Purple
                 ];
 
                 const borderColor = [
                     'rgba(255, 99, 132, 1)',
                     'rgba(54, 162, 235, 1)',
                     'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)'
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)'
                 ];
+
 
                 const config = {
                     type: 'doughnut',

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use App\Models\PropertyModel;
 use App\Models\PropCardModel;
+use App\Models\SemiModel;
 
 class PropertyController extends Controller
 {
@@ -166,51 +167,6 @@ class PropertyController extends Controller
         return redirect('/all-property')->with('success', 'Property Card ' . $propCard->prop_no . ' has been created!');
     }
 
-
-    // //SEMI EXPANDABLE CARD
-    // public function addSemi()
-    // {
-    //     $validatedData = $request->validate([
-    //         'entity_name' => 'required',
-    //         'fund_cluster' => 'required',
-    //         'prop_plant_eq' => 'required',
-    //         'prop_no' => 'required',
-    //         'description' => 'required',
-    //         'date' => 'required|date',
-    //         'reference' => 'required',
-    //         'receipt_qty' => 'required',
-    //         'receipt_unitcost' => 'required',
-    //         'receipt_totalcost' => 'required',
-    //         'issue_qty' => 'required',
-    //         'issue_office_officer' => 'required',
-    //         'repair_amount' => 'required',
-    //         'remarks' => 'required',
-    //     ], [
-    //         'entity_name.required' => 'The entity name field is required.',
-    //         'fund_cluster.required' => 'The fund cluster field is required.',
-    //         'prop_plant_eq.required' => 'The property plant and equipment field is required.',
-    //         'prop_no.required' => 'The property number field is required.',
-    //         'description.required' => 'The description field is required.',
-    //         'date.required' => 'The date field is required.',
-    //         'date.date' => 'The date must be a valid date format.',
-    //         'reference.required' => 'The reference field is required.',
-    //         'receipt_qty.required' => 'The receipt quantity field is required.',
-    //         'receipt_unitcost.required' => 'The receipt unit cost field is required.',
-    //         'receipt_totalcost.required' => 'The receipt total cost field is required.',
-    //         'repair_amount.required' => 'The repair amount field is required.',
-    //         'remarks.required' => 'The remarks field is required.',
-    //     ]);
-
-    //     $propCard = new PropCardModel();
-    //     $propCard->fill($validatedData);
-    //     $propCard->save();
-
-    //     return redirect('/all-property')->with('success', 'Property Card ' . $propCard->prop_no . ' has been created!');
-    // }
-
-    // }
-
-
     public function getPropertyCards()
     {
         $prop_card = DB::table('property_card')->get();
@@ -254,7 +210,11 @@ class PropertyController extends Controller
         $prop_card = PropCardModel::get();
         return view('accounting_division.all-ppel-card', ['prop_card' => $prop_card]);
     }
-
+    public function getDataForSELC()
+    {
+        $sep_card = SemiModel::get();
+        return view('accounting_division.SELC', ['sep_card' => $sep_card]);
+    }
 
     public function edit_PPELC(Request $request, $id)
     {
@@ -295,6 +255,133 @@ class PropertyController extends Controller
         ->whereNotNull('repair_nature')
         ->count();
 
-        return view('property_division.dash-prop' , compact('stockCards', 'stockLedgerCards', 'PPEC', 'PPELC'));
+        $sepCards = SemiModel::count();
+        $stockCardRecent = PropertyModel::where('is_clicked', 0)->latest()->first();
+        $semiCardRecent = SemiModel::where('is_clicked', 0)->latest()->first();
+        $propCardRecent = PropCardModel::where('is_clicked', 0)->latest()->first();
+
+        return view('property_division.dash-prop' , compact('stockCards', 'stockLedgerCards', 'PPEC', 'PPELC', 'sepCards','stockCardRecent','semiCardRecent','propCardRecent'));
+    }
+
+    public function clickSC($id){
+        $stockCardRecent = PropertyModel::find($id);
+
+        if($stockCardRecent){
+            $stockCardRecent->update(['is_clicked' => 1]);
+            return redirect('/all-forms');
+        }else{
+            return redirect()->back()->with('failed', 'ERROR');
+        }
+    }
+
+    public function clickPc($id){
+        $propCardRecent = PropCardModel::find($id);
+
+        if($propCardRecent){
+            $propCardRecent->update(['is_clicked' => 1]);
+            return redirect('/all-property');
+        }else{
+            return redirect()->back()->with('failed', 'ERROR');
+        }
+    }
+    public function clickSep($id){
+        $sepCardRecent = SemiModel::find($id);
+
+        if($sepCardRecent){
+            $sepCardRecent->update(['is_clicked' => 1]);
+            return redirect('/all-semi-expandable');
+        }else{
+            return redirect()->back()->with('failed', 'ERROR');
+        }
+    }
+
+    public function addSemiPropertyCard(Request $request)
+    {
+        try {
+            $validatedData = $request->validate([
+                'entity_name' => 'required',
+                'fund_cluster' => 'required',
+                'desc' => 'required',
+                'sep_no' => 'required',
+                'sep_name' => 'required',
+                'date' => 'required|date',
+                'ref' => 'required',
+                'receipt_qty' => 'required',
+                'receipt_unitcost' => 'required',
+                'receipt_totalcost' => 'required',
+                'item_no' => 'required',
+                'issue_qty' => 'required',
+                'office_officer' => 'required',
+                'amount' => 'required',
+                'remarks' => 'required',
+            ], [
+                'entity_name.required' => 'The entity name field is required.',
+                'fund_cluster.required' => 'The fund cluster field is required.',
+                'desc.required' => 'The description field is required.',
+                'sep_no.required' => 'The Semi-expendable property number field is required.',
+                'sep_name.required' => 'The Semi-expendable property name field is required.',
+                'date.required' => 'The date field is required.',
+                'date.date' => 'The date must be a valid date format.',
+                'ref.required' => 'The reference field is required.',
+                'receipt_qty.required' => 'The receipt quantity field is required.',
+                'receipt_unitcost.required' => 'The receipt unit cost field is required.',
+                'receipt_totalcost.required' => 'The receipt total cost field is required.',
+                'item_no.required' => 'The item number field is required.',
+                'issue_qty.required' => 'The issue quantity field is required.',
+                'office_officer.required' => 'The office officer field is required.',
+                'amount.required' => 'The amount field is required.',
+                'remarks.required' => 'The remarks field is required.',
+            ]);
+
+            $SemipropCard = new SemiModel();
+            $SemipropCard->fill($validatedData);
+            $SemipropCard->save();
+
+        return redirect('/all-semi-expandable')->with('success', 'Semi-Expendable Property Card ' . $SemipropCard->prop_no . ' has been created!');
+        } catch (\Exception $e) {
+            return back()->withErrors([$e->getMessage()])->withInput();
+        }
+    }
+
+    public function getDataForSEPC()
+    {
+        $sep_card = SemiModel::get();
+        return view('property_division.SEC', ['sep_card' => $sep_card]);
+    }
+
+    public function edit_sep_card(Request $request, $id)
+    {
+        $data = $request->all();
+        $sep = SemiModel::find($id);
+
+        if (!$sep) {
+            return redirect()->back()->with('error', 'Semi-Expendable Property Card not found.');
+        }
+
+        $sep->update($data);
+
+        if ($sep) {
+            return redirect('/all-semi-expandable')->with('success', 'Semi-Expendable Property Number ' . $sep->sep_no . ' updated successfully.');
+        } else {
+            return redirect()->back()->with('failed', 'No changes detected or failed to update item.');
+        }
+    }
+
+    public function countCardAccounting(){
+        $stockLedgerCards = PropertyModel::whereNotNull('bal_qty')->whereNotNull('bal_unitcost')->whereNotNull('bal_totalcost')->count();
+        $PPELC = PropCardModel::whereNotNull('obj_acc_code')
+        ->whereNotNull('est_useful_life')
+        ->whereNotNull('rate_of_dep')
+        ->whereNotNull('accumulated_dep')
+        ->whereNotNull('accumulated_impairment_losses')
+        ->whereNotNull('issue_transfers_adjustments')
+        ->whereNotNull('adjusted_code')
+        ->whereNotNull('repair_nature')
+        ->count();
+        $stockCardRecent = PropertyModel::where('is_clicked', 0)->latest()->first();
+        $semiCardRecent = SemiModel::where('is_clicked', 0)->latest()->first();
+        $propCardRecent = PropCardModel::where('is_clicked', 0)->latest()->first();
+
+        return view('accounting_division.dash-accounting' , compact('stockLedgerCards', 'PPELC'));
     }
 }

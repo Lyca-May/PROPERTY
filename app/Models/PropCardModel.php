@@ -36,6 +36,7 @@ class PropCardModel extends Model
         'issue_transfers_adjustments',
         'adjusted_code',
         'repair_nature',
+        'is_clicked',
     ];
 
     protected $casts = [

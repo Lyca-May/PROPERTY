@@ -5,33 +5,32 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PropertyModel extends Model
+class SemiModel extends Model
 {
     use HasFactory;
-
-    protected $table = 'sc_andslc';
+    protected $table = 'semi';
     protected $primaryKey = 'id';
     protected $fillable = [
         'entity_name',
+        'desc',
         'fund_cluster',
-        'item_name',
-        'description',
-        'unit_of_measurement',
-        'item_code',
-        'reorder_point',
-        'stock_no',
+        'sep_no',
+        'sep_name',
         'date',
-        'reference',
+        'ref',
         'receipt_qty',
         'receipt_unitcost',
         'receipt_totalcost',
+        'item_no',
         'issue_qty',
-        'issue_unitcost',
-        'issue_totalcost',
+        'office_officer',
         'bal_qty',
-        'bal_unitcost',
-        'bal_totalcost',
-        'no_of_days',
+        'amount',
+        'remarks',
         'is_clicked',
+    ];
+
+    protected $dates = [
+        'date',
     ];
 }
