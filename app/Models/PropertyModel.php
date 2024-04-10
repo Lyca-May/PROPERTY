@@ -28,6 +28,7 @@ class PropertyModel extends Model
         'issue_qty',
         'issue_unitcost',
         'issue_totalcost',
+        'office_officer',
         'bal_qty',
         'bal_unitcost',
         'bal_totalcost',

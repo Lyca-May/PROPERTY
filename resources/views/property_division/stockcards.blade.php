@@ -16,6 +16,9 @@
         integrity="sha512-Lg2h+7fH4FG/D9xPZv94f4jeDmhgWxVxs7g2agQF7uYUgMNHmz4vkq0CIGsYqUZkR9Tf7fDcDX5XdLnq6C9ulA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+
 </head>
 
 <body>
@@ -166,7 +169,7 @@
 
                                                                         <div class="col-lg-12">
                                                                             <div class="card-body">
-                                                                                <div class="table-responsive">
+                                                                                <div class="table-responsive ">
                                                                                     <table
                                                                                         class="table table-bordered">
                                                                                         <tbody>
@@ -217,15 +220,15 @@
                                                                                                     @enderror
                                                                                                 </td>
                                                                                                 <th scope="row">
-                                                                                                    Re-Order Point
+                                                                                                   Item Code:
                                                                                                 </th>
                                                                                                 <td>
                                                                                                     <input
                                                                                                         type="text"
-                                                                                                        name="reorder_point"class="form-control text-line"
+                                                                                                        name="item_code"class="form-control text-line"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
-                                                                                                        value="{{ $stock_cards->reorder_point }}">
-                                                                                                    @error('reorder_point')
+                                                                                                        value="{{ $stock_cards->item_code }}">
+                                                                                                    @error('item_code')
                                                                                                         <span
                                                                                                             class="text-danger">{{ $message }}</span>
                                                                                                     @enderror
@@ -244,6 +247,20 @@
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                         value="{{ $stock_cards->unit_of_measurement }}">
                                                                                                     @error('unit_of_measurement')
+                                                                                                        <span
+                                                                                                            class="text-danger">{{ $message }}</span>
+                                                                                                    @enderror
+                                                                                                </td>
+                                                                                                <th scope="row">
+                                                                                                    Re-Order Point
+                                                                                                </th>
+                                                                                                <td>
+                                                                                                    <input
+                                                                                                        type="text"
+                                                                                                        name="reorder_point"class="form-control text-line"
+                                                                                                        style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                                        value="{{ $stock_cards->reorder_point }}">
+                                                                                                    @error('reorder_point')
                                                                                                         <span
                                                                                                             class="text-danger">{{ $message }}</span>
                                                                                                     @enderror
@@ -270,7 +287,7 @@
                                                                                                     RECEIPT
                                                                                                 </th>
                                                                                                 <th scope="col"
-                                                                                                    colspan="3"
+                                                                                                    colspan="4"
                                                                                                     style="text-align: center;">
                                                                                                     ISSUE</th>
                                                                                                 <th scope="col"
@@ -317,6 +334,10 @@
                                                                                                 </th>
                                                                                                 <th scope="col"
                                                                                                     style="text-align: center;">
+                                                                                                    OFFICE/OFFICER
+                                                                                                </th>
+                                                                                                <th scope="col"
+                                                                                                    style="text-align: center;">
                                                                                                     QTY
                                                                                                 </th>
                                                                                                 <th scope="col"
@@ -335,7 +356,7 @@
                                                                                                     CONSUME</th>
                                                                                             </tr>
                                                                                         </thead>
-                                                                                        <tbody>
+                                                                                        <tbody id="stockTableBody">
                                                                                             <tr>
                                                                                                 <td>
                                                                                                     <input
@@ -409,7 +430,7 @@
                                                                                                         type="text"
                                                                                                         name="issue_qty"
                                                                                                         id="issue_qty"
-                                                                                                        class="form-control text-line"
+                                                                                                        class="form-control text-line issue-input"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                         value="{{ $stock_cards->issue_qty }}"
                                                                                                         data-card-id="{{ $stock_cards->id }}">
@@ -419,7 +440,7 @@
                                                                                                         type="text"
                                                                                                         name="issue_unitcost"
                                                                                                         id="issue_unitcost"
-                                                                                                        class="form-control text-line"
+                                                                                                        class="form-control text-line issue-input"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                         value="{{ $stock_cards->issue_unitcost }}"
                                                                                                         data-card-id="{{ $stock_cards->id }}">
@@ -429,31 +450,40 @@
                                                                                                         type="text"
                                                                                                         name="issue_totalcost"
                                                                                                         id="issue_totalcost"
-                                                                                                        class="form-control text-line"
+                                                                                                        class="form-control text-line issue-total"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                         value="{{ $stock_cards->issue_totalcost }}"
                                                                                                         readonly
                                                                                                         data-card-id="{{ $stock_cards->id }}">
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <input
+                                                                                                        type="text"
+                                                                                                        name="office_officer"
+                                                                                                        id="office_officer"
+                                                                                                        class="form-control text-line issue-total"
+                                                                                                        style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                                        value="{{ $stock_cards->office_officer }}">
                                                                                                 </td>
 
                                                                                                 <!-- Bal section -->
                                                                                                 <td>
                                                                                                     <input
                                                                                                         type="text"
-                                                                                                        name=""
+                                                                                                        name="bal_qty"
                                                                                                         class="form-control text-line"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                         placeholder=""
-                                                                                                        readonly>
+                                                                                                        value="{{ $stock_cards->bal_qty }}">
                                                                                                 </td>
                                                                                                 <td>
                                                                                                     <input
                                                                                                         type="text"
-                                                                                                        name=""
+                                                                                                        name="bal_unitcost"
                                                                                                         class="form-control text-line"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                         placeholder=""
-                                                                                                        readonly>
+                                                                                                        value="{{ $stock_cards->bal_unitcost }}">
                                                                                                 </td>
                                                                                                 <td>
                                                                                                     <input
@@ -461,7 +491,8 @@
                                                                                                         class="form-control text-line"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                         placeholder=""
-                                                                                                        readonly>
+                                                                                                        name="bal_totalcost"
+                                                                                                        value="{{ $stock_cards->bal_totalcost }}">
                                                                                                 </td>
                                                                                                 <td>
                                                                                                     <input
@@ -477,7 +508,10 @@
                                                                                                 </td>
                                                                                             </tr>
                                                                                         </tbody>
+
+
                                                                                     </table>
+                                                                                    <button id="addRowButton">Add Row</button>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -504,22 +538,35 @@
                                                             </form>
                                                         </div>
                                                     </div>
-                                                    <script>
-                                                        const receiptInputs = document.querySelectorAll('.receipt-input');
-                                                        receiptInputs.forEach(input => {
-                                                            input.addEventListener('input', updateReceiptTotalCost);
-                                                        });
-                                                        function updateReceiptTotalCost(event) {
-                                                            const parentRow = event.target.closest('tr');
-                                                            const qty = parseFloat(parentRow.querySelector('[name="receipt_qty"]').value);
-                                                            const unitCost = parseFloat(parentRow.querySelector('[name="receipt_unitcost"]').value);
-                                                            const totalCost = qty * unitCost;
-                                                            parentRow.querySelector('[name="receipt_totalcost"]').value = isNaN(totalCost) ? '' : totalCost.toFixed(2);
-                                                        }
-                                                    </script>
                                                 </div>
                                             </div>
                                         @endforeach
+                                        <script>
+                                            const receiptInputs = document.querySelectorAll('.receipt-input');
+                                            const issueInputs = document.querySelectorAll('.issue-input');
+
+                                            receiptInputs.forEach(input => {
+                                                input.addEventListener('input', updateReceiptTotalCost);
+                                            });
+                                            issueInputs.forEach(input => {
+                                                input.addEventListener('input', updateIssueTotalCost);
+                                            });
+
+                                            function updateReceiptTotalCost(event) {
+                                                const parentRow = event.target.closest('tr');
+                                                const qty = parseFloat(parentRow.querySelector('[name="receipt_qty"]').value);
+                                                const unitCost = parseFloat(parentRow.querySelector('[name="receipt_unitcost"]').value);
+                                                const totalCost = qty * unitCost;
+                                                parentRow.querySelector('[name="receipt_totalcost"]').value = isNaN(totalCost) ? '' : totalCost.toFixed(2);
+                                            }
+                                            function updateIssueTotalCost(event) {
+                                                const parentRow = event.target.closest('tr');
+                                                const issue_qty = parseFloat(parentRow.querySelector('[name="issue_qty"]').value);
+                                                const issue_unitCost = parseFloat(parentRow.querySelector('[name="issue_unitcost"]').value);
+                                                const issueTotalCost =  issue_qty * issue_unitCost
+                                                parentRow.querySelector('[name="issue_totalcost"]').value = isNaN(issueTotalCost) ? '' : issueTotalCost.toFixed(2);
+                                            }
+                                        </script>
                                     </div>
 
                                 </div>
@@ -537,16 +584,14 @@
             </section>
         </div>
 
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         @if (session('success'))
             <script>
                 Swal.fire({
                     icon: 'success',
                     title: 'Success!',
-                    text: '{{ session('
-                                                        success ') }}',
+                    text: '{{ session('success ') }}',
                     toast: true,
                     position: 'top-end',
                     showConfirmButton: false,
@@ -567,8 +612,7 @@
                 Swal.fire({
                     icon: 'failed',
                     title: 'failed!',
-                    text: '{{ session('
-                                                        failed ') }}',
+                    text: '{{ session('failed ') }}',
                     toast: true,
                     position: 'top-end',
                     showConfirmButton: false,
@@ -586,9 +630,17 @@
 
         @include('footer')
     </div>
-    </div>
 
 
+    <script>
+        // Function to navigate to the printable page
+        function navigateToPrintablePage() {
+            // Assuming 'prop_cards_id' is the parameter to be passed
+            var stock_cards_id = '{{ $stock_cards->id }}';
+            // Navigate to the printable page
+            window.location.href = '/printable-stock-page/' + stock_cards_id;
+        }
+    </script>
 
     <script>
         $(document).ready(function() {
@@ -609,10 +661,9 @@
         });
     </script>
 
+
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>

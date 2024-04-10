@@ -21,23 +21,12 @@
                 </div>
             </div>
             <ul class="sidebar-menu">
-                <li class="menu-header">Dashboard</li>
+                <li class="menu-header">DASHBOARD</li>
                 <li class="active">
                     <a href="{{ url ('/dash-prop')}}"><i class="ion ion-speedometer"></i><span>Dashboard</span></a>
                 </li>
 
-                <li class="menu-header">Components</li>
-
-                {{-- <li>
-                    <a href="#" class="has-dropdown"><i class="ion ion-flag"></i><span>Icons</span></a>
-                    <ul class="menu-dropdown">
-                        <li><a href="ion-icons.html"><i class="ion ion-ios-circle-outline"></i> Ion Icons</a>
-                        </li>
-                        <li><a href="fontawesome.html"><i class="ion ion-ios-circle-outline"></i> Font
-                                Awesome</a></li>
-                        <li><a href="flag.html"><i class="ion ion-ios-circle-outline"></i> Flag</a></li>
-                    </ul>
-                </li> --}}
+                <li class="menu-header">CARDS</li>
                 <li>
                     <a href="{{ url ('/all-forms')}}"><i class="ion ion-clipboard"></i><span>Stock Cards</span></a>
                 </li>
@@ -48,36 +37,11 @@
                 <li>
                     <a href="{{ url ('/all-semi-expandable') }}"><i class="ion ion-stats-bars"></i><span>Semi-Expendable Cards</span></a>
                 </li>
-              
 
-                <li class="menu-header">More</li>
+
+                <li class="menu-header">ACCOUNTABILITY</li>
                 <li>
-                    <a href="#" class="has-dropdown"><i class="ion ion-ios-nutrition"></i> Click Me</a>
-                    <ul class="menu-dropdown">
-                        <li><a href="#"><i class="ion ion-ios-circle-outline"></i> Menu 1</a></li>
-                        <li><a href="#" class="has-dropdown"><i class="ion ion-ios-circle-outline"></i>
-                                Menu 2</a>
-                            <ul class="menu-dropdown">
-                                <li><a href="#"><i class="ion ion-ios-circle-outline"></i> Child Menu
-                                        1</a></li>
-                                <li><a href="#"><i class="ion ion-ios-circle-outline"></i> Child Menu
-                                        2</a></li>
-                                <li><a href="#" class="has-dropdown"><i class="ion ion-ios-circle-outline"></i>
-                                        Child Menu 3</a>
-                                    <ul class="menu-dropdown">
-                                        <li><a href="#"><i class="ion ion-ios-circle-outline"></i> Child
-                                                Menu 1</a></li>
-                                        <li><a href="#"><i class="ion ion-ios-circle-outline"></i> Child
-                                                Menu 2</a></li>
-                                        <li><a href="#"><i class="ion ion-ios-circle-outline"></i> Child
-                                                Menu 3</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="#"><i class="ion ion-ios-circle-outline"></i> Child Menu
-                                        4</a></li>
-                            </ul>
-                        </li>
-                    </ul>
+                    <a href="{{ url ('/all-users') }}"><i class="ion ion-person"></i><span>Users</span></a>
                 </li>
             </ul>
         </aside>

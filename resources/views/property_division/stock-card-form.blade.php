@@ -108,10 +108,10 @@
                                                         <span class="text-danger">{{ $message }}</span>
                                                         @enderror
                                                     </td>
-                                                    <th scope="row">Re-Order Point</th>
+                                                    <th scope="row">Item Code:</th>
                                                     <td>
-                                                        <input type="text" name="reorder_point" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">
-                                                        @error('reorder_point')
+                                                        <input type="text" name="item_code" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">
+                                                        @error('item_code')
                                                         <span class="text-danger">{{ $message }}</span>
                                                         @enderror
                                                     </td>
@@ -121,6 +121,13 @@
                                                     <td>
                                                         <input type="text" name="unit_of_measurement" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">
                                                         @error('unit_of_measurement')
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
+                                                    </td>
+                                                    <th scope="row">Re-Order Point</th>
+                                                    <td>
+                                                        <input type="text" name="reorder_point" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">
+                                                        @error('reorder_point')
                                                         <span class="text-danger">{{ $message }}</span>
                                                         @enderror
                                                     </td>
@@ -139,11 +146,11 @@
                                                     <th scope="col" colspan="2"></th>
                                                     <th scope="col" colspan="3" style="text-align: center;">
                                                         RECEIPT</th>
-                                                    <th scope="col" colspan="3" style="text-align: center;">ISSUE
+                                                    <th scope="col" colspan="4" style="text-align: center;">ISSUE
                                                     </th>
                                                     <th scope="col" colspan="3" style="text-align: center;">
                                                         BALANCE</th>
-                                                    <th scope="col" colspan="3" style="text-align: center;"></th>
+                                                    <th scope="col" colspan="1" style="text-align: center;"></th>
                                                 </tr>
                                                 <tr>
                                                     <th scope="col" style="text-align: center;">DATE</th>
@@ -158,6 +165,9 @@
                                                     <th scope="col" style="text-align: center;">UNIT COST
                                                     </th>
                                                     <th scope="col" style="text-align: center;">TOTAL COST
+                                                    </th>
+                                                    </th>
+                                                    <th scope="col" style="text-align: center;">OFFICE/OFFICER
                                                     </th>
                                                     <th scope="col" style="text-align: center;">QTY</th>
                                                     <th scope="col" style="text-align: center;">UNIT COST
@@ -220,13 +230,19 @@
                                                         @enderror
                                                     </td>
                                                     <td>
-                                                        <input type="text" name="" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="" readonly>
+                                                        <input type="text" name="office_officer" id="office_officer" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">
+                                                        @error('office_officer')
+                                                        <span class="text-danger">{{ $message }}</span>
+                                                        @enderror
                                                     </td>
                                                     <td>
-                                                        <input type="text" name="" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="" readonly>
+                                                        <input type="text" name="bal_qty" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">
                                                     </td>
                                                     <td>
-                                                        <input type="text" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="" readonly>
+                                                        <input type="text" name="bal_unitcost" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" name="bal_totalcost" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">
                                                     </td>
                                                     <td>
                                                         <input type="text" name="no_of_days" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">
@@ -353,6 +369,7 @@
             });
         @endif
     </script>
+
 @endif
 
 

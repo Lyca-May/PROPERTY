@@ -14,7 +14,9 @@
         integrity="sha512-Lg2h+7fH4FG/D9xPZv94f4jeDmhgWxVxs7g2agQF7uYUgMNHmz4vkq0CIGsYqUZkR9Tf7fDcDX5XdLnq6C9ulA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-Lg2h+7fH4FG/D9xPZv94f4jeDmhgWxVxs7g2agQF7uYUgMNHmz4vkq0CIGsYqUZkR9Tf7fDcDX5XdLnq6C9ulA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        integrity="sha512-Lg2h+7fH4FG/D9xPZv94f4jeDmhgWxVxs7g2agQF7uYUgMNHmz4vkq0CIGsYqUZkR9Tf7fDcDX5XdLnq6C9ulA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <style>
         .table-responsive {
@@ -103,40 +105,40 @@
 
                                     <div class="row card-row">
                                         @foreach ($prop_card as $prop_cards)
-                                        <div class="col-lg-3 col-md-6 col-sm-12 mb-12">
-                                            <!-- Modal trigger element -->
-                                            <a class="card2" href="#" data-toggle="modal" data-target="#editItemModal{{ $prop_cards->id }}">
-                                                <div class="card-body">
-                                                    <h3 class="card-title">ENTITY NAME:
-                                                        {{ $prop_cards->entity_name }}
-                                                    </h3>
-                                                    <h3 class="card-title">FUND CLUSTERE:
-                                                        {{ $prop_cards->fund_cluster }}
-                                                    </h3>
-                                                    <h3 class="card-text small">NAME:
-                                                        {{ $prop_cards->prop_plant_eq }}
-                                                    </h3>
-                                                    <p class="card-text small">Property No/Object Account Code:
-                                                        {{ $prop_cards->prop_no }}
-                                                    </p>
-                                                </div>
-                                                <div class="go-corner" href="#">
-                                                    <div class="go-arrow">
-                                                        →
+                                            <div class="col-lg-3 col-md-6 col-sm-12 mb-12">
+                                                <!-- Modal trigger element -->
+                                                <a class="card2" href="#" data-toggle="modal"
+                                                    data-target="#editItemModal{{ $prop_cards->id }}">
+                                                    <div class="card-body">
+                                                        <h3 class="card-title">ENTITY NAME:
+                                                            {{ $prop_cards->entity_name }}
+                                                        </h3>
+                                                        <h3 class="card-title">FUND CLUSTERE:
+                                                            {{ $prop_cards->fund_cluster }}
+                                                        </h3>
+                                                        <h3 class="card-text small">NAME:
+                                                            {{ $prop_cards->prop_plant_eq }}
+                                                        </h3>
+                                                        <p class="card-text small">Property No/Object Account Code:
+                                                            {{ $prop_cards->prop_no }}
+                                                        </p>
                                                     </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <div class="modal fade" id="editItemModal{{ $prop_cards->id }}" tabindex="-1" role="dialog" aria-labelledby="editItemModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-lg modal-custom-width" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="editItemModalLabel">View or Edit
-                                                            Property Card</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
+                                                    <div class="go-corner" href="#">
+                                                        <div class="go-arrow">
+                                                            →
+                                                        </div>
                                                     </div>
+                                                </a>
+                                            </div>
+                                            <div class="modal fade" id="editItemModal{{ $prop_cards->id }}" tabindex="-1" role="dialog" aria-labelledby="editItemModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-lg modal-custom-width" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="editItemModalLabel">View or Edit Property Card</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
 
                                                         <div class="modal-body">
                                                             <form
@@ -517,19 +519,10 @@
                                 </div>
                                 <div class="tab-pane fade" id="profile3" role="tabpanel"
                                     aria-labelledby="profile-tab3">
-                                    Sed sed metus vel lacus hendrerit tempus. Sed efficitur velit tortor, ac efficitur
-                                    est lobortis
-                                    quis. Nullam lacinia metus erat, sed fermentum justo rutrum ultrices. Proin quis
-                                    iaculis tellus.
-                                    Etiam ac vehicula eros, pharetra consectetur dui.
+
                                 </div>
                                 <div class="tab-pane fade" id="contact3" role="tabpanel"
                                     aria-labelledby="contact-tab3">
-                                    Vestibulum imperdiet odio sed neque ultricies, ut dapibus mi maximus. Proin ligula
-                                    massa,
-                                    gravida in lacinia efficitur, hendrerit eget mauris. Pellentesque fermentum, sem
-                                    interdum
-                                    molestie finibus, nulla diam varius leo, nec varius lectus elit id dolor.
                                 </div>
 
                             </div>
@@ -540,6 +533,13 @@
         </div>
 
 
+
+
+
+
+
+
+{{-- SCRIPTS --}}
         <script>
             // Function to calculate receipt total cost
             function calculateReceiptTotalCost() {
@@ -569,9 +569,6 @@
             calculateReceiptTotalCost();
             calculateIssueTotalCost();
         </script>
-
-        <!-- Modal -->
-
         <script>
             $(document).ready(function() {
                 $('#search-input').on('keyup', function() {
@@ -590,8 +587,6 @@
                 });
             });
         </script>
-
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         @if (session('success'))
             <script>
                 Swal.fire({
@@ -633,10 +628,6 @@
                 });
             </script>
         @endif
-
-
-
-
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 const tables = document.querySelectorAll('.table-resizable');
@@ -664,9 +655,11 @@
                 });
             });
         </script>
-
-        {{-- Footer --}}
         @include('footer')
+
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     </div>
     </div>

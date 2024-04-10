@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\PropertyController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -77,4 +78,7 @@ Route::post('/edit-ppelc-card/{id}', [PropertyController::class, 'edit_PPELC']);
 
 // semi-expandable ledger card
 Route::get('/all-semi-expandable-ledger', [PropertyController::class, 'getDataForSELC']);
+
+// users
+Route::get('/all-users', [UserController::class, 'getUsers']);
 

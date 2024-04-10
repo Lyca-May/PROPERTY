@@ -66,29 +66,11 @@
                                     <a class="nav-link active" id="home-tab3" data-toggle="tab" href="#home3"
                                         role="tab" aria-controls="home" aria-selected="true">All Cards</a>
                                 </li>
-                                <!-- {{-- <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab3" data-toggle="tab" href="#profile3"
-                                        role="tab" aria-controls="profile" aria-selected="false">New Form</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="contact-tab3" data-toggle="tab" href="#contact3"
-                                        role="tab" aria-controls="contact" aria-selected="false">Contact</a>
-                                </li> --}} -->
                             </ul>
 
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="home3" role="tabpanel"
                                     aria-labelledby="home-tab3">
-                                    <!-- {{-- <div class="container">
-                                        <div class="row">
-                                            <div class="col-md-12 mx-auto">
-                                                <a href="{{ url('/property-card-form') }}" class="card">
-                                                    <div class="card-body text-center" style="font-size: 20px">+ Add new property card
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div> --}} -->
                                     <hr>
 
                                     <div class="col-md-12 d-flex justify-content-end">

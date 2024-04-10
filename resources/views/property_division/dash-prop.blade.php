@@ -106,7 +106,7 @@
                                         <h4>TOTAL Semi-Expendable Ledger Cards</h4>
                                     </div>
                                     <div class="card-body">
-                                        1,201
+                                        0
                                     </div>
                                 </div>
                             </div>
