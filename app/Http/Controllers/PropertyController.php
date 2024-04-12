@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\DB;
 use App\Models\PropertyModel;
 use App\Models\PropCardModel;
 use App\Models\SemiModel;
+use App\Models\PropCardExtension_Model;
+
 
 class PropertyController extends Controller
 {
@@ -169,21 +171,20 @@ class PropertyController extends Controller
 
     public function getPropertyCards()
     {
-        $prop_card = DB::table('property_card')->get();
-        return view('property_division.propertycards', ['prop_card' => $prop_card]);
+       // Retrieve all data from PropCardModel
+        $prop_card = PropCardModel::all();
+
+            $prop_ext = PropCardExtension_Model::get();
+            return view('property_division.propertycards', compact('prop_card', 'prop_ext'));
+
+    
     }
 
     public function edit_property_card(Request $request, $id)
     {
         $data = $request->all();
         $propCard = PropCardModel::find($id);
-
-        if (!$propCard) {
-            return redirect()->back()->with('error', 'Property Card not found.');
-        }
-
         $propCard->update($data);
-
         if ($propCard) {
             return redirect('/all-property')->with('success', 'Property number ' . $propCard->prop_no . ' updated successfully.');
         } else {

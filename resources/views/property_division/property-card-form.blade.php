@@ -35,7 +35,7 @@
             <hr>
 
             <div>
-                <a href="{{ url ('/all-property')}}"> <button class="btn btn-primary btn-sm no-print"> <small>
+                <a href="{{ url('/all-property') }}"> <button class="btn btn-primary btn-sm no-print"> <small>
                             << </small>back</button></a>
             </div>
             <div class="row">
@@ -57,9 +57,11 @@
                                                 Entity Name
                                             </label>
                                             <div class="col-md-6">
-                                                <input type="text" name="entity_name" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px; width:280px" placeholder="">
+                                                <input type="text" name="entity_name" class="form-control text-line"
+                                                    style="padding-top: 4px; padding-bottom: 4px; width:280px"
+                                                    placeholder="">
                                                 @error('entity_name')
-                                                <span class="text-danger">{{ $message }}</span>
+                                                    <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
                                         </div>
@@ -70,9 +72,11 @@
                                                 Fund Cluster
                                             </label>
                                             <div class="col-md-6">
-                                                <input type="text" name="fund_cluster" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px; width:280px" placeholder="">
+                                                <input type="text" name="fund_cluster" class="form-control text-line"
+                                                    style="padding-top: 4px; padding-bottom: 4px; width:280px"
+                                                    value="01101101">
                                                 @error('fund_cluster')
-                                                <span class="text-danger">{{ $message }}</span>
+                                                    <span class="text-danger">{{ $message }}</span>
                                                 @enderror
                                             </div>
                                         </div>
@@ -88,25 +92,39 @@
                                                 <tr>
                                                     <th scope="row">Property, Plant & Equipment:</th>
                                                     <td>
-                                                        <input type="text" name="prop_plant_eq" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">
+                                                        <select name="prop_plant_eq" class="form-control">
+                                                            <option value="ICTE">ICTE</option>
+                                                            <option value="FURNITURE & FIXTURE">FURNITURE & FIXTURE
+                                                            </option>
+                                                            <option value="OFFICE EQUIPMENTS">OFFICE EQUIPMENTS</option>
+                                                            <option value="TSE">TSE</option>
+                                                            <option value="MFE">MFE</option>
+                                                        </select>
                                                         @error('prop_plant_eq')
-                                                        <span class="text-danger">{{ $message }}</span>
+                                                            <span class="text-danger">{{ $message }}</span>
                                                         @enderror
+
                                                     </td>
                                                     <th scope="row">Property No:</th>
                                                     <td>
-                                                        <input type="text" name="prop_no" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">
+                                                        <input type="text" name="prop_no"
+                                                            class="form-control text-line"
+                                                            style="padding-top: 4px; padding-bottom: 4px;"
+                                                            placeholder="">
                                                         @error('prop_no')
-                                                        <span class="text-danger">{{ $message }}</span>
+                                                            <span class="text-danger">{{ $message }}</span>
                                                         @enderror
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row">Description:</th>
                                                     <td>
-                                                        <input type="text" name="description" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">
+                                                        <input type="text" name="description"
+                                                            class="form-control text-line"
+                                                            style="padding-top: 4px; padding-bottom: 4px;"
+                                                            placeholder="">
                                                         @error('description')
-                                                        <span class="text-danger">{{ $message }}</span>
+                                                            <span class="text-danger">{{ $message }}</span>
                                                         @enderror
                                                     </td>
                                                 </tr>
@@ -124,7 +142,7 @@
                                                     <th scope="col" colspan="2"></th>
                                                     <th scope="col" colspan="3" style="text-align: center;">
                                                         Receipt</th>
-                                                    <th scope="col" colspan="2" style="text-align: center;">
+                                                    <th scope="col" colspan="5" style="text-align: center;">
                                                         Issue/Transfer/Disposal
                                                     </th>
                                                     <th scope="col" colspan="1" style="text-align: center;">
@@ -140,7 +158,13 @@
                                                     </th>
                                                     <th scope="col" style="text-align: center;">Total Cost</th>
                                                     <th scope="col" style="text-align: center;">Qty</th>
-                                                    <th scope="col" style="text-align: center;">Office / Officer</th>
+                                                    <th scope="col" style="text-align: center;">Office / Officer
+                                                    </th>
+                                                    <th scope="col" style="text-align: center;">Issue</th>
+                                                    <th scope="col" style="text-align: center;">Transfer</th>
+                                                    <th scope="col" style="text-align: center;">Disposal</th>
+
+
                                                     <th scope="col" style="text-align: center;">Qty</th>
                                                     <th scope="col" style="text-align: center;">Amount
                                                     </th>
@@ -151,64 +175,108 @@
                                             <tbody>
                                                 <tr>
                                                     <td>
-                                                        <input type="date" name="date" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">
+                                                        <input type="date" name="date"
+                                                            class="form-control text-line"
+                                                            style="padding-top: 4px; padding-bottom: 4px;"
+                                                            placeholder="">
                                                         @error('date')
-                                                        <span class="text-danger">{{ $message }}</span>
+                                                            <span class="text-danger">{{ $message }}</span>
                                                         @enderror
                                                     </td>
                                                     <td>
-                                                        <textarea type="text" name="reference" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="@error('reference') {{ $message }} @enderror"></textarea>
+                                                        <textarea type="text" name="reference" class="form-control text-line"
+                                                            style="padding-top: 4px; padding-bottom: 4px;" placeholder="@error('reference') {{ $message }} @enderror"></textarea>
                                                         @error('reference')
-                                                        <span class="text-danger">{{ $message }}</span>
+                                                            <span class="text-danger">{{ $message }}</span>
                                                         @enderror
                                                     </td>
                                                     <td>
-                                                        <input type="text" name="receipt_qty" id="receipt_qtyy" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">
+                                                        <input type="text" name="receipt_qty" id="receipt_qtyy"
+                                                            class="form-control text-line"
+                                                            style="padding-top: 4px; padding-bottom: 4px;"
+                                                            placeholder="">
                                                         @error('receipt_qty')
-                                                        <span class="text-danger">{{ $message }}</span>
+                                                            <span class="text-danger">{{ $message }}</span>
                                                         @enderror
                                                     </td>
                                                     <td>
-                                                        <input type="text" name="receipt_unitcost" id="receipt_unitcost" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">
+                                                        <input type="text" name="receipt_unitcost"
+                                                            id="receipt_unitcost" class="form-control text-line"
+                                                            style="padding-top: 4px; padding-bottom: 4px;"
+                                                            placeholder="">
                                                         @error('receipt_unitcost')
-                                                        <span class="text-danger">{{ $message }}</span>
+                                                            <span class="text-danger">{{ $message }}</span>
                                                         @enderror
                                                     </td>
                                                     <td>
-                                                        <input type="text" name="receipt_totalcost" id="receipt_totalcost" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="" readonly>
+                                                        <input type="text" name="receipt_totalcost"
+                                                            id="receipt_totalcost" class="form-control text-line"
+                                                            style="padding-top: 4px; padding-bottom: 4px;"
+                                                            placeholder="" readonly>
                                                         @error('receipt_totalcost')
-                                                        <span class="text-danger">{{ $message }}</span>
+                                                            <span class="text-danger">{{ $message }}</span>
                                                         @enderror
                                                     </td>
                                                     <td>
-                                                        <input type="text" name="issue_qty" id="issue_qty" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">
+                                                        <input type="text" name="issue_qty" id="issue_qty"
+                                                            class="form-control text-line"
+                                                            style="padding-top: 4px; padding-bottom: 4px;"
+                                                            placeholder="">
                                                         @error('issue_qty')
-                                                        <span class="text-danger">{{ $message }}</span>
+                                                            <span class="text-danger">{{ $message }}</span>
                                                         @enderror
                                                     </td>
                                                     <td>
-                                                        <input type="text" name="issue_office_officer" id="issue_office_officer" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">
+                                                        <input type="text" name="issue_office_officer"
+                                                            id="issue_office_officer" class="form-control text-line"
+                                                            style="padding-top: 4px; padding-bottom: 4px;"
+                                                            placeholder="">
                                                         @error('issue_office_officer')
-                                                        <span class="text-danger">{{ $message }}</span>
+                                                            <span class="text-danger">{{ $message }}</span>
                                                         @enderror
                                                     </td>
+                                                    <div style="text-align: center;">
+                                                        <td>
+                                                            <input type="checkbox" name="issue"
+                                                                id="issue_office_officer1" value="issue">
+                                                        </td>
+                                                        <td>
+                                                            <input type="checkbox" name="transfer"
+                                                                id="issue_office_officer2" value="tra">
+                                                        </td>
+                                                        <td>
+                                                            <input type="checkbox" name="disposal"
+                                                                id="issue_office_officer3" value="value3">
+                                                        </td>
+                                                    </div>
+                                                    </td>
+
                                                     <td>
-                                                        <input type="text" name="bal_qty" id="" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="" readonly>
+                                                        <input type="text" name="bal_qty" id=""
+                                                            class="form-control text-line"
+                                                            style="padding-top: 4px; padding-bottom: 4px;"
+                                                            placeholder="">
                                                         @error('bal_qty')
-                                                        <span class="text-danger">{{ $message }}</span>
+                                                            <span class="text-danger">{{ $message }}</span>
                                                         @enderror
                                                     </td>
                                                     <td>
-                                                        <input type="text" name="repair_amount" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">
+                                                        <input type="text" name="repair_amount"
+                                                            class="form-control text-line"
+                                                            style="padding-top: 4px; padding-bottom: 4px;"
+                                                            placeholder="">
                                                         @error('repair_amount')
-                                                        <span class="text-danger">{{ $message }}</span>
+                                                            <span class="text-danger">{{ $message }}</span>
                                                         @enderror
                                                     </td>
 
                                                     <td>
-                                                        <input type="text" name="remarks" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">
+                                                        <input type="text" name="remarks"
+                                                            class="form-control text-line"
+                                                            style="padding-top: 4px; padding-bottom: 4px;"
+                                                            placeholder="">
                                                         @error('remarks')
-                                                        <span class="text-danger">{{ $message }}</span>
+                                                            <span class="text-danger">{{ $message }}</span>
                                                         @enderror
                                                     </td>
                                                 </tr>

@@ -10,20 +10,46 @@
 
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
-    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
         integrity="sha512-Lg2h+7fH4FG/D9xPZv94f4jeDmhgWxVxs7g2agQF7uYUgMNHmz4vkq0CIGsYqUZkR9Tf7fDcDX5XdLnq6C9ulA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" /> --}}
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
         integrity="sha512-Lg2h+7fH4FG/D9xPZv94f4jeDmhgWxVxs7g2agQF7uYUgMNHmz4vkq0CIGsYqUZkR9Tf7fDcDX5XdLnq6C9ulA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" /> --}}
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Open+Sans">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    {{-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> --}}
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <style>
+        body {
+            color: #404E67;
+            background: #F5F7FA;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .table-wrapper {
+            width: 700px;
+            margin: 30px auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+        }
+
+        .table-title {
+            padding-bottom: 10px;
+            margin: 0 0 10px;
+        }
+
+        .table-title h2 {
+            margin: 6px 0 0;
+            font-size: 22px;
+        }
+
         .table-title .add-new {
             float: right;
             height: 30px;
@@ -40,7 +66,7 @@
         }
 
         table.table {
-            table-layout: auto;
+            table-layout: fixed;
         }
 
         table.table tr th,
@@ -223,8 +249,8 @@
                                                             <h5 class="modal-title" id="editItemModalLabel">View or
                                                                 Edit
                                                                 Property Card</h5>
-                                                            <button type="button" class="close" data-dismiss="modal"
-                                                                aria-label="Close">
+                                                            <button type="button" class="close"
+                                                                data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
@@ -330,8 +356,7 @@
                                                                         <div class="col-lg-12">
                                                                             <div class="card-body">
                                                                                 <div class="table-responsive">
-                                                                                    <table
-                                                                                        class="table table-bordered table-resizable"
+                                                                                    <table class="table table-bordered"
                                                                                         style="font-size: 10px">
                                                                                         <thead>
                                                                                             <tr>
@@ -570,58 +595,11 @@
                                                                                                     @enderror
                                                                                                 </td>
                                                                                                 <td>
-                                                                                                    <a class="add"
-                                                                                                        title="Add"
-                                                                                                        data-toggle="tooltip"><i
-                                                                                                            class="material-icons">&#xE03B;</i></a>
-                                                                                                    <a class="edit"
-                                                                                                        title="Edit"
-                                                                                                        data-toggle="tooltip"><i
-                                                                                                            class="material-icons">&#xE254;</i></a>
-                                                                                                    <a class="delete"
-                                                                                                        title="Delete"
-                                                                                                        data-toggle="tooltip"><i
-                                                                                                            class="material-icons">&#xE872;</i></a>
+                                                                                                    <a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
+                                                                                                    <a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                                                                                                    <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
                                                                                                 </td>
                                                                                             </tr>
-                                                                                            @foreach ($prop_ext->where('prop_id', $prop_cards->id) as $data)
-                                                                                            <tr>
-                                                                                                    <td><input type="date" value="{{$data->date}}" name="date" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>
-                                                                                                    <td><textarea type="text" name="reference" value="{{$data->reference}}" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></textarea></td>
-                                                                                                    <td><input type="text" name="receipt_qty" value="{{ $data->receipt_qty }}" class="form-control text-line receipt-input" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>
-                                                                                                    <td><input type="text" name="receipt_unitcost" value="{{ $data->receipt_unitcost }}" class="form-control text-line receipt-input" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>
-                                                                                                    <td><input type="text" name="receipt_totalcost" value="{{ $data->receipt_totalcost }}" class="form-control text-line receipt-total" style="padding-top: 4px; padding-bottom: 4px;" ></td>
-                                                                                                    <td><input type="text" name="issue_qty" value="{{$data->issue_qty}}" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>
-                                                                                                    <td><input type="text" name="office_officer" value="{{$data->office_officer}}" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>
-                                                                                                    <td>
-                                                                                                        <input type="checkbox" name="issue_transfer_disposal" value="ISSUE" {{ $data->issue_transfer_disposal == "ISSUE" ? 'checked' : '' }}>
-                                                                                                    </td>
-                                                                                                    <td>
-                                                                                                        <input type="checkbox" name="issue_transfer_disposal" value="TRANSFER" {{ $data->issue_transfer_disposal == "TRANSFER" ? 'checked' : '' }}>
-                                                                                                    </td>
-                                                                                                    <td>
-                                                                                                        <input type="checkbox" name="issue_transfer_disposal" value="DISPOSAL" {{ $data->issue_transfer_disposal == "DISPOSAL" ? 'checked' : '' }}>
-                                                                                                    </td>
-                                                                                                    <td><input type="text" name="bal_qty" value="{{$data->bal_qty}}" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>
-                                                                                                    <td><input type="text" name="bal_amount" value="{{$data->bal_amount}}" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>
-                                                                                                    <td><input type="text" name="remarks" value="{{$data->remarks}}" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>
-                                                                                                    <td>
-                                                                                                        <a class="add"
-                                                                                                            title="Add"
-                                                                                                            data-toggle="tooltip"><i
-                                                                                                                class="material-icons">&#xE03B;</i></a>
-                                                                                                        <a class="edit"
-                                                                                                            title="Edit"
-                                                                                                            data-toggle="tooltip"><i
-                                                                                                                class="material-icons">&#xE254;</i></a>
-                                                                                                        <a class="delete"
-                                                                                                            title="Delete"
-                                                                                                            data-toggle="tooltip"><i
-                                                                                                                class="material-icons">&#xE872;</i></a>
-                                                                                                    </td>
-                                                                                            </tr>
-                                                                                            
-                                                                                            @endforeach
                                                                                         </tbody>
                                                                                     </table>
                                                                                 </div>
@@ -648,120 +626,73 @@
                                             </script>
                                         @endforeach
 
-                                        <script>
-                                            var csrfToken = "{{ csrf_token() }}";
-                                        </script>
 
                                         <script>
-                                           $(document).ready(function() {
-                                                    $('[data-toggle="tooltip"]').tooltip();
-                                                    var actions = $("table td:last-child").html();
-
-                                                    // Append table with add row form on add new button click
-                                                    $(document).on("click", ".add-new", function() {
-                                                        $(this).attr("disabled", "disabled");
-                                                        var index = $("table tbody tr:last-child").index();
-                                                        var row = '<tr>' +
+                                            $(document).ready(function() {
+                                                $('[data-toggle="tooltip"]').tooltip();
+                                                var actions = $("table td:last-child").html();
+                                                // Append table with add row form on add new button click
+                                                $(".add-new").click(function() {
+                                                    $(this).attr("disabled", "disabled");
+                                                    var index = $("table tbody tr:last-child").index();
+                                                    var row = '<tr>' +
                                                         '<td><input type="date" name="date" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>' +
                                                         '<td><textarea type="text" name="reference" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></textarea></td>' +
-                                                        '<td><input type="text" name="receipt_qty" value="{{ $prop_cards->receipt_qty }}" class="form-control text-line receipt-input" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>' +
-                                                        '<td><input type="text" name="receipt_unitcost" value="{{ $prop_cards->receipt_unitcost }}" class="form-control text-line receipt-input" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>' +
-                                                        '<td><input type="text" name="receipt_totalcost" value="{{ $prop_cards->receipt_totalcost }}" class="form-control text-line receipt-total" style="padding-top: 4px; padding-bottom: 4px;" ></td>' +
+                                                        '<td><input type="text" name="receipt_qty" class="form-control text-line receipt-input" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>' +
+                                                        '<td><input type="text" name="receipt_unitcost" class="form-control text-line receipt-input" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>' +
+                                                        '<td><input type="text" name="receipt_totalcost" class="form-control text-line receipt-total" style="padding-top: 4px; padding-bottom: 4px;" readonly></td>' +
                                                         '<td><input type="text" name="issue_qty" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>' +
                                                         '<td><input type="text" name="office_officer" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>' +
                                                         '<td>' +
-                                                        '<input type="checkbox" name="issue_transfer_disposal" id="issue_transfer_disposal" value="ISSUE">' +
+                                                        '<div>' +
+                                                        '<input type="checkbox" name="issue_transfer_disposal" id="issue_office_officer1" value="issue">' +
                                                         '</td>' +
                                                         '<td>' +
-                                                        '<input type="checkbox" name="issue_transfer_disposal" id="issue_transfer_disposal" value="TRANSFER">' +
+                                                        '<input type="checkbox" name="issue_transfer_disposal" id="issue_office_officer2" value="tra">' +
                                                         '</td>' +
                                                         '<td>' +
-                                                        '<input type="checkbox" name="issue_transfer_disposal" id="issue_transfer_disposal" value="DISPOSAL">' +
+                                                        '<input type="checkbox" name="issue_transfer_disposal" id="issue_office_officer3" value="value3">' +
                                                         '</td>' +
                                                         '</div>' +
                                                         '<td><input type="text" name="bal_qty" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;"></td>' +
-                                                        '<td><input type="text" name="bal_amount" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>' +
+                                                        '<td><input type="text" name="repair_amount" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>' +
                                                         '<td><textarea type="text" name="remarks" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></textarea></td>' +
                                                         '<td>' + actions + '</td>' +
-                                                        '<td><input type="hidden" name="prop_id" value="{{ $prop_cards->id }}" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>' +
                                                         '</tr>';
-                                                        $("table").append(row);
-                                                        // Hide "Add" icon and show "Edit" icon for existing rows
-                                                        $("table tbody tr:last-child").find(".add").hide();
-                                                        $("table tbody tr:last-child").find(".edit").show();
-                                                        $('[data-toggle="tooltip"]').tooltip();
-                                                    });
-
-                                                $(document).on("click", ".add", function() {
-                                                    var rowData = {};
-                                                    var input = $(this).parents("tr").find(
-                                                        'input[type="text"], input[type="date"], textarea, input[type="checkbox"]');
-                                                    input.each(function() {
-                                                        var name = $(this).attr("name");
-                                                        var value = $(this).val();
-                                                        if ($(this).attr('type') === 'checkbox') {
-                                                            if ($(this).is(':checked')) {
-                                                                value = 'ISSUE';
-                                                            } else if ($(this).prop('checked')) {
-                                                                value = 'TRANSFER';
-                                                            } else {
-                                                                value = 'DISPOSAL';
-                                                            }
-                                                        }
-
-                                                        rowData[name] = value;
-                                                    });
-
-                                                    $.ajax({
-                                                        type: 'POST',
-                                                        url: '/add-prop-extension',
-                                                        headers: {
-                                                            'X-CSRF-TOKEN': csrfToken
-                                                        },
-                                                        data: rowData,
-                                                        success: function(response) {
-                                                            // Update table with new row data
-                                                            var newRow = '<tr>';
-                                                            Object.values(rowData).forEach(function(value) {
-                                                                newRow += '<td>' + value + '</td>';
-                                                            });
-                                                            newRow += '<td>' + actions + '</td></tr>';
-                                                            $("table tbody").append(newRow);
-                                                        },
-                                                        error: function(xhr, status, error) {
-                                                            // Handle error
-                                                            console.error(xhr.responseText);
-                                                        }
-                                                    });
-
-                                                    $(this).parents("tr").find(".add, .edit").toggle();
-                                                    $(".add-new").removeAttr("disabled", "disabled");
+                                                    $("table").append(row);
+                                                    $("table tbody tr").eq(index + 1).find(".add, .edit").toggle();
+                                                    $('[data-toggle="tooltip"]').tooltip();
                                                 });
-
-
-
+                                                // Add row on add button click
+                                                $(document).on("click", ".add", function() {
+                                                    var empty = false;
+                                                    var input = $(this).parents("tr").find('input[type="text"]');
+                                                    input.each(function() {
+                                                        if (!$(this).val()) {
+                                                            $(this).addClass("error");
+                                                            empty = true;
+                                                        } else {
+                                                            $(this).removeClass("error");
+                                                        }
+                                                    });
+                                                    $(this).parents("tr").find(".error").first().focus();
+                                                    if (!empty) {
+                                                        input.each(function() {
+                                                            $(this).parent("td").html($(this).val());
+                                                        });
+                                                        $(this).parents("tr").find(".add, .edit").toggle();
+                                                        $(".add-new").removeAttr("disabled");
+                                                    }
+                                                });
                                                 // Edit row on edit button click
                                                 $(document).on("click", ".edit", function() {
                                                     $(this).parents("tr").find("td:not(:last-child)").each(function() {
-                                                        if ($(this).find('input[type="checkbox"]').length > 0) {
-                                                            var checkboxes = [];
-                                                            $(this).find('input[type="checkbox"]').each(function() {
-                                                                checkboxes.push($(this).prop('checked'));
-                                                            });
-                                                            $(this).html('');
-                                                            checkboxes.forEach(function(checked) {
-                                                                var checkbox = checked ? 'checked' : '';
-                                                                $(this).append('<input type="checkbox" ' + checkbox + '>');
-                                                            });
-                                                        } else {
-                                                            $(this).html('<input type="text" class="form-control" value="' + $(this)
-                                                                .text() + '">');
-                                                        }
+                                                        $(this).html('<input type="text" class="form-control" value="' + $(this)
+                                                            .text() + '">');
                                                     });
                                                     $(this).parents("tr").find(".add, .edit").toggle();
                                                     $(".add-new").attr("disabled", "disabled");
                                                 });
-
                                                 // Delete row on delete button click
                                                 $(document).on("click", ".delete", function() {
                                                     $(this).parents("tr").remove();
@@ -769,8 +700,6 @@
                                                 });
                                             });
                                         </script>
-
-
                                         <script>
                                             // Select receipt input fields
                                             const receiptInputs = document.querySelectorAll('.receipt-input');
@@ -873,7 +802,7 @@
                     icon: 'success',
                     title: 'Success!',
                     text: '{{ session('
-                                                                                                                                                                                                    success ') }}',
+                                                                                                success ') }}',
                     toast: true,
                     position: 'top-end',
                     showConfirmButton: false,
@@ -894,8 +823,7 @@
                 Swal.fire({
                     icon: 'failed',
                     title: 'failed!',
-                    text: '{{ session('
-                                                                                                                                                                                                    failed ') }}',
+                    text: '{{ session('failed ') }}',
                     toast: true,
                     position: 'top-end',
                     showConfirmButton: false,

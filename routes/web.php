@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PropCardExtension_Controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -81,4 +82,7 @@ Route::get('/all-semi-expandable-ledger', [PropertyController::class, 'getDataFo
 
 // users
 Route::get('/all-users', [UserController::class, 'getUsers']);
+
+//prop ext
+Route::post('/add-prop-extension', [PropCardExtension_Controller::class, 'addPropExt']);
 
