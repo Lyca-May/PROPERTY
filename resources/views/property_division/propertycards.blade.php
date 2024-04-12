@@ -419,13 +419,16 @@
                                                                                         <tbody>
                                                                                             <tr>
                                                                                                 <td>
+                                                                                                    @php
+                                                                                                    $formattedDate = date('d/m/y', strtotime($prop_cards->date));
+                                                                                                @endphp
                                                                                                     <input
                                                                                                         type="date"
                                                                                                         name="date"
                                                                                                         class="form-control text-line"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                         placeholder=""
-                                                                                                        value="{{ $prop_cards->date }}">
+                                                                                                        value="{{ $formattedDate }}">
                                                                                                     @error('date')
                                                                                                         <span
                                                                                                             class="text-danger">{{ $message }}</span>
@@ -587,7 +590,7 @@
                                                                                             @foreach ($prop_ext->where('prop_id', $prop_cards->id) as $data)
                                                                                             <tr>
                                                                                                     <td><input type="date" value="{{$data->date}}" name="date" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>
-                                                                                                    <td><textarea type="text" name="reference" value="{{$data->reference}}" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></textarea></td>
+                                                                                                    <td><textarea type="text" name="reference"  class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">{{$data->reference}}</textarea></td>
                                                                                                     <td><input type="text" name="receipt_qty" value="{{ $data->receipt_qty }}" class="form-control text-line receipt-input" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>
                                                                                                     <td><input type="text" name="receipt_unitcost" value="{{ $data->receipt_unitcost }}" class="form-control text-line receipt-input" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>
                                                                                                     <td><input type="text" name="receipt_totalcost" value="{{ $data->receipt_totalcost }}" class="form-control text-line receipt-total" style="padding-top: 4px; padding-bottom: 4px;" ></td>
@@ -620,7 +623,6 @@
                                                                                                                 class="material-icons">&#xE872;</i></a>
                                                                                                     </td>
                                                                                             </tr>
-                                                                                            
                                                                                             @endforeach
                                                                                         </tbody>
                                                                                     </table>
@@ -631,8 +633,8 @@
                                                                 </div>
                                                                 <br>
                                                             </form>
-                                                            <button type="button" class="btn btn-info add-new"><i
-                                                                    class="fa fa-plus"></i> Add New</button>
+                                                            <button type="button" data-prop-id="{{ $prop_cards->id }} " class="btn btn-info add-new"><i
+                                                                    class="fa fa-plus" ></i> Add New</button>
                                                             <br>
                                                         </div>
                                                     </div>
@@ -646,129 +648,132 @@
                                                     window.location.href = '/printable-prop-page/' + prop_cards_id;
                                                 }
                                             </script>
+                                         
                                         @endforeach
-
                                         <script>
                                             var csrfToken = "{{ csrf_token() }}";
                                         </script>
-
                                         <script>
-                                           $(document).ready(function() {
-                                                    $('[data-toggle="tooltip"]').tooltip();
-                                                    var actions = $("table td:last-child").html();
+                                            $(document).ready(function() {
+                                               $('[data-toggle="tooltip"]').tooltip();
+                                               var actions = $("table td:last-child").html();
 
-                                                    // Append table with add row form on add new button click
-                                                    $(document).on("click", ".add-new", function() {
-                                                        $(this).attr("disabled", "disabled");
-                                                        var index = $("table tbody tr:last-child").index();
-                                                        var row = '<tr>' +
-                                                        '<td><input type="date" name="date" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>' +
-                                                        '<td><textarea type="text" name="reference" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></textarea></td>' +
-                                                        '<td><input type="text" name="receipt_qty" value="{{ $prop_cards->receipt_qty }}" class="form-control text-line receipt-input" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>' +
-                                                        '<td><input type="text" name="receipt_unitcost" value="{{ $prop_cards->receipt_unitcost }}" class="form-control text-line receipt-input" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>' +
-                                                        '<td><input type="text" name="receipt_totalcost" value="{{ $prop_cards->receipt_totalcost }}" class="form-control text-line receipt-total" style="padding-top: 4px; padding-bottom: 4px;" ></td>' +
-                                                        '<td><input type="text" name="issue_qty" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>' +
-                                                        '<td><input type="text" name="office_officer" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>' +
-                                                        '<td>' +
-                                                        '<input type="checkbox" name="issue_transfer_disposal" id="issue_transfer_disposal" value="ISSUE">' +
-                                                        '</td>' +
-                                                        '<td>' +
-                                                        '<input type="checkbox" name="issue_transfer_disposal" id="issue_transfer_disposal" value="TRANSFER">' +
-                                                        '</td>' +
-                                                        '<td>' +
-                                                        '<input type="checkbox" name="issue_transfer_disposal" id="issue_transfer_disposal" value="DISPOSAL">' +
-                                                        '</td>' +
-                                                        '</div>' +
-                                                        '<td><input type="text" name="bal_qty" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;"></td>' +
-                                                        '<td><input type="text" name="bal_amount" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>' +
-                                                        '<td><textarea type="text" name="remarks" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></textarea></td>' +
-                                                        '<td>' + actions + '</td>' +
-                                                        '<td><input type="hidden" name="prop_id" value="{{ $prop_cards->id }}" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>' +
-                                                        '</tr>';
-                                                        $("table").append(row);
-                                                        // Hide "Add" icon and show "Edit" icon for existing rows
-                                                        $("table tbody tr:last-child").find(".add").hide();
-                                                        $("table tbody tr:last-child").find(".edit").show();
-                                                        $('[data-toggle="tooltip"]').tooltip();
-                                                    });
+                                               // Append table with add row form on add new button click
+                                               $(".add-new").click(function() {
+                                                   $(this).attr("disabled", "disabled");
+                                                   var index = $("table tbody tr:last-child").index();
+                                                   var propId = $(this).data("prop-id");
+                                                   var row = '<tr>' +
+                                                       '<td><input type="date" name="date" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>' +
+                                                       '<td><textarea type="text" name="reference" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></textarea></td>' +
+                                                       '<td><input type="text" name="receipt_qty" value="{{ $prop_cards->receipt_qty }}" class="form-control text-line receipt-input" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>' +
+                                                       '<td><input type="text" name="receipt_unitcost" value="{{ $prop_cards->receipt_unitcost }}" class="form-control text-line receipt-input" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>' +
+                                                       '<td><input type="text" name="receipt_totalcost" value="{{ $prop_cards->receipt_totalcost }}" class="form-control text-line receipt-total" style="padding-top: 4px; padding-bottom: 4px;" ></td>' +
+                                                       '<td><input type="text" name="issue_qty" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>' +
+                                                       '<td><input type="text" name="office_officer" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>' +
+                                                       '<td>' +
+                                                       '<input type="checkbox" name="issue_transfer_disposal" id="issue_transfer_disposal" value="ISSUE">' +
+                                                       '</td>' +
+                                                       '<td>' +
+                                                       '<input type="checkbox" name="issue_transfer_disposal" id="issue_transfer_disposal" value="TRANSFER">' +
+                                                       '</td>' +
+                                                       '<td>' +
+                                                       '<input type="checkbox" name="issue_transfer_disposal" id="issue_transfer_disposal" value="DISPOSAL">' +
+                                                       '</td>' +
+                                                       '</div>' +
+                                                       '<td><input type="text" name="bal_qty" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;"></td>' +
+                                                       '<td><input type="text" name="bal_amount" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>' +
+                                                       '<td><textarea type="text" name="remarks" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></textarea></td>' +
+                                                       '<td>' + actions + '</td>' +
+                                                       '<td><input type="text" name="prop_id" value="' + propId + '" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>' +
+                                                    //    '<td><input type="text" name="prop_id" value="{{ $prop_cards->id }}" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>' +
+                                                       '</tr>';
+                                                       $("table tbody").append(row);
+                                                       // Show "Add" icon for the newly added row
+                                                       $("table tbody tr:last-child").find(".add").show();
+                                                       $("table tbody tr:last-child").find(".edit").hide();
+                                                       $('[data-toggle="tooltip"]').tooltip();
+                                               });
 
-                                                $(document).on("click", ".add", function() {
-                                                    var rowData = {};
-                                                    var input = $(this).parents("tr").find(
-                                                        'input[type="text"], input[type="date"], textarea, input[type="checkbox"]');
-                                                    input.each(function() {
-                                                        var name = $(this).attr("name");
-                                                        var value = $(this).val();
-                                                        if ($(this).attr('type') === 'checkbox') {
-                                                            if ($(this).is(':checked')) {
-                                                                value = 'ISSUE';
-                                                            } else if ($(this).prop('checked')) {
-                                                                value = 'TRANSFER';
-                                                            } else {
-                                                                value = 'DISPOSAL';
-                                                            }
-                                                        }
+                                               $(document).on("click", ".add", function() {
+                                                   var rowData = {};
+                                                   var input = $(this).parents("tr").find(
+                                                       'input[type="text"], input[type="date"], textarea, input[type="checkbox"]');
+                                                   input.each(function() {
+                                                       var name = $(this).attr("name");
+                                                       var value = $(this).val();
+                                                       if ($(this).attr('type') === 'checkbox') {
+                                                           if ($(this).is(':checked')) {
+                                                               value = 'ISSUE';
+                                                           } else if ($(this).prop('checked')) {
+                                                               value = 'TRANSFER';
+                                                           } else {
+                                                               value = 'DISPOSAL';
+                                                           }
+                                                       }
 
-                                                        rowData[name] = value;
-                                                    });
+                                                       rowData[name] = value;
+                                                   });
 
-                                                    $.ajax({
-                                                        type: 'POST',
-                                                        url: '/add-prop-extension',
-                                                        headers: {
-                                                            'X-CSRF-TOKEN': csrfToken
-                                                        },
-                                                        data: rowData,
-                                                        success: function(response) {
-                                                            // Update table with new row data
-                                                            var newRow = '<tr>';
-                                                            Object.values(rowData).forEach(function(value) {
-                                                                newRow += '<td>' + value + '</td>';
-                                                            });
-                                                            newRow += '<td>' + actions + '</td></tr>';
-                                                            $("table tbody").append(newRow);
-                                                        },
-                                                        error: function(xhr, status, error) {
-                                                            // Handle error
-                                                            console.error(xhr.responseText);
-                                                        }
-                                                    });
+                                                   $.ajax({
+                                                       type: 'POST',
+                                                       url: '/add-prop-extension',
+                                                       headers: {
+                                                           'X-CSRF-TOKEN': csrfToken
+                                                       },
+                                                       data: rowData,
+                                                       success: function(response) {
+                                                           // Update table with new row data
+                                                           var newRow = '<tr>';
+                                                           Object.values(rowData).forEach(function(value) {
+                                                               newRow += '<td>' + value + '</td>';
+                                                           });
+                                                           newRow += '<td>' + actions + '</td></tr>';
+                                                           $("table tbody").append(newRow);
+                                                       },
+                                                       error: function(xhr, status, error) {
+                                                           // Handle error
+                                                           console.error(xhr.responseText);
+                                                       }
+                                                   });
 
-                                                    $(this).parents("tr").find(".add, .edit").toggle();
-                                                    $(".add-new").removeAttr("disabled", "disabled");
-                                                });
+                                                   $(this).parents("tr").find(".add, .edit").toggle();
+                                                   $(".add-new").removeAttr("disabled", "disabled");
+                                               });
 
 
 
-                                                // Edit row on edit button click
-                                                $(document).on("click", ".edit", function() {
-                                                    $(this).parents("tr").find("td:not(:last-child)").each(function() {
-                                                        if ($(this).find('input[type="checkbox"]').length > 0) {
-                                                            var checkboxes = [];
-                                                            $(this).find('input[type="checkbox"]').each(function() {
-                                                                checkboxes.push($(this).prop('checked'));
-                                                            });
-                                                            $(this).html('');
-                                                            checkboxes.forEach(function(checked) {
-                                                                var checkbox = checked ? 'checked' : '';
-                                                                $(this).append('<input type="checkbox" ' + checkbox + '>');
-                                                            });
-                                                        } else {
-                                                            $(this).html('<input type="text" class="form-control" value="' + $(this)
-                                                                .text() + '">');
-                                                        }
-                                                    });
-                                                    $(this).parents("tr").find(".add, .edit").toggle();
-                                                    $(".add-new").attr("disabled", "disabled");
-                                                });
+                                               // Edit row on edit button click
+                                               $(document).on("click", ".edit", function() {
+                                                   $(this).parents("tr").find("td:not(:last-child)").each(function() {
+                                                       if ($(this).find('input[type="checkbox"]').length > 0) {
+                                                           var checkboxes = [];
+                                                           $(this).find('input[type="checkbox"]').each(function() {
+                                                               checkboxes.push($(this).prop('checked'));
+                                                           });
+                                                           $(this).html('');
+                                                           checkboxes.forEach(function(checked) {
+                                                               var checkbox = checked ? 'checked' : '';
+                                                               $(this).append('<input type="checkbox" ' + checkbox + '>');
+                                                           });
+                                                       } else {
+                                                           $(this).html('<input type="text" class="form-control" value="' + $(this)
+                                                               .text() + '">');
+                                                       }
+                                                   });
+                                                   $(this).parents("tr").find(".add, .edit").toggle();
+                                                   $(".add-new").attr("disabled", "disabled");
+                                               });
 
-                                                // Delete row on delete button click
-                                                $(document).on("click", ".delete", function() {
-                                                    $(this).parents("tr").remove();
-                                                    $(".add-new").removeAttr("disabled");
-                                                });
-                                            });
-                                        </script>
+                                               // Delete row on delete button click
+                                               $(document).on("click", ".delete", function() {
+                                                   $(this).parents("tr").remove();
+                                                   $(".add-new").removeAttr("disabled");
+                                               });
+                                           });
+                                       </script>
+
+                                        
 
 
                                         <script>
