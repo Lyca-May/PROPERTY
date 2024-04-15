@@ -85,4 +85,6 @@ Route::get('/all-users', [UserController::class, 'getUsers']);
 
 //prop ext
 Route::post('/add-prop-extension', [PropCardExtension_Controller::class, 'addPropExt']);
+Route::get('/get-prop-ext-data/{id}', [PropCardExtension_Controller::class, 'getPropExtData']);
+Route::post('/update-prop-ext-data/{id}', [PropCardExtension_Controller::class, 'saveEditedData']);
 

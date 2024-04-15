@@ -56,4 +56,27 @@ class PropCardExtension_Controller extends Controller
 
         return redirect('/all-property')->with('success', 'Property Card has been created!');
     }
+
+    public function getPropExtData($id)
+    {
+        // Retrieve the prop_ext data with the given ID
+        $propExt = PropCardExtension_Model::findOrFail($id); // Assuming your model is named YourModelName
+
+        // Return the prop_ext data as a JSON response
+        return response()->json($propExt);
+    }
+    public function saveEditedData($id) {
+        // Retrieve the prop_ext record with the given ID
+        $propExt = PropCardExtension_Model::findOrFail($id);
+    
+        // Assuming the request data contains the updated values
+        $requestData = request()->all();
+    
+        // Update the prop_ext record with the new values
+        $propExt->update($requestData);
+    
+        // Optionally, you can return a response indicating success
+        return response()->json(['message' => 'Data updated successfully']);
+    }
+    
 }

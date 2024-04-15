@@ -420,8 +420,13 @@
                                                                                             <tr>
                                                                                                 <td>
                                                                                                     @php
-                                                                                                    $formattedDate = date('d/m/y', strtotime($prop_cards->date));
-                                                                                                @endphp
+                                                                                                        $formattedDate = date(
+                                                                                                            'd/m/y',
+                                                                                                            strtotime(
+                                                                                                                $prop_cards->date,
+                                                                                                            ),
+                                                                                                        );
+                                                                                                    @endphp
                                                                                                     <input
                                                                                                         type="date"
                                                                                                         name="date"
@@ -446,7 +451,7 @@
                                                                                                     <input
                                                                                                         type="text"
                                                                                                         name="receipt_qty"
-                                                                                                        id="receipt_qtyy"
+                                                                                                        id="receipt-qty{{ $prop_cards->id }}"
                                                                                                         class="form-control text-line receipt-input"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                         value="{{ $prop_cards->receipt_qty }}"
@@ -460,7 +465,7 @@
                                                                                                     <input
                                                                                                         type="text"
                                                                                                         name="receipt_unitcost"
-                                                                                                        id="receipt_unitcost"
+                                                                                                        id="receipt-unitcost{{ $prop_cards->id }}"
                                                                                                         class="form-control text-line receipt-input"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                         value="{{ $prop_cards->receipt_unitcost }}"
@@ -538,7 +543,7 @@
                                                                                                 </div>
                                                                                                 <td>
                                                                                                     <input
-                                                                                                        type="text"
+                                                                                                        type="hidden"
                                                                                                         name="bal_qty"
                                                                                                         id=""
                                                                                                         class="form-control text-line"
@@ -588,26 +593,105 @@
                                                                                                 </td>
                                                                                             </tr>
                                                                                             @foreach ($prop_ext->where('prop_id', $prop_cards->id) as $data)
-                                                                                            <tr>
-                                                                                                    <td><input type="date" value="{{$data->date}}" name="date" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>
-                                                                                                    <td><textarea type="text" name="reference"  class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">{{$data->reference}}</textarea></td>
-                                                                                                    <td><input type="text" name="receipt_qty" value="{{ $data->receipt_qty }}" class="form-control text-line receipt-input" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>
-                                                                                                    <td><input type="text" name="receipt_unitcost" value="{{ $data->receipt_unitcost }}" class="form-control text-line receipt-input" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>
-                                                                                                    <td><input type="text" name="receipt_totalcost" value="{{ $data->receipt_totalcost }}" class="form-control text-line receipt-total" style="padding-top: 4px; padding-bottom: 4px;" ></td>
-                                                                                                    <td><input type="text" name="issue_qty" value="{{$data->issue_qty}}" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>
-                                                                                                    <td><input type="text" name="office_officer" value="{{$data->office_officer}}" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>
-                                                                                                    <td>
-                                                                                                        <input type="checkbox" name="issue_transfer_disposal" value="ISSUE" {{ $data->issue_transfer_disposal == "ISSUE" ? 'checked' : '' }}>
+                                                                                                <tr>
+                                                                                                    <td><input
+                                                                                                            type="date"
+                                                                                                            value="{{ $data->date }}"
+                                                                                                            name="date"
+                                                                                                            class="form-control text-line"
+                                                                                                            style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                                            placeholder="">
                                                                                                     </td>
                                                                                                     <td>
-                                                                                                        <input type="checkbox" name="issue_transfer_disposal" value="TRANSFER" {{ $data->issue_transfer_disposal == "TRANSFER" ? 'checked' : '' }}>
+                                                                                                        <textarea type="text" name="reference" class="form-control text-line"
+                                                                                                            style="padding-top: 4px; padding-bottom: 4px;" placeholder="">{{ $data->reference }}</textarea>
+                                                                                                    </td>
+                                                                                                    <td><input
+                                                                                                            type="text"
+                                                                                                            name="receipt_qty"
+                                                                                                            value="{{ $data->receipt_qty }}"
+                                                                                                            class="form-control text-line receipt-input"
+                                                                                                            id="receipt-qty"
+                                                                                                            style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                                            placeholder="">
+                                                                                                    </td>
+                                                                                                    <td><input
+                                                                                                            type="text"
+                                                                                                            name="receipt_unitcost"
+                                                                                                            value="{{ $data->receipt_unitcost }}"
+                                                                                                            class="form-control text-line receipt-input"
+                                                                                                            id="receipt-unitost"
+                                                                                                            style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                                            placeholder="">
+                                                                                                    </td>
+                                                                                                    <td><input
+                                                                                                            type="text"
+                                                                                                            name="receipt_totalcost"
+                                                                                                            value="{{ $data->receipt_totalcost }}"
+                                                                                                            class="form-control text-line receipt-total"
+                                                                                                            style="padding-top: 4px; padding-bottom: 4px;">
+                                                                                                    </td>
+                                                                                                    <td><input
+                                                                                                            type="text"
+                                                                                                            name="issue_qty"
+                                                                                                            value="{{ $data->issue_qty }}"
+                                                                                                            class="form-control text-line"
+                                                                                                            style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                                            placeholder="">
+                                                                                                    </td>
+                                                                                                    <td><input
+                                                                                                            type="text"
+                                                                                                            name="office_officer"
+                                                                                                            value="{{ $data->office_officer }}"
+                                                                                                            class="form-control text-line"
+                                                                                                            style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                                            placeholder="">
                                                                                                     </td>
                                                                                                     <td>
-                                                                                                        <input type="checkbox" name="issue_transfer_disposal" value="DISPOSAL" {{ $data->issue_transfer_disposal == "DISPOSAL" ? 'checked' : '' }}>
+                                                                                                        <input
+                                                                                                            type="checkbox"
+                                                                                                            name="issue_transfer_disposal"
+                                                                                                            value="ISSUE"
+                                                                                                            {{ $data->issue_transfer_disposal == 'ISSUE' ? 'checked' : '' }}>
                                                                                                     </td>
-                                                                                                    <td><input type="text" name="bal_qty" value="{{$data->bal_qty}}" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>
-                                                                                                    <td><input type="text" name="bal_amount" value="{{$data->bal_amount}}" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>
-                                                                                                    <td><input type="text" name="remarks" value="{{$data->remarks}}" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>
+                                                                                                    <td>
+                                                                                                        <input
+                                                                                                            type="checkbox"
+                                                                                                            name="issue_transfer_disposal"
+                                                                                                            value="TRANSFER"
+                                                                                                            {{ $data->issue_transfer_disposal == 'TRANSFER' ? 'checked' : '' }}>
+                                                                                                    </td>
+                                                                                                    <td>
+                                                                                                        <input
+                                                                                                            type="checkbox"
+                                                                                                            name="issue_transfer_disposal"
+                                                                                                            value="DISPOSAL"
+                                                                                                            {{ $data->issue_transfer_disposal == 'DISPOSAL' ? 'checked' : '' }}>
+                                                                                                    </td>
+                                                                                                    <td><input
+                                                                                                            type="text"
+                                                                                                            name="bal_qty"
+                                                                                                            value="{{ $data->bal_qty }}"
+                                                                                                            class="form-control text-line"
+                                                                                                            style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                                            placeholder="">
+                                                                                                    </td>
+                                                                                                    <td><input
+                                                                                                            type="text"
+                                                                                                            name="bal_amount"
+                                                                                                            value="{{ $data->bal_amount }}"
+                                                                                                            class="form-control text-line"
+                                                                                                            style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                                            placeholder="">
+                                                                                                    </td>
+                                                                                                    <td><input
+                                                                                                            type="text"
+                                                                                                            name="remarks"
+                                                                                                            value="{{ $data->remarks }}"
+                                                                                                            class="form-control text-line"
+                                                                                                            style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                                            placeholder="">
+                                                                                                    </td>
                                                                                                     <td>
                                                                                                         <a class="add"
                                                                                                             title="Add"
@@ -615,6 +699,8 @@
                                                                                                                 class="material-icons">&#xE03B;</i></a>
                                                                                                         <a class="edit"
                                                                                                             title="Edit"
+                                                                                                            data-edit-id="{{ $data->id }}"
+                                                                                                            data-edit-id="{{ $prop_cards->id }} "
                                                                                                             data-toggle="tooltip"><i
                                                                                                                 class="material-icons">&#xE254;</i></a>
                                                                                                         <a class="delete"
@@ -622,7 +708,10 @@
                                                                                                             data-toggle="tooltip"><i
                                                                                                                 class="material-icons">&#xE872;</i></a>
                                                                                                     </td>
-                                                                                            </tr>
+                                                                                                </tr>
+                                                                                                <tr>
+                                                                                                </tr>
+
                                                                                             @endforeach
                                                                                         </tbody>
                                                                                     </table>
@@ -633,8 +722,10 @@
                                                                 </div>
                                                                 <br>
                                                             </form>
-                                                            <button type="button" data-prop-id="{{ $prop_cards->id }} " class="btn btn-info add-new"><i
-                                                                    class="fa fa-plus" ></i> Add New</button>
+                                                            <button type="button"
+                                                                data-prop-id="{{ $prop_cards->id }}"
+                                                                class="btn btn-info add-new"><i
+                                                                    class="fa fa-plus"></i> Add New</button>
                                                             <br>
                                                         </div>
                                                     </div>
@@ -648,134 +739,7 @@
                                                     window.location.href = '/printable-prop-page/' + prop_cards_id;
                                                 }
                                             </script>
-                                         
                                         @endforeach
-                                        <script>
-                                            var csrfToken = "{{ csrf_token() }}";
-                                        </script>
-                                        <script>
-                                            $(document).ready(function() {
-                                               $('[data-toggle="tooltip"]').tooltip();
-                                               var actions = $("table td:last-child").html();
-
-                                               // Append table with add row form on add new button click
-                                               $(".add-new").click(function() {
-                                                   $(this).attr("disabled", "disabled");
-                                                   var index = $("table tbody tr:last-child").index();
-                                                   var propId = $(this).data("prop-id");
-                                                   var row = '<tr>' +
-                                                       '<td><input type="date" name="date" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>' +
-                                                       '<td><textarea type="text" name="reference" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></textarea></td>' +
-                                                       '<td><input type="text" name="receipt_qty" value="{{ $prop_cards->receipt_qty }}" class="form-control text-line receipt-input" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>' +
-                                                       '<td><input type="text" name="receipt_unitcost" value="{{ $prop_cards->receipt_unitcost }}" class="form-control text-line receipt-input" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>' +
-                                                       '<td><input type="text" name="receipt_totalcost" value="{{ $prop_cards->receipt_totalcost }}" class="form-control text-line receipt-total" style="padding-top: 4px; padding-bottom: 4px;" ></td>' +
-                                                       '<td><input type="text" name="issue_qty" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>' +
-                                                       '<td><input type="text" name="office_officer" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>' +
-                                                       '<td>' +
-                                                       '<input type="checkbox" name="issue_transfer_disposal" id="issue_transfer_disposal" value="ISSUE">' +
-                                                       '</td>' +
-                                                       '<td>' +
-                                                       '<input type="checkbox" name="issue_transfer_disposal" id="issue_transfer_disposal" value="TRANSFER">' +
-                                                       '</td>' +
-                                                       '<td>' +
-                                                       '<input type="checkbox" name="issue_transfer_disposal" id="issue_transfer_disposal" value="DISPOSAL">' +
-                                                       '</td>' +
-                                                       '</div>' +
-                                                       '<td><input type="text" name="bal_qty" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;"></td>' +
-                                                       '<td><input type="text" name="bal_amount" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>' +
-                                                       '<td><textarea type="text" name="remarks" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></textarea></td>' +
-                                                       '<td>' + actions + '</td>' +
-                                                       '<td><input type="text" name="prop_id" value="' + propId + '" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>' +
-                                                    //    '<td><input type="text" name="prop_id" value="{{ $prop_cards->id }}" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>' +
-                                                       '</tr>';
-                                                       $("table tbody").append(row);
-                                                       // Show "Add" icon for the newly added row
-                                                       $("table tbody tr:last-child").find(".add").show();
-                                                       $("table tbody tr:last-child").find(".edit").hide();
-                                                       $('[data-toggle="tooltip"]').tooltip();
-                                               });
-
-                                               $(document).on("click", ".add", function() {
-                                                   var rowData = {};
-                                                   var input = $(this).parents("tr").find(
-                                                       'input[type="text"], input[type="date"], textarea, input[type="checkbox"]');
-                                                   input.each(function() {
-                                                       var name = $(this).attr("name");
-                                                       var value = $(this).val();
-                                                       if ($(this).attr('type') === 'checkbox') {
-                                                           if ($(this).is(':checked')) {
-                                                               value = 'ISSUE';
-                                                           } else if ($(this).prop('checked')) {
-                                                               value = 'TRANSFER';
-                                                           } else {
-                                                               value = 'DISPOSAL';
-                                                           }
-                                                       }
-
-                                                       rowData[name] = value;
-                                                   });
-
-                                                   $.ajax({
-                                                       type: 'POST',
-                                                       url: '/add-prop-extension',
-                                                       headers: {
-                                                           'X-CSRF-TOKEN': csrfToken
-                                                       },
-                                                       data: rowData,
-                                                       success: function(response) {
-                                                           // Update table with new row data
-                                                           var newRow = '<tr>';
-                                                           Object.values(rowData).forEach(function(value) {
-                                                               newRow += '<td>' + value + '</td>';
-                                                           });
-                                                           newRow += '<td>' + actions + '</td></tr>';
-                                                           $("table tbody").append(newRow);
-                                                       },
-                                                       error: function(xhr, status, error) {
-                                                           // Handle error
-                                                           console.error(xhr.responseText);
-                                                       }
-                                                   });
-
-                                                   $(this).parents("tr").find(".add, .edit").toggle();
-                                                   $(".add-new").removeAttr("disabled", "disabled");
-                                               });
-
-
-
-                                               // Edit row on edit button click
-                                               $(document).on("click", ".edit", function() {
-                                                   $(this).parents("tr").find("td:not(:last-child)").each(function() {
-                                                       if ($(this).find('input[type="checkbox"]').length > 0) {
-                                                           var checkboxes = [];
-                                                           $(this).find('input[type="checkbox"]').each(function() {
-                                                               checkboxes.push($(this).prop('checked'));
-                                                           });
-                                                           $(this).html('');
-                                                           checkboxes.forEach(function(checked) {
-                                                               var checkbox = checked ? 'checked' : '';
-                                                               $(this).append('<input type="checkbox" ' + checkbox + '>');
-                                                           });
-                                                       } else {
-                                                           $(this).html('<input type="text" class="form-control" value="' + $(this)
-                                                               .text() + '">');
-                                                       }
-                                                   });
-                                                   $(this).parents("tr").find(".add, .edit").toggle();
-                                                   $(".add-new").attr("disabled", "disabled");
-                                               });
-
-                                               // Delete row on delete button click
-                                               $(document).on("click", ".delete", function() {
-                                                   $(this).parents("tr").remove();
-                                                   $(".add-new").removeAttr("disabled");
-                                               });
-                                           });
-                                       </script>
-
-                                        
-
-
                                         <script>
                                             // Select receipt input fields
                                             const receiptInputs = document.querySelectorAll('.receipt-input');
@@ -817,43 +781,7 @@
             </section>
         </div>
 
-
-
-
-
-
-
-
         {{-- SCRIPTS --}}
-        <script>
-            // Function to calculate receipt total cost
-            function calculateReceiptTotalCost() {
-                var receiptQty = parseFloat(document.getElementById("receipt_qtyy").value);
-                var receiptUnitCost = parseFloat(document.getElementById("receipt_unitcost").value);
-                var receiptTotalCost = receiptQty * receiptUnitCost;
-                document.getElementById("receipt_totalcost").value = receiptTotalCost.toFixed(
-                    2); // Adjust to your required precision
-            }
-
-            // Function to calculate issue total cost
-            function calculateIssueTotalCost() {
-                var issueQty = parseFloat(document.getElementById("issue_qty").value);
-                var issueUnitCost = parseFloat(document.getElementById("issue_unitcost").value);
-                var issueTotalCost = issueQty * issueUnitCost;
-                document.getElementById("issue_totalcost").value = issueTotalCost.toFixed(
-                    2); // Adjust to your required precision
-            }
-
-            // Attach event listeners to input fields for receipt and issue to trigger calculation
-            document.getElementById("receipt_qtyy").addEventListener("input", calculateReceiptTotalCost);
-            document.getElementById("receipt_unitcost").addEventListener("input", calculateReceiptTotalCost);
-            document.getElementById("issue_qty").addEventListener("input", calculateIssueTotalCost);
-            document.getElementById("issue_unitcost").addEventListener("input", calculateIssueTotalCost);
-
-            // Calculate on initial load if values are present
-            calculateReceiptTotalCost();
-            calculateIssueTotalCost();
-        </script>
         <script>
             $(document).ready(function() {
                 $('#search-input').on('keyup', function() {
@@ -878,7 +806,7 @@
                     icon: 'success',
                     title: 'Success!',
                     text: '{{ session('
-                                                                                                                                                                                                    success ') }}',
+                                                                                                                                                                                                                                            success ') }}',
                     toast: true,
                     position: 'top-end',
                     showConfirmButton: false,
@@ -900,7 +828,7 @@
                     icon: 'failed',
                     title: 'failed!',
                     text: '{{ session('
-                                                                                                                                                                                                    failed ') }}',
+                                                                                                                                                                                                                                            failed ') }}',
                     toast: true,
                     position: 'top-end',
                     showConfirmButton: false,
@@ -943,6 +871,205 @@
             });
         </script>
         @include('footer')
+<script>
+var csrfToken = "{{ csrf_token() }}";
+$(document).ready(function() {
+    function calculateBalance() {
+    var receiptQty = parseFloat($(this).closest('.modal-body').find('input[name="receipt_qty"]').val()) || 0;
+    var unitCost = parseFloat($(this).closest('.modal-body').find('input[name="receipt_unitcost"]').val()) || 0;
+    var issueQty = parseFloat($(this).closest('tr').find('input[name="issue_qty"]').val()) || 0;
+
+    var balanceQty = receiptQty - issueQty;
+    var balanceAmount = unitCost * balanceQty;
+
+    $(this).closest('tr').find('input[name="bal_qty"]').val(balanceQty);
+    $(this).closest('tr').find('input[name="bal_amount"]').val(balanceAmount.toFixed(2));
+}
+
+$(document).on('input', '.modal-body input[name="receipt_qty"], .modal-body input[name="issue_qty"]', calculateBalance);
+
+
+    $('[data-toggle="tooltip"]').tooltip();
+
+    $(".add-new").click(function() {
+        $(this).attr("disabled", "disabled");
+        var propId = $(this).data("prop-id");
+        var editId = $(this).data("edit-id");
+        var actions =
+            '<a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>' +
+            '<a class="edit" title="Edit" data-edit-id="' + editId +
+            '" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>' +
+            '<a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>';
+
+        var row = '<tr>' +
+            '<td><input type="date" name="date" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>' +
+            '<td><textarea type="text" name="reference" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></textarea></td>' +
+            '<td><input type="text" name="receipt_qty" value="" class="form-control text-line receipt-input1" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>' +
+            '<td><input type="text" name="receipt_unitcost" value="" class="form-control text-line receipt-input1" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>' +
+            '<td><input type="text" name="receipt_totalcost" value="" class="form-control text-line receipt-total" style="padding-top: 4px; padding-bottom: 4px;" ></td>' +
+            '<td><input type="text" name="issue_qty" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>' +
+            '<td><input type="text" name="office_officer" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>' +
+            '<td>' +
+            '<input type="checkbox" name="issue_transfer_disposal" id="issue_transfer_disposal" value="ISSUE">' +
+            '</td>' +
+            '<td>' +
+            '<input type="checkbox" name="issue_transfer_disposal" id="issue_transfer_disposal" value="TRANSFER">' +
+            '</td>' +
+            '<td>' +
+            '<input type="checkbox" name="issue_transfer_disposal" id="issue_transfer_disposal" value="DISPOSAL">' +
+            '</td>' +
+            '</div>' +
+            '<td><input type="text" name="bal_qty" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;"></td>' +
+            '<td><input type="text" name="bal_amount" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>' +
+            '<td><textarea type="text" name="remarks" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></textarea></td>' +
+            '<td>' + actions + '</td>' +
+            '<td><input type="text" name="prop_id" value="' + propId +
+            '" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>' +
+            '</tr>';
+
+        $("table tbody").append(row);
+
+        $("table tbody tr:last-child").find(".add").show();
+        $("table tbody tr:last-child").find(".edit").hide();
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
+    $(document).on("click", ".add", function() {
+        var rowData = {};
+        var input = $(this).parents("tr").find(
+            'input[type="text"], input[type="date"], textarea, input[type="checkbox"]');
+        input.each(function() {
+            var name = $(this).attr("name");
+            var value = $(this).val();
+            if ($(this).attr('type') === 'checkbox') {
+                if ($(this).is(':checked')) {
+                    value = 'ISSUE';
+                } else if ($(this).prop('checked')) {
+                    value = 'TRANSFER';
+                } else {
+                    value = 'DISPOSAL';
+                }
+            }
+
+            rowData[name] = value;
+        });
+
+        $.ajax({
+            type: 'POST',
+            url: '/add-prop-extension',
+            headers: {
+                'X-CSRF-TOKEN': csrfToken
+            },
+            data: rowData,
+            success: function(response) {
+                // Update table with new row data
+                var newRow = '<tr>';
+                Object.values(rowData).forEach(function(value) {
+                    newRow += '<td>' + value + '</td>';
+                });
+                newRow += '<td>' + actions + '</td></tr>';
+                $("table tbody").append(newRow);
+            },
+            error: function(xhr, status, error) {
+                // Handle error
+                console.error(xhr.responseText);
+            }
+        });
+
+        $(this).parents("tr").find(".add, .edit").toggle();
+        $(".add-new").removeAttr("disabled", "disabled");
+    });
+
+    $(document).on("click", ".edit", function() {
+        var row = $(this).closest("tr");
+        var editId = $(this).data("edit-id");
+
+        if (editId) {
+            $.ajax({
+                type: 'GET',
+                url: '/get-prop-ext-data/' + editId,
+                success: function(response) {
+                    var rowData = response;
+                    row.find('td:not(:last-child)').each(function() {
+                        var fieldName = $(this).data("field-name");
+                        if (fieldName) {
+                            var value = rowData[fieldName];
+                            if (fieldName === "issue_transfer_disposal") {
+                                // Handle checkboxes
+                                $(this).html('<input type="checkbox" name="' +
+                                    fieldName + '" ' + (value ? 'checked' :
+                                        '') + '>');
+                            } else {
+                                // Handle other input fields
+                                $(this).html(
+                                    '<input type="text" class="form-control" name="' +
+                                    fieldName + '" value="' + value + '">');
+                            }
+                        }
+                    });
+
+                    // Show the save button and hide the edit button
+                    row.find('.add').show();
+                    row.find('.edit').hide();
+                },
+                error: function(xhr, status, error) {
+                    // Handle error
+                    console.error(xhr.responseText);
+                }
+            });
+        } else {
+            console.error("editId is undefined");
+        }
+    });
+
+    $(document).on("click", ".add", function() {
+        var row = $(this).closest("tr");
+        var propId = $(this).data("prop-id");
+        var editId = $(this).data("edit-id");
+        var rowData = {
+            prop_id: propId
+        };
+
+        // Collect the updated data from the row
+        row.find('input[type="text"], input[type="checkbox"]').each(function() {
+            var fieldName = $(this).attr("name");
+            var value = $(this).is(":checkbox") ? $(this).is(":checked") : $(this).val();
+            rowData[fieldName] = value;
+        });
+
+        // Set the ID value if available
+        if (editId) {
+            rowData.id = editId;
+        }
+
+        // Perform an AJAX request to update the data on the server
+        $.ajax({
+            type: 'POST',
+            url: '/update-prop-ext-data/' + editId, // Use editId in the URL
+            headers: {
+                'X-CSRF-TOKEN': csrfToken
+            },
+            data: rowData,
+            success: function(response) {
+                // Optionally, handle success response
+                console.log("Data updated successfully!");
+            },
+            error: function(xhr, status, error) {
+                // Handle error
+                console.error(xhr.responseText);
+            }
+        });
+        row.find('.edit').show();
+        row.find('.add').hide();
+    });
+    $(document).on("click", ".delete", function() {
+        $(this).parents("tr").remove();
+        $(".add-new").removeAttr("disabled");
+    });
+
+});
+
+</script>
 
 
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

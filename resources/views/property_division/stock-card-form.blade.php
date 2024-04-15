@@ -306,7 +306,6 @@
     @include('footer')
 
 
-
     <script>
         // Function to calculate receipt total cost
         function calculateReceiptTotalCost() {
@@ -369,6 +368,7 @@
             });
         @endif
     </script>
+     <script src="{{ assets('assets/js/property.js') }}"></script>
 
 @endif
 
