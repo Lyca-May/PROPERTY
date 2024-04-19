@@ -3,21 +3,121 @@
 
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>PROPERTY AND SUPPLIES</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Open+Sans">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    {{-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> --}}
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
+    <style>
+        .table-title .add-new {
+            float: right;
+            height: 30px;
+            font-weight: bold;
+            font-size: 12px;
+            text-shadow: none;
+            min-width: 100px;
+            border-radius: 50px;
+            line-height: 13px;
+        }
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-        integrity="sha512-Lg2h+7fH4FG/D9xPZv94f4jeDmhgWxVxs7g2agQF7uYUgMNHmz4vkq0CIGsYqUZkR9Tf7fDcDX5XdLnq6C9ulA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+        .table-title .add-new i {
+            margin-right: 4px;
+        }
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-        integrity="sha512-Lg2h+7fH4FG/D9xPZv94f4jeDmhgWxVxs7g2agQF7uYUgMNHmz4vkq0CIGsYqUZkR9Tf7fDcDX5XdLnq6C9ulA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+        table.table {
+            table-layout: auto;
+        }
 
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        table.table tr th,
+        table.table tr td {
+            border-color: #e9e9e9;
+        }
 
+        table.table th i {
+            font-size: 13px;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+
+        table.table th:last-child {
+            width: 100px;
+        }
+
+        table.table td a {
+            cursor: pointer;
+            display: inline-block;
+            margin: 0 5px;
+            min-width: 24px;
+        }
+
+        table.table td a.add {
+            color: #27C46B;
+        }
+
+        table.table td a.edit {
+            color: #FFC107;
+        }
+
+        table.table td a.delete {
+            color: #E34724;
+        }
+
+        table.table td i {
+            font-size: 19px;
+        }
+
+        table.table td a.add i {
+            font-size: 24px;
+            margin-right: -1px;
+            position: relative;
+            top: 3px;
+        }
+
+        table.table .form-control {
+            height: 32px;
+            line-height: 32px;
+            box-shadow: none;
+            border-radius: 2px;
+        }
+
+        table.table .form-control.error {
+            border-color: #f50000;
+        }
+
+        table.table td .add {
+            display: none;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        /* Make table columns resizable */
+        .table-resizable th {
+            position: relative;
+        }
+
+        .table-resizable th::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: -5px;
+            bottom: 0;
+            width: 10px;
+            cursor: col-resize;
+            z-index: 10;
+            background-color: transparent;
+        }
+
+        .table-resizable th:hover::after {
+            background-color: #f0f0f0;
+        }
+    </style>
 
 </head>
 
@@ -167,115 +267,99 @@
                                                                             </div>
                                                                         </div>
 
-                                                                        <div class="col-lg-12">
+                                                                        <div class="col-lg-12"
+                                                                            style="margin-bottom: 20px">
                                                                             <div class="card-body">
-                                                                                <div class="table-responsive ">
-                                                                                    <table
-                                                                                        class="table table-bordered">
-                                                                                        <tbody>
-                                                                                            <tr>
-                                                                                                <th scope="row">
-                                                                                                    Item:</th>
-                                                                                                <td>
-                                                                                                    <input
-                                                                                                        type="text"
-                                                                                                        name="item_name"
-                                                                                                        class="form-control text-line"
-                                                                                                        style="padding-top: 4px; padding-bottom: 4px;"
-                                                                                                        value="{{ $stock_cards->item_name }}">
-                                                                                                    @error('item_name')
-                                                                                                        <span
-                                                                                                            class="text-danger">{{ $message }}</span>
-                                                                                                    @enderror
-                                                                                                </td>
-                                                                                                <th scope="row">
-                                                                                                    Stock No:</th>
-                                                                                                <td>
-                                                                                                    <input
-                                                                                                        type="text"
-                                                                                                        name="stock_no"
-                                                                                                        class="form-control text-line"
-                                                                                                        style="padding-top: 4px; padding-bottom: 4px;"
-                                                                                                        value="{{ $stock_cards->stock_no }}"">
-                                                                                                    @error('stock_no')
-                                                                                                        <span
-                                                                                                            class="text-danger">{{ $message }}</span>
-                                                                                                    @enderror
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                            <tr>
-                                                                                                <th scope="row">
-                                                                                                    Description:
-                                                                                                </th>
-                                                                                                <td>
-                                                                                                    <input
-                                                                                                        type="text"
-                                                                                                        name="description"
-                                                                                                        class="form-control text-line"
-                                                                                                        style="padding-top: 4px; padding-bottom: 4px;"
-                                                                                                        value="{{ $stock_cards->description }}">
-                                                                                                    @error('description')
-                                                                                                        <span
-                                                                                                            class="text-danger">{{ $message }}</span>
-                                                                                                    @enderror
-                                                                                                </td>
-                                                                                                <th scope="row">
-                                                                                                   Item Code:
-                                                                                                </th>
-                                                                                                <td>
-                                                                                                    <input
-                                                                                                        type="text"
-                                                                                                        name="item_code"class="form-control text-line"
-                                                                                                        style="padding-top: 4px; padding-bottom: 4px;"
-                                                                                                        value="{{ $stock_cards->item_code }}">
-                                                                                                    @error('item_code')
-                                                                                                        <span
-                                                                                                            class="text-danger">{{ $message }}</span>
-                                                                                                    @enderror
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                            <tr>
-                                                                                                <th scope="row">Unit
-                                                                                                    of
-                                                                                                    Measurement:
-                                                                                                </th>
-                                                                                                <td>
-                                                                                                    <input
-                                                                                                        type="text"
-                                                                                                        name="unit_of_measurement"
-                                                                                                        class="form-control text-line"
-                                                                                                        style="padding-top: 4px; padding-bottom: 4px;"
-                                                                                                        value="{{ $stock_cards->unit_of_measurement }}">
-                                                                                                    @error('unit_of_measurement')
-                                                                                                        <span
-                                                                                                            class="text-danger">{{ $message }}</span>
-                                                                                                    @enderror
-                                                                                                </td>
-                                                                                                <th scope="row">
-                                                                                                    Re-Order Point
-                                                                                                </th>
-                                                                                                <td>
-                                                                                                    <input
-                                                                                                        type="text"
-                                                                                                        name="reorder_point"class="form-control text-line"
-                                                                                                        style="padding-top: 4px; padding-bottom: 4px;"
-                                                                                                        value="{{ $stock_cards->reorder_point }}">
-                                                                                                    @error('reorder_point')
-                                                                                                        <span
-                                                                                                            class="text-danger">{{ $message }}</span>
-                                                                                                    @enderror
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                        </tbody>
-                                                                                    </table>
+                                                                                <div class="row">
+                                                                                    <div class="col-md-6">
+                                                                                        <label
+                                                                                            class="col-form-label"><b>Item:</b></label>
+                                                                                        <input type="text"
+                                                                                            name="item_name"
+                                                                                            class="form-control text-line"
+                                                                                            style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                            value="{{ $stock_cards->item_name }}">
+                                                                                        @error('item_name')
+                                                                                            <span
+                                                                                                class="text-danger">{{ $message }}</span>
+                                                                                        @enderror
+                                                                                        <label
+                                                                                            class="col-form-label"><b>
+                                                                                                Stock
+                                                                                                No:</b></label>
+
+                                                                                        <input type="text"
+                                                                                            name="stock_no"
+                                                                                            class="form-control text-line"
+                                                                                            style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                            value="{{ $stock_cards->stock_no }}"">
+                                                                                        @error('stock_no')
+                                                                                            <span
+                                                                                                class="text-danger">{{ $message }}</span>
+                                                                                        @enderror
+                                                                                        <label
+                                                                                            class="col-form-label"><b>Description:</b></label>
+                                                                                        <input type="text"
+                                                                                            name="description"
+                                                                                            class="form-control text-line"
+                                                                                            style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                            value="{{ $stock_cards->description }}">
+                                                                                        @error('description')
+                                                                                            <span
+                                                                                                class="text-danger">{{ $message }}</span>
+                                                                                        @enderror
+                                                                                    </div>
+                                                                                    <div class="col-md-6">
+                                                                                        <label
+                                                                                            class="col-form-label"><b>Item
+                                                                                                Code:</b></label>
+
+                                                                                        <input type="text"
+                                                                                            name="item_code"class="form-control text-line"
+                                                                                            style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                            value="{{ $stock_cards->item_code }}">
+                                                                                        @error('item_code')
+                                                                                            <span
+                                                                                                class="text-danger">{{ $message }}</span>
+                                                                                        @enderror
+
+                                                                                        <label
+                                                                                            class="col-form-label"><b>Unit
+                                                                                                of
+                                                                                                Measurement:</b></label>
+
+                                                                                        <input type="text"
+                                                                                            name="unit_of_measurement"
+                                                                                            class="form-control text-line"
+                                                                                            style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                            value="{{ $stock_cards->unit_of_measurement }}">
+                                                                                        @error('unit_of_measurement')
+                                                                                            <span
+                                                                                                class="text-danger">{{ $message }}</span>
+                                                                                        @enderror
+                                                                                        <label
+                                                                                            class="col-form-label"><b>
+                                                                                                Re-Order
+                                                                                                Point:</b></label>
+
+                                                                                        <input type="text"
+                                                                                            name="reorder_point"class="form-control text-line"
+                                                                                            style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                            value="{{ $stock_cards->reorder_point }}">
+                                                                                        @error('reorder_point')
+                                                                                            <span
+                                                                                                class="text-danger">{{ $message }}</span>
+                                                                                        @enderror
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
+
                                                                         <div class="col-lg-12">
                                                                             <div class="card-body">
                                                                                 <div class="table-responsive">
                                                                                     <table
-                                                                                        class="table table-bordered">
+                                                                                        class="table table-bordered table-resizable">
                                                                                         <thead>
                                                                                             <tr>
                                                                                                 <th scope="col"
@@ -354,6 +438,9 @@
                                                                                                     OF DAYS
                                                                                                     TO
                                                                                                     CONSUME</th>
+                                                                                                <th scope="col"
+                                                                                                    style="text-align: center;">
+                                                                                                    ACTION</th>
                                                                                             </tr>
                                                                                         </thead>
                                                                                         <tbody id="stockTableBody">
@@ -506,69 +593,90 @@
                                                                                                             class="text-danger">{{ $message }}</span>
                                                                                                     @enderror
                                                                                                 </td>
+                                                                                                <td>
+                                                                                                    <a class="add"
+                                                                                                        title="Add"
+                                                                                                        data-toggle="tooltip"><i
+                                                                                                            class="material-icons">&#xE03B;</i></a>
+                                                                                                    <a class="edit"
+                                                                                                        title="Edit"
+                                                                                                        data-edit-id=""
+                                                                                                        data-edit-id=""
+                                                                                                        data-toggle="tooltip"><i
+                                                                                                            class="material-icons">&#xE254;</i></a>
+                                                                                                    <a class="delete"
+                                                                                                        title="Delete"
+                                                                                                        data-toggle="tooltip"><i
+                                                                                                            class="material-icons">&#xE872;</i></a>
+                                                                                                </td>
                                                                                             </tr>
                                                                                         </tbody>
-
-
                                                                                     </table>
-                                                                                    <button id="addRowButton">Add Row</button>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                                 <br>
-                                                                <div class="row">
-                                                                    <div class="col-md-6">
-                                                                        {{-- Button positioned to the left --}}
-                                                                        <a type="button" class="btn btn-danger"
+                                                                {{-- <div class="row"> --}}
+                                                                {{-- <div class="col-md-6"> --}}
+                                                                {{-- Button positioned to the left --}}
+                                                                {{-- <a type="button" class="btn btn-danger"
                                                                             href="{{ url('/view-slc/' . $stock_cards->id) }}">View
                                                                             Stock Ledger Card</a>
                                                                     </div>
-                                                                    <div class="col-md-6 text-right">
-                                                                        {{-- Buttons positioned to the right --}}
-                                                                        <button type="submit"
+                                                                    <div class="col-md-6 text-right"> --}}
+                                                                {{-- Buttons positioned to the right --}}
+                                                                {{-- <button type="submit"
                                                                             class="btn btn-primary">Save
                                                                             Changes</button>
                                                                         <button type="button"
                                                                             onclick="navigateToPrintablePage()"
                                                                             class="btn btn-success ">Preview</button>
                                                                     </div>
-                                                                </div>
+                                                                </div> --}}
                                                             </form>
+                                                            <button type="button"
+                                                                data-stock-id="{{ $stock_cards->id }}"
+                                                                class="btn btn-info add-new"><i
+                                                                    class="fa fa-plus"></i>
+                                                                Add New</button>
+                                                            <br>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
+
+                                            <script>
+                                                const receiptInputs = document.querySelectorAll('.receipt-input');
+                                                const issueInputs = document.querySelectorAll('.issue-input');
+
+                                                receiptInputs.forEach(input => {
+                                                    input.addEventListener('input', updateReceiptTotalCost);
+                                                });
+                                                issueInputs.forEach(input => {
+                                                    input.addEventListener('input', updateIssueTotalCost);
+                                                });
+
+                                                function updateReceiptTotalCost(event) {
+                                                    const parentRow = event.target.closest('tr');
+                                                    const qty = parseFloat(parentRow.querySelector('[name="receipt_qty"]').value);
+                                                    const unitCost = parseFloat(parentRow.querySelector('[name="receipt_unitcost"]').value);
+                                                    const totalCost = qty * unitCost;
+                                                    parentRow.querySelector('[name="receipt_totalcost"]').value = isNaN(totalCost) ? '' : totalCost.toFixed(2);
+                                                }
+
+                                                function updateIssueTotalCost(event) {
+                                                    const parentRow = event.target.closest('tr');
+                                                    const issue_qty = parseFloat(parentRow.querySelector('[name="issue_qty"]').value);
+                                                    const issue_unitCost = parseFloat(parentRow.querySelector('[name="issue_unitcost"]').value);
+                                                    const issueTotalCost = issue_qty * issue_unitCost
+                                                    parentRow.querySelector('[name="issue_totalcost"]').value = isNaN(issueTotalCost) ? '' : issueTotalCost.toFixed(
+                                                        2);
+                                                }
+                                            </script>
                                         @endforeach
-                                        <script>
-                                            const receiptInputs = document.querySelectorAll('.receipt-input');
-                                            const issueInputs = document.querySelectorAll('.issue-input');
-
-                                            receiptInputs.forEach(input => {
-                                                input.addEventListener('input', updateReceiptTotalCost);
-                                            });
-                                            issueInputs.forEach(input => {
-                                                input.addEventListener('input', updateIssueTotalCost);
-                                            });
-
-                                            function updateReceiptTotalCost(event) {
-                                                const parentRow = event.target.closest('tr');
-                                                const qty = parseFloat(parentRow.querySelector('[name="receipt_qty"]').value);
-                                                const unitCost = parseFloat(parentRow.querySelector('[name="receipt_unitcost"]').value);
-                                                const totalCost = qty * unitCost;
-                                                parentRow.querySelector('[name="receipt_totalcost"]').value = isNaN(totalCost) ? '' : totalCost.toFixed(2);
-                                            }
-                                            function updateIssueTotalCost(event) {
-                                                const parentRow = event.target.closest('tr');
-                                                const issue_qty = parseFloat(parentRow.querySelector('[name="issue_qty"]').value);
-                                                const issue_unitCost = parseFloat(parentRow.querySelector('[name="issue_unitcost"]').value);
-                                                const issueTotalCost =  issue_qty * issue_unitCost
-                                                parentRow.querySelector('[name="issue_totalcost"]').value = isNaN(issueTotalCost) ? '' : issueTotalCost.toFixed(2);
-                                            }
-                                        </script>
                                     </div>
-
                                 </div>
                                 <div class="tab-pane fade" id="profile3" role="tabpanel"
                                     aria-labelledby="profile-tab3">
@@ -580,11 +688,12 @@
                         </div>
                     </div>
 
+
+                </section>
             </div>
-            </section>
         </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
         @if (session('success'))
             <script>
@@ -628,42 +737,74 @@
             </script>
         @endif
 
-        @include('footer')
-    </div>
 
-
-    <script>
-        // Function to navigate to the printable page
-        function navigateToPrintablePage() {
-            // Assuming 'prop_cards_id' is the parameter to be passed
-            var stock_cards_id = '{{ $stock_cards->id }}';
-            // Navigate to the printable page
-            window.location.href = '/printable-stock-page/' + stock_cards_id;
-        }
-    </script>
-
-    <script>
-        $(document).ready(function() {
-            $('#search-input').on('keyup', function() {
-                var searchText = $(this).val().toLowerCase();
-                $('.card-row .card2').each(function() {
-                    var entityName = $(this).find('.card-title:first').text().toLowerCase();
-                    var fundCluster = $(this).find('.card-title:nth-child(2)').text().toLowerCase();
-                    var itemName = $(this).find('.card-text').text().toLowerCase();
-                    if (entityName.indexOf(searchText) === -1 && fundCluster.indexOf(searchText) ===
-                        -1 && itemName.indexOf(searchText) === -1) {
-                        $(this).hide();
-                    } else {
-                        $(this).show();
+        <script>
+            $(document).ready(function() {
+                $('[data-toggle="tooltip"]').tooltip();
+                var actions = $("table td:last-child").html();
+                // Append table with add row form on add new button click
+                $(".add-new").click(function() {
+                    $(this).attr("disabled", "disabled");
+                    var index = $("table tbody tr:last-child").index();
+                    var row = '<tr>' +
+                        '<td><input type="date" class="form-control text-line" name="date" style="padding-top: 4px; padding-bottom: 4px;" value=""></td>' +
+                        '<td><input type="text" class="form-control text-line" name="reference" style="padding-top: 4px; padding-bottom: 4px;" value=""></td>' +
+                        '<td><input type="text" class="form-control text-line receipt-input" name="receipt_qty" id="receipt_qtyy" style="padding-top: 4px; padding-bottom: 4px;" placeholder="" value=""></td>' +
+                        '<td><input type="text" class="form-control text-line receipt-input" name="receipt_unitcost" id="receipt_unitcost" style="padding-top: 4px; padding-bottom: 4px;" placeholder="" value=""></td>' +
+                        '<td><input type="text" class="form-control text-line receipt-total" name="receipt_totalcost" id="receipt_totalcost" style="padding-top: 4px; padding-bottom: 4px;"  value=""></td>' +
+                        '<td><input type="text" class="form-control text-line issue-input" name="issue_qty" id="issue_qty" style="padding-top: 4px; padding-bottom: 4px;" value=""></td>' +
+                        '<td><input type="text" class="form-control text-line issue-input" name="issue_unitcost" id="issue_unitcost" style="padding-top: 4px; padding-bottom: 4px;" value=""></td>' +
+                        '<td><input type="text" class="form-control text-line issue-total" name="issue_totalcost" id="issue_totalcost" style="padding-top: 4px; padding-bottom: 4px;"  value=""></td>' +
+                        '<td><input type="text" class="form-control text-line issue-total" name="office_officer" id="office_officer" style="padding-top: 4px; padding-bottom: 4px;" value=""></td>' +
+                        '<td><input type="text" class="form-control text-line" name="bal_qty" style="padding-top: 4px; padding-bottom: 4px;" value=""></td>' +
+                        '<td><input type="text" class="form-control text-line" name="bal_unitcost" style="padding-top: 4px; padding-bottom: 4px;" value=""></td>' +
+                        '<td><input type="text" class="form-control text-line" name="bal_totalcost" style="padding-top: 4px; padding-bottom: 4px;" value=""></td>' +
+                        '<td><input type="text" class="form-control text-line" name="no_of_days" style="padding-top: 4px; padding-bottom: 4px;" value=""></td>' +
+                        '<td>' + actions + '</td>' +
+                        '</tr>';
+                    $("table").append(row);
+                    $("table tbody tr").eq(index + 1).find(".add, .edit").toggle();
+                    $('[data-toggle="tooltip"]').tooltip();
+                });
+                // Add row on add button click
+                $(document).on("click", ".add", function() {
+                    var empty = false;
+                    var input = $(this).parents("tr").find('input[type="text"]');
+                    input.each(function() {
+                        if (!$(this).val()) {
+                            $(this).addClass("error");
+                            empty = true;
+                        } else {
+                            $(this).removeClass("error");
+                        }
+                    });
+                    $(this).parents("tr").find(".error").first().focus();
+                    if (!empty) {
+                        input.each(function() {
+                            $(this).parent("td").html($(this).val());
+                        });
+                        $(this).parents("tr").find(".add, .edit").toggle();
+                        $(".add-new").removeAttr("disabled");
                     }
                 });
+                // Edit row on edit button click
+                $(document).on("click", ".edit", function() {
+                    $(this).parents("tr").find("td:not(:last-child)").each(function() {
+                        $(this).html('<input type="text" class="form-control" value="' + $(this)
+                            .text() + '">');
+                    });
+                    $(this).parents("tr").find(".add, .edit").toggle();
+                    $(".add-new").attr("disabled", "disabled");
+                });
+                // Delete row on delete button click
+                $(document).on("click", ".delete", function() {
+                    $(this).parents("tr").remove();
+                    $(".add-new").removeAttr("disabled");
+                });
             });
-        });
-    </script>
-
-
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        </script>
+        @include('footer')
+    </div>
 </body>
 
 </html>

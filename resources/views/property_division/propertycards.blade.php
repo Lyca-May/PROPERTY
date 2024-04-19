@@ -344,7 +344,7 @@
                                                                                                     RECEIPT
                                                                                                 </th>
                                                                                                 <th scope="col"
-                                                                                                    colspan="5"
+                                                                                                    colspan="6"
                                                                                                     style="text-align: center;">
                                                                                                     ISSUE/TRANSFER/DISPOSAL
                                                                                                 </th>
@@ -385,6 +385,9 @@
                                                                                                 <th scope="col"
                                                                                                     style="text-align: center;">
                                                                                                     QTY
+                                                                                                </th>
+                                                                                                <th scope="col"
+                                                                                                    style="text-align: center;">
                                                                                                 </th>
                                                                                                 <th scope="col"
                                                                                                     style="text-align: center;">
@@ -497,8 +500,24 @@
                                                                                                         class="form-control text-line"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                         placeholder=""
-                                                                                                        value="">
+                                                                                                        value=""
+                                                                                                        hidden>
                                                                                                     @error('issue_qty')
+                                                                                                        <span
+                                                                                                            class="text-danger">{{ $message }}</span>
+                                                                                                    @enderror
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <input
+                                                                                                        type="text"
+                                                                                                        name="transfer_dropdown"
+                                                                                                        id="transfer_dropdown"
+                                                                                                        class="form-control text-line"
+                                                                                                        style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                                        placeholder=""
+                                                                                                        value=""
+                                                                                                        hidden>
+                                                                                                    @error('transfer_dropdown')
                                                                                                         <span
                                                                                                             class="text-danger">{{ $message }}</span>
                                                                                                     @enderror
@@ -511,7 +530,8 @@
                                                                                                         class="form-control text-line"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                         placeholder=""
-                                                                                                        value="">
+                                                                                                        value=""
+                                                                                                        hidden>
                                                                                                     @error('issue_office_officer')
                                                                                                         <span
                                                                                                             class="text-danger">{{ $message }}</span>
@@ -524,21 +544,24 @@
                                                                                                             type="checkbox"
                                                                                                             name="issue"
                                                                                                             id="issue_office_officer1"
-                                                                                                            value="issue">
+                                                                                                            value="issue"
+                                                                                                            hidden>
                                                                                                     </td>
                                                                                                     <td>
                                                                                                         <input
                                                                                                             type="checkbox"
                                                                                                             name="transfer"
                                                                                                             id="issue_office_officer2"
-                                                                                                            value="tra">
+                                                                                                            value="tra"
+                                                                                                            hidden>
                                                                                                     </td>
                                                                                                     <td>
                                                                                                         <input
                                                                                                             type="checkbox"
                                                                                                             name="disposal"
                                                                                                             id="issue_office_officer3"
-                                                                                                            value="value3">
+                                                                                                            value="value3"
+                                                                                                            hidden>
                                                                                                     </td>
                                                                                                 </div>
                                                                                                 <td>
@@ -549,7 +572,8 @@
                                                                                                         class="form-control text-line"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                         placeholder=""
-                                                                                                        value="">
+                                                                                                        value=""
+                                                                                                        hidden>
                                                                                                     @error('bal_qty')
                                                                                                         <span
                                                                                                             class="text-danger">{{ $message }}</span>
@@ -562,7 +586,8 @@
                                                                                                         class="form-control text-line"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                         placeholder=""
-                                                                                                        value="">
+                                                                                                        value=""
+                                                                                                        hidden>
                                                                                                     @error('repair_amount')
                                                                                                         <span
                                                                                                             class="text-danger">{{ $message }}</span>
@@ -571,7 +596,7 @@
 
                                                                                                 <td>
                                                                                                     <textarea type="text" name="remarks" class="form-control text-line"
-                                                                                                        style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></textarea>
+                                                                                                        style="padding-top: 4px; padding-bottom: 4px;" placeholder="" hidden></textarea>
                                                                                                     @error('remarks')
                                                                                                         <span
                                                                                                             class="text-danger">{{ $message }}</span>
@@ -581,15 +606,18 @@
                                                                                                     <a class="add"
                                                                                                         title="Add"
                                                                                                         data-toggle="tooltip"><i
-                                                                                                            class="material-icons">&#xE03B;</i></a>
+                                                                                                            class="material-icons"
+                                                                                                            hidden>&#xE03B;</i></a>
                                                                                                     <a class="edit"
                                                                                                         title="Edit"
                                                                                                         data-toggle="tooltip"><i
-                                                                                                            class="material-icons">&#xE254;</i></a>
+                                                                                                            class="material-icons"
+                                                                                                            hidden>&#xE254;</i></a>
                                                                                                     <a class="delete"
                                                                                                         title="Delete"
                                                                                                         data-toggle="tooltip"><i
-                                                                                                            class="material-icons">&#xE872;</i></a>
+                                                                                                            class="material-icons"
+                                                                                                            hidden>&#xE872;</i></a>
                                                                                                 </td>
                                                                                             </tr>
                                                                                             @foreach ($prop_ext->where('prop_id', $prop_cards->id) as $data)
@@ -607,7 +635,7 @@
                                                                                                             style="padding-top: 4px; padding-bottom: 4px;" placeholder="">{{ $data->reference }}</textarea>
                                                                                                     </td>
                                                                                                     <td><input
-                                                                                                            type="text"
+                                                                                                            type="hidden"
                                                                                                             name="receipt_qty"
                                                                                                             value="{{ $data->receipt_qty }}"
                                                                                                             class="form-control text-line receipt-input"
@@ -616,7 +644,7 @@
                                                                                                             placeholder="">
                                                                                                     </td>
                                                                                                     <td><input
-                                                                                                            type="text"
+                                                                                                            type="hidden"
                                                                                                             name="receipt_unitcost"
                                                                                                             value="{{ $data->receipt_unitcost }}"
                                                                                                             class="form-control text-line receipt-input"
@@ -625,7 +653,7 @@
                                                                                                             placeholder="">
                                                                                                     </td>
                                                                                                     <td><input
-                                                                                                            type="text"
+                                                                                                            type="hidden"
                                                                                                             name="receipt_totalcost"
                                                                                                             value="{{ $data->receipt_totalcost }}"
                                                                                                             class="form-control text-line receipt-total"
@@ -635,6 +663,15 @@
                                                                                                             type="text"
                                                                                                             name="issue_qty"
                                                                                                             value="{{ $data->issue_qty }}"
+                                                                                                            class="form-control text-line"
+                                                                                                            style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                                            placeholder="">
+                                                                                                    </td>
+                                                                                                    <td>
+                                                                                                        <input
+                                                                                                            type="text"
+                                                                                                            name="transform_drop"
+                                                                                                            value="{{ $data->transform_drop }}"
                                                                                                             class="form-control text-line"
                                                                                                             style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                             placeholder="">
@@ -668,10 +705,13 @@
                                                                                                             value="DISPOSAL"
                                                                                                             {{ $data->issue_transfer_disposal == 'DISPOSAL' ? 'checked' : '' }}>
                                                                                                     </td>
-                                                                                                    <td><input
+                                                                                                    <td
+                                                                                                        class="bal_qty">
+                                                                                                        <input
                                                                                                             type="text"
-                                                                                                            name="bal_qty"
-                                                                                                            value="{{ $data->bal_qty }}"
+                                                                                                            name="new_bal_qty"
+                                                                                                            id="bal-qty {{ $data->id }} "
+                                                                                                            value="{{ $data->new_bal_qty }}"
                                                                                                             class="form-control text-line"
                                                                                                             style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                             placeholder="">
@@ -695,8 +735,10 @@
                                                                                                     <td>
                                                                                                         <a class="add"
                                                                                                             title="Add"
+                                                                                                            data-edit-add-propid="{{ $prop_cards->id }} "
+                                                                                                            data-edit-id="{{ $data->id }}"
                                                                                                             data-toggle="tooltip"><i
-                                                                                                                class="material-icons">&#xE03B;</i></a>
+                                                                                                            class="material-icons">&#xE03B;</i></a>
                                                                                                         <a class="edit"
                                                                                                             title="Edit"
                                                                                                             data-edit-id="{{ $data->id }}"
@@ -705,13 +747,13 @@
                                                                                                                 class="material-icons">&#xE254;</i></a>
                                                                                                         <a class="delete"
                                                                                                             title="Delete"
+                                                                                                            data-edit-id="{{ $data->id }}"
                                                                                                             data-toggle="tooltip"><i
                                                                                                                 class="material-icons">&#xE872;</i></a>
                                                                                                     </td>
                                                                                                 </tr>
                                                                                                 <tr>
                                                                                                 </tr>
-
                                                                                             @endforeach
                                                                                         </tbody>
                                                                                     </table>
@@ -740,30 +782,6 @@
                                                 }
                                             </script>
                                         @endforeach
-                                        <script>
-                                            // Select receipt input fields
-                                            const receiptInputs = document.querySelectorAll('.receipt-input');
-
-                                            // Add event listener for each receipt input field
-                                            receiptInputs.forEach(input => {
-                                                input.addEventListener('input', updateReceiptTotalCost);
-                                            });
-
-                                            function updateReceiptTotalCost(event) {
-                                                // Get the parent row of the input field
-                                                const parentRow = event.target.closest('tr');
-
-                                                // Get the quantity and unit cost values within the parent row
-                                                const qty = parseFloat(parentRow.querySelector('[name="receipt_qty"]').value);
-                                                const unitCost = parseFloat(parentRow.querySelector('[name="receipt_unitcost"]').value);
-
-                                                // Calculate the total cost
-                                                const totalCost = qty * unitCost;
-
-                                                // Update the total cost field within the parent row with the calculated value
-                                                parentRow.querySelector('[name="receipt_totalcost"]').value = isNaN(totalCost) ? '' : totalCost.toFixed(2);
-                                            }
-                                        </script>
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="profile3" role="tabpanel"
@@ -780,33 +798,17 @@
             </div>
             </section>
         </div>
+        @include('footer')
 
         {{-- SCRIPTS --}}
-        <script>
-            $(document).ready(function() {
-                $('#search-input').on('keyup', function() {
-                    var searchText = $(this).val().toLowerCase();
-                    $('.card-row .card2').each(function() {
-                        var entityName = $(this).find('.card-title:first').text().toLowerCase();
-                        var fundCluster = $(this).find('.card-title:nth-child(2)').text().toLowerCase();
-                        var itemName = $(this).find('.card-text').text().toLowerCase();
-                        if (entityName.indexOf(searchText) === -1 && fundCluster.indexOf(searchText) ===
-                            -1 && itemName.indexOf(searchText) === -1) {
-                            $(this).hide();
-                        } else {
-                            $(this).show();
-                        }
-                    });
-                });
-            });
-        </script>
+
         @if (session('success'))
             <script>
                 Swal.fire({
                     icon: 'success',
                     title: 'Success!',
                     text: '{{ session('
-                                                                                                                                                                                                                                            success ') }}',
+                                                                                                                                                                                                                                                                                                                                                                                    success ') }}',
                     toast: true,
                     position: 'top-end',
                     showConfirmButton: false,
@@ -828,7 +830,7 @@
                     icon: 'failed',
                     title: 'failed!',
                     text: '{{ session('
-                                                                                                                                                                                                                                            failed ') }}',
+                                                                                                                                                                                                                                                                                                                                                                                    failed ') }}',
                     toast: true,
                     position: 'top-end',
                     showConfirmButton: false,
@@ -843,236 +845,459 @@
                 });
             </script>
         @endif
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const tables = document.querySelectorAll('.table-resizable');
+        <script src="{{ asset('assets/js/property.js') }}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-                tables.forEach(table => {
-                    let ths = table.querySelectorAll('th');
+        <script>
+            const receiptInputs = document.querySelectorAll(".receipt-input");
+            receiptInputs.forEach((input) => {
+                input.addEventListener("input", updateReceiptTotalCost);
+            });
+
+            function updateReceiptTotalCost(event) {
+                const parentRow = event.target.closest("tr");
+                const qty = parseFloat(
+                    parentRow.querySelector('[name="receipt_qty"]').value
+                );
+                const unitCost = parseFloat(
+                    parentRow.querySelector('[name="receipt_unitcost"]').value
+                );
+                const totalCost = qty * unitCost;
+                parentRow.querySelector('[name="receipt_totalcost"]').value = isNaN(
+                        totalCost
+                    ) ?
+                    "" :
+                    totalCost.toFixed(2);
+            }
+
+            $(document).ready(function() {
+                $("#search-input").on("keyup", function() {
+                    var searchText = $(this).val().toLowerCase();
+                    $(".card-row .card2").each(function() {
+                        var entityName = $(this)
+                            .find(".card-title:first")
+                            .text()
+                            .toLowerCase();
+                        var fundCluster = $(this)
+                            .find(".card-title:nth-child(2)")
+                            .text()
+                            .toLowerCase();
+                        var itemName = $(this).find(".card-text").text().toLowerCase();
+                        if (
+                            entityName.indexOf(searchText) === -1 &&
+                            fundCluster.indexOf(searchText) === -1 &&
+                            itemName.indexOf(searchText) === -1
+                        ) {
+                            $(this).hide();
+                        } else {
+                            $(this).show();
+                        }
+                    });
+                });
+            });
+
+            document.addEventListener("DOMContentLoaded", function() {
+                const tables = document.querySelectorAll(".table-resizable");
+
+                tables.forEach((table) => {
+                    let ths = table.querySelectorAll("th");
                     let startX, startWidth;
 
-                    ths.forEach(th => {
-                        th.addEventListener('mousedown', function(event) {
+                    ths.forEach((th) => {
+                        th.addEventListener("mousedown", function(event) {
                             startX = event.pageX;
                             startWidth = th.offsetWidth;
 
-                            document.addEventListener('mousemove', onMouseMove);
-                            document.addEventListener('mouseup', () => {
-                                document.removeEventListener('mousemove', onMouseMove);
+                            document.addEventListener("mousemove", onMouseMove);
+                            document.addEventListener("mouseup", () => {
+                                document.removeEventListener("mousemove", onMouseMove);
                             });
                         });
 
                         function onMouseMove(event) {
                             const diffX = event.pageX - startX;
-                            th.style.width = startWidth + diffX + 'px';
+                            th.style.width = startWidth + diffX + "px";
                         }
                     });
                 });
             });
         </script>
-        @include('footer')
-<script>
-var csrfToken = "{{ csrf_token() }}";
-$(document).ready(function() {
-    function calculateBalance() {
-    var receiptQty = parseFloat($(this).closest('.modal-body').find('input[name="receipt_qty"]').val()) || 0;
-    var unitCost = parseFloat($(this).closest('.modal-body').find('input[name="receipt_unitcost"]').val()) || 0;
-    var issueQty = parseFloat($(this).closest('tr').find('input[name="issue_qty"]').val()) || 0;
+        <script>
+            var csrfToken = "{{ csrf_token() }}";
+            $(document).ready(function() {
 
-    var balanceQty = receiptQty - issueQty;
-    var balanceAmount = unitCost * balanceQty;
+                $('[data-toggle="tooltip"]').tooltip();
 
-    $(this).closest('tr').find('input[name="bal_qty"]').val(balanceQty);
-    $(this).closest('tr').find('input[name="bal_amount"]').val(balanceAmount.toFixed(2));
-}
+                $(".add-new").click(function(event) {
+                    try {
+                        event.preventDefault(); // Prevent default behavior of button (e.g., form submission)
+                        $(this).attr("disabled", "disabled");
+                        $(this).attr("disabled", "disabled");
+                        var propId = $(this).data(
+                        "prop-id"); // Get the propID associated with the clicked button
+                        var modal = $('#editItemModal' + propId); // Find the modal with the specific propID
+                        var table = modal.find(
+                        '.table-bordered.table-resizable tbody'); // Find the table within the modal
+                        var editId = $(this).data("edit-id");
+                        var actions =
+                            '<a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>' +
+                            '<a class="edit" title="Edit" data-edit-id="' +
+                            editId +
+                            '" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>' +
+                            '<a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>';
+                        var filteredOfficers = {!! json_encode($filteredOfficers) !!};
+                        console.log(filteredOfficers);
+                        var row = $("<tr>").append(
+                            $('<td>').append(
+                                '<input type="date" name="date" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">'
+                            ),
+                            $('<td>').append(
+                                '<textarea type="text" name="reference" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></textarea>'
+                            ),
+                            $('<td>').append(
+                                '<input type="hidden" name="receipt_qty" value="0" class="form-control text-line receipt-input1" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">'
+                            ),
+                            $('<td>').append(
+                                '<input type="hidden" name="receipt_unitcost" value="0" class="form-control text-line receipt-input1" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">'
+                            ),
+                            $('<td>').append(
+                                '<input type="hidden" name="receipt_totalcost" value="0" class="form-control text-line receipt-total" style="padding-top: 4px; padding-bottom: 4px;" >'
+                            ),
+                            $('<td>').append(
+                                '<input type="text" name="issue_qty" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">'
+                            ),
+                            $('<td>').append(
+                                $('<select>').attr({
+                                    'name': 'transfer_dropdown',
+                                    'id': 'transfer_dropdown',
+                                    'class': 'form-control text-line',
+                                    'style': 'padding-top: 4px; padding-bottom: 4px;'
+                                }).append(
+                                    // Append options dynamically from filteredOfficers array
+                                    filteredOfficers.map(function(officer) {
+                                        return $('<option>').attr('value', officer).text(
+                                            officer);
+                                    })
+                                )
+                            ),
+                            $('<td>').append(
+                                '<input type="text" name="office_officer" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">'
+                            ),
+                            // Checkboxes for Issue, Transfer, and Disposal
+                            $('<td>').append(
+                                '<input type="checkbox" name="issue_transfer_disposal" id="issue_transfer_disposal1" value="ISSUE">'
+                            ),
+                            $('<td>').append(
+                                '<input type="checkbox" name="issue_transfer_disposal" id="issue_transfer_disposal2" value="TRANSFER">'
+                            ),
+                            $('<td>').append(
+                                '<input type="checkbox" name="issue_transfer_disposal" id="issue_transfer_disposal3" value="DISPOSAL">'
+                            ),
+                            $('<td>').append(
+                                '<input type="text" name="new_bal_qty" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;">'
+                            ),
+                            $('<td>').append(
+                                '<input type="text" name="bal_amount" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">'
+                            ),
+                            $('<td>').append(
+                                '<textarea type="text" name="remarks" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></textarea>'
+                            ),
+                            $('<td>').append(actions),
+                            $('<td>').append('<input type="text" name="prop_id" value="' + propId +
+                                '" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">'
+                            )
+                        );
 
-$(document).on('input', '.modal-body input[name="receipt_qty"], .modal-body input[name="issue_qty"]', calculateBalance);
+                        table.append(row); // Append the row to the table within the modal
+                        var rowCount = table.find("tr").length; // Count the number of rows in the table
+                        console.log("rowCount:", rowCount);
 
+                        // var isTransferChecked = false; // Flag to track if "TRANSFER" checkbox is checked
 
-    $('[data-toggle="tooltip"]').tooltip();
+                        // // Disable and clear bal_qty and bal_amount if "TRANSFER" checkbox is checked
+                        // $('table tbody tr:last input[name="issue_transfer_disposal"]').change(function() {
+                        //     var isChecked = $(this).is(":checked");
+                        //     console.log("Checkbox value:", $(this).val());
+                        //     if ($(this).val() === "TRANSFER" && isChecked) {
+                        //         // Disable and clear bal_qty and bal_amount
+                        //         $('table tbody tr:last input[name="new_bal_qty"]').prop('disabled', true).val('');
+                        //         $('table tbody tr:last input[name="bal_amount"]').prop('disabled', true).val('');
+                        //         isTransferChecked = true; // Update flag
+                        //     }else {
+                        //         // Enable bal_qty and bal_amount
+                        //         $('table tbody tr:last input[name="new_bal_qty"]').prop('disabled', false);
+                        //         $('table tbody tr:last input[name="bal_amount"]').prop('disabled', false);
+                        //         isTransferChecked = false; // Update flag
+                        //     }
+                        // });
 
-    $(".add-new").click(function() {
-        $(this).attr("disabled", "disabled");
-        var propId = $(this).data("prop-id");
-        var editId = $(this).data("edit-id");
-        var actions =
-            '<a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>' +
-            '<a class="edit" title="Edit" data-edit-id="' + editId +
-            '" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>' +
-            '<a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>';
+                        if (rowCount === 2) {
+                            console.log("row 2 added.");
+                            calculateBalance();
+                        } else if (rowCount > 2) {
+                            console.log("more than 2 row added.");
+                            // if (!!isTransferChecked) {
+                                $(document).on(
+                                    "input",
+                                    'table tbody tr:last input[name="issue_qty"]',
+                                    function() {
+                                        // Get the parent row
+                                        var $row = $(this).closest("tr");
 
-        var row = '<tr>' +
-            '<td><input type="date" name="date" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>' +
-            '<td><textarea type="text" name="reference" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></textarea></td>' +
-            '<td><input type="text" name="receipt_qty" value="" class="form-control text-line receipt-input1" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>' +
-            '<td><input type="text" name="receipt_unitcost" value="" class="form-control text-line receipt-input1" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>' +
-            '<td><input type="text" name="receipt_totalcost" value="" class="form-control text-line receipt-total" style="padding-top: 4px; padding-bottom: 4px;" ></td>' +
-            '<td><input type="text" name="issue_qty" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>' +
-            '<td><input type="text" name="office_officer" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>' +
-            '<td>' +
-            '<input type="checkbox" name="issue_transfer_disposal" id="issue_transfer_disposal" value="ISSUE">' +
-            '</td>' +
-            '<td>' +
-            '<input type="checkbox" name="issue_transfer_disposal" id="issue_transfer_disposal" value="TRANSFER">' +
-            '</td>' +
-            '<td>' +
-            '<input type="checkbox" name="issue_transfer_disposal" id="issue_transfer_disposal" value="DISPOSAL">' +
-            '</td>' +
-            '</div>' +
-            '<td><input type="text" name="bal_qty" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;"></td>' +
-            '<td><input type="text" name="bal_amount" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>' +
-            '<td><textarea type="text" name="remarks" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></textarea></td>' +
-            '<td>' + actions + '</td>' +
-            '<td><input type="text" name="prop_id" value="' + propId +
-            '" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>' +
-            '</tr>';
+                                        // Get the index of the current row
+                                        var index = $row.index();
 
-        $("table tbody").append(row);
+                                        // Check if the current row is not the first or last row
+                                        if (index > 1 && index < $("table tbody tr").length) {
+                                            // Get the input field for new_bal_qty in the second to the last row
+                                            var prevRowBalQtyInput = $row.prev().prev().find(
+                                                'input[name="new_bal_qty"]');
+                                            var prevRowBalQtyValue = prevRowBalQtyInput.val();
+                                            var prevRowBalQty = parseFloat(prevRowBalQtyValue);
+                                            console.log("Previous Row Bal Qty:", prevRowBalQty);
+                                            var unitCost =
+                                                parseFloat(
+                                                    $(this)
+                                                    .closest(".modal-body")
+                                                    .find('input[name="receipt_unitcost"]')
+                                                    .val()
+                                                ) || 0;
+                                            console.log("Unitcost:", unitCost);
+                                            // Get the last row's issue_qty
+                                            var $lastRow = $("table tbody tr:last");
+                                            var issueQty = parseFloat($lastRow.find('input[name="issue_qty"]')
+                                                .val());
+                                            console.log("Issue Qty:", issueQty);
+                                            var newBalQty = prevRowBalQty - issueQty;
 
-        $("table tbody tr:last-child").find(".add").show();
-        $("table tbody tr:last-child").find(".edit").hide();
-        $('[data-toggle="tooltip"]').tooltip();
-    });
-
-    $(document).on("click", ".add", function() {
-        var rowData = {};
-        var input = $(this).parents("tr").find(
-            'input[type="text"], input[type="date"], textarea, input[type="checkbox"]');
-        input.each(function() {
-            var name = $(this).attr("name");
-            var value = $(this).val();
-            if ($(this).attr('type') === 'checkbox') {
-                if ($(this).is(':checked')) {
-                    value = 'ISSUE';
-                } else if ($(this).prop('checked')) {
-                    value = 'TRANSFER';
-                } else {
-                    value = 'DISPOSAL';
-                }
-            }
-
-            rowData[name] = value;
-        });
-
-        $.ajax({
-            type: 'POST',
-            url: '/add-prop-extension',
-            headers: {
-                'X-CSRF-TOKEN': csrfToken
-            },
-            data: rowData,
-            success: function(response) {
-                // Update table with new row data
-                var newRow = '<tr>';
-                Object.values(rowData).forEach(function(value) {
-                    newRow += '<td>' + value + '</td>';
+                                            var newBalAm = unitCost * newBalQty;
+                                            console.log("New Bal Qty:", newBalQty);
+                                            $row.find('input[name="new_bal_qty"]').val(newBalQty);
+                                            $row.find('input[name="bal_amount"]').val(newBalAm);
+                                        } else {
+                                            console.log("NO VALUE FOR THE PREVIOUS BAL QTY");
+                                        }
+                                    }
+                                );
+                            // }else{
+                            //     console.log('isTransferChecked is true. No calculation needed');
+                            // }
+                        }
+                        $("table tbody tr:last-child").find(".add").show();
+                        $("table tbody tr:last-child").find(".edit").hide();
+                        $('[data-toggle="tooltip"]').tooltip();
+                    } catch (error) {
+                        console.error("An error occurred:", error);
+                    }
                 });
-                newRow += '<td>' + actions + '</td></tr>';
-                $("table tbody").append(newRow);
-            },
-            error: function(xhr, status, error) {
-                // Handle error
-                console.error(xhr.responseText);
-            }
-        });
 
-        $(this).parents("tr").find(".add, .edit").toggle();
-        $(".add-new").removeAttr("disabled", "disabled");
-    });
+                function calculateBalance() {
+                    var receiptQty =
+                        parseFloat(
+                            $(this)
+                            .closest(".modal-body")
+                            .find('input[name="receipt_qty"]')
+                            .val()
+                        ) || 0;
+                    var unitCost =
+                        parseFloat(
+                            $(this)
+                            .closest(".modal-body")
+                            .find('input[name="receipt_unitcost"]')
+                            .val()
+                        ) || 0;
+                    var issueQty =
+                        parseFloat(
+                            $(this).closest("tr").find('input[name="issue_qty"]').val()
+                        ) || 0;
 
-    $(document).on("click", ".edit", function() {
-        var row = $(this).closest("tr");
-        var editId = $(this).data("edit-id");
+                    var balanceQty = receiptQty - issueQty;
+                    var balanceAmount = unitCost * balanceQty;
 
-        if (editId) {
-            $.ajax({
-                type: 'GET',
-                url: '/get-prop-ext-data/' + editId,
-                success: function(response) {
-                    var rowData = response;
-                    row.find('td:not(:last-child)').each(function() {
-                        var fieldName = $(this).data("field-name");
-                        if (fieldName) {
-                            var value = rowData[fieldName];
-                            if (fieldName === "issue_transfer_disposal") {
-                                // Handle checkboxes
-                                $(this).html('<input type="checkbox" name="' +
-                                    fieldName + '" ' + (value ? 'checked' :
-                                        '') + '>');
+                    $(this).closest("tr").find('input[name="new_bal_qty"]').val(balanceQty);
+                    $(this)
+                        .closest("tr")
+                        .find('input[name="bal_amount"]')
+                        .val(balanceAmount.toFixed(2));
+                }
+                $(document).on(
+                    "input",
+                    '.modal-body input[name="receipt_qty"], .modal-body input[name="issue_qty"]',
+                    calculateBalance
+                );
+
+                $(document).on("click", ".add", function() {
+                    var rowData = {};
+                    var input = $(this)
+                        .parents("tr")
+                        .find(
+                            'input[type="text"], input[type="date"], textarea, input[type="checkbox"], select'
+                        );
+                    input.each(function() {
+                        var name = $(this).attr("name");
+                        var value = $(this).val();
+                        if ($(this).attr("type") === "checkbox") {
+                            if ($(this).is(":checked")) {
+                                value = "ISSUE";
+                            } else if ($(this).prop("checked")) {
+                                value = "TRANSFER";
                             } else {
-                                // Handle other input fields
-                                $(this).html(
-                                    '<input type="text" class="form-control" name="' +
-                                    fieldName + '" value="' + value + '">');
+                                value = "DISPOSAL";
                             }
                         }
+
+                        rowData[name] = value;
                     });
 
-                    // Show the save button and hide the edit button
-                    row.find('.add').show();
-                    row.find('.edit').hide();
-                },
-                error: function(xhr, status, error) {
-                    // Handle error
-                    console.error(xhr.responseText);
-                }
+                    $.ajax({
+                        type: "POST",
+                        url: "/add-prop-extension",
+                        headers: {
+                            "X-CSRF-TOKEN": csrfToken,
+                        },
+                        data: rowData,
+                        success: function(response) {
+                            // Update table with new row data
+                            var newRow = "<tr>";
+                            Object.values(rowData).forEach(function(value) {
+                                newRow += "<td>" + value + "</td>";
+                            });
+                            newRow += "<td>" + actions + "</td></tr>";
+                            $("table tbody").append(newRow);
+                        },
+                        error: function(xhr, status, error) {
+                            // Handle error
+                            console.error(xhr.responseText);
+                        },
+                    });
+
+                    $(this).parents("tr").find(".add, .edit").toggle();
+                    $(".add-new").removeAttr("disabled", "disabled");
+                });
+
+                $(document).on("click", ".edit", function() {
+                    var row = $(this).closest("tr");
+                    var editId = $(this).data("edit-id");
+
+                    if (editId) {
+                        $.ajax({
+                            type: "GET",
+                            url: "/get-prop-ext-data/" + editId,
+                            success: function(response) {
+                                var rowData = response;
+                                row.find("td:not(:last-child)").each(function() {
+                                    var fieldName = $(this).data("field-name");
+                                    if (fieldName) {
+                                        var value = rowData[fieldName];
+                                        if (fieldName === "issue_transfer_disposal") {
+                                            // Handle checkboxes
+                                            $(this).html(
+                                                '<input type="checkbox" name="' +
+                                                fieldName +
+                                                '" ' +
+                                                (value ? "checked" : "") +
+                                                ">"
+                                            );
+                                        } else {
+                                            // Handle other input fields
+                                            $(this).html(
+                                                '<input type="text" class="form-control" name="' +
+                                                fieldName +
+                                                '" value="' +
+                                                value +
+                                                '">'
+                                            );
+                                        }
+                                    }
+                                });
+
+                                // Show the save button and hide the edit button
+                                row.find(".add").show();
+                                row.find(".edit").hide();
+                            },
+                            error: function(xhr, status, error) {
+                                // Handle error
+                                console.error(xhr.responseText);
+                            },
+                        });
+                    } else {
+                        console.error("editId is undefined");
+                    }
+                });
+
+                $(document).on("click", ".add", function() {
+                    var row = $(this).closest("tr");
+                    var propId = $(this).data("edit-add-propid");
+                    var editId = $(this).data("edit-id");
+                    var rowData = {
+                        prop_id: propId,
+                    };
+
+                    // Collect the updated data from the row
+                    row.find('input[type="text"], input[type="checkbox"]').each(
+                        function() {
+                            var fieldName = $(this).attr("name");
+                            var value = $(this).is(":checkbox") ?
+                                $(this).is(":checked") :
+                                $(this).val();
+                            rowData[fieldName] = value;
+                        }
+                    );
+
+                    // Set the ID value if available
+                    if (editId) {
+                        rowData.id = editId;
+                    }
+
+                    // Perform an AJAX request to update the data on the server
+                    $.ajax({
+                        type: "POST",
+                        url: "/update-prop-ext-data/" + editId, // Use editId in the URL
+                        headers: {
+                            "X-CSRF-TOKEN": csrfToken,
+                        },
+                        data: rowData,
+                        success: function(response) {
+                            // Optionally, handle success response
+                            console.log("Data updated successfully!");
+                        },
+                        error: function(xhr, status, error) {
+                            // Handle error
+                            console.error(xhr.responseText);
+                        },
+                    });
+                    row.find(".edit").show();
+                    row.find(".add").hide();
+                });
+                $(document).on("click", ".delete", function() {
+                    var editId = $(this).data("edit-id");
+                    var $deleteButton = $(this); // Store reference to the delete button
+
+                    // Perform an AJAX request to delete the data on the server
+                    $.ajax({
+                        type: "DELETE", // Use DELETE method
+                        url: "/delete-propext-data/" + editId, // Use editId in the URL
+                        headers: {
+                            "X-CSRF-TOKEN": csrfToken,
+                        },
+                        success: function(response) {
+                            // Optionally, handle success response
+                            console.log("Data deleted successfully!");
+                            // Remove the row from the table after successful deletion
+                            $deleteButton.closest("tr").remove(); // Use the stored reference to deleteButton
+                        },
+                        error: function(xhr, status, error) {
+                            // Handle error
+                            console.error(xhr.responseText);
+                        },
+                    });
+                });
+
+
+
+
             });
-        } else {
-            console.error("editId is undefined");
-        }
-    });
-
-    $(document).on("click", ".add", function() {
-        var row = $(this).closest("tr");
-        var propId = $(this).data("prop-id");
-        var editId = $(this).data("edit-id");
-        var rowData = {
-            prop_id: propId
-        };
-
-        // Collect the updated data from the row
-        row.find('input[type="text"], input[type="checkbox"]').each(function() {
-            var fieldName = $(this).attr("name");
-            var value = $(this).is(":checkbox") ? $(this).is(":checked") : $(this).val();
-            rowData[fieldName] = value;
-        });
-
-        // Set the ID value if available
-        if (editId) {
-            rowData.id = editId;
-        }
-
-        // Perform an AJAX request to update the data on the server
-        $.ajax({
-            type: 'POST',
-            url: '/update-prop-ext-data/' + editId, // Use editId in the URL
-            headers: {
-                'X-CSRF-TOKEN': csrfToken
-            },
-            data: rowData,
-            success: function(response) {
-                // Optionally, handle success response
-                console.log("Data updated successfully!");
-            },
-            error: function(xhr, status, error) {
-                // Handle error
-                console.error(xhr.responseText);
-            }
-        });
-        row.find('.edit').show();
-        row.find('.add').hide();
-    });
-    $(document).on("click", ".delete", function() {
-        $(this).parents("tr").remove();
-        $(".add-new").removeAttr("disabled");
-    });
-
-});
-
-</script>
-
-
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        </script>
 
     </div>
     </div>

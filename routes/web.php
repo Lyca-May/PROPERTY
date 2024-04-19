@@ -87,4 +87,6 @@ Route::get('/all-users', [UserController::class, 'getUsers']);
 Route::post('/add-prop-extension', [PropCardExtension_Controller::class, 'addPropExt']);
 Route::get('/get-prop-ext-data/{id}', [PropCardExtension_Controller::class, 'getPropExtData']);
 Route::post('/update-prop-ext-data/{id}', [PropCardExtension_Controller::class, 'saveEditedData']);
+Route::delete('/delete-propext-data/{id}', [PropCardExtension_Controller::class, 'deletePropExt']);
+// Route::get('/fetch-officers', [PropertyController::class, 'fetchOfficers']);
 

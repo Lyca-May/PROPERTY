@@ -173,12 +173,13 @@ class PropertyController extends Controller
     {
        // Retrieve all data from PropCardModel
         $prop_card = PropCardModel::all();
+        $prop_ext = PropCardExtension_Model::get();
+        $filteredOfficers = PropCardExtension_Model::where('issue_transfer_disposal', 'ISSUE')->pluck('office_officer')->toArray();
 
-            $prop_ext = PropCardExtension_Model::get();
-            return view('property_division.propertycards', compact('prop_card', 'prop_ext'));
+        return view('property_division.propertycards', compact('prop_card', 'prop_ext', 'filteredOfficers'));
 
-    
     }
+
 
     public function edit_property_card(Request $request, $id)
     {

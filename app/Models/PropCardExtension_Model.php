@@ -18,10 +18,17 @@ class PropCardExtension_Model extends Model
         'receipt_unitcost',
         'receipt_totalcost',
         'issue_qty',
+        'transfer_dropdown',
         'office_officer',
         'issue_transfer_disposal',
-        'bal_qty',
+        'new_bal_qty',
         'bal_amount',
         'remarks',
     ];
+
+    // Define the relationship
+    public function propertyCard()
+    {
+        return $this->belongsTo(PropCardModel::class, 'prop_id', 'id');
+    }
 }
