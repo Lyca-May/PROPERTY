@@ -10,6 +10,7 @@ use App\Models\PropertyModel;
 use App\Models\PropCardModel;
 use App\Models\SemiModel;
 use App\Models\PropCardExtension_Model;
+use App\Models\StockCardExtension_Model;
 
 
 class PropertyController extends Controller
@@ -61,8 +62,11 @@ class PropertyController extends Controller
 
     public function getStockCards()
     {
-        $stock_card = DB::table('sc_andslc')->get();
-        return view('property_division.stockcards', ['stock_card' => $stock_card]);
+        $stock_card = PropertyModel::all();
+
+        $stock_ext = StockCardExtension_Model::get();
+
+        return view('property_division.stockcards', compact('stock_card', 'stock_ext'));
     }
 
     public function edit_stock_card(Request $request, $id)

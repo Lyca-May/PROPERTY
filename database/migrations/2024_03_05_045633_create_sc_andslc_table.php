@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('item_code');
             $table->decimal('reorder_point');
             $table->integer('stock_no');
+
             $table->date('date');
             $table->string('reference');
             $table->integer('receipt_qty');

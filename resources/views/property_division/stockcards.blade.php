@@ -371,16 +371,16 @@
                                                                                                     RECEIPT
                                                                                                 </th>
                                                                                                 <th scope="col"
-                                                                                                    colspan="4"
+                                                                                                    colspan="2"
                                                                                                     style="text-align: center;">
                                                                                                     ISSUE</th>
                                                                                                 <th scope="col"
-                                                                                                    colspan="3"
+                                                                                                    colspan="2"
                                                                                                     style="text-align: center;">
                                                                                                     BALANCE
                                                                                                 </th>
                                                                                                 <th scope="col"
-                                                                                                    colspan="3"
+                                                                                                    colspan="2"
                                                                                                     style="text-align: center;">
                                                                                                 </th>
                                                                                             </tr>
@@ -410,23 +410,11 @@
                                                                                                 </th>
                                                                                                 <th scope="col"
                                                                                                     style="text-align: center;">
-                                                                                                    UNIT COST
-                                                                                                </th>
-                                                                                                <th scope="col"
-                                                                                                    style="text-align: center;">
-                                                                                                    TOTAL COST
-                                                                                                </th>
-                                                                                                <th scope="col"
-                                                                                                    style="text-align: center;">
                                                                                                     OFFICE/OFFICER
                                                                                                 </th>
                                                                                                 <th scope="col"
                                                                                                     style="text-align: center;">
                                                                                                     QTY
-                                                                                                </th>
-                                                                                                <th scope="col"
-                                                                                                    style="text-align: center;">
-                                                                                                    UNIT COST
                                                                                                 </th>
                                                                                                 <th scope="col"
                                                                                                     style="text-align: center;">
@@ -520,28 +508,8 @@
                                                                                                         class="form-control text-line issue-input"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                         value="{{ $stock_cards->issue_qty }}"
-                                                                                                        data-card-id="{{ $stock_cards->id }}">
-                                                                                                </td>
-                                                                                                <td>
-                                                                                                    <input
-                                                                                                        type="text"
-                                                                                                        name="issue_unitcost"
-                                                                                                        id="issue_unitcost"
-                                                                                                        class="form-control text-line issue-input"
-                                                                                                        style="padding-top: 4px; padding-bottom: 4px;"
-                                                                                                        value="{{ $stock_cards->issue_unitcost }}"
-                                                                                                        data-card-id="{{ $stock_cards->id }}">
-                                                                                                </td>
-                                                                                                <td>
-                                                                                                    <input
-                                                                                                        type="text"
-                                                                                                        name="issue_totalcost"
-                                                                                                        id="issue_totalcost"
-                                                                                                        class="form-control text-line issue-total"
-                                                                                                        style="padding-top: 4px; padding-bottom: 4px;"
-                                                                                                        value="{{ $stock_cards->issue_totalcost }}"
-                                                                                                        readonly
-                                                                                                        data-card-id="{{ $stock_cards->id }}">
+                                                                                                        data-card-id="{{ $stock_cards->id }}"
+                                                                                                        hidden>
                                                                                                 </td>
                                                                                                 <td>
                                                                                                     <input
@@ -550,7 +518,8 @@
                                                                                                         id="office_officer"
                                                                                                         class="form-control text-line issue-total"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
-                                                                                                        value="{{ $stock_cards->office_officer }}">
+                                                                                                        value="{{ $stock_cards->office_officer }}"
+                                                                                                        hidden>
                                                                                                 </td>
 
                                                                                                 <!-- Bal section -->
@@ -561,16 +530,8 @@
                                                                                                         class="form-control text-line"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                         placeholder=""
-                                                                                                        value="{{ $stock_cards->bal_qty }}">
-                                                                                                </td>
-                                                                                                <td>
-                                                                                                    <input
-                                                                                                        type="text"
-                                                                                                        name="bal_unitcost"
-                                                                                                        class="form-control text-line"
-                                                                                                        style="padding-top: 4px; padding-bottom: 4px;"
-                                                                                                        placeholder=""
-                                                                                                        value="{{ $stock_cards->bal_unitcost }}">
+                                                                                                        value="{{ $stock_cards->bal_qty }}"
+                                                                                                        hidden>
                                                                                                 </td>
                                                                                                 <td>
                                                                                                     <input
@@ -579,7 +540,8 @@
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                         placeholder=""
                                                                                                         name="bal_totalcost"
-                                                                                                        value="{{ $stock_cards->bal_totalcost }}">
+                                                                                                        value="{{ $stock_cards->bal_totalcost }}"
+                                                                                                        hidden>
                                                                                                 </td>
                                                                                                 <td>
                                                                                                     <input
@@ -587,7 +549,8 @@
                                                                                                         name="no_of_days"
                                                                                                         class="form-control text-line"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
-                                                                                                        value="{{ $stock_cards->no_of_days }}">
+                                                                                                        value="{{ $stock_cards->no_of_days }}"
+                                                                                                        hidden>
                                                                                                     @error('no_of_days')
                                                                                                         <span
                                                                                                             class="text-danger">{{ $message }}</span>
@@ -595,21 +558,127 @@
                                                                                                 </td>
                                                                                                 <td>
                                                                                                     <a class="add"
-                                                                                                        title="Add"
-                                                                                                        data-toggle="tooltip"><i
-                                                                                                            class="material-icons">&#xE03B;</i></a>
+                                                                                                    title="Add"
+                                                                                                    data-edit-add-stockid="{{ $stock_cards->id }} "
+                                                                                                    data-toggle="tooltip"><i
+                                                                                                        class="material-icons">&#xE03B;</i></a>
                                                                                                     <a class="edit"
                                                                                                         title="Edit"
-                                                                                                        data-edit-id=""
-                                                                                                        data-edit-id=""
+                                                                                                        data-edit-id="{{ $stock_cards->id }} "
                                                                                                         data-toggle="tooltip"><i
                                                                                                             class="material-icons">&#xE254;</i></a>
                                                                                                     <a class="delete"
                                                                                                         title="Delete"
+                                                                                                        data-edit-id="{{ $stock_cards->id }}"
                                                                                                         data-toggle="tooltip"><i
                                                                                                             class="material-icons">&#xE872;</i></a>
                                                                                                 </td>
                                                                                             </tr>
+                                                                                            @foreach ($stock_ext->where('stock_id', $stock_cards->id) as $data)
+                                                                                                <tr>
+                                                                                                    <td><input
+                                                                                                            type="date"
+                                                                                                            value="{{ $data->date }}"
+                                                                                                            name="date"
+                                                                                                            class="form-control text-line"
+                                                                                                            style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                                            placeholder="">
+                                                                                                    </td>
+                                                                                                    <td>
+                                                                                                        <textarea type="text" name="reference" class="form-control text-line"
+                                                                                                            style="padding-top: 4px; padding-bottom: 4px;" placeholder="">{{ $data->reference }}</textarea>
+                                                                                                    </td>
+                                                                                                    <td><input
+                                                                                                            type="hidden"
+                                                                                                            name="receipt_qty"
+                                                                                                            value=""
+                                                                                                            class="form-control text-line receipt-input"
+                                                                                                            id="receipt-qty"
+                                                                                                            style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                                            placeholder="">
+                                                                                                    </td>
+                                                                                                    <td><input
+                                                                                                            type="hidden"
+                                                                                                            name="receipt_unitcost"
+                                                                                                            value=""
+                                                                                                            class="form-control text-line receipt-input"
+                                                                                                            id="receipt-unitost"
+                                                                                                            style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                                            placeholder="">
+                                                                                                    </td>
+                                                                                                    <td><input
+                                                                                                            type="hidden"
+                                                                                                            name="receipt_totalcost"
+                                                                                                            value=""
+                                                                                                            class="form-control text-line receipt-total"
+                                                                                                            style="padding-top: 4px; padding-bottom: 4px;">
+                                                                                                    </td>
+                                                                                                    <td><input
+                                                                                                            type="text"
+                                                                                                            name="issue_qty"
+                                                                                                            value="{{ $data->issue_qty }}"
+                                                                                                            class="form-control text-line"
+                                                                                                            style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                                            placeholder="">
+                                                                                                    </td>
+                                                                                                    <td><input
+                                                                                                            type="text"
+                                                                                                            name="office_officer"
+                                                                                                            value="{{ $data->office_officer }}"
+                                                                                                            class="form-control text-line"
+                                                                                                            style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                                            placeholder="">
+                                                                                                    </td>
+                                                                                                    <td
+                                                                                                        class="bal_qty">
+                                                                                                        <input
+                                                                                                            type="text"
+                                                                                                            name="bal_qty"
+                                                                                                            id="bal-qty {{ $data->id }} "
+                                                                                                            value="{{ $data->bal_qty }}"
+                                                                                                            class="form-control text-line"
+                                                                                                            style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                                            placeholder="">
+                                                                                                    </td>
+                                                                                                    <td><input
+                                                                                                            type="text"
+                                                                                                            name="bal_totalcost"
+                                                                                                            value="{{ $data->bal_totalcost }}"
+                                                                                                            class="form-control text-line"
+                                                                                                            style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                                            placeholder="">
+                                                                                                    </td>
+                                                                                                    <td><input
+                                                                                                            type="text"
+                                                                                                            name="no_of_days"
+                                                                                                            value="{{ $data->no_of_days }}"
+                                                                                                            class="form-control text-line"
+                                                                                                            style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                                            placeholder="">
+                                                                                                    </td>
+                                                                                                    <td>
+                                                                                                        <a class="add"
+                                                                                                            title="Add"
+                                                                                                            data-edit-add-stockid="{{ $stock_cards->id }} "
+                                                                                                            data-edit-id="{{ $data->id }}"
+                                                                                                            data-toggle="tooltip"><i
+                                                                                                                class="material-icons">&#xE03B;</i></a>
+                                                                                                        <a class="edit"
+                                                                                                            title="Edit"
+                                                                                                            data-edit-id="{{ $data->id }}"
+                                                                                                            data-edit-id="{{ $stock_cards->id }} "
+                                                                                                            data-toggle="tooltip"><i
+                                                                                                                class="material-icons">&#xE254;</i></a>
+                                                                                                        <a class="delete"
+                                                                                                            title="Delete"
+                                                                                                            data-edit-id="{{ $data->id }}"
+                                                                                                            data-toggle="tooltip"><i
+                                                                                                                class="material-icons">&#xE872;</i></a>
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                                <tr>
+                                                                                                </tr>
+                                                                                            @endforeach
                                                                                         </tbody>
                                                                                     </table>
                                                                                 </div>
@@ -737,72 +806,511 @@
             </script>
         @endif
 
-
         <script>
+            var csrfToken = "{{ csrf_token() }}";
             $(document).ready(function() {
                 $('[data-toggle="tooltip"]').tooltip();
-                var actions = $("table td:last-child").html();
-                // Append table with add row form on add new button click
-                $(".add-new").click(function() {
-                    $(this).attr("disabled", "disabled");
-                    var index = $("table tbody tr:last-child").index();
-                    var row = '<tr>' +
-                        '<td><input type="date" class="form-control text-line" name="date" style="padding-top: 4px; padding-bottom: 4px;" value=""></td>' +
-                        '<td><input type="text" class="form-control text-line" name="reference" style="padding-top: 4px; padding-bottom: 4px;" value=""></td>' +
-                        '<td><input type="text" class="form-control text-line receipt-input" name="receipt_qty" id="receipt_qtyy" style="padding-top: 4px; padding-bottom: 4px;" placeholder="" value=""></td>' +
-                        '<td><input type="text" class="form-control text-line receipt-input" name="receipt_unitcost" id="receipt_unitcost" style="padding-top: 4px; padding-bottom: 4px;" placeholder="" value=""></td>' +
-                        '<td><input type="text" class="form-control text-line receipt-total" name="receipt_totalcost" id="receipt_totalcost" style="padding-top: 4px; padding-bottom: 4px;"  value=""></td>' +
-                        '<td><input type="text" class="form-control text-line issue-input" name="issue_qty" id="issue_qty" style="padding-top: 4px; padding-bottom: 4px;" value=""></td>' +
-                        '<td><input type="text" class="form-control text-line issue-input" name="issue_unitcost" id="issue_unitcost" style="padding-top: 4px; padding-bottom: 4px;" value=""></td>' +
-                        '<td><input type="text" class="form-control text-line issue-total" name="issue_totalcost" id="issue_totalcost" style="padding-top: 4px; padding-bottom: 4px;"  value=""></td>' +
-                        '<td><input type="text" class="form-control text-line issue-total" name="office_officer" id="office_officer" style="padding-top: 4px; padding-bottom: 4px;" value=""></td>' +
-                        '<td><input type="text" class="form-control text-line" name="bal_qty" style="padding-top: 4px; padding-bottom: 4px;" value=""></td>' +
-                        '<td><input type="text" class="form-control text-line" name="bal_unitcost" style="padding-top: 4px; padding-bottom: 4px;" value=""></td>' +
-                        '<td><input type="text" class="form-control text-line" name="bal_totalcost" style="padding-top: 4px; padding-bottom: 4px;" value=""></td>' +
-                        '<td><input type="text" class="form-control text-line" name="no_of_days" style="padding-top: 4px; padding-bottom: 4px;" value=""></td>' +
-                        '<td>' + actions + '</td>' +
-                        '</tr>';
-                    $("table").append(row);
-                    $("table tbody tr").eq(index + 1).find(".add, .edit").toggle();
+
+                $(document).on('click', '.add-new', function(event) {
+                    event.preventDefault();
+
+                    var stockId = $(this).data("stock-id");
+                    var modal = $('#editItemModal' + stockId);
+                    var table = modal.find('.table-bordered.table-resizable tbody');
+                    var editId = $(this).data("edit-id");
+                    var actions =
+                        '<a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>' +
+                        '<a class="edit" title="Edit" data-edit-id="' + editId +
+                        '" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>' +
+                        '<a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>';
+
+                    var row = $('<tr>').append(
+                        $('<td>').append(
+                            '<input type="date" class="form-control text-line" name="date" style="padding-top: 4px; padding-bottom: 4px;" value="">'
+                            ),
+                        $('<td>').append(
+                            '<input type="text" class="form-control text-line" name="reference" style="padding-top: 4px; padding-bottom: 4px;" value="">'
+                            ),
+                        $('<td>').append(
+                            '<input type="hidden" class="form-control text-line receipt-input" name="" id="receipt_qty" style="padding-top: 4px; padding-bottom: 4px;" placeholder="" value="">'
+                            ),
+                        $('<td>').append(
+                            '<input type="hidden" class="form-control text-line receipt-input" name="" id="receipt_unitcost" style="padding-top: 4px; padding-bottom: 4px;" placeholder="" value="">'
+                            ),
+                        $('<td>').append(
+                            '<input type="hidden" class="form-control text-line receipt-total" name="" id="receipt_totalcost" style="padding-top: 4px; padding-bottom: 4px;" value="">'
+                            ),
+                        $('<td>').append(
+                            '<input type="text" class="form-control text-line issue-input" name="issue_qty" id="issue_qty" style="padding-top: 4px; padding-bottom: 4px;" value="">'
+                            ),
+                        $('<td>').append(
+                            '<input type="text" class="form-control text-line issue-total" name="office_officer" id="office_officer" style="padding-top: 4px; padding-bottom: 4px;" value="">'
+                            ),
+                        $('<td>').append(
+                            '<input type="text" class="form-control text-line" name="bal_qty" style="padding-top: 4px; padding-bottom: 4px;" value="">'
+                            ),
+                        $('<td>').append(
+                            '<input type="text" class="form-control text-line" name="bal_totalcost" style="padding-top: 4px; padding-bottom: 4px;" value="">'
+                            ),
+                        $('<td>').append(
+                            '<input type="text" class="form-control text-line" name="no_of_days" style="padding-top: 4px; padding-bottom: 4px;" value="">'
+                            ),
+                        $('<td>').append(actions),
+                        $('<td>').append('<input type="text" name="stock_id" value="' + stockId +
+                            '" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">'
+                            )
+                    );
+
+                    table.append(row);
+                    var rowCount = table.find("tr").length;
+                    console.log("rowCount:", rowCount);
+
+                    if (rowCount === 2) {
+                        console.log("row 2 has been added.");
+
+                        $(document).on("input",
+                            '.modal-body input[name="receipt_qty"], .modal-body input[name="issue_qty"]',
+                            function() {
+                                console.log("Calculating balance...");
+                                var receiptQty = $(this).closest(".modal-body").find(
+                                    'input[name="receipt_qty"]').val() || 0;
+                                var unitCost = parseFloat($(this).closest(".modal-body").find(
+                                    'input[name="receipt_unitcost"]').val()) || 0;
+                                var issueQty = $(this).closest("tr").find('input[name="issue_qty"]')
+                                .val() || 0;
+
+                                var balanceQty = receiptQty - issueQty;
+                                var balanceTotal = unitCost * balanceQty;
+
+                                console.log("Balance calculated. Quantity:", balanceQty, "Amount:",
+                                    balanceTotal);
+
+                                $(this).closest("tr").find('input[name="bal_qty"]').val(balanceQty);
+                                $(this).closest("tr").find('input[name="bal_totalcost"]').val(balanceTotal
+                                    .toFixed(2));
+                            });
+                    } else if (rowCount > 2) {
+                        console.log("more than 2 rows have been added.");
+
+                        // Ensure that the elements targeted by the selector exist
+                        console.log("Checking elements existence...");
+                        $(document).on("input",
+                            ' input[name="bal_qty"], input[name="issue_qty"], input[name="bal_totalcost"]',
+                            function() {
+                                console.log("Calculating new balance...");
+                                var $row = $(this).closest("tr");
+                                // Get the index of the current row
+                                var index = $row.index();
+                                if (index > 1 && index < $("table tbody tr").length) {
+                                    var prevRowBalQtyInput = $row.prev().prev().find(
+                                        'input[name="bal_qty"]');
+                                    var prevRowBalQtyValue = prevRowBalQtyInput.val();
+                                    var prevRowBalQty = parseFloat(
+                                    prevRowBalQtyValue); // Define prevRowBalQty here
+                                    console.log("Previous Row Bal Qty:", prevRowBalQty);
+                                    var unitCost = parseFloat($(this)
+                                        .closest(".modal-body")
+                                        .find('input[name="receipt_unitcost"]')
+                                        .val());
+                                    console.log("Unitcost:", unitCost);
+                                    var issueQty = parseFloat(table.find(
+                                        'tr:last-child input[name="issue_qty"]').val());
+
+                                    console.log("Issue Qty:", issueQty);
+
+
+                                    var newBalQty = prevRowBalQty - issueQty;
+
+                                    var newBalTotalCost = unitCost * newBalQty;
+                                    console.log("New Bal Qty:", newBalQty);
+                                    console.log("New Bal TotalCost:", newBalTotalCost);
+                                    $row.find('input[name="bal_qty"]').val(newBalQty);
+                                    $row.find('input[name="bal_totalcost"]').val(newBalTotalCost);
+                                } else {
+                                    console.log("NO VALUE FOR THE PREVIOUS BAL QTY");
+                                }
+                        });
+
+                    }
+                    $("table tbody tr:last-child").find(".add").show();
+                    $("table tbody tr:last-child").find(".edit").hide();
                     $('[data-toggle="tooltip"]').tooltip();
                 });
-                // Add row on add button click
+
                 $(document).on("click", ".add", function() {
-                    var empty = false;
-                    var input = $(this).parents("tr").find('input[type="text"]');
+                    var rowData = {};
+                    var input = $(this).parents("tr").find(
+                        'input[type="text"], input[type="date"], textarea');
+
                     input.each(function() {
-                        if (!$(this).val()) {
-                            $(this).addClass("error");
-                            empty = true;
-                        } else {
-                            $(this).removeClass("error");
-                        }
+                        var name = $(this).attr("name");
+                        var value = $(this).val();
+                        rowData[name] = value;
                     });
-                    $(this).parents("tr").find(".error").first().focus();
-                    if (!empty) {
-                        input.each(function() {
-                            $(this).parent("td").html($(this).val());
-                        });
-                        $(this).parents("tr").find(".add, .edit").toggle();
-                        $(".add-new").removeAttr("disabled");
-                    }
-                });
-                // Edit row on edit button click
-                $(document).on("click", ".edit", function() {
-                    $(this).parents("tr").find("td:not(:last-child)").each(function() {
-                        $(this).html('<input type="text" class="form-control" value="' + $(this)
-                            .text() + '">');
+                    $.ajax({
+                        type: "POST",
+                        url: "/add-stock-extension",
+                        headers: {
+                            "X-CSRF-TOKEN": csrfToken,
+                        },
+                        data: JSON.stringify(rowData), // Ensure the data is sent as JSON
+                        contentType: "application/json", // Set the content type to JSON
+                        success: function(response) {
+                            // Update table with new row data
+                            var newRow = "<tr>";
+                            Object.values(rowData).forEach(function(value) {
+                                newRow += "<td>" + value + "</td>";
+                            });
+                            newRow += "<td>" + actions + "</td></tr>";
+                            $("table tbody").append(newRow);
+                        },
+                        error: function(xhr, status, error) {
+                            // Handle error
+                            console.error(xhr.responseText);
+                        },
                     });
+
                     $(this).parents("tr").find(".add, .edit").toggle();
-                    $(".add-new").attr("disabled", "disabled");
-                });
-                // Delete row on delete button click
-                $(document).on("click", ".delete", function() {
-                    $(this).parents("tr").remove();
                     $(".add-new").removeAttr("disabled");
                 });
+
+                $(document).on("click", ".edit", function() {
+                    var row = $(this).closest("tr");
+                    var editId = $(this).data("edit-id");
+
+                    if (editId) {
+                        $.ajax({
+                            type: "GET",
+                            url: "/get-stock-ext-data/" + editId,
+                            success: function(response) {
+                                var rowData = response;
+                                row.find("td:not(:last-child)").each(function() {
+                                    var fieldName = $(this).data("field-name");
+                                    if (fieldName) {
+                                        var value = rowData[fieldName];
+                                        // Check if the field is an input field
+                                        var inputField = $('<input>', {
+                                            type: 'text',
+                                            class: 'form-control',
+                                            name: fieldName,
+                                            value: value
+                                        });
+                                        $(this).html(inputField);
+                                    }
+                                });
+
+                                // Show the save button and hide the edit button
+                                row.find(".add").show();
+                                row.find(".edit").hide();
+                            },
+                            error: function(xhr, status, error) {
+                                // Handle error
+                                console.error(xhr.responseText);
+                            },
+                        });
+                    } else {
+                        console.error("editId is undefined");
+                    }
+                });
+
+
+                $(document).on("click", ".add", function() {
+                    var row = $(this).closest("tr");
+                    var stockId = $(this).data("edit-add-stockid");
+                    var editId = $(this).data("edit-id");
+                    var rowData = {
+                        prop_id: stockId,
+                    };
+
+                    // Collect the updated data from the row
+                    row.find('input[type="text"], input[type="checkbox"]').each(
+                        function() {
+                            var fieldName = $(this).attr("name");
+                            var value = $(this).is(":checkbox") ?
+                                $(this).is(":checked") :
+                                $(this).val();
+                            rowData[fieldName] = value;
+                        }
+                    );
+
+                    // Set the ID value if available
+                    if (editId) {
+                        rowData.id = editId;
+                    }
+
+                    // Perform an AJAX request to update the data on the server
+                    $.ajax({
+                        type: "POST",
+                        url: "/update-stock-ext-data/" + editId, // Use editId in the URL
+                        headers: {
+                            "X-CSRF-TOKEN": csrfToken,
+                        },
+                        data: rowData,
+                        success: function(response) {
+                            // Optionally, handle success response
+                            console.log("Data updated successfully!");
+                        },
+                        error: function(xhr, status, error) {
+                            // Handle error
+                            console.error(xhr.responseText);
+                        },
+                    });
+                    row.find(".edit").show();
+                    row.find(".add").hide();
+                });
+
+                $(document).on("click", ".delete", function() {
+                    var editId = $(this).data("edit-id");
+                    var $deleteButton = $(this); // Store reference to the delete button
+
+                    // Perform an AJAX request to delete the data on the server
+                    $.ajax({
+                        type: "DELETE", // Use DELETE method
+                        url: "/delete-stockext-data/" + editId, // Use editId in the URL
+                        headers: {
+                            "X-CSRF-TOKEN": csrfToken,
+                        },
+                        success: function(response) {
+                            // Optionally, handle success response
+                            console.log("Data deleted successfully!");
+                            // Remove the row from the table after successful deletion
+                            $deleteButton.closest("tr")
+                        .remove(); // Use the stored reference to deleteButton
+                        },
+                        error: function(xhr, status, error) {
+                            // Handle error
+                            console.error(xhr.responseText);
+                        },
+                    });
+                });
             });
+
+            $(document).ready(function(){
+            $(document).on("click", ".edit", function() {
+                var row = $(this).closest("tr");
+                var editId = $(this).data("edit-id");
+
+                if (editId) {
+                    $.ajax({
+                        type: "GET",
+                        url: "/get-stock-ext-data/" + editId,
+                        success: function(response) {
+                            var rowData = response;
+                            row.find("td:not(:last-child)").each(function() {
+                                var fieldName = $(this).data("field-name");
+                                if (fieldName) {
+                                    var value = rowData[fieldName];
+                                    // Check if the field is an input field
+                                    var inputField = $('<input>', {
+                                        type: 'text',
+                                        class: 'form-control',
+                                        name: fieldName,
+                                        value: value
+                                    });
+                                    $(this).html(inputField);
+                                }
+                            });
+
+                            // Show the save button and hide the edit button
+                            row.find(".add").show();
+                            row.find(".edit").hide();
+                        },
+                        error: function(xhr, status, error) {
+                            // Handle error
+                            console.error(xhr.responseText);
+                        },
+                    });
+                } else {
+                    console.error("editId is undefined");
+                }
+            });
+
+
+            $(document).on("click", ".add", function() {
+                var row = $(this).closest("tr");
+                var stockId = $(this).data("edit-add-stockid");
+                var editId = $(this).data("edit-id");
+                var rowData = {
+                    prop_id: stockId,
+                };
+
+                // Collect the updated data from the row
+                row.find('input[type="text"], input[type="checkbox"]').each(
+                    function() {
+                        var fieldName = $(this).attr("name");
+                        var value = $(this).is(":checkbox") ?
+                            $(this).is(":checked") :
+                            $(this).val();
+                        rowData[fieldName] = value;
+                    }
+                );
+
+                // Set the ID value if available
+                if (editId) {
+                    rowData.id = editId;
+                }
+
+                // Perform an AJAX request to update the data on the server
+                $.ajax({
+                    type: "POST",
+                    url: "/update-stock-ext-data/" + editId, // Use editId in the URL
+                    headers: {
+                        "X-CSRF-TOKEN": csrfToken,
+                    },
+                    data: rowData,
+                    success: function(response) {
+                        // Optionally, handle success response
+                        console.log("Data updated successfully!");
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle error
+                        console.error(xhr.responseText);
+                    },
+                });
+                row.find(".edit").show();
+                row.find(".add").hide();
+            });
+
+            $(document).on("click", ".delete", function() {
+                var editId = $(this).data("edit-id");
+                var $deleteButton = $(this); // Store reference to the delete button
+
+                // Perform an AJAX request to delete the data on the server
+                $.ajax({
+                    type: "DELETE", // Use DELETE method
+                    url: "/delete-stockext-data/" + editId, // Use editId in the URL
+                    headers: {
+                        "X-CSRF-TOKEN": csrfToken,
+                    },
+                    success: function(response) {
+                        // Optionally, handle success response
+                        console.log("Data deleted successfully!");
+                        // Remove the row from the table after successful deletion
+                        $deleteButton.closest("tr")
+                    .remove(); // Use the stored reference to deleteButton
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle error
+                        console.error(xhr.responseText);
+                    },
+                });
+            });
+        })
         </script>
+        <script>
+            $(document).ready(function(){
+            $(document).on("click", ".editParent", function() {
+                var row = $(this).closest("tr");
+                var editId = $(this).data("edit-id");
+
+                if (editId) {
+                    $.ajax({
+                        type: "GET",
+                        url: "/get-stock-ext-data/" + editId,
+                        success: function(response) {
+                            var rowData = response;
+                            row.find("td:not(:last-child)").each(function() {
+                                var fieldName = $(this).data("field-name");
+                                if (fieldName) {
+                                    var value = rowData[fieldName];
+                                    // Check if the field is an input field
+                                    var inputField = $('<input>', {
+                                        type: 'text',
+                                        class: 'form-control',
+                                        name: fieldName,
+                                        value: value
+                                    });
+                                    $(this).html(inputField);
+                                }
+                            });
+
+                            // Show the save button and hide the edit button
+                            row.find(".add").show();
+                            row.find(".edit").hide();
+                        },
+                        error: function(xhr, status, error) {
+                            // Handle error
+                            console.error(xhr.responseText);
+                        },
+                    });
+                } else {
+                    console.error("editId is undefined");
+                }
+            });
+
+
+            $(document).on("click", ".add", function() {
+                var row = $(this).closest("tr");
+                var stockId = $(this).data("edit-add-stockid");
+                var editId = $(this).data("edit-id");
+                var rowData = {
+                    prop_id: stockId,
+                };
+
+                // Collect the updated data from the row
+                row.find('input[type="text"], input[type="checkbox"]').each(
+                    function() {
+                        var fieldName = $(this).attr("name");
+                        var value = $(this).is(":checkbox") ?
+                            $(this).is(":checked") :
+                            $(this).val();
+                        rowData[fieldName] = value;
+                    }
+                );
+
+                // Set the ID value if available
+                if (editId) {
+                    rowData.id = editId;
+                }
+
+                // Perform an AJAX request to update the data on the server
+                $.ajax({
+                    type: "POST",
+                    url: "/update-stock-ext-data/" + editId, // Use editId in the URL
+                    headers: {
+                        "X-CSRF-TOKEN": csrfToken,
+                    },
+                    data: rowData,
+                    success: function(response) {
+                        // Optionally, handle success response
+                        console.log("Data updated successfully!");
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle error
+                        console.error(xhr.responseText);
+                    },
+                });
+                row.find(".edit").show();
+                row.find(".add").hide();
+            });
+
+            $(document).on("click", ".delete", function() {
+                var editId = $(this).data("edit-id");
+                var $deleteButton = $(this); // Store reference to the delete button
+
+                // Perform an AJAX request to delete the data on the server
+                $.ajax({
+                    type: "DELETE", // Use DELETE method
+                    url: "/delete-stockext-data/" + editId, // Use editId in the URL
+                    headers: {
+                        "X-CSRF-TOKEN": csrfToken,
+                    },
+                    success: function(response) {
+                        // Optionally, handle success response
+                        console.log("Data deleted successfully!");
+                        // Remove the row from the table after successful deletion
+                        $deleteButton.closest("tr")
+                    .remove(); // Use the stored reference to deleteButton
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle error
+                        console.error(xhr.responseText);
+                    },
+                });
+            });
+        })
+        </script>
+
         @include('footer')
     </div>
 </body>

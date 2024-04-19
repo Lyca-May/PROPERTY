@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PropCardExtension_Controller;
+use App\Http\Controllers\StockCardExtension_Controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -89,4 +90,10 @@ Route::get('/get-prop-ext-data/{id}', [PropCardExtension_Controller::class, 'get
 Route::post('/update-prop-ext-data/{id}', [PropCardExtension_Controller::class, 'saveEditedData']);
 Route::delete('/delete-propext-data/{id}', [PropCardExtension_Controller::class, 'deletePropExt']);
 // Route::get('/fetch-officers', [PropertyController::class, 'fetchOfficers']);
+
+//stock ext
+Route::post('/add-stock-extension', [StockCardExtension_Controller::class, 'addStockExt']);
+Route::get('/get-stock-ext-data/{id}', [StockCardExtension_Controller::class, 'getStockExtData']);
+Route::post('/update-stock-ext-data/{id}', [StockCardExtension_Controller::class, 'saveEditedData']);
+Route::delete('/delete-stockext-data/{id}', [StockCardExtension_Controller::class, 'deleteStockExt']);
 
