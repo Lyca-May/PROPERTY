@@ -69,6 +69,26 @@ class PropertyController extends Controller
         return view('property_division.stockcards', compact('stock_card', 'stock_ext'));
     }
 
+    public function getStockEditData($id)
+    {
+        $stock = PropertyModel::findOrFail($id);
+        return response()->json($stock);
+    }
+
+    public function saveEditedData($id) {
+        $stockData = PropertyModel::findOrFail($id);
+        $requestData = request()->all();
+        $stockData->update($requestData);
+        return response()->json(['message' => 'Data updated successfully']);
+    }
+    public function deleteStock($id)
+    {
+        PropertyModel::destroy($id);
+
+        return response()->json(['success' => true]); // Return success response
+    }
+
+
     public function edit_stock_card(Request $request, $id)
     {
         // Retrieve all input data
@@ -146,10 +166,6 @@ class PropertyController extends Controller
             'receipt_qty' => 'required',
             'receipt_unitcost' => 'required',
             'receipt_totalcost' => 'required',
-            'issue_qty' => 'required',
-            'issue_office_officer' => 'required',
-            'repair_amount' => 'required',
-            'remarks' => 'required',
         ], [
             'entity_name.required' => 'The entity name field is required.',
             'fund_cluster.required' => 'The fund cluster field is required.',
@@ -162,8 +178,6 @@ class PropertyController extends Controller
             'receipt_qty.required' => 'The receipt quantity field is required.',
             'receipt_unitcost.required' => 'The receipt unit cost field is required.',
             'receipt_totalcost.required' => 'The receipt total cost field is required.',
-            'repair_amount.required' => 'The repair amount field is required.',
-            'remarks.required' => 'The remarks field is required.',
         ]);
 
         $propCard = new PropCardModel();
@@ -176,10 +190,17 @@ class PropertyController extends Controller
     public function getPropertyCards()
     {
        // Retrieve all data from PropCardModel
-        $prop_card = PropCardModel::all();
+        $propCard = PropCardModel::first();
         $prop_ext = PropCardExtension_Model::get();
-        $filteredOfficers = PropCardExtension_Model::where('issue_transfer_disposal', 'ISSUE')->pluck('office_officer')->toArray();
-
+        $prop_card = PropCardModel::all(); // use this to populate data in the script
+        $filteredOfficers = PropCardExtension_Model::where(function($query) {
+            $query->where('issue_transfer_disposal', 'ISSUE')
+                  ->orWhere('issue_transfer_disposal', 'TRANSFER');
+        })
+        ->where('issue_qty', '!=', 0)
+        ->pluck('office_officer')
+        ->toArray();
+        
         return view('property_division.propertycards', compact('prop_card', 'prop_ext', 'filteredOfficers'));
 
     }
@@ -348,11 +369,12 @@ class PropertyController extends Controller
             return back()->withErrors([$e->getMessage()])->withInput();
         }
     }
-
     public function getDataForSEPC()
     {
         $sep_card = SemiModel::get();
-        return view('property_division.SEC', ['sep_card' => $sep_card]);
+        $semi_ext = StockCardExtension_Model::get();
+
+        return view('property_division.SEC', compact('sep_card','semi_ext'));
     }
 
     public function edit_sep_card(Request $request, $id)

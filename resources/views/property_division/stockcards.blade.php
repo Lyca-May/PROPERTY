@@ -530,8 +530,8 @@
                                                                                                         class="form-control text-line"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                         placeholder=""
-                                                                                                        value="{{ $stock_cards->bal_qty }}"
-                                                                                                        hidden>
+                                                                                                        value="{{ $stock_cards->receipt_qty }}" readonly
+                                                                                                    >
                                                                                                 </td>
                                                                                                 <td>
                                                                                                     <input
@@ -540,8 +540,8 @@
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                         placeholder=""
                                                                                                         name="bal_totalcost"
-                                                                                                        value="{{ $stock_cards->bal_totalcost }}"
-                                                                                                        hidden>
+                                                                                                        value="{{ $stock_cards->receipt_totalcost }}"
+                                                                                                        readonly>
                                                                                                 </td>
                                                                                                 <td>
                                                                                                     <input
@@ -559,7 +559,7 @@
                                                                                                 <td>
                                                                                                     <a class="add"
                                                                                                     title="Add"
-                                                                                                    data-edit-add-stockid="{{ $stock_cards->id }} "
+                                                                                                    data-edit-id="{{ $stock_cards->id }} "
                                                                                                     data-toggle="tooltip"><i
                                                                                                         class="material-icons">&#xE03B;</i></a>
                                                                                                     <a class="edit"
@@ -569,7 +569,7 @@
                                                                                                             class="material-icons">&#xE254;</i></a>
                                                                                                     <a class="delete"
                                                                                                         title="Delete"
-                                                                                                        data-edit-id="{{ $stock_cards->id }}"
+                                                                                                        data-del-id="{{ $stock_cards->id }}"
                                                                                                         data-toggle="tooltip"><i
                                                                                                             class="material-icons">&#xE872;</i></a>
                                                                                                 </td>
@@ -856,7 +856,7 @@
                             '<input type="text" class="form-control text-line" name="no_of_days" style="padding-top: 4px; padding-bottom: 4px;" value="">'
                             ),
                         $('<td>').append(actions),
-                        $('<td>').append('<input type="text" name="stock_id" value="' + stockId +
+                        $('<td hidden>').append('<input type="text" name="stock_id" value="' + stockId +
                             '" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">'
                             )
                     );
@@ -1084,7 +1084,8 @@
                     });
                 });
             });
-
+        </script>
+        <script>
             $(document).ready(function(){
             $(document).on("click", ".edit", function() {
                 var row = $(this).closest("tr");
@@ -1093,7 +1094,7 @@
                 if (editId) {
                     $.ajax({
                         type: "GET",
-                        url: "/get-stock-ext-data/" + editId,
+                        url: "/get-stock-data/" + editId,
                         success: function(response) {
                             var rowData = response;
                             row.find("td:not(:last-child)").each(function() {
@@ -1128,32 +1129,25 @@
 
             $(document).on("click", ".add", function() {
                 var row = $(this).closest("tr");
-                var stockId = $(this).data("edit-add-stockid");
-                var editId = $(this).data("edit-id");
-                var rowData = {
-                    prop_id: stockId,
-                };
+                var stockId = $(this).data("edit-id");
+                var rowData = {};
 
                 // Collect the updated data from the row
-                row.find('input[type="text"], input[type="checkbox"]').each(
-                    function() {
-                        var fieldName = $(this).attr("name");
-                        var value = $(this).is(":checkbox") ?
-                            $(this).is(":checked") :
-                            $(this).val();
-                        rowData[fieldName] = value;
-                    }
-                );
+                row.find('input[type="text"], input[type="checkbox"]').each(function() {
+                    var fieldName = $(this).attr("name");
+                    var value = $(this).is(":checkbox") ? $(this).is(":checked") : $(this).val();
+                    rowData[fieldName] = value;
+                });
 
                 // Set the ID value if available
-                if (editId) {
-                    rowData.id = editId;
+                if (stockId) {
+                    rowData.id = stockId;
                 }
 
                 // Perform an AJAX request to update the data on the server
                 $.ajax({
                     type: "POST",
-                    url: "/update-stock-ext-data/" + editId, // Use editId in the URL
+                    url: "/update-stock-data/" + stockId, // Use stockId in the URL
                     headers: {
                         "X-CSRF-TOKEN": csrfToken,
                     },
@@ -1167,131 +1161,21 @@
                         console.error(xhr.responseText);
                     },
                 });
+
+                // Show edit and hide add button
                 row.find(".edit").show();
                 row.find(".add").hide();
             });
 
+
             $(document).on("click", ".delete", function() {
-                var editId = $(this).data("edit-id");
+                var delId = $(this).data("del-id");
                 var $deleteButton = $(this); // Store reference to the delete button
 
                 // Perform an AJAX request to delete the data on the server
                 $.ajax({
                     type: "DELETE", // Use DELETE method
-                    url: "/delete-stockext-data/" + editId, // Use editId in the URL
-                    headers: {
-                        "X-CSRF-TOKEN": csrfToken,
-                    },
-                    success: function(response) {
-                        // Optionally, handle success response
-                        console.log("Data deleted successfully!");
-                        // Remove the row from the table after successful deletion
-                        $deleteButton.closest("tr")
-                    .remove(); // Use the stored reference to deleteButton
-                    },
-                    error: function(xhr, status, error) {
-                        // Handle error
-                        console.error(xhr.responseText);
-                    },
-                });
-            });
-        })
-        </script>
-        <script>
-            $(document).ready(function(){
-            $(document).on("click", ".editParent", function() {
-                var row = $(this).closest("tr");
-                var editId = $(this).data("edit-id");
-
-                if (editId) {
-                    $.ajax({
-                        type: "GET",
-                        url: "/get-stock-ext-data/" + editId,
-                        success: function(response) {
-                            var rowData = response;
-                            row.find("td:not(:last-child)").each(function() {
-                                var fieldName = $(this).data("field-name");
-                                if (fieldName) {
-                                    var value = rowData[fieldName];
-                                    // Check if the field is an input field
-                                    var inputField = $('<input>', {
-                                        type: 'text',
-                                        class: 'form-control',
-                                        name: fieldName,
-                                        value: value
-                                    });
-                                    $(this).html(inputField);
-                                }
-                            });
-
-                            // Show the save button and hide the edit button
-                            row.find(".add").show();
-                            row.find(".edit").hide();
-                        },
-                        error: function(xhr, status, error) {
-                            // Handle error
-                            console.error(xhr.responseText);
-                        },
-                    });
-                } else {
-                    console.error("editId is undefined");
-                }
-            });
-
-
-            $(document).on("click", ".add", function() {
-                var row = $(this).closest("tr");
-                var stockId = $(this).data("edit-add-stockid");
-                var editId = $(this).data("edit-id");
-                var rowData = {
-                    prop_id: stockId,
-                };
-
-                // Collect the updated data from the row
-                row.find('input[type="text"], input[type="checkbox"]').each(
-                    function() {
-                        var fieldName = $(this).attr("name");
-                        var value = $(this).is(":checkbox") ?
-                            $(this).is(":checked") :
-                            $(this).val();
-                        rowData[fieldName] = value;
-                    }
-                );
-
-                // Set the ID value if available
-                if (editId) {
-                    rowData.id = editId;
-                }
-
-                // Perform an AJAX request to update the data on the server
-                $.ajax({
-                    type: "POST",
-                    url: "/update-stock-ext-data/" + editId, // Use editId in the URL
-                    headers: {
-                        "X-CSRF-TOKEN": csrfToken,
-                    },
-                    data: rowData,
-                    success: function(response) {
-                        // Optionally, handle success response
-                        console.log("Data updated successfully!");
-                    },
-                    error: function(xhr, status, error) {
-                        // Handle error
-                        console.error(xhr.responseText);
-                    },
-                });
-                row.find(".edit").show();
-                row.find(".add").hide();
-            });
-
-            $(document).on("click", ".delete", function() {
-                var editId = $(this).data("edit-id");
-                var $deleteButton = $(this); // Store reference to the delete button
-
-                // Perform an AJAX request to delete the data on the server
-                $.ajax({
-                    type: "DELETE", // Use DELETE method
-                    url: "/delete-stockext-data/" + editId, // Use editId in the URL
+                    url: "/delete-stock-data/" + delId, // Use editId in the URL
                     headers: {
                         "X-CSRF-TOKEN": csrfToken,
                     },

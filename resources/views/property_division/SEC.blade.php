@@ -282,6 +282,21 @@
                                                                                                 class="text-danger">{{ $message }}</span>
                                                                                         @enderror
                                                                                     </div>
+
+                                                                                    <div class="col-md-4">
+                                                                                        <label
+                                                                                            class="col-form-label"><b>Description:</b></label>
+                                                                                        <input type="text"
+                                                                                            name="desc"
+                                                                                            class="form-control text-line"
+                                                                                            style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                            value="{{ $sep->desc }}">
+                                                                                        @error('desc')
+                                                                                            <span
+                                                                                                class="text-danger">{{ $message }}</span>
+                                                                                        @enderror
+                                                                                    </div>
+
                                                                                     <div class="col-md-4">
                                                                                         <label
                                                                                             class="col-form-label"><b>
@@ -295,19 +310,6 @@
                                                                                         @error('prop_no')
                                                                                             <span
                                                                                                 class=" text-danger">{{ $message }}</span>
-                                                                                        @enderror
-                                                                                    </div>
-                                                                                    <div class="col-md-4">
-                                                                                        <label
-                                                                                            class="col-form-label"><b>Description:</b></label>
-                                                                                        <input type="text"
-                                                                                            name="desc"
-                                                                                            class="form-control text-line"
-                                                                                            style="padding-top: 4px; padding-bottom: 4px;"
-                                                                                            value="{{ $sep->desc }}">
-                                                                                        @error('desc')
-                                                                                            <span
-                                                                                                class="text-danger">{{ $message }}</span>
                                                                                         @enderror
                                                                                     </div>
                                                                                 </div>
@@ -330,7 +332,11 @@
                                                                                                     RECEIPT
                                                                                                 </th>
                                                                                                 <th scope="col"
-                                                                                                    colspan="3"
+                                                                                                    colspan=""
+                                                                                                    style="text-align: center;">
+                                                                                                </th>
+                                                                                                <th scope="col"
+                                                                                                    colspan="4"
                                                                                                     style="text-align: center;">
                                                                                                     ISSUE/TRANSFER/DISPOSAL
                                                                                                 </th>
@@ -374,8 +380,16 @@
                                                                                                 </th>
                                                                                                 <th scope="col"
                                                                                                     style="text-align: center;">
+                                                                                                    TRANSFER FROM?
+                                                                                                </th>
+                                                                                                <th scope="col"
+                                                                                                    style="text-align: center;">
                                                                                                     OFFICE
                                                                                                     OFFICER</th>
+                                                                                                <th scope="col"
+                                                                                                    style="text-align: center;">
+                                                                                                    CATEGORY
+                                                                                                </th>
                                                                                                 <th scope="col"
                                                                                                     style="text-align: center;">
                                                                                                     QTY
@@ -466,7 +480,7 @@
                                                                                                         class="form-control text-line"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                         placeholder=""
-                                                                                                        value="{{ $sep->item_no }}">
+                                                                                                        value="{{ $sep->item_no }}" hidden>
                                                                                                     @error('item_no')
                                                                                                         <span
                                                                                                             class="text-danger">{{ $message }}</span>
@@ -480,7 +494,21 @@
                                                                                                         class="form-control text-line"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                         placeholder=""
-                                                                                                        value="{{ $sep->issue_qty }}">
+                                                                                                        value="{{ $sep->issue_qty }}" hidden>
+                                                                                                    @error('issue_qty')
+                                                                                                        <span
+                                                                                                            class="text-danger">{{ $message }}</span>
+                                                                                                    @enderror
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <input
+                                                                                                        type="text"
+                                                                                                        name="transfer_from"
+                                                                                                        id="issue_qty"
+                                                                                                        class="form-control text-line"
+                                                                                                        style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                                        placeholder=""
+                                                                                                        value="{{ $sep->transfer_from }}" hidden>
                                                                                                     @error('issue_qty')
                                                                                                         <span
                                                                                                             class="text-danger">{{ $message }}</span>
@@ -494,7 +522,21 @@
                                                                                                         class="form-control text-line"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                         placeholder=""
-                                                                                                        value="{{ $sep->office_officer }}">
+                                                                                                        value="{{ $sep->office_officer }}" hidden>
+                                                                                                    @error('office_officer')
+                                                                                                        <span
+                                                                                                            class="text-danger">{{ $message }}</span>
+                                                                                                    @enderror
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <input
+                                                                                                        type="text"
+                                                                                                        name="issue_transfer_disposal"
+                                                                                                        id=""
+                                                                                                        class="form-control text-line"
+                                                                                                        style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                                        placeholder=""
+                                                                                                        value="{{ $sep->issue_transfer_disposal }}" hidden>
                                                                                                     @error('office_officer')
                                                                                                         <span
                                                                                                             class="text-danger">{{ $message }}</span>
@@ -508,7 +550,7 @@
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                         placeholder=""
                                                                                                         value="{{ $sep->bal_qty }}"
-                                                                                                        readonly>
+                                                                                                         hidden>
                                                                                                     @error('bal_qty')
                                                                                                         <span
                                                                                                             class="text-danger">{{ $message }}</span>
@@ -520,7 +562,7 @@
                                                                                                         name="amount"
                                                                                                         class="form-control text-line"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
-                                                                                                        placeholder=""
+                                                                                                        placeholder="" hidden
                                                                                                         value="{{ $sep->amount }}">
                                                                                                     @error('amount')
                                                                                                         <span
@@ -529,7 +571,7 @@
                                                                                                 </td>
                                                                                                 <td>
                                                                                                     <textarea type="text" name="remarks" class="form-control text-line"
-                                                                                                        style="padding-top: 4px; padding-bottom: 4px;" placeholder="">{{ $sep->remarks }}</textarea>
+                                                                                                        style="padding-top: 4px; padding-bottom: 4px;" placeholder="" hidden>{{ $sep->remarks }}</textarea>
                                                                                                     @error('remarks')
                                                                                                         <span
                                                                                                             class="text-danger">{{ $message }}</span>
@@ -552,6 +594,111 @@
                                                                                                             class="material-icons">&#xE872;</i></a>
                                                                                                 </td>
                                                                                             </tr>
+                                                                                            @foreach ($semi_ext->where('semi_id', $sep->id) as $data)
+                                                                                            <tr>
+                                                                                                <td><input
+                                                                                                        type="date"
+                                                                                                        value="{{ $data->date }}"
+                                                                                                        name="date"
+                                                                                                        class="form-control text-line"
+                                                                                                        style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                                        placeholder="">
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <textarea type="text" name="reference" class="form-control text-line"
+                                                                                                        style="padding-top: 4px; padding-bottom: 4px;" placeholder="">{{ $data->reference }}</textarea>
+                                                                                                </td>
+                                                                                                <td><input
+                                                                                                        type="hidden"
+                                                                                                        name="receipt_qty"
+                                                                                                        value=""
+                                                                                                        class="form-control text-line receipt-input"
+                                                                                                        id="receipt-qty"
+                                                                                                        style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                                        placeholder="">
+                                                                                                </td>
+                                                                                                <td><input
+                                                                                                        type="hidden"
+                                                                                                        name="receipt_unitcost"
+                                                                                                        value=""
+                                                                                                        class="form-control text-line receipt-input"
+                                                                                                        id="receipt-unitost"
+                                                                                                        style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                                        placeholder="">
+                                                                                                </td>
+                                                                                                <td><input
+                                                                                                        type="hidden"
+                                                                                                        name="receipt_totalcost"
+                                                                                                        value=""
+                                                                                                        class="form-control text-line receipt-total"
+                                                                                                        style="padding-top: 4px; padding-bottom: 4px;">
+                                                                                                </td>
+                                                                                                <td><input
+                                                                                                        type="text"
+                                                                                                        name="issue_qty"
+                                                                                                        value="{{ $data->issue_qty }}"
+                                                                                                        class="form-control text-line"
+                                                                                                        style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                                        placeholder="">
+                                                                                                </td>
+                                                                                                <td><input
+                                                                                                        type="text"
+                                                                                                        name="office_officer"
+                                                                                                        value="{{ $data->office_officer }}"
+                                                                                                        class="form-control text-line"
+                                                                                                        style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                                        placeholder="">
+                                                                                                </td>
+                                                                                                <td
+                                                                                                    class="bal_qty">
+                                                                                                    <input
+                                                                                                        type="text"
+                                                                                                        name="bal_qty"
+                                                                                                        id="bal-qty {{ $data->id }} "
+                                                                                                        value="{{ $data->bal_qty }}"
+                                                                                                        class="form-control text-line"
+                                                                                                        style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                                        placeholder="">
+                                                                                                </td>
+                                                                                                <td><input
+                                                                                                        type="text"
+                                                                                                        name="bal_totalcost"
+                                                                                                        value="{{ $data->bal_totalcost }}"
+                                                                                                        class="form-control text-line"
+                                                                                                        style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                                        placeholder="">
+                                                                                                </td>
+                                                                                                <td><input
+                                                                                                        type="text"
+                                                                                                        name="no_of_days"
+                                                                                                        value="{{ $data->no_of_days }}"
+                                                                                                        class="form-control text-line"
+                                                                                                        style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                                        placeholder="">
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <a class="add"
+                                                                                                        title="Add"
+                                                                                                        data-edit-add-stockid="{{ $sep->id }} "
+                                                                                                        data-edit-id="{{ $data->id }}"
+                                                                                                        data-toggle="tooltip"><i
+                                                                                                            class="material-icons">&#xE03B;</i></a>
+                                                                                                    <a class="edit"
+                                                                                                        title="Edit"
+                                                                                                        data-edit-id="{{ $data->id }}"
+                                                                                                        data-edit-id="{{ $sep->id }} "
+                                                                                                        data-toggle="tooltip"><i
+                                                                                                            class="material-icons">&#xE254;</i></a>
+                                                                                                    <a class="delete"
+                                                                                                        title="Delete"
+                                                                                                        data-edit-id="{{ $data->id }}"
+                                                                                                        data-toggle="tooltip"><i
+                                                                                                            class="material-icons">&#xE872;</i></a>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                            </tr>
+                                                                                        @endforeach
                                                                                         </tbody>
                                                                                     </table>
                                                                                 </div>
@@ -579,7 +726,7 @@
                                                                 </div> --}}
                                                             </form>
                                                             <button type="button"
-                                                                data-stock-id="{{ $sep->id }}"
+                                                                data-semi-id="{{ $sep->id }}"
                                                                 class="btn btn-info add-new"><i
                                                                     class="fa fa-plus"></i>
                                                                 Add New</button>
@@ -685,65 +832,99 @@
 
 
         <script>
+             var csrfToken = "{{ csrf_token() }}";
             $(document).ready(function() {
                 $('[data-toggle="tooltip"]').tooltip();
-                var actions = $("table td:last-child").html();
-                // Append table with add row form on add new button click
-                $(".add-new").click(function() {
-                    $(this).attr("disabled", "disabled");
-                    var index = $("table tbody tr:last-child").index();
-                    var row = '<tr>' +
-                        '<td><input type="date" class="form-control text-line" name="date" style="padding-top: 4px; padding-bottom: 4px;" value=""></td>' +
-                        '<td><input type="text" name="ref" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>' +
-                        '<td><input type="text" class="form-control text-line receipt-input" name="receipt_qty" id="receipt_qtyy" style="padding-top: 4px; padding-bottom: 4px;" placeholder="" value=""></td>' +
-                        '<td><input type="text" class="form-control text-line receipt-input" name="receipt_unitcost" id="receipt_unitcost" style="padding-top: 4px; padding-bottom: 4px;" placeholder="" value=""></td>' +
-                        '<td><input type="text" class="form-control text-line receipt-total" name="receipt_totalcost" id="receipt_totalcost" style="padding-top: 4px; padding-bottom: 4px;" value=""></td>' +
-                        '<td><input type="text" class="form-control text-line" name="item_no" style="padding-top: 4px; padding-bottom: 4px;" value=""></td>' +
-                        '<td><input type="text" class="form-control text-line" name="issue_qty" style="padding-top: 4px; padding-bottom: 4px;" value=""></td>' +
-                        '<td><input type="text" class="form-control text-line" name="office_officer" style="padding-top: 4px; padding-bottom: 4px;" value=""></td>' +
-                        '<td><input type="text" class="form-control text-line" name="bal_qty" style="padding-top: 4px; padding-bottom: 4px;" value=""></td>' +
-                        '<td><input type="text" class="form-control text-line" name="amount" style="padding-top: 4px; padding-bottom: 4px;" placeholder="" value=""></td>' +
-                        '<td><input type="text" name="remarks" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></td>' +
-                        '<td>' + actions + '</td>' +
-                        '</tr>';
+
+                $(document).on('click', '.add-new', function(event) {
+                    event.preventDefault();
+                    var semiId = $(this).data("semi-id");
+                    var modal = $('#editItemModal' + semiId);
+                    var table = modal.find('.table-bordered.table-resizable tbody');
+                    var editId = $(this).data("edit-id");
+                    var actions =
+                        '<a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>' +
+                        '<a class="edit" title="Edit" data-edit-id="' + editId +
+                        '" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>' +
+                        '<a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>';
+
+                        var row = $('<tr>').append(
+                            $('<td>').append('<input type="date" class="form-control text-line" name="date" style="padding-top: 4px; padding-bottom: 4px;" value="">'),
+                            $('<td>').append('<input type="text" name="ref" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">'),
+                            $('<td>').append('<input type="text" class="form-control text-line receipt-input" name="" id="receipt_qtyy" style="padding-top: 4px; padding-bottom: 4px;" placeholder="" value="">'),
+                            $('<td>').append('<input type="text" class="form-control text-line receipt-input" name="" id="receipt_unitcost" style="padding-top: 4px; padding-bottom: 4px;" placeholder="" value="">'),
+                            $('<td>').append('<input type="text" class="form-control text-line receipt-total" name="" id="receipt_totalcost" style="padding-top: 4px; padding-bottom: 4px;" value="">'),
+                            $('<td>').append('<input type="text" class="form-control text-line" name="item_no" style="padding-top: 4px; padding-bottom: 4px;" value="">'),
+                            $('<td>').append('<input type="text" class="form-control text-line" name="issue_qty" style="padding-top: 4px; padding-bottom: 4px;" value="">'),
+                                $('<td>').append(
+                                $('<select>').addClass('form-control text-line').attr('name', 'issue_transfer_disposal').css({'padding-top': '4px', 'padding-bottom': '4px'}).append(
+                                    $('<option>').val('WHO').text('TRANSFER FROM?')
+                                )
+                            ),
+                                $('<td>').append('<input type="text" class="form-control text-line" name="office_officer" style="padding-top: 4px; padding-bottom: 4px;" value="">'),
+                            $('<td>').append(
+                                $('<select>').addClass('form-control text-line').attr('name', 'issue_transfer_disposal').css({'padding-top': '4px', 'padding-bottom': '4px'}).append(
+                                    $('<option>').val('ISSUE').text('Transfer'),
+                                    $('<option>').val('TRANSFER').text('Transfer'),
+                                    $('<option>').val('DISPOSAL').text('Disposal')
+                                )
+                            ),
+                            $('<td>').append('<input type="text" class="form-control text-line" name="bal_qty" style="padding-top: 4px; padding-bottom: 4px;" value="">'),
+                            $('<td>').append('<input type="text" class="form-control text-line" name="bal_amount" style="padding-top: 4px; padding-bottom: 4px;" placeholder="" value="">'),
+                            $('<td>').append('<input type="text" name="remarks" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">'),
+                            $('<td>').append(actions),
+                            $('<td>').append('<input type="text" name="semi_id" value="' + semiId + '" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">')
+                        );
+
+
                     $("table").append(row);
-                    $("table tbody tr").eq(index + 1).find(".add, .edit").toggle();
+                    var rowCount = table.find("tr").length;
+                    console.log("rowCount:", rowCount);
+
+                    if (rowCount === 2) {
+                        console.log("row 2 has been added.");
+
+                        $(document).on("input",
+                            '.modal-body input[name="receipt_qty"], .modal-body input[name="issue_qty"]',
+                            function() {
+                                console.log("Calculating balance...");
+                                var receiptQty = $(this).closest(".modal-body").find(
+                                    'input[name="receipt_qty"]').val() || 0;
+                                var unitCost = parseFloat($(this).closest(".modal-body").find(
+                                    'input[name="receipt_unitcost"]').val()) || 0;
+                                var issueQty = $(this).closest("tr").find('input[name="issue_qty"]')
+                                .val() || 0;
+
+                                var balanceQty = receiptQty - issueQty;
+                                var balanceTotal = unitCost * balanceQty;
+
+                                console.log("Balance calculated. Quantity:", balanceQty, "Amount:",
+                                    balanceTotal);
+
+                                $(this).closest("tr").find('input[name="bal_qty"]').val(balanceQty);
+                                $(this).closest("tr").find('input[name="bal_amount"]').val(balanceTotal
+                                    .toFixed(2));
+                            });
+                    }else if(rowCount >2){
+                        console.log("More than 2 rows has been added");
+                    }
+
+                    $("table tbody tr:last-child").find(".add").show();
+                    $("table tbody tr:last-child").find(".edit").hide();
                     $('[data-toggle="tooltip"]').tooltip();
                 });
+
                 // Add row on add button click
                 $(document).on("click", ".add", function() {
-                    var empty = false;
-                    var input = $(this).parents("tr").find('input[type="text"]');
-                    input.each(function() {
-                        if (!$(this).val()) {
-                            $(this).addClass("error");
-                            empty = true;
-                        } else {
-                            $(this).removeClass("error");
-                        }
-                    });
-                    $(this).parents("tr").find(".error").first().focus();
-                    if (!empty) {
-                        input.each(function() {
-                            $(this).parent("td").html($(this).val());
-                        });
-                        $(this).parents("tr").find(".add, .edit").toggle();
-                        $(".add-new").removeAttr("disabled");
-                    }
+
                 });
                 // Edit row on edit button click
                 $(document).on("click", ".edit", function() {
-                    $(this).parents("tr").find("td:not(:last-child)").each(function() {
-                        $(this).html('<input type="text" class="form-control" value="' + $(this)
-                            .text() + '">');
-                    });
-                    $(this).parents("tr").find(".add, .edit").toggle();
-                    $(".add-new").attr("disabled", "disabled");
+
                 });
                 // Delete row on delete button click
                 $(document).on("click", ".delete", function() {
-                    $(this).parents("tr").remove();
-                    $(".add-new").removeAttr("disabled");
+
                 });
             });
         </script>

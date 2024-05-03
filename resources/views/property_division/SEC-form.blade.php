@@ -101,10 +101,20 @@
                                                 <tr>
                                                     <th scope="row">Semi-expendable Property:</th>
                                                     <td>
-                                                        <input type="text" name="sep_name"
-                                                            class="form-control text-line"
-                                                            style="padding-top: 4px; padding-bottom: 4px;"
-                                                            placeholder="">
+                                                        <select name="sep_name" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;">
+                                                            <option value="OFFICE EQUIPMENT">OFFICE EQUIPMENT</option>
+                                                            <option value="FURNITURE AND FIXTURE">FURNITURE AND FIXTURE</option>
+                                                            <option value="OTHER SUPPLIES/MATERIALS (CONSUMPTION)">OTHER SUPPLIES/MATERIALS (CONSUMPTION)</option>
+                                                            <option value="AGRICULTURAL/MARINE FOR DISTRIBUTION">AGRICULTURAL/MARINE FOR DISTRIBUTION</option>
+                                                            <option value="MILITARY, POLICE & SECURITY, EQUIPMENT">MILITARY, POLICE & SECURITY, EQUIPMENT</option>
+                                                            <option value="COMMUNICATION EQUIPMENT">COMMUNICATION EQUIPMENT</option>
+                                                            <option value="OTHER SUPPLIES INVENTORY">OTHER SUPPLIES INVENTORY</option>
+                                                            <option value="MARINE & FISHERY EQUIPMENT">MARINE & FISHERY EQUIPMENT</option>
+                                                            <option value="TECHNOLOGY AND SCIENTIFIC EQUIPMENT">TECHNOLOGY AND SCIENTIFIC EQUIPMENT</option>
+                                                            <option value="OTHER PROPERTY PLANT &  EQUIPMENT">OTHER PROPERTY PLANT &  EQUIPMENT</option>
+                                                            <option value="INFORMATION AND COMMUNICATION TECHNOLOGY EQUIPMENT">INFORMATION AND COMMUNICATION TECHNOLOGY EQUIPMENT</option>
+                                                        </select>
+
                                                         @error('sep_name')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror

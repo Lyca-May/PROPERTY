@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\PropCardExtension_Model;
+use App\Models\PropCardModel;
+use Illuminate\Support\Facades\Log;
 
 class PropCardExtension_Controller extends Controller
 {
@@ -16,6 +18,7 @@ class PropCardExtension_Controller extends Controller
             'issue_qty' => 'nullable',
             'office_officer' => 'required',
             'issue_transfer_disposal' => 'required|in:ISSUE,TRANSFER,DISPOSAL',
+            'transfer_dropdown' => 'nullable',
             'new_bal_qty' => 'nullable',
             'bal_amount' => 'nullable',
             'remarks' => 'required',
@@ -36,6 +39,7 @@ class PropCardExtension_Controller extends Controller
         $propCardExtension->issue_qty = $validatedData['issue_qty'];
         $propCardExtension->office_officer = $validatedData['office_officer'];
         $propCardExtension->issue_transfer_disposal = $validatedData['issue_transfer_disposal'];
+        $propCardExtension->transfer_dropdown = $validatedData['transfer_dropdown'];
         $propCardExtension->new_bal_qty = $validatedData['new_bal_qty'];
         $propCardExtension->bal_amount = $validatedData['bal_amount'];
         $propCardExtension->remarks = $validatedData['remarks'];
@@ -43,7 +47,28 @@ class PropCardExtension_Controller extends Controller
         // Save the new PropCardExtension instance
         $propCardExtension->save();
 
-        return redirect('/all-property')->with('success', 'Property Card has been created!');
+        $officer = $request->input('officer');
+        $newIssueQty = $request->input('newIssueQty');
+
+        Log::info('Selected officer:', ['officer' => $officer]);
+        Log::info('Issue Qty:', ['newIssueQty' => $newIssueQty]);
+
+        $propCard = PropCardExtension_Model::where('office_officer', $officer)->get();
+
+        if ($propCard->isNotEmpty()) {
+            foreach ($propCard as $item) {
+                // Modify the issue_qty property of each item if needed
+                $item->issue_qty = $newIssueQty;
+                // Save the changes to the database
+                $item->save();
+            }
+
+            Log::info('Issue quantity updated successfully for PropCard collection.');
+        } else {
+            Log::info('No PropCard items found for the given office officer.');
+        }
+         return response()->json(['success' => 'Property Card has been created!']);
+
     }
 
     public function getPropExtData($id)
@@ -74,4 +99,66 @@ class PropCardExtension_Controller extends Controller
         return response()->json(['success' => true]); // Return success response
     }
 
+    public function getOfficerIssueQty(Request $request)
+    {
+        $selectedOfficer = $request->input('officer');
+
+        // Fetch the issue_qty of the selected officer from the database
+        $officer = PropCardExtension_Model::where('office_officer', $selectedOfficer)->first();
+
+        if ($officer) {
+            $issueQty = $officer->issue_qty;
+            return response()->json(['success' => true, 'issue_qty' => $issueQty]);
+        } else {
+            return response()->json(['success' => false, 'message' => 'Officer not found'], 404);
+        }
+    }
+    public function getDisposalIssueQty(Request $request)
+    {
+        $selectedOfficer = $request->input('officer');
+
+        // Fetch the issue_qty of the selected officer from the database
+        $officer = PropCardExtension_Model::where('office_officer', $selectedOfficer)->first();
+
+        if ($officer) {
+            $issueQty = $officer->issue_qty;
+            return response()->json(['success' => true, 'issue_qty' => $issueQty]);
+        } else {
+            return response()->json(['success' => false, 'message' => 'Officer not found'], 404);
+        }
+    }
+    public function getLatestIssueRow()
+{
+    // Fetch the latest row with "ISSUE" value in the issue_transfer_disposal field
+    $latestIssueRow = PropCardExtension_Model::where('issue_transfer_disposal', 'ISSUE')
+        ->latest()
+        ->first();
+
+    if ($latestIssueRow) {
+        return response()->json([
+            'issue_row_id' => $latestIssueRow->id,
+            'new_bal_qty' => $latestIssueRow->new_bal_qty
+        ]);
+    } else {
+        return response()->json(['error' => 'No row with ISSUE value found.']);
+    }
+}
+public function getPropID(Request $request)
+    {
+        // Retrieve the propId from the request
+        $propId = $request->input('propId');
+
+        // Fetch data based on the propId
+        $data = PropCardExtension_Model::where('prop_id', $propId)
+            ->where(function($query) {
+                $query->where('issue_transfer_disposal', 'ISSUE')
+                    ->orWhere('issue_transfer_disposal', 'TRANSFER');
+            })
+            ->where('issue_qty', '!=', 0)
+            ->pluck('office_officer')
+            ->toArray();
+
+            // Return the data as JSON response
+            return response()->json($data);
+        }
 }

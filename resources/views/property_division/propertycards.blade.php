@@ -349,12 +349,12 @@
                                                                                                     ISSUE/TRANSFER/DISPOSAL
                                                                                                 </th>
                                                                                                 <th scope="col"
-                                                                                                    colspan="1"
+                                                                                                    colspan="2"
                                                                                                     style="text-align: center;">
                                                                                                     BALANCE
                                                                                                 </th>
                                                                                                 <th scope="col"
-                                                                                                    colspan="2"
+                                                                                                    colspan="1"
                                                                                                     style="text-align: center;">
                                                                                                 </th>
                                                                                                 <th scope="col"
@@ -388,14 +388,15 @@
                                                                                                 </th>
                                                                                                 <th scope="col"
                                                                                                     style="text-align: center;">
-                                                                                                </th>
+                                                                                                    CATEGORY</th>
                                                                                                 <th scope="col"
                                                                                                     style="text-align: center;">
                                                                                                     OFFICE
                                                                                                     OFFICER</th>
                                                                                                 <th scope="col"
                                                                                                     style="text-align: center;">
-                                                                                                    CATEGORY</th>
+                                                                                                    FROM WHO?
+                                                                                                </th>
                                                                                                 <th scope="col"
                                                                                                     style="text-align: center;">
                                                                                                     QTY
@@ -648,13 +649,13 @@
                                                                                                     <td>
                                                                                                         <input
                                                                                                             type="text"
-                                                                                                            name="transform_drop"
-                                                                                                            value="{{ $data->transform_drop }}"
+                                                                                                            name="issue_transfer_disposal"
                                                                                                             class="form-control text-line"
                                                                                                             style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                             placeholder=""
-                                                                                                            readonly>
+                                                                                                            value="{{ $data->issue_transfer_disposal }}">
                                                                                                     </td>
+
                                                                                                     <td><input
                                                                                                             type="text"
                                                                                                             name="office_officer"
@@ -665,24 +666,24 @@
                                                                                                     </td>
                                                                                                     <td>
                                                                                                         <input
-                                                                                                        type="text"
-                                                                                                        name="office_officer"
-                                                                                                        class="form-control text-line"
-                                                                                                        style="padding-top: 4px; padding-bottom: 4px;"
-                                                                                                        placeholder=""
-                                                                                                            value="{{ $data->issue_transfer_disposal }}"
-                                                                                                            >
+                                                                                                            type="text"
+                                                                                                            name="transfer_dropdown"
+                                                                                                            value="{{ $data->transfer_dropdown }}"
+                                                                                                            class="form-control text-line"
+                                                                                                            style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                                            placeholder=""
+                                                                                                            readonly>
                                                                                                     </td>
                                                                                                     <td
                                                                                                         class="bal_qty">
                                                                                                         <input
                                                                                                             type="text"
                                                                                                             name="new_bal_qty"
-                                                                                                            id="bal-qty {{ $data->id }} "
+                                                                                                            id="bal-qty{{ $data->id }}"
                                                                                                             value="{{ $data->new_bal_qty }}"
                                                                                                             class="form-control text-line"
                                                                                                             style="padding-top: 4px; padding-bottom: 4px;"
-                                                                                                            placeholder="">
+                                                                                                            @if ($data->issue_transfer_disposal == 'TRANSFER' || $data->issue_transfer_disposal == 'DISPOSAL') hidden @endif>
                                                                                                     </td>
                                                                                                     <td><input
                                                                                                             type="text"
@@ -690,7 +691,7 @@
                                                                                                             value="{{ $data->bal_amount }}"
                                                                                                             class="form-control text-line"
                                                                                                             style="padding-top: 4px; padding-bottom: 4px;"
-                                                                                                            placeholder="">
+                                                                                                            @if ($data->issue_transfer_disposal == 'TRANSFER' || $data->issue_transfer_disposal == 'DISPOSAL') hidden @endif>
                                                                                                     </td>
                                                                                                     <td><input
                                                                                                             type="text"
@@ -701,23 +702,29 @@
                                                                                                             placeholder="">
                                                                                                     </td>
                                                                                                     <td>
-                                                                                                        <a class="add"
+                                                                                                        {{-- <a class="add"
                                                                                                             title="Add"
                                                                                                             data-edit-add-propid="{{ $prop_cards->id }} "
                                                                                                             data-edit-id="{{ $data->id }}"
                                                                                                             data-toggle="tooltip"><i
-                                                                                                                class="material-icons">&#xE03B;</i></a>
+                                                                                                                class="material-icons">&#xE03B;</i></a> --}}
                                                                                                         <a class="edit"
                                                                                                             title="Edit"
                                                                                                             data-edit-id="{{ $data->id }}"
                                                                                                             data-edit-id="{{ $prop_cards->id }} "
                                                                                                             data-toggle="tooltip"><i
                                                                                                                 class="material-icons">&#xE254;</i></a>
-                                                                                                        <a class="delete"
+                                                                                                        <a class="edit-add"
+                                                                                                            title="Add"
+                                                                                                            data-edit-add-propid="{{ $prop_cards->id }} "
+                                                                                                            data-edit-id="{{ $data->id }}"
+                                                                                                            data-toggle="tooltip" hidden><i
+                                                                                                                class="material-icons">&#xE03B;</i></a>
+                                                                                                        {{-- <a class="delete"
                                                                                                             title="Delete"
                                                                                                             data-edit-id="{{ $data->id }}"
                                                                                                             data-toggle="tooltip"><i
-                                                                                                                class="material-icons">&#xE872;</i></a>
+                                                                                                                class="material-icons">&#xE872;</i></a> --}}
                                                                                                     </td>
                                                                                                 </tr>
                                                                                                 <tr>
@@ -776,7 +783,7 @@
                     icon: 'success',
                     title: 'Success!',
                     text: '{{ session('
-                                                                                                                                                                                                                                                                                                                                                                                                        success ') }}',
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            success ') }}',
                     toast: true,
                     position: 'top-end',
                     showConfirmButton: false,
@@ -798,7 +805,7 @@
                     icon: 'failed',
                     title: 'failed!',
                     text: '{{ session('
-                                                                                                                                                                                                                                                                                                                                                                                                        failed ') }}',
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            failed ') }}',
                     toast: true,
                     position: 'top-end',
                     showConfirmButton: false,
@@ -901,20 +908,20 @@
                         event.preventDefault(); // Prevent default behavior of button (e.g., form submission)
                         $(this).attr("disabled", "disabled");
                         $(this).attr("disabled", "disabled");
-                        var propId = $(this).data(
-                            "prop-id"); // Get the propID associated with the clicked button
+                        var propId = $(this).data("prop-id");
+                        console.log(propId);
                         var modal = $('#editItemModal' + propId); // Find the modal with the specific propID
                         var table = modal.find(
                             '.table-bordered.table-resizable tbody'); // Find the table within the modal
                         var editId = $(this).data("edit-id");
                         var actions =
                             '<a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>' +
+                            '<a class="edit-add" title="Add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>' +
                             '<a class="edit" title="Edit" data-edit-id="' +
                             editId +
                             '" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>' +
                             '<a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>';
-                        var filteredOfficers = {!! json_encode($filteredOfficers) !!};
-                        console.log(filteredOfficers);
+
                         var row = $("<tr>").append(
                             $('<td>').append(
                                 '<input type="date" name="date" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">'
@@ -933,23 +940,6 @@
                             ),
                             $('<td>').append(
                                 '<input type="text" name="issue_qty" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">'
-                            ),
-                            $('<td>').append(
-                                $('<select>').attr({
-                                    'name': 'transfer_dropdown',
-                                    'id': 'transfer_dropdown',
-                                    'class': 'form-control text-line',
-                                    'style': 'padding-top: 4px; padding-bottom: 4px;'
-                                }).append(
-                                    // Append options dynamically from filteredOfficers array
-                                    filteredOfficers.map(function(officer) {
-                                        return $('<option>').attr('value', officer).text(
-                                            officer);
-                                    })
-                                )
-                            ),
-                            $('<td>').append(
-                                '<input type="text" name="office_officer" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">'
                             ),
                             $('<td>').append(
                                 $('<select>', {
@@ -972,6 +962,17 @@
                                     })
                                 )),
                             $('<td>').append(
+                                '<input type="text" name="office_officer" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">'
+                            ),
+                            $('<td class="select">').append(
+                                $('<select>').attr({
+                                    'name': 'transfer_dropdown',
+                                    'id': 'transfer_dropdown',
+                                    'class': 'form-control text-line',
+                                    'style': 'padding-top: 4px; padding-bottom: 4px;'
+                                })
+                            ),
+                            $('<td>').append(
                                 '<input type="text" name="new_bal_qty" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;">'
                             ),
                             $('<td>').append(
@@ -981,74 +982,200 @@
                                 '<textarea type="text" name="remarks" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></textarea>'
                             ),
                             $('<td>').append(actions),
-                            $('<td>').append('<input type="text" name="prop_id" value="' + propId +
+                            $('<td hidden>').append('<input type="text" name="prop_id" value="' + propId +
                                 '" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">'
-                            )
+                            ),
                         );
 
                         table.append(row); // Append the row to the table within the modal
                         var rowCount = table.find("tr").length; // Count the number of rows in the table
                         console.log("rowCount:", rowCount);
                         if (rowCount === 2) {
-                            console.log("row 2 added.");
+                            console.log("Two rows added.");
+
+                            // Find the newly added row
+                            var $row = table.find("tr:last");
+
+                            // Hide the new_bal_qty and bal_amount inputs
+                            $row.find('select[name="transfer_dropdown"]').val(0).hide();
+
+                            // Call the calculateBalance function
                             calculateBalance();
                         } else if (rowCount > 2) {
                             console.log("more than 2 row added.");
-                            // if (!!isTransferChecked) {
-                            $(document).on(
-                                "input",
-                                'table tbody tr:last input[name="issue_qty"]',
-                                function() {
-                                    // Get the parent row
-                                    var $row = $(this).closest("tr");
 
-                                    // Get the index of the current row
-                                    var index = $row.index();
+                            function handleIssueTransferChange() {
+                                var issueTransferValue = $(this).val();
+                                var $row = $(this).closest("tr");
 
-                                    // Check if the current row is not the first or last row
-                                    if (index > 1 && index < $("table tbody tr").length) {
-                                        // Get the input field for new_bal_qty in the second to the last row
-                                        var prevRowBalQtyInput = $row.prev().prev().find(
-                                            'input[name="new_bal_qty"]');
-                                        var prevRowBalQtyValue = prevRowBalQtyInput.val();
-                                        var prevRowBalQty = parseFloat(prevRowBalQtyValue);
-                                        console.log("Previous Row Bal Qty:", prevRowBalQty);
-                                        var unitCost =parseFloat(
-                                                $(this)
-                                                .closest(".modal-body")
-                                                .find('input[name="receipt_unitcost"]')
-                                                .val()
-                                            ) || 0;
-                                        console.log("Unitcost:", unitCost);
-                                        // Get the last row's issue_qty
-                                        var $lastRow = $("table tbody tr:last");
-                                        var issueQty = parseFloat($lastRow.find('input[name="issue_qty"]')
-                                            .val());
-                                        console.log("Issue Qty:", issueQty);
+                                if (issueTransferValue === "TRANSFER") {
+                                    $row.find('input[name="new_bal_qty"]').val(0).prop("hidden", true);
+                                    $row.find('input[name="bal_amount"]').val(0).prop("hidden", true);
+                                    $.ajax({
+                                        url: '/get-prop-id',
+                                        method: 'GET',
+                                        data: {
+                                            propId: propId
+                                        },
+                                        success: function(response) {
+                                            // Clear existing select dropdowns with class "select"
+                                            $('td.select').empty();
+
+                                            var selectDropdown = $('<select>').attr({
+                                                'name': 'transfer_dropdown',
+                                                'id': 'transfer_dropdown',
+                                                'class': 'form-control text-line',
+                                                'style': 'padding-top: 4px; padding-bottom: 4px;'
+                                            });
+                                            $.each(response, function(index, item) {
+                                                selectDropdown.append($('<option>').attr('value', item)
+                                                    .text(item));
+                                            });
+                                            $('td.select').append(selectDropdown);
+                                        },
+                                        error: function(xhr, status, error) {
+                                            console.error('Failed to fetch data:', error);
+                                        }
+                                    });
+                                    $(document).on("input", 'input[name="issue_qty"]', function() {
+                                        var $row = $(this).closest("tr");
+                                        var issueQty = parseFloat($(this).val());
+                                        var selectedOfficer = $row.find(
+                                                'select[name="transfer_dropdown"]')
+                                            .val();
+                                        console.log("the selected officer is " + selectedOfficer);
+                                        var $matchingRow = $row.closest(".modal-body").find(
+                                            'input[name="office_officer"]').filter(function() {
+                                            return $(this).val() === selectedOfficer;
+                                        }).closest("tr");
+
+                                        if ($matchingRow.length) {
+                                            var officeOfficer = $matchingRow.find(
+                                                    'input[name="office_officer"]').val()
+                                                .toString(); // Convert to string
+                                            console.log("the matched office officer is " +
+                                                officeOfficer);
+                                            $.ajax({
+                                                url: '/get-issue-qty/propertycard',
+                                                method: 'GET',
+                                                data: {
+                                                    officer: selectedOfficer
+                                                },
+                                                success: function(response) {
+                                                    if (response.success) {
+                                                        var officerIssueQty = response
+                                                            .issue_qty;
+                                                        console.log(officerIssueQty);
+                                                        var newIssueQty = officerIssueQty -
+                                                            issueQty;
+                                                        console.log(newIssueQty);
+                                                        $(document).trigger(
+                                                            "issueQtyUpdated", [
+                                                                newIssueQty,
+                                                                selectedOfficer
+                                                            ]);
+                                                    } else {
+                                                        console.error(
+                                                            'Failed to fetch issue_qty for officer ' +
+                                                            selectedOfficer);
+                                                    }
+                                                },
+                                                error: function(xhr, status, error) {
+                                                    console.error(
+                                                        'Failed to fetch issue_qty for officer ' +
+                                                        selectedOfficer + ': ' + error);
+                                                }
+                                            });
+                                        } else {
+                                            console.log("No matching office officer found.");
+                                        }
+                                    });
+                                } else if (issueTransferValue === "ISSUE") {
+                                    $row.find('#transfer_dropdown').hide();
+                                    $row.find('input[name="new_bal_qty"]').val(0).prop("hidden", false);
+                                    $row.find('input[name="bal_amount"]').val(0).prop("hidden", false);
+                                    calculateNewBalQty();
+                                } else if (issueTransferValue === "DISPOSAL") {
+                                    $row.find('input[name="new_bal_qty"]').val(0).prop("hidden", true);
+                                    $row.find('input[name="bal_amount"]').val(0).prop("hidden", true);
+                                    $row.find('select[name="transfer_dropdown"]').val(0).prop("hidden", true);
+                                     $(document).on("input", 'input[name="office_officer"]', function() {
+                                        var $row = $(this).closest("tr");
+                                        var selectedOfficer = $(this).val();
+                                        console.log("the selected officer is " + selectedOfficer);
+
+                                        $row.find('input[name="issue_qty"]').on("input", function() {
+                                            var issueQty = $(this).val();
+                                            console.log("THIS IS THE ISSUEQTY " + issueQty);
+                                            var $matchingRow = $row.closest(".modal-body").find(
+                                            'input[name="office_officer"]').filter(function() {
+                                            return $(this).val() === selectedOfficer;
+                                        }).closest("tr");
+
+                                        if ($matchingRow.length) {
+                                            var officeOfficer = $matchingRow.find(
+                                                    'input[name="office_officer"]').val()
+                                                .toString(); // Convert to string
+                                            console.log("the matched office officer is " + officeOfficer);
+                                            $.ajax({
+                                                url: '/get-disposal-issue-qty',
+                                                method: 'GET',
+                                                data: {
+                                                    officer: selectedOfficer
+                                                },
+                                                success: function(response) {
+                                                    if (response.success) {
+                                                        var officerDisposalQty = response.issue_qty;
+                                                        console.log("THE ISSUE QTY OF " + selectedOfficer + " is " + officerDisposalQty);
+                                                        var newDisposalQty = officerDisposalQty - issueQty; // Subtract the issueQty of the current row
+                                                        console.log(newDisposalQty);
+                                                        $(document).trigger(
+                                                            "disposedQtyUpdated", [
+                                                                newDisposalQty,
+                                                                selectedOfficer
+                                                            ]);
+                                                    } else {
+                                                        console.error('Failed to fetch issue_qty for officer ' + selectedOfficer);
+                                                    }
+                                                },
+                                                error: function(xhr, status, error) {
+                                                    console.error('Failed to fetch issue_qty for officer ' + selectedOfficer + ': ' + error);
+                                                }
+                                            });
+                                        } else {
+                                            console.log("No matching office officer found.");
+                                        }
+                                        });
+
                                         
-                                        var newBalQty = prevRowBalQty - issueQty;
+                                    });
 
-                                        var newBalAm = unitCost * newBalQty;
-                                        console.log("New Bal Qty:", newBalQty);
-                                        $row.find('input[name="new_bal_qty"]').val(newBalQty);
-                                        $row.find('input[name="bal_amount"]').val(newBalAm);
-                                    } else {
-                                        console.log("NO VALUE FOR THE PREVIOUS BAL QTY");
-                                    }
+                                }else{
+                                    console.log('error');
                                 }
-                            );
-                            // }else{
-                            //     console.log('isTransferChecked is true. No calculation needed');
-                            // }
+
+                                if (issueTransferValue === "TRANSFER") {
+                                    $row.find('#transfer_dropdown').show();
+                                } else {
+                                    $row.find('#transfer_dropdown').hide();
+                                    $row.find('select[name="transfer_dropdown"]').val("");
+                                }
+                            }
+                            // Add event listener for change event on select element with name 'issue_transfer_disposal'
+                            $(document).on("change", 'select[name="issue_transfer_disposal"]',
+                                handleIssueTransferChange);
                         }
+                        $('table tbody tr:last select[name="issue_transfer_disposal"]').trigger("change");
                         $("table tbody tr:last-child").find(".add").show();
                         $("table tbody tr:last-child").find(".edit").hide();
+                        $("table tbody tr:last-child").find(".edit-add").hide();
                         $('[data-toggle="tooltip"]').tooltip();
                     } catch (error) {
                         console.error("An error occurred:", error);
                     }
                 });
 
+                //CALCULATION FOT THE 2ND ROW
                 function calculateBalance() {
                     var receiptQty =
                         parseFloat(
@@ -1083,17 +1210,138 @@
                     '.modal-body input[name="receipt_qty"], .modal-body input[name="issue_qty"]',
                     calculateBalance
                 );
+                //CALCULATION OF BAL QTY FOR MORE THAN 2 ROWS
+                function calculateNewBalQty() {
+                    // Get the parent row
+                    var $row = $(this).closest("tr");
+                    $row.find('select[name="transfer_dropdown"]').val(0).prop("hidden", true);
+                    var index = $row.index()
+                    if (index > 1 && index < $("table tbody tr").length) {
+                        $.ajax({
+                            url: "/get-latest-issue-row",
+                            method: "GET",
+                            success: function(response) {
+                                if (response.new_bal_qty) {
 
-                $(document).on("click", ".add", function() {
-                    var rowData = {};
-                    var input = $(this).parents("tr").find(
-                        'input[type="text"], input[type="date"], textarea, select');
+                                    console.log('ISSUE HAS BEEN FOUND!');
+                                    var prevRowBalQty = parseFloat(response.new_bal_qty);
+                                    var unitCost = parseFloat($row.closest(".modal-body").find(
+                                        'input[name="receipt_unitcost"]').val()) || 0;
+                                    var issueQty = parseFloat($row.find('input[name="issue_qty"]').val());
+                                    var newBalQty = prevRowBalQty - issueQty;
+                                    var newBalAm = unitCost * newBalQty;
+                                    console.log(newBalQty, newBalAm);
 
+                                    $row.find('input[name="new_bal_qty"]').val(newBalQty);
+                                    $row.find('input[name="bal_amount"]').val(newBalAm.toFixed(2));
+                                } else {
+                                    console.log("No previous row with ISSUE value found.");
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                console.error("Error fetching latest issue row:", error);
+                            }
+                        });
+                    }
+                }
+                // Attach the input event handler
+                $(document).on("input", 'table tbody tr:last input[name="issue_qty"]', calculateNewBalQty);
+                // Event handler for when issueQty is updated
+                $(document).on("issueQtyUpdated", function(event, newIssueQty, selectedOfficer) {
+                    $(document).on("click", ".add", function() {
+                        console.log("ADD BUTTON CLICKED");
+                        var rowData = {};
+                        var input = $(this).parents("tr").find(
+                            'input[type="text"], input[type="date"], textarea, select');
                         input.each(function() {
                             var name = $(this).attr("name");
                             var value = $(this).val();
                             rowData[name] = value;
                         });
+                        $.ajax({
+                            type: "POST",
+                            url: "/add-prop-extension",
+                            headers: {
+                                "X-CSRF-TOKEN": csrfToken,
+                            },
+                            data: JSON.stringify({
+                                ...rowData,
+                                officer: selectedOfficer,
+                                newIssueQty: newIssueQty
+                            }),
+                            contentType: "application/json",
+                            success: function(response) {
+                                var newRow = "<tr>";
+                                Object.values(rowData).forEach(function(value) {
+                                    newRow += "<td>" + value + "</td>";
+                                });
+                                newRow += "<td>" + actions + "</td></tr>";
+                                $("table tbody").append(newRow);
+                            },
+                            error: function(xhr, status, error) {
+                                // Handle error
+                                console.error(xhr.responseText);
+                            },
+                        });
+
+                        $(this).parents("tr").find(".add, .edit").toggle();
+                        $(".add-new").removeAttr("disabled");
+                        $(".edit-add").removeAttr("disabled");
+                    });
+                });
+
+                //FOR DISPOSED
+                $(document).on("disposedQtyUpdated", function(event, newDisposalQty, selectedOfficer) {
+                    $(document).on("click", ".add", function() {
+                        console.log("ADD BUTTON CLICKED");
+                        var rowData = {};
+                        var input = $(this).parents("tr").find(
+                            'input[type="text"], input[type="date"], textarea, select');
+                        input.each(function() {
+                            var name = $(this).attr("name");
+                            var value = $(this).val();
+                            rowData[name] = value;
+                        });
+                        $.ajax({
+                            type: "POST",
+                            url: "/add-prop-extension",
+                            headers: {
+                                "X-CSRF-TOKEN": csrfToken,
+                            },
+                            data: JSON.stringify({
+                                ...rowData,
+                                officer: selectedOfficer,
+                                newIssueQty: newDisposalQty
+                            }),
+                            contentType: "application/json",
+                            success: function(response) {
+                                var newRow = "<tr>";
+                                Object.values(rowData).forEach(function(value) {
+                                    newRow += "<td>" + value + "</td>";
+                                });
+                                newRow += "<td>" + actions + "</td></tr>";
+                                $("table tbody").append(newRow);
+                            },
+                            error: function(xhr, status, error) {
+                                // Handle error
+                                console.error(xhr.responseText);
+                            },
+                        });
+
+                        $(this).parents("tr").find(".add, .edit").toggle();
+                        $(".add-new").removeAttr("disabled");
+                        $(".edit-add").removeAttr("disabled");
+                    });
+                });
+                $(document).on("click", ".add", function() {
+                    var rowData = {};
+                    var input = $(this).parents("tr").find(
+                        'input[type="text"], input[type="date"], textarea, select');
+                    input.each(function() {
+                        var name = $(this).attr("name");
+                        var value = $(this).val();
+                        rowData[name] = value;
+                    });
 
                     $.ajax({
                         type: "POST",
@@ -1101,8 +1349,7 @@
                         headers: {
                             "X-CSRF-TOKEN": csrfToken,
                         },
-                        data: JSON.stringify(rowData), // Ensure the data is sent as JSON
-                        contentType: "application/json", // Set the content type to JSON
+                        data: rowData,
                         success: function(response) {
                             // Update table with new row data
                             var newRow = "<tr>";
@@ -1119,10 +1366,9 @@
                     });
 
                     $(this).parents("tr").find(".add, .edit").toggle();
-                    $(".add-new").removeAttr("disabled");
+                    $("table tbody tr:last-child").find(".edit-add").hide();
+                    $(".add-new").removeAttr("disabled", "disabled");
                 });
-
-
                 $(document).on("click", ".edit", function() {
                     var row = $(this).closest("tr");
                     var editId = $(this).data("edit-id");
@@ -1173,7 +1419,7 @@
                     }
                 });
 
-                $(document).on("click", ".add", function() {
+                $(document).on("click", ".edit-add", function() {
                     var row = $(this).closest("tr");
                     var propId = $(this).data("edit-add-propid");
                     var editId = $(this).data("edit-id");
@@ -1233,7 +1479,7 @@
                             console.log("Data deleted successfully!");
                             // Remove the row from the table after successful deletion
                             $deleteButton.closest("tr")
-                        .remove(); // Use the stored reference to deleteButton
+                                .remove(); // Use the stored reference to deleteButton
                         },
                         error: function(xhr, status, error) {
                             // Handle error
@@ -1241,9 +1487,6 @@
                         },
                     });
                 });
-
-
-
 
             });
         </script>

@@ -73,4 +73,5 @@ class StockCardExtension_Controller extends Controller
 
         return response()->json(['success' => true]); // Return success response
     }
+    
 }

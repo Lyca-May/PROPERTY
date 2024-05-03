@@ -74,6 +74,13 @@ Route::post('/clicked-property-card/{id}', [PropertyController::class, 'clickPc'
 // stock card
 Route::get('/all-slc', [PropertyController::class, 'getDataForSLC']);
 Route::post('/edit-slc/{id}', [PropertyController::class, 'edit_SLC']);
+Route::get('/get-stock-data/{id}', [PropertyController::class, 'getStockEditData']);
+Route::post('/update-stock-data/{id}', [PropertyController::class, 'saveEditedData']);
+Route::delete('/delete-stock-data/{id}', [PropertyController::class, 'deleteStock']);
+
+
+
+
 //ppelc
 Route::get('/all-ppelc', [PropertyController::class, 'getDataForPPELC']);
 Route::post('/edit-ppelc-card/{id}', [PropertyController::class, 'edit_PPELC']);
@@ -89,7 +96,11 @@ Route::post('/add-prop-extension', [PropCardExtension_Controller::class, 'addPro
 Route::get('/get-prop-ext-data/{id}', [PropCardExtension_Controller::class, 'getPropExtData']);
 Route::post('/update-prop-ext-data/{id}', [PropCardExtension_Controller::class, 'saveEditedData']);
 Route::delete('/delete-propext-data/{id}', [PropCardExtension_Controller::class, 'deletePropExt']);
-// Route::get('/fetch-officers', [PropertyController::class, 'fetchOfficers']);
+Route::get('/get-issue-qty/propertycard', [PropCardExtension_Controller::class, 'getOfficerIssueQty']);
+Route::get('/get-latest-issue-row', [PropCardExtension_Controller::class, 'getLatestIssueRow']);
+Route::get('/get-prop-id', [PropCardExtension_Controller::class, 'getPropID']);
+Route::get('/get-disposal-issue-qty', [PropCardExtension_Controller::class, 'getDisposalIssueQty']);
+
 
 //stock ext
 Route::post('/add-stock-extension', [StockCardExtension_Controller::class, 'addStockExt']);

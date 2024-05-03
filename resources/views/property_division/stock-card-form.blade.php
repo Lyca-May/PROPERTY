@@ -212,40 +212,40 @@
                                                         @enderror
                                                     </td>
                                                     <td>
-                                                        <input type="text" name="issue_qty" id="issue_qty" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">
+                                                        <input hidden type="text" name="issue_qty" id="issue_qty" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">
                                                         @error('issue_qty')
                                                         <span class="text-danger">{{ $message }}</span>
                                                         @enderror
                                                     </td>
                                                     <td>
-                                                        <input type="text" name="issue_unitcost" id="issue_unitcost" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">
+                                                        <input hidden type="text" name="issue_unitcost" id="issue_unitcost" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">
                                                         @error('issue_unitcost')
                                                         <span class="text-danger">{{ $message }}</span>
                                                         @enderror
                                                     </td>
                                                     <td>
-                                                        <input type="text" name="issue_totalcost" id="issue_totalcost" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="" readonly>
+                                                        <input hidden type="text" name="issue_totalcost" id="issue_totalcost" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="" readonly>
                                                         @error('issue_totalcost')
                                                         <span class="text-danger">{{ $message }}</span>
                                                         @enderror
                                                     </td>
                                                     <td>
-                                                        <input type="text" name="office_officer" id="office_officer" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">
+                                                        <input hidden type="text" name="office_officer" id="office_officer" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">
                                                         @error('office_officer')
                                                         <span class="text-danger">{{ $message }}</span>
                                                         @enderror
                                                     </td>
                                                     <td>
-                                                        <input type="text" name="bal_qty" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">
+                                                        <input hidden type="text" name="bal_qty" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">
                                                     </td>
                                                     <td>
-                                                        <input type="text" name="bal_unitcost" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">
+                                                        <input hidden type="text" name="bal_unitcost" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">
                                                     </td>
                                                     <td>
-                                                        <input type="text" name="bal_totalcost" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">
+                                                        <input hidden type="text" name="bal_totalcost" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">
                                                     </td>
                                                     <td>
-                                                        <input type="text" name="no_of_days" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">
+                                                        <input hidden type="text" name="no_of_days" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">
                                                         @error('no_of_days')
                                                         <span class="text-danger">{{ $message }}</span>
                                                         @enderror
