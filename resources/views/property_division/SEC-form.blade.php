@@ -29,7 +29,7 @@
     <div class="main-content">
         <section class="section">
             <h1 class="section-header">
-                <div>Semi - Expendable Ledger Card | Form</div>
+                <div>Semi-Expendable Property Card | Form</div>
             </h1>
             <hr>
 
@@ -42,7 +42,7 @@
                 <div class="col-lg-12 mx-auto">
                     <div class="card">
                         <div class="card-title pr" style="text-align: center;">
-                            <h4><strong>SEMI - EXPENDABLE LEDGER CARD</strong></h4>
+                            <h4><strong>SEMI - EXPENDABLE PROPERTY CARD</strong></h4>
                         </div>
                         <br>
 
@@ -83,7 +83,7 @@
                                             <div class="col-md-6">
                                                 <input type="text" name="fund_cluster" class="form-control text-line"
                                                     style="padding-top: 4px; padding-bottom: 4px;width: 300px"
-                                                    placeholder="">
+                                                    placeholder="" value="01101101" placeholder="01101101">
                                                 @error('fund_cluster')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -99,29 +99,19 @@
                                         <table class="table table-bordered">
                                             <tbody>
                                                 <tr>
-                                                    <th scope="row">Semi-expendable Property:</th>
+                                                    <th scope="row" style="width: 150px">Semi-Expendable Property:</th>
                                                     <td>
-                                                        <select name="sep_name" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;">
-                                                            <option value="OFFICE EQUIPMENT">OFFICE EQUIPMENT</option>
-                                                            <option value="FURNITURE AND FIXTURE">FURNITURE AND FIXTURE</option>
-                                                            <option value="OTHER SUPPLIES/MATERIALS (CONSUMPTION)">OTHER SUPPLIES/MATERIALS (CONSUMPTION)</option>
-                                                            <option value="AGRICULTURAL/MARINE FOR DISTRIBUTION">AGRICULTURAL/MARINE FOR DISTRIBUTION</option>
-                                                            <option value="MILITARY, POLICE & SECURITY, EQUIPMENT">MILITARY, POLICE & SECURITY, EQUIPMENT</option>
-                                                            <option value="COMMUNICATION EQUIPMENT">COMMUNICATION EQUIPMENT</option>
-                                                            <option value="OTHER SUPPLIES INVENTORY">OTHER SUPPLIES INVENTORY</option>
-                                                            <option value="MARINE & FISHERY EQUIPMENT">MARINE & FISHERY EQUIPMENT</option>
-                                                            <option value="TECHNOLOGY AND SCIENTIFIC EQUIPMENT">TECHNOLOGY AND SCIENTIFIC EQUIPMENT</option>
-                                                            <option value="OTHER PROPERTY PLANT &  EQUIPMENT">OTHER PROPERTY PLANT &  EQUIPMENT</option>
-                                                            <option value="INFORMATION AND COMMUNICATION TECHNOLOGY EQUIPMENT">INFORMATION AND COMMUNICATION TECHNOLOGY EQUIPMENT</option>
-                                                        </select>
+                                                        <input type="text" id="unitInput" name="sep_name" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px; width:100%" placeholder="Type to search">
+
+                                                        <div id="unitList"></div>
 
                                                         @error('sep_name')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
                                                     </td>
-                                                    <th scope="row">Semi-expendable Property Number:</th>
+                                                    <th scope="row" style="width:150px">Semi-Expendable Property Number:</th>
                                                     <td>
-                                                        <input type="text" name="sep_no"
+                                                        <input type="text" name="sep_no" id="sep_no"
                                                             class="form-control text-line"
                                                             style="padding-top: 4px; padding-bottom: 4px;"
                                                             placeholder="">
@@ -165,13 +155,13 @@
                                                 </tr>
                                                 <tr style="font-size:12px;">
                                                     <th scope="col" style="text-align: center;">Date</th>
-                                                    <th scope="col" style="text-align: center;">Reference
+                                                    <th scope="col" style="text-align: center; width: 200px">Reference
                                                     </th>
                                                     <th scope="col" style="text-align: center;">Qty</th>
-                                                    <th scope="col" style="text-align: center;">Unit Cost
+                                                    <th scope="col" style="text-align: center; width: 200px">Unit Cost
                                                     </th>
-                                                    <th scope="col" style="text-align: center;">Total Cost
-                                                    <th scope="col" style="text-align: center;">Item Number</th>
+                                                    <th scope="col" style="text-align: center; width: 200px">Total Cost
+                                                    <th scope="col" style="text-align: center; width: 300px">Item Number</th>
                                                     <th scope="col" style="text-align: center;">Qty</th>
                                                     <th scope="col" style="text-align: center;">Office Officer
                                                     </th>
@@ -205,7 +195,7 @@
                                                     <td>
                                                         <input type="text" name="receipt_qty" id="receipt_qtyy"
                                                             class="form-control text-line"
-                                                            style="padding-top: 4px; padding-bottom: 4px;"
+                                                            style="padding-top: 4px; padding-bottom: 4px; width:100px"
                                                             placeholder="">
                                                         @error('receipt_qty')
                                                             <span class="text-danger">{{ $message }}</span>
@@ -242,7 +232,7 @@
                                                         <input type="text" name="issue_qty" id="issue_qty"
                                                             class="form-control text-line"
                                                             style="padding-top: 4px; padding-bottom: 4px;"
-                                                            placeholder="">
+                                                            placeholder="" hidden>
                                                         @error('issue_qty')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -251,7 +241,7 @@
                                                         <input type="text" name="office_officer"
                                                             id="office_officer" class="form-control text-line"
                                                             style="padding-top: 4px; padding-bottom: 4px;"
-                                                            placeholder="">
+                                                            placeholder="" hidden>
                                                         @error('office_officer')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -260,13 +250,13 @@
                                                         <input type="text" name=""
                                                             class="form-control text-line"
                                                             style="padding-top: 4px; padding-bottom: 4px;"
-                                                            placeholder="" readonly>
+                                                            placeholder="" hidden>
                                                     </td>
                                                     <td>
                                                         <input type="text" name="amount"
                                                             class="form-control text-line"
                                                             style="padding-top: 4px; padding-bottom: 4px;"
-                                                            placeholder="">
+                                                            placeholder="" hidden>
                                                         @error('amount')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -275,7 +265,7 @@
                                                         <input type="text" name="remarks"
                                                             class="form-control text-line"
                                                             style="padding-top: 4px; padding-bottom: 4px;"
-                                                            placeholder="">
+                                                            placeholder="" hidden>
                                                         @error('remarks')
                                                             <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -357,6 +347,71 @@
             });
         @endif
     </script>
+    <script>
+        $(document).ready(function() {
+            // Attach an event listener to the sep_no input field
+            $('#sep_no').on('input', function() {
+                // Get the value of the sep_no input field
+                var sepNoValue = $(this).val();
+
+                // Set the value of the item_no input field to the value of sep_no
+                $('#item_no').val(sepNoValue);
+            });
+        });
+    </script>
+
+<script>
+    const inventoryUnits = [
+        { name: "OFFICE EQUIPMENT", number: 10405020 },
+        { name: "FURNITURE AND FIXTURE", number: 10406010 },
+        { name: "OTHER SUPPLIES/MATERIALS (CONSUMPTION)", number: 10404990 },
+        { name: "AGRICULTURAL/MARINE FOR DISTRIBUTION", number: 10406010 },
+        { name: "MILITARY, POLICE & SECURITY, EQUIPMENT", number: 10405090 },
+        { name: "COMMUNICATION EQUIPMENT", number: 10405070 },
+        { name: "OTHER SUPPLIES INVENTORY", number: 10404010 },
+        { name: "MARINE & FISHERY EQUIPMENT", number: 10405050 },
+        { name: "TECHNOLOGY AND SCIENTIFIC EQUIPMENT", number: 10405130 },
+        { name: "OTHER PROPERTY PLANT &  EQUIPMENT", number: 10405190 },
+        { name: "INFORMATION AND COMMUNICATION TECHNOLOGY EQUIPMENT", number: 10405030 },
+    ];
+
+    const unitInput = document.getElementById("unitInput");
+    const unitList = document.getElementById("unitList");
+    const sepNoInput = document.getElementById("sep_no"); // Get the input field
+    const itemNo = document.getElementById("item_no"); // Get the input field
+
+    unitInput.addEventListener("input", function() {
+        const inputValue = unitInput.value.trim().toLowerCase();
+        const matchedUnits = inventoryUnits.filter(unit => unit.name.toLowerCase().includes(inputValue));
+
+        displayMatchedUnits(matchedUnits);
+    });
+
+    function displayMatchedUnits(matchedUnits) {
+        unitList.innerHTML = ""; // Clear previous content
+
+        matchedUnits.forEach(unit => {
+            const unitItem = document.createElement("div");
+            unitItem.textContent = unit.name;
+            unitItem.classList.add("unitItem"); // Add class for styling
+            unitItem.addEventListener("click", function() {
+                unitInput.value = unit.name; // Set input value to selected unit name
+                sepNoInput.value = unit.number; // Set sep_no input value to corresponding number
+                itemNo.value = unit.number; // Set sep_no input value to corresponding number
+                unitList.innerHTML = ""; // Clear list after selection
+            });
+            unitList.appendChild(unitItem);
+        });
+    }
+
+    // Close the dropdown when clicking outside of it
+    document.addEventListener("click", function(event) {
+        if (!event.target.matches(".unitItem") && !event.target.matches("#unitInput")) {
+            unitList.innerHTML = "";
+        }
+    });
+</script>
+
 
 </body>
 

@@ -21,6 +21,16 @@ return new class extends Migration
             $table->string('new_bal_qty');
             $table->string('bal_totalcost');
             $table->string('no_of_days');
+
+            //accounting
+            $table->string('acctg_reference');
+            $table->string('particulars');
+            $table->integer('receipt_qty');
+            $table->float('receipt_unitcost');
+            $table->decimal('receipt_totalcost');
+            $table->float('issue_unitcost');
+            $table->decimal('issue_totalcost');
+            $table->float('bal_unitcost');
             $table->timestamps();
         });
     }

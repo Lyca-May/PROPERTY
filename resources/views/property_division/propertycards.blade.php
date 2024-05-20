@@ -35,6 +35,10 @@
             line-height: 13px;
         }
 
+        .centered-card {
+                                            margin: 0 auto; This will center the card horizontally
+                                            max-width: 200%;
+                                        }
         .table-title .add-new i {
             margin-right: 4px;
         }
@@ -187,33 +191,44 @@
                                     </div>
 
 
-                                    <div class="row card-row">
-                                        @foreach ($prop_card as $prop_cards)
-                                            <div class="col-lg-3 col-md-6 col-sm-12 mb-12">
-                                                <!-- Modal trigger element -->
-                                                <a class="card2" href="#" data-toggle="modal"
-                                                    data-target="#editItemModal{{ $prop_cards->id }}">
-                                                    <div class="card-body">
-                                                        <h3 class="card-title">ENTITY NAME:
-                                                            {{ $prop_cards->entity_name }}
-                                                        </h3>
-                                                        <h3 class="card-title">FUND CLUSTERE:
-                                                            {{ $prop_cards->fund_cluster }}
-                                                        </h3>
-                                                        <h3 class="card-text small">NAME:
-                                                            {{ $prop_cards->prop_plant_eq }}
-                                                        </h3>
-                                                        <p class="card-text small">Property No/Object Account Code:
-                                                            {{ $prop_cards->prop_no }}
-                                                        </p>
-                                                    </div>
-                                                    <div class="go-corner" href="#">
-                                                        <div class="go-arrow">
-                                                            →
-                                                        </div>
-                                                    </div>
-                                                </a>
+                                    <div class="centered-card">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="table-responsive">
+                                                    <table class="table table-bordered table-striped">
+                                                        <thead class="thead-dark">
+                                                            <tr>
+                                                                <th>ENTITY NAME</th>
+                                                                <th>NAME</th>
+                                                                <th>Description</th>
+                                                                <th>Property No/Object Account Code</th>
+                                                                <th>Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach ($prop_card as $prop_cards)
+                                                            <tr>
+                                                                <td>{{ $prop_cards->entity_name }}</td>
+                                                                <td>{{ $prop_cards->prop_plant_eq }}</td>
+                                                                <td>{{ $prop_cards->description }}</td>
+                                                                <td>{{ $prop_cards->prop_no }}</td>
+                                                                <td>
+                                                                    <!-- View icon to trigger modal -->
+                                                                    <a href="#" class="view-icon" data-toggle="modal" data-target="#editItemModal{{ $prop_cards->id }}">
+                                                                        <i class="fas fa-eye"></i>
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                             </div>
+                                        </div>
+                                    </div>
+
+
+                                        @foreach ($prop_card as $prop_cards)
                                             <div class="modal fade" id="editItemModal{{ $prop_cards->id }}"
                                                 tabindex="-1" role="dialog" aria-labelledby="editItemModalLabel"
                                                 aria-hidden="true">
@@ -391,12 +406,12 @@
                                                                                                     CATEGORY</th>
                                                                                                 <th scope="col"
                                                                                                     style="text-align: center;">
-                                                                                                    OFFICE
-                                                                                                    OFFICER</th>
-                                                                                                <th scope="col"
-                                                                                                    style="text-align: center;">
                                                                                                     FROM WHO?
                                                                                                 </th>
+                                                                                                <th scope="col"
+                                                                                                    style="text-align: center;">
+                                                                                                    OFFICE
+                                                                                                    OFFICER</th>
                                                                                                 <th scope="col"
                                                                                                     style="text-align: center;">
                                                                                                     QTY
@@ -417,26 +432,21 @@
                                                                                         <tbody>
                                                                                             <tr>
                                                                                                 <td>
-                                                                                                    @php
-                                                                                                        $formattedDate = date(
-                                                                                                            'd/m/y',
-                                                                                                            strtotime(
-                                                                                                                $prop_cards->date,
-                                                                                                            ),
-                                                                                                        );
-                                                                                                    @endphp
                                                                                                     <input
                                                                                                         type="date"
+                                                                                                        value="{{ \Carbon\Carbon::parse($prop_cards->date)->format('Y-m-d') }}"
+                                                                                                        id="dateInput"
                                                                                                         name="date"
-                                                                                                        class="form-control text-line"
+                                                                                                        class="form-control text-line date-input"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
-                                                                                                        placeholder=""
-                                                                                                        value="{{ $formattedDate }}">
-                                                                                                    @error('date')
-                                                                                                        <span
-                                                                                                            class="text-danger">{{ $message }}</span>
-                                                                                                    @enderror
+                                                                                                        placeholder="dd/mm/yyyy">
                                                                                                 </td>
+
+                                                                                                <script>
+                                                                                                    flatpickr('#dateInput', {
+                                                                                                        dateFormat: "d/m/Y",
+                                                                                                    });
+                                                                                                </script>
                                                                                                 <td>
                                                                                                     <textarea type="text" name="reference" class="form-control text-line"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;" placeholder="@error('reference') {{ $message }} @enderror">{{ $prop_cards->reference }}</textarea>
@@ -655,15 +665,6 @@
                                                                                                             placeholder=""
                                                                                                             value="{{ $data->issue_transfer_disposal }}">
                                                                                                     </td>
-
-                                                                                                    <td><input
-                                                                                                            type="text"
-                                                                                                            name="office_officer"
-                                                                                                            value="{{ $data->office_officer }}"
-                                                                                                            class="form-control text-line"
-                                                                                                            style="padding-top: 4px; padding-bottom: 4px;"
-                                                                                                            placeholder="">
-                                                                                                    </td>
                                                                                                     <td>
                                                                                                         <input
                                                                                                             type="text"
@@ -674,6 +675,14 @@
                                                                                                             placeholder=""
                                                                                                             readonly>
                                                                                                     </td>
+                                                                                                    <td><input
+                                                                                                            type="text"
+                                                                                                            name="office_officer"
+                                                                                                            value="{{ $data->office_officer }}"
+                                                                                                            class="form-control text-line"
+                                                                                                            style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                                            placeholder="">
+                                                                                                    </td>
                                                                                                     <td
                                                                                                         class="bal_qty">
                                                                                                         <input
@@ -683,7 +692,7 @@
                                                                                                             value="{{ $data->new_bal_qty }}"
                                                                                                             class="form-control text-line"
                                                                                                             style="padding-top: 4px; padding-bottom: 4px;"
-                                                                                                            @if ($data->issue_transfer_disposal == 'TRANSFER' || $data->issue_transfer_disposal == 'DISPOSAL') hidden @endif>
+                                                                                                            @if ($data->issue_transfer_disposal == 'TRANSFER' || $data->issue_transfer_disposal == 'RETURN') hidden @endif>
                                                                                                     </td>
                                                                                                     <td><input
                                                                                                             type="text"
@@ -691,7 +700,7 @@
                                                                                                             value="{{ $data->bal_amount }}"
                                                                                                             class="form-control text-line"
                                                                                                             style="padding-top: 4px; padding-bottom: 4px;"
-                                                                                                            @if ($data->issue_transfer_disposal == 'TRANSFER' || $data->issue_transfer_disposal == 'DISPOSAL') hidden @endif>
+                                                                                                            @if ($data->issue_transfer_disposal == 'TRANSFER' || $data->issue_transfer_disposal == 'RETURN') hidden @endif>
                                                                                                     </td>
                                                                                                     <td><input
                                                                                                             type="text"
@@ -714,12 +723,15 @@
                                                                                                             data-edit-id="{{ $prop_cards->id }} "
                                                                                                             data-toggle="tooltip"><i
                                                                                                                 class="material-icons">&#xE254;</i></a>
-                                                                                                        <a class="edit-add"
-                                                                                                            title="Add"
-                                                                                                            data-edit-add-propid="{{ $prop_cards->id }} "
-                                                                                                            data-edit-id="{{ $data->id }}"
-                                                                                                            data-toggle="tooltip" hidden><i
-                                                                                                                class="material-icons">&#xE03B;</i></a>
+                                                                                                                <a class="edit-add"
+                                                                                                                title="Add"
+                                                                                                                data-edit-add-propid="{{ $prop_cards->id }}"
+                                                                                                                data-edit-id="{{ $data->id }}"
+                                                                                                                data-toggle="tooltip"
+                                                                                                                hidden>
+                                                                                                                <i class="material-icons"></i>
+                                                                                                             </a>
+
                                                                                                         {{-- <a class="delete"
                                                                                                             title="Delete"
                                                                                                             data-edit-id="{{ $data->id }}"
@@ -738,11 +750,41 @@
                                                                     </div>
                                                                 </div>
                                                                 <br>
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+
+                                                                        <button type="button"
+                                                                        data-prop-id="{{ $prop_cards->id }}"
+                                                                        class="btn btn-info add-new"><i
+                                                                            class="fa fa-plus"></i> Add New</button>
+                                                                        <br>
+                                                                    </div>
+                                                                    <div class="col-md-6 text-right">
+
+                                                                        {{-- <button type="submit"
+                                                                            class="btn btn-primary">Save
+                                                                            Changes</button> --}}
+                                                                            <button type="button" onclick="navigateToPrintablePage('{{ $prop_cards->id }}')" class="btn btn-success">
+                                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-printer">
+                                                                                    <path d="M6 9V2H18V9"></path>
+                                                                                    <path d="M18 14H20V20H4V14H6"></path>
+                                                                                    <path d="M16 18H8"></path>
+                                                                                    <path d="M16 12H8"></path>
+                                                                                </svg>
+                                                                            </button>
+
+                                                                            <script>
+                                                                                function navigateToPrintablePage(propId) {
+                                                                                    window.location.href = '/printable-prop-page/' + propId;
+                                                                                }
+                                                                            </script>
+
+
+
+                                                                    </div>
+                                                                </div>
                                                             </form>
-                                                            <button type="button"
-                                                                data-prop-id="{{ $prop_cards->id }}"
-                                                                class="btn btn-info add-new"><i
-                                                                    class="fa fa-plus"></i> Add New</button>
+
                                                             <br>
                                                         </div>
                                                     </div>
@@ -750,12 +792,7 @@
                                             </div>
 
 
-                                            <script>
-                                                function navigateToPrintablePage() {
-                                                    var prop_cards_id = '{{ $prop_cards->id }}';
-                                                    window.location.href = '/printable-prop-page/' + prop_cards_id;
-                                                }
-                                            </script>
+
                                         @endforeach
                                     </div>
                                 </div>
@@ -848,21 +885,11 @@
             $(document).ready(function() {
                 $("#search-input").on("keyup", function() {
                     var searchText = $(this).val().toLowerCase();
-                    $(".card-row .card2").each(function() {
-                        var entityName = $(this)
-                            .find(".card-title:first")
-                            .text()
-                            .toLowerCase();
-                        var fundCluster = $(this)
-                            .find(".card-title:nth-child(2)")
-                            .text()
-                            .toLowerCase();
-                        var itemName = $(this).find(".card-text").text().toLowerCase();
-                        if (
-                            entityName.indexOf(searchText) === -1 &&
-                            fundCluster.indexOf(searchText) === -1 &&
-                            itemName.indexOf(searchText) === -1
-                        ) {
+
+                    $(".table tbody tr").each(function() {
+                        var rowData = $(this).text().toLowerCase();
+
+                        if (rowData.indexOf(searchText) === -1 && searchText !== "") {
                             $(this).hide();
                         } else {
                             $(this).show();
@@ -904,6 +931,7 @@
                 $('[data-toggle="tooltip"]').tooltip();
 
                 $(".add-new").click(function(event) {
+
                     try {
                         event.preventDefault(); // Prevent default behavior of button (e.g., form submission)
                         $(this).attr("disabled", "disabled");
@@ -923,24 +951,12 @@
                             '<a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>';
 
                         var row = $("<tr>").append(
-                            $('<td>').append(
-                                '<input type="date" name="date" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">'
-                            ),
-                            $('<td>').append(
-                                '<textarea type="text" name="reference" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></textarea>'
-                            ),
-                            $('<td>').append(
-                                '<input type="hidden" name="receipt_qty" value="0" class="form-control text-line receipt-input1" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">'
-                            ),
-                            $('<td>').append(
-                                '<input type="hidden" name="receipt_unitcost" value="0" class="form-control text-line receipt-input1" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">'
-                            ),
-                            $('<td>').append(
-                                '<input type="hidden" name="receipt_totalcost" value="0" class="form-control text-line receipt-total" style="padding-top: 4px; padding-bottom: 4px;" >'
-                            ),
-                            $('<td>').append(
-                                '<input type="text" name="issue_qty" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">'
-                            ),
+                            $('<td>').append('<input type="date" class="form-control text-line" name="date" style="padding-top: 4px; padding-bottom: 4px;" value="">'),
+                            $('<td>').append('<input type="text" name="reference" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">'),
+                            $('<td>').append('<input type="hidden" name="receipt_qty" value="0" class="form-control text-line receipt-input1" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">'),
+                            $('<td>').append('<input type="hidden" name="receipt_unitcost" value="0" class="form-control text-line receipt-input1" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">'),
+                            $('<td>').append('<input type="hidden" name="receipt_totalcost" value="0" class="form-control text-line receipt-total" style="padding-top: 4px; padding-bottom: 4px;" >'),
+                            $('<td>').append('<input type="text" class="form-control text-line" name="issue_qty" style="padding-top: 4px; padding-bottom: 4px;" value="">'),
                             $('<td>').append(
                                 $('<select>', {
                                     'name': 'issue_transfer_disposal',
@@ -948,6 +964,10 @@
                                     'class': 'form-control text-line',
                                     'style': 'padding-top: 4px; padding-bottom: 4px;'
                                 }).append(
+                                    $('<option>', {
+                                        value: '',
+                                        text: ''
+                                    }),
                                     $('<option>', {
                                         value: 'ISSUE',
                                         text: 'Issue'
@@ -957,13 +977,10 @@
                                         text: 'Transfer'
                                     }),
                                     $('<option>', {
-                                        value: 'DISPOSAL',
-                                        text: 'Disposal'
+                                        value: 'RETURN',
+                                        text: 'Return'
                                     })
                                 )),
-                            $('<td>').append(
-                                '<input type="text" name="office_officer" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">'
-                            ),
                             $('<td class="select">').append(
                                 $('<select>').attr({
                                     'name': 'transfer_dropdown',
@@ -972,15 +989,10 @@
                                     'style': 'padding-top: 4px; padding-bottom: 4px;'
                                 })
                             ),
-                            $('<td>').append(
-                                '<input type="text" name="new_bal_qty" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;">'
-                            ),
-                            $('<td>').append(
-                                '<input type="text" name="bal_amount" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">'
-                            ),
-                            $('<td>').append(
-                                '<textarea type="text" name="remarks" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder=""></textarea>'
-                            ),
+                            $('<td>').append('<input type="text" name="office_officer" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">'),
+                            $('<td>').append('<input type="text" class="form-control text-line" name="new_bal_qty" style="padding-top: 4px; padding-bottom: 4px;" value="">'),
+                            $('<td>').append('<input type="text" class="form-control text-line" name="bal_amount" style="padding-top: 4px; padding-bottom: 4px;" placeholder="" value="">'),
+                            $('<td>').append('<input type="text" name="remarks" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">'),
                             $('<td>').append(actions),
                             $('<td hidden>').append('<input type="text" name="prop_id" value="' + propId +
                                 '" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">'
@@ -1094,20 +1106,82 @@
                                     $row.find('#transfer_dropdown').hide();
                                     $row.find('input[name="new_bal_qty"]').val(0).prop("hidden", false);
                                     $row.find('input[name="bal_amount"]').val(0).prop("hidden", false);
-                                    calculateNewBalQty();
-                                } else if (issueTransferValue === "DISPOSAL") {
+                                    console.log('ISSUE IS SELECTED');
+                                    $(document).ready(function() {
+                                        $(document).on("input", 'input[name="issue_qty"]', function() {
+                                            var $row = $(this).closest("tr");
+                                            var issueQty = $(this).val();
+                                            console.log("the current issueqty is " + issueQty);
+                                            var index = $row.index();
+                                            if (index > 1 && index < $("table tbody tr").length) {
+                                                $.ajax({
+                                                    url: "/get-latest-issue-row",
+                                                    method: "GET",
+                                                    success: function(response) {
+                                                        if (response.new_bal_qty) {
+                                                            console.log('ISSUE HAS BEEN FOUND!');
+                                                            var prevRowBalQty = parseFloat(response.new_bal_qty);
+                                                            var unitCost = parseFloat($row.closest(".modal-body").find(
+                                                                'input[name="receipt_unitcost"]').val()) || 0;
+                                                            var issueQty = parseFloat($row.find('input[name="issue_qty"]').val());
+                                                            var newBalQty = prevRowBalQty - issueQty;
+                                                            var newBalAm = unitCost * newBalQty;
+                                                            console.log(newBalQty, newBalAm);
+
+                                                            $row.find('input[name="new_bal_qty"]').val(newBalQty);
+                                                            $row.find('input[name="bal_amount"]').val(newBalAm.toFixed(2));
+                                                        } else {
+                                                            console.log("No previous row with ISSUE value found.");
+                                                        }
+                                                    },
+                                                    error: function(xhr, status, error) {
+                                                        console.error("Error fetching latest issue row:", error);
+                                                    }
+                                                });
+                                            }else{
+                                                console.log("error");
+                                            }
+                                        });
+                                    });
+                                }
+                                else if (issueTransferValue === "RETURN") {
+                                    $row.find('#transfer_dropdown').show();
                                     $row.find('input[name="new_bal_qty"]').val(0).prop("hidden", true);
                                     $row.find('input[name="bal_amount"]').val(0).prop("hidden", true);
-                                    $row.find('select[name="transfer_dropdown"]').val(0).prop("hidden", true);
-                                     $(document).on("input", 'input[name="office_officer"]', function() {
-                                        var $row = $(this).closest("tr");
-                                        var selectedOfficer = $(this).val();
-                                        console.log("the selected officer is " + selectedOfficer);
+                                    $.ajax({
+                                        url: '/get-prop-id',
+                                        method: 'GET',
+                                        data: {
+                                            propId: propId
+                                        },
+                                        success: function(response) {
+                                            // Clear existing select dropdowns with class "select"
+                                            $('td.select').empty();
 
-                                        $row.find('input[name="issue_qty"]').on("input", function() {
-                                            var issueQty = $(this).val();
-                                            console.log("THIS IS THE ISSUEQTY " + issueQty);
-                                            var $matchingRow = $row.closest(".modal-body").find(
+                                            var selectDropdown = $('<select>').attr({
+                                                'name': 'transfer_dropdown',
+                                                'id': 'transfer_dropdown',
+                                                'class': 'form-control text-line',
+                                                'style': 'padding-top: 4px; padding-bottom: 4px;'
+                                            });
+                                            $.each(response, function(index, item) {
+                                                selectDropdown.append($('<option>').attr('value', item)
+                                                    .text(item));
+                                            });
+                                            $('td.select').append(selectDropdown);
+                                        },
+                                        error: function(xhr, status, error) {
+                                            console.error('Failed to fetch data:', error);
+                                        }
+                                    });
+                                    $(document).on("input", 'input[name="issue_qty"]', function() {
+                                        var $row = $(this).closest("tr");
+                                        var issueQty = parseFloat($(this).val());
+                                        var selectedOfficer = $row.find(
+                                                'select[name="transfer_dropdown"]')
+                                            .val();
+                                        console.log("the selected officer is " + selectedOfficer);
+                                        var $matchingRow = $row.closest(".modal-body").find(
                                             'input[name="office_officer"]').filter(function() {
                                             return $(this).val() === selectedOfficer;
                                         }).closest("tr");
@@ -1116,47 +1190,52 @@
                                             var officeOfficer = $matchingRow.find(
                                                     'input[name="office_officer"]').val()
                                                 .toString(); // Convert to string
-                                            console.log("the matched office officer is " + officeOfficer);
+                                            console.log("the matched office officer is " +
+                                                officeOfficer);
                                             $.ajax({
-                                                url: '/get-disposal-issue-qty',
+                                                url: '/get-issue-qty/propertycard',
                                                 method: 'GET',
                                                 data: {
                                                     officer: selectedOfficer
                                                 },
                                                 success: function(response) {
                                                     if (response.success) {
-                                                        var officerDisposalQty = response.issue_qty;
-                                                        console.log("THE ISSUE QTY OF " + selectedOfficer + " is " + officerDisposalQty);
-                                                        var newDisposalQty = officerDisposalQty - issueQty; // Subtract the issueQty of the current row
-                                                        console.log(newDisposalQty);
+                                                        var officerIssueQty = response
+                                                            .issue_qty;
+                                                        console.log(officerIssueQty);
+                                                        var newIssueQty = officerIssueQty -
+                                                            issueQty;
+                                                        console.log(newIssueQty);
                                                         $(document).trigger(
-                                                            "disposedQtyUpdated", [
-                                                                newDisposalQty,
+                                                            "issueQtyUpdated", [
+                                                                newIssueQty,
                                                                 selectedOfficer
                                                             ]);
                                                     } else {
-                                                        console.error('Failed to fetch issue_qty for officer ' + selectedOfficer);
+                                                        console.error(
+                                                            'Failed to fetch issue_qty for officer ' +
+                                                            selectedOfficer);
                                                     }
                                                 },
                                                 error: function(xhr, status, error) {
-                                                    console.error('Failed to fetch issue_qty for officer ' + selectedOfficer + ': ' + error);
+                                                    console.error(
+                                                        'Failed to fetch issue_qty for officer ' +
+                                                        selectedOfficer + ': ' + error);
                                                 }
                                             });
                                         } else {
                                             console.log("No matching office officer found.");
                                         }
-                                        });
-
-                                        
                                     });
 
-                                }else{
-                                    console.log('error');
                                 }
-
                                 if (issueTransferValue === "TRANSFER") {
                                     $row.find('#transfer_dropdown').show();
-                                } else {
+                                }
+                                else if (issueTransferValue === "RETURN") {
+                                    $row.find('#transfer_dropdown').show();
+                                }
+                                else {
                                     $row.find('#transfer_dropdown').hide();
                                     $row.find('select[name="transfer_dropdown"]').val("");
                                 }
@@ -1210,42 +1289,6 @@
                     '.modal-body input[name="receipt_qty"], .modal-body input[name="issue_qty"]',
                     calculateBalance
                 );
-                //CALCULATION OF BAL QTY FOR MORE THAN 2 ROWS
-                function calculateNewBalQty() {
-                    // Get the parent row
-                    var $row = $(this).closest("tr");
-                    $row.find('select[name="transfer_dropdown"]').val(0).prop("hidden", true);
-                    var index = $row.index()
-                    if (index > 1 && index < $("table tbody tr").length) {
-                        $.ajax({
-                            url: "/get-latest-issue-row",
-                            method: "GET",
-                            success: function(response) {
-                                if (response.new_bal_qty) {
-
-                                    console.log('ISSUE HAS BEEN FOUND!');
-                                    var prevRowBalQty = parseFloat(response.new_bal_qty);
-                                    var unitCost = parseFloat($row.closest(".modal-body").find(
-                                        'input[name="receipt_unitcost"]').val()) || 0;
-                                    var issueQty = parseFloat($row.find('input[name="issue_qty"]').val());
-                                    var newBalQty = prevRowBalQty - issueQty;
-                                    var newBalAm = unitCost * newBalQty;
-                                    console.log(newBalQty, newBalAm);
-
-                                    $row.find('input[name="new_bal_qty"]').val(newBalQty);
-                                    $row.find('input[name="bal_amount"]').val(newBalAm.toFixed(2));
-                                } else {
-                                    console.log("No previous row with ISSUE value found.");
-                                }
-                            },
-                            error: function(xhr, status, error) {
-                                console.error("Error fetching latest issue row:", error);
-                            }
-                        });
-                    }
-                }
-                // Attach the input event handler
-                $(document).on("input", 'table tbody tr:last input[name="issue_qty"]', calculateNewBalQty);
                 // Event handler for when issueQty is updated
                 $(document).on("issueQtyUpdated", function(event, newIssueQty, selectedOfficer) {
                     $(document).on("click", ".add", function() {
@@ -1463,34 +1506,33 @@
                     row.find(".edit").show();
                     row.find(".add").hide();
                 });
-                $(document).on("click", ".delete", function() {
-                    var editId = $(this).data("edit-id");
-                    var $deleteButton = $(this); // Store reference to the delete button
+                // $(document).on("click", ".delete", function() {
+                //     var editId = $(this).data("edit-id");
+                //     var $deleteButton = $(this); // Store reference to the delete button
 
-                    // Perform an AJAX request to delete the data on the server
-                    $.ajax({
-                        type: "DELETE", // Use DELETE method
-                        url: "/delete-propext-data/" + editId, // Use editId in the URL
-                        headers: {
-                            "X-CSRF-TOKEN": csrfToken,
-                        },
-                        success: function(response) {
-                            // Optionally, handle success response
-                            console.log("Data deleted successfully!");
-                            // Remove the row from the table after successful deletion
-                            $deleteButton.closest("tr")
-                                .remove(); // Use the stored reference to deleteButton
-                        },
-                        error: function(xhr, status, error) {
-                            // Handle error
-                            console.error(xhr.responseText);
-                        },
-                    });
-                });
+                //     // Perform an AJAX request to delete the data on the server
+                //     $.ajax({
+                //         type: "DELETE", // Use DELETE method
+                //         url: "/delete-propext-data/" + editId, // Use editId in the URL
+                //         headers: {
+                //             "X-CSRF-TOKEN": csrfToken,
+                //         },
+                //         success: function(response) {
+                //             // Optionally, handle success response
+                //             console.log("Data deleted successfully!");
+                //             // Remove the row from the table after successful deletion
+                //             $deleteButton.closest("tr")
+                //                 .remove(); // Use the stored reference to deleteButton
+                //         },
+                //         error: function(xhr, status, error) {
+                //             // Handle error
+                //             console.error(xhr.responseText);
+                //         },
+                //     });
+                // });
 
             });
         </script>
-
 
 
     </div>

@@ -24,6 +24,8 @@ return new class extends Migration
 
             $table->date('date');
             $table->string('reference');
+            $table->string('acctg_reference');
+            $table->string('particulars');
             $table->integer('receipt_qty');
             $table->float('receipt_unitcost');
             $table->decimal('receipt_totalcost');

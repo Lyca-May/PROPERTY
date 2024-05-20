@@ -90,21 +90,13 @@
                                         <table class="table table-bordered">
                                             <tbody>
                                                 <tr>
-                                                    <th scope="row">Property, Plant & Equipment:</th>
+                                                    <th scope="row" style="width: 150px">Property, Plant & Equipment:</th>
                                                     <td>
-                                                        <select name="prop_plant_eq" class="form-control">
-                                                            <option value="ICTE">ICTE</option>
-                                                            <option value="FURNITURE & FIXTURE">FURNITURE & FIXTURE
-                                                            </option>
-                                                            <option value="OFFICE EQUIPMENTS">OFFICE EQUIPMENTS</option>
-                                                            <option value="TSE">TSE</option>
-                                                            <option value="MFE">MFE</option>
-                                                        </select>
-                                                        @error('prop_plant_eq')
-                                                            <span class="text-danger">{{ $message }}</span>
-                                                        @enderror
+                                                        <input type="text" id="unitInput" name="prop_plant_eq" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px; width:100%" placeholder="Type to search">
 
+                                                        <div id="unitList"></div>
                                                     </td>
+
                                                     <th scope="row">Property No:</th>
                                                     <td>
                                                         <input type="text" name="prop_no"
@@ -358,6 +350,56 @@
             });
         </script>
     @endif
+
+
+<script>
+    const inventoryUnits = [
+        "OFFICE EQUIPMENT",
+        "FURNITURE AND FIXTURE",
+        "OTHER SUPPLIES/MATERIALS (CONSUMPTION)",
+        "AGRICULTURAL/MARINE FOR DISTRIBUTION",
+        "MILITARY, POLICE & SECURITY, EQUIPMENT",
+        "COMMUNICATION EQUIPMENT",
+        "OTHER SUPPLIES INVENTORY",
+        "MARINE & FISHERY EQUIPMENT",
+        "TECHNOLOGY AND SCIENTIFIC EQUIPMENT",
+        "OTHER PROPERTY PLANT &  EQUIPMENT",
+        "INFORMATION AND COMMUNICATION TECHNOLOGY EQUIPMENT"
+    ];
+
+    const unitInput = document.getElementById("unitInput");
+    const unitList = document.getElementById("unitList");
+
+    unitInput.addEventListener("input", function() {
+        const inputValue = unitInput.value.trim().toLowerCase();
+        const matchedUnits = inventoryUnits.filter(unit => unit.toLowerCase().includes(inputValue));
+
+        displayMatchedUnits(matchedUnits);
+    });
+
+    function displayMatchedUnits(matchedUnits) {
+        unitList.innerHTML = ""; // Clear previous content
+
+        matchedUnits.forEach(unit => {
+            const unitItem = document.createElement("div");
+            unitItem.textContent = unit;
+            unitItem.classList.add("unitItem"); // Add class for styling
+            unitItem.addEventListener("click", function() {
+                unitInput.value = unit; // Set input value to selected unit
+                unitList.innerHTML = ""; // Clear list after selection
+            });
+            unitList.appendChild(unitItem);
+        });
+    }
+
+    // Close the dropdown when clicking outside of it
+    document.addEventListener("click", function(event) {
+        if (!event.target.matches(".unitItem") && !event.target.matches("#unitInput")) {
+            unitList.innerHTML = "";
+        }
+    });
+</script>
+
 </body>
 
 </html>

@@ -164,46 +164,60 @@
                                         </div>
                                     </div>
                                     <hr>
-                                    <div class="col-md-12 d-flex justify-content-end">
-                                        <form id="search-form">
-                                            <div class="input-group">
-                                                <input type="text" class="form-control" placeholder="Search"
-                                                    id="search-input" style="width: 300px;">
-                                                <div class="input-group-append">
-                                                    <!-- Add your search button or other elements here -->
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
                                     <br>
                                     <div class="row card-row">
-                                        @foreach ($stock_card as $stock_cards)
-                                            <div class="col-lg-3 col-md-6 col-sm-12 mb-12">
-                                                {{-- <div class="card"> --}}
-                                                <!-- Modal trigger element -->
-                                                <a class="card2" href="#" data-toggle="modal"
-                                                    data-target="#editItemModal{{ $stock_cards->id }}">
-                                                    <div class="card-body">
-                                                        <h3 class="card-title">ENTITY NAME:
-                                                            {{ $stock_cards->entity_name }}
-                                                        </h3>
-                                                        <h3 class="card-title">FUND CLUSTER:
-                                                            {{ $stock_cards->fund_cluster }}
-                                                        </h3>
-                                                        <h3 class="card-text small">ITEM NAME:
-                                                            {{ $stock_cards->item_name }}
-                                                        </h3>
-                                                        <p class="card-text small">ITEMCODE/STOCK NO:
-                                                            {{ $stock_cards->stock_no }}
-                                                        </p>
+                                        <div class="col-md-12 d-flex justify-content-end">
+                                            <form id="search-form">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" placeholder="Search"
+                                                        id="search-input" style="width: 300px;">
+                                                    <div class="input-group-append">
+                                                        <!-- Add your search button or other elements here -->
                                                     </div>
-                                                    <div class="go-corner" href="#">
-                                                        <div class="go-arrow">→</div>
-                                                    </div>
-                                                </a>
-                                                {{-- </div> --}}
-                                            </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <br>
 
+                                        <div class="centered-card">
+                                            <div class="card"
+                                                style="width:240%; margin-left:30px; margin-top:30px;">
+                                                <div class="card-body">
+                                                    <div class="table-responsive">
+                                                    <table class="table table-bordered table-striped">
+                                                        <thead class="thead-dark">
+                                                                <tr>
+                                                                    <th>Entity Name</th>
+                                                                    <th>Name</th>
+                                                                    <th>Description</th>
+                                                                    <th>Item Code</th>
+                                                                    <th>Action</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @foreach ($stock_card as $stock_cards)
+                                                                    <tr>
+                                                                        <td>{{ $stock_cards->entity_name }}</td>
+                                                                        <td>{{ $stock_cards->item_name }}</td>
+                                                                        <td>{{ $stock_cards->description }}</td>
+                                                                        <td>{{ $stock_cards->item_code }}</td>
+                                                                        <td>
+                                                                            <!-- View icon to trigger modal -->
+                                                                            <a href="#" class="view-icon"
+                                                                                data-toggle="modal"
+                                                                                data-target="#editItemModal{{ $stock_cards->id }}">
+                                                                                <i class="fas fa-eye"></i>
+                                                                            </a>
+                                                                        </td>
+                                                                    </tr>
+                                                                @endforeach
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @foreach ($stock_card as $stock_cards)
                                             <div class="modal fade" id="editItemModal{{ $stock_cards->id }}"
                                                 tabindex="-1" role="dialog" aria-labelledby="editItemModalLabel"
                                                 aria-hidden="true">
@@ -530,8 +544,8 @@
                                                                                                         class="form-control text-line"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                         placeholder=""
-                                                                                                        value="{{ $stock_cards->receipt_qty }}" readonly
-                                                                                                    >
+                                                                                                        value="{{ $stock_cards->receipt_qty }}"
+                                                                                                        readonly>
                                                                                                 </td>
                                                                                                 <td>
                                                                                                     <input
@@ -558,10 +572,10 @@
                                                                                                 </td>
                                                                                                 <td>
                                                                                                     <a class="add"
-                                                                                                    title="Add"
-                                                                                                    data-edit-id="{{ $stock_cards->id }} "
-                                                                                                    data-toggle="tooltip"><i
-                                                                                                        class="material-icons">&#xE03B;</i></a>
+                                                                                                        title="Add"
+                                                                                                        data-edit-id="{{ $stock_cards->id }} "
+                                                                                                        data-toggle="tooltip"><i
+                                                                                                            class="material-icons">&#xE03B;</i></a>
                                                                                                     <a class="edit"
                                                                                                         title="Edit"
                                                                                                         data-edit-id="{{ $stock_cards->id }} "
@@ -633,9 +647,9 @@
                                                                                                         class="bal_qty">
                                                                                                         <input
                                                                                                             type="text"
-                                                                                                            name="bal_qty"
+                                                                                                            name="new_bal_qty"
                                                                                                             id="bal-qty {{ $data->id }} "
-                                                                                                            value="{{ $data->bal_qty }}"
+                                                                                                            value="{{ $data->new_bal_qty }}"
                                                                                                             class="form-control text-line"
                                                                                                             style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                             placeholder="">
@@ -687,29 +701,42 @@
                                                                     </div>
                                                                 </div>
                                                                 <br>
-                                                                {{-- <div class="row"> --}}
-                                                                {{-- <div class="col-md-6"> --}}
-                                                                {{-- Button positioned to the left --}}
-                                                                {{-- <a type="button" class="btn btn-danger"
-                                                                            href="{{ url('/view-slc/' . $stock_cards->id) }}">View
-                                                                            Stock Ledger Card</a>
-                                                                    </div>
-                                                                    <div class="col-md-6 text-right"> --}}
-                                                                {{-- Buttons positioned to the right --}}
-                                                                {{-- <button type="submit"
-                                                                            class="btn btn-primary">Save
-                                                                            Changes</button>
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
                                                                         <button type="button"
-                                                                            onclick="navigateToPrintablePage()"
-                                                                            class="btn btn-success ">Preview</button>
+                                                                            data-stock-id="{{ $stock_cards->id }}"
+                                                                            class="btn btn-info add-new"><i
+                                                                                class="fa fa-plus"></i>
+                                                                            Add New</button>
+                                                                        <br>
                                                                     </div>
-                                                                </div> --}}
+                                                                    <div class="col-md-6 text-right">
+                                                                        <button type="button"
+                                                                            onclick="navigateToPrintablePage('{{ $stock_cards->id }}')"
+                                                                            class="btn btn-success">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                width="24" height="24"
+                                                                                viewBox="0 0 24 24" fill="none"
+                                                                                stroke="currentColor" stroke-width="2"
+                                                                                stroke-linecap="round"
+                                                                                stroke-linejoin="round"
+                                                                                class="feather feather-printer">
+                                                                                <path d="M6 9V2H18V9"></path>
+                                                                                <path d="M18 14H20V20H4V14H6"></path>
+                                                                                <path d="M16 18H8"></path>
+                                                                                <path d="M16 12H8"></path>
+                                                                            </svg>
+                                                                        </button>
+
+                                                                        <script>
+                                                                            function navigateToPrintablePage(propId) {
+                                                                                window.location.href = '/printable-stock-page/' + propId;
+                                                                            }
+                                                                        </script>
+                                                                    </div>
+                                                                </div>
                                                             </form>
-                                                            <button type="button"
-                                                                data-stock-id="{{ $stock_cards->id }}"
-                                                                class="btn btn-info add-new"><i
-                                                                    class="fa fa-plus"></i>
-                                                                Add New</button>
+
                                                             <br>
                                                         </div>
                                                     </div>
@@ -827,38 +854,38 @@
                     var row = $('<tr>').append(
                         $('<td>').append(
                             '<input type="date" class="form-control text-line" name="date" style="padding-top: 4px; padding-bottom: 4px;" value="">'
-                            ),
+                        ),
                         $('<td>').append(
                             '<input type="text" class="form-control text-line" name="reference" style="padding-top: 4px; padding-bottom: 4px;" value="">'
-                            ),
+                        ),
                         $('<td>').append(
                             '<input type="hidden" class="form-control text-line receipt-input" name="" id="receipt_qty" style="padding-top: 4px; padding-bottom: 4px;" placeholder="" value="">'
-                            ),
+                        ),
                         $('<td>').append(
                             '<input type="hidden" class="form-control text-line receipt-input" name="" id="receipt_unitcost" style="padding-top: 4px; padding-bottom: 4px;" placeholder="" value="">'
-                            ),
+                        ),
                         $('<td>').append(
                             '<input type="hidden" class="form-control text-line receipt-total" name="" id="receipt_totalcost" style="padding-top: 4px; padding-bottom: 4px;" value="">'
-                            ),
+                        ),
                         $('<td>').append(
                             '<input type="text" class="form-control text-line issue-input" name="issue_qty" id="issue_qty" style="padding-top: 4px; padding-bottom: 4px;" value="">'
-                            ),
+                        ),
                         $('<td>').append(
                             '<input type="text" class="form-control text-line issue-total" name="office_officer" id="office_officer" style="padding-top: 4px; padding-bottom: 4px;" value="">'
-                            ),
+                        ),
                         $('<td>').append(
-                            '<input type="text" class="form-control text-line" name="bal_qty" style="padding-top: 4px; padding-bottom: 4px;" value="">'
-                            ),
+                            '<input type="text" class="form-control text-line" name="new_bal_qty" style="padding-top: 4px; padding-bottom: 4px;" value="">'
+                        ),
                         $('<td>').append(
                             '<input type="text" class="form-control text-line" name="bal_totalcost" style="padding-top: 4px; padding-bottom: 4px;" value="">'
-                            ),
+                        ),
                         $('<td>').append(
                             '<input type="text" class="form-control text-line" name="no_of_days" style="padding-top: 4px; padding-bottom: 4px;" value="">'
-                            ),
+                        ),
                         $('<td>').append(actions),
                         $('<td hidden>').append('<input type="text" name="stock_id" value="' + stockId +
                             '" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">'
-                            )
+                        )
                     );
 
                     table.append(row);
@@ -877,7 +904,7 @@
                                 var unitCost = parseFloat($(this).closest(".modal-body").find(
                                     'input[name="receipt_unitcost"]').val()) || 0;
                                 var issueQty = $(this).closest("tr").find('input[name="issue_qty"]')
-                                .val() || 0;
+                                    .val() || 0;
 
                                 var balanceQty = receiptQty - issueQty;
                                 var balanceTotal = unitCost * balanceQty;
@@ -885,7 +912,7 @@
                                 console.log("Balance calculated. Quantity:", balanceQty, "Amount:",
                                     balanceTotal);
 
-                                $(this).closest("tr").find('input[name="bal_qty"]').val(balanceQty);
+                                $(this).closest("tr").find('input[name="new_bal_qty"]').val(balanceQty);
                                 $(this).closest("tr").find('input[name="bal_totalcost"]').val(balanceTotal
                                     .toFixed(2));
                             });
@@ -903,10 +930,10 @@
                                 var index = $row.index();
                                 if (index > 1 && index < $("table tbody tr").length) {
                                     var prevRowBalQtyInput = $row.prev().prev().find(
-                                        'input[name="bal_qty"]');
+                                        'input[name="new_bal_qty"]');
                                     var prevRowBalQtyValue = prevRowBalQtyInput.val();
                                     var prevRowBalQty = parseFloat(
-                                    prevRowBalQtyValue); // Define prevRowBalQty here
+                                        prevRowBalQtyValue); // Define prevRowBalQty here
                                     console.log("Previous Row Bal Qty:", prevRowBalQty);
                                     var unitCost = parseFloat($(this)
                                         .closest(".modal-body")
@@ -924,12 +951,12 @@
                                     var newBalTotalCost = unitCost * newBalQty;
                                     console.log("New Bal Qty:", newBalQty);
                                     console.log("New Bal TotalCost:", newBalTotalCost);
-                                    $row.find('input[name="bal_qty"]').val(newBalQty);
+                                    $row.find('input[name="new_bal_qty"]').val(newBalQty);
                                     $row.find('input[name="bal_totalcost"]').val(newBalTotalCost);
                                 } else {
                                     console.log("NO VALUE FOR THE PREVIOUS BAL QTY");
                                 }
-                        });
+                            });
 
                     }
                     $("table tbody tr:last-child").find(".add").show();
@@ -938,6 +965,7 @@
                 });
 
                 $(document).on("click", ".add", function() {
+                    var csrfToken = "{{ csrf_token() }}";
                     var rowData = {};
                     var input = $(this).parents("tr").find(
                         'input[type="text"], input[type="date"], textarea');
@@ -947,6 +975,7 @@
                         var value = $(this).val();
                         rowData[name] = value;
                     });
+                    // var csrfToken = $('meta[name="csrf-token"]').attr('content');
                     $.ajax({
                         type: "POST",
                         url: "/add-stock-extension",
@@ -956,7 +985,6 @@
                         data: JSON.stringify(rowData), // Ensure the data is sent as JSON
                         contentType: "application/json", // Set the content type to JSON
                         success: function(response) {
-                            // Update table with new row data
                             var newRow = "<tr>";
                             Object.values(rowData).forEach(function(value) {
                                 newRow += "<td>" + value + "</td>";
@@ -965,7 +993,6 @@
                             $("table tbody").append(newRow);
                         },
                         error: function(xhr, status, error) {
-                            // Handle error
                             console.error(xhr.responseText);
                         },
                     });
@@ -1059,14 +1086,123 @@
                     row.find(".add").hide();
                 });
 
-                $(document).on("click", ".delete", function() {
+                // $(document).on("click", ".delete", function() {
+                //     var editId = $(this).data("edit-id");
+                //     var $deleteButton = $(this); // Store reference to the delete button
+
+                //     // Perform an AJAX request to delete the data on the server
+                //     $.ajax({
+                //         type: "DELETE", // Use DELETE method
+                //         url: "/delete-stockext-data/" + editId, // Use editId in the URL
+                //         headers: {
+                //             "X-CSRF-TOKEN": csrfToken,
+                //         },
+                //         success: function(response) {
+                //             // Optionally, handle success response
+                //             console.log("Data deleted successfully!");
+                //             // Remove the row from the table after successful deletion
+                //             $deleteButton.closest("tr")
+                //                 .remove(); // Use the stored reference to deleteButton
+                //         },
+                //         error: function(xhr, status, error) {
+                //             // Handle error
+                //             console.error(xhr.responseText);
+                //         },
+                //     });
+                // });
+            });
+        </script>
+        {{-- <script>
+            $(document).ready(function() {
+                $(document).on("click", ".edit", function() {
+                    var row = $(this).closest("tr");
                     var editId = $(this).data("edit-id");
+
+                    if (editId) {
+                        $.ajax({
+                            type: "GET",
+                            url: "/get-stock-data/" + editId,
+                            success: function(response) {
+                                var rowData = response;
+                                row.find("td:not(:last-child)").each(function() {
+                                    var fieldName = $(this).data("field-name");
+                                    if (fieldName) {
+                                        var value = rowData[fieldName];
+                                        // Check if the field is an input field
+                                        var inputField = $('<input>', {
+                                            type: 'text',
+                                            class: 'form-control',
+                                            name: fieldName,
+                                            value: value
+                                        });
+                                        $(this).html(inputField);
+                                    }
+                                });
+
+                                // Show the save button and hide the edit button
+                                row.find(".add").show();
+                                row.find(".edit").hide();
+                            },
+                            error: function(xhr, status, error) {
+                                // Handle error
+                                console.error(xhr.responseText);
+                            },
+                        });
+                    } else {
+                        console.error("editId is undefined");
+                    }
+                });
+
+
+                $(document).on("click", ".add", function() {
+                    var row = $(this).closest("tr");
+                    var stockId = $(this).data("edit-id");
+                    var rowData = {};
+
+                    // Collect the updated data from the row
+                    row.find('input[type="text"], input[type="checkbox"]').each(function() {
+                        var fieldName = $(this).attr("name");
+                        var value = $(this).is(":checkbox") ? $(this).is(":checked") : $(this).val();
+                        rowData[fieldName] = value;
+                    });
+
+                    // Set the ID value if available
+                    if (stockId) {
+                        rowData.id = stockId;
+                    }
+
+                    // Perform an AJAX request to update the data on the server
+                    $.ajax({
+                        type: "POST",
+                        url: "/update-stock-data/" + stockId, // Use stockId in the URL
+                        headers: {
+                            "X-CSRF-TOKEN": csrfToken,
+                        },
+                        data: rowData,
+                        success: function(response) {
+                            // Optionally, handle success response
+                            console.log("Data updated successfully!");
+                        },
+                        error: function(xhr, status, error) {
+                            // Handle error
+                            console.error(xhr.responseText);
+                        },
+                    });
+
+                    // Show edit and hide add button
+                    row.find(".edit").show();
+                    row.find(".add").hide();
+                });
+
+
+                $(document).on("click", ".delete", function() {
+                    var delId = $(this).data("del-id");
                     var $deleteButton = $(this); // Store reference to the delete button
 
                     // Perform an AJAX request to delete the data on the server
                     $.ajax({
                         type: "DELETE", // Use DELETE method
-                        url: "/delete-stockext-data/" + editId, // Use editId in the URL
+                        url: "/delete-stock-data/" + delId, // Use editId in the URL
                         headers: {
                             "X-CSRF-TOKEN": csrfToken,
                         },
@@ -1075,7 +1211,7 @@
                             console.log("Data deleted successfully!");
                             // Remove the row from the table after successful deletion
                             $deleteButton.closest("tr")
-                        .remove(); // Use the stored reference to deleteButton
+                                .remove(); // Use the stored reference to deleteButton
                         },
                         error: function(xhr, status, error) {
                             // Handle error
@@ -1083,119 +1219,28 @@
                         },
                     });
                 });
-            });
-        </script>
-        <script>
-            $(document).ready(function(){
-            $(document).on("click", ".edit", function() {
-                var row = $(this).closest("tr");
-                var editId = $(this).data("edit-id");
-
-                if (editId) {
-                    $.ajax({
-                        type: "GET",
-                        url: "/get-stock-data/" + editId,
-                        success: function(response) {
-                            var rowData = response;
-                            row.find("td:not(:last-child)").each(function() {
-                                var fieldName = $(this).data("field-name");
-                                if (fieldName) {
-                                    var value = rowData[fieldName];
-                                    // Check if the field is an input field
-                                    var inputField = $('<input>', {
-                                        type: 'text',
-                                        class: 'form-control',
-                                        name: fieldName,
-                                        value: value
-                                    });
-                                    $(this).html(inputField);
-                                }
-                            });
-
-                            // Show the save button and hide the edit button
-                            row.find(".add").show();
-                            row.find(".edit").hide();
-                        },
-                        error: function(xhr, status, error) {
-                            // Handle error
-                            console.error(xhr.responseText);
-                        },
-                    });
-                } else {
-                    console.error("editId is undefined");
-                }
-            });
-
-
-            $(document).on("click", ".add", function() {
-                var row = $(this).closest("tr");
-                var stockId = $(this).data("edit-id");
-                var rowData = {};
-
-                // Collect the updated data from the row
-                row.find('input[type="text"], input[type="checkbox"]').each(function() {
-                    var fieldName = $(this).attr("name");
-                    var value = $(this).is(":checkbox") ? $(this).is(":checked") : $(this).val();
-                    rowData[fieldName] = value;
-                });
-
-                // Set the ID value if available
-                if (stockId) {
-                    rowData.id = stockId;
-                }
-
-                // Perform an AJAX request to update the data on the server
-                $.ajax({
-                    type: "POST",
-                    url: "/update-stock-data/" + stockId, // Use stockId in the URL
-                    headers: {
-                        "X-CSRF-TOKEN": csrfToken,
-                    },
-                    data: rowData,
-                    success: function(response) {
-                        // Optionally, handle success response
-                        console.log("Data updated successfully!");
-                    },
-                    error: function(xhr, status, error) {
-                        // Handle error
-                        console.error(xhr.responseText);
-                    },
-                });
-
-                // Show edit and hide add button
-                row.find(".edit").show();
-                row.find(".add").hide();
-            });
-
-
-            $(document).on("click", ".delete", function() {
-                var delId = $(this).data("del-id");
-                var $deleteButton = $(this); // Store reference to the delete button
-
-                // Perform an AJAX request to delete the data on the server
-                $.ajax({
-                    type: "DELETE", // Use DELETE method
-                    url: "/delete-stock-data/" + delId, // Use editId in the URL
-                    headers: {
-                        "X-CSRF-TOKEN": csrfToken,
-                    },
-                    success: function(response) {
-                        // Optionally, handle success response
-                        console.log("Data deleted successfully!");
-                        // Remove the row from the table after successful deletion
-                        $deleteButton.closest("tr")
-                    .remove(); // Use the stored reference to deleteButton
-                    },
-                    error: function(xhr, status, error) {
-                        // Handle error
-                        console.error(xhr.responseText);
-                    },
-                });
-            });
-        })
-        </script>
+            })
+        </script> --}}
 
         @include('footer')
+        <script>
+            $(document).ready(function() {
+                $("#search-input").on("keyup", function() {
+                    var searchText = $(this).val().toLowerCase();
+
+                    $(".table tbody tr").each(function() {
+                        var rowData = $(this).text().toLowerCase();
+
+                        if (rowData.indexOf(searchText) === -1 && searchText !== "") {
+                            $(this).hide();
+                        } else {
+                            $(this).show();
+                        }
+                    });
+                });
+            });
+        </script>
+
     </div>
 </body>
 

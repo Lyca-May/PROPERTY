@@ -69,7 +69,7 @@
                                                 Fund Cluster
                                             </label>
                                             <div class="col-md-6">
-                                                <input type="text" name="fund_cluster" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px; width:280px" placeholder="">
+                                                <input type="text" name="fund_cluster" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px; width:280px" placeholder="01101101" value="01101101">
                                                 @error('fund_cluster')
                                                 <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -119,11 +119,13 @@
                                                 <tr>
                                                     <th scope="row">Unit of Measurement:</th>
                                                     <td>
-                                                        <input type="text" name="unit_of_measurement" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">
+                                                        <input type="text" id="unitInput" name="unit_of_measurement" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">
+                                                        <div id="unitList"></div> <!-- Empty div for displaying matched units -->
                                                         @error('unit_of_measurement')
                                                         <span class="text-danger">{{ $message }}</span>
                                                         @enderror
                                                     </td>
+
                                                     <th scope="row">Re-Order Point</th>
                                                     <td>
                                                         <input type="text" name="reorder_point" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">
@@ -245,7 +247,7 @@
                                                         <input hidden type="text" name="bal_totalcost" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">
                                                     </td>
                                                     <td>
-                                                        <input hidden type="text" name="no_of_days" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">
+                                                        <input type="text" name="no_of_days" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">
                                                         @error('no_of_days')
                                                         <span class="text-danger">{{ $message }}</span>
                                                         @enderror
@@ -371,6 +373,59 @@
      <script src="{{ assets('assets/js/property.js') }}"></script>
 
 @endif
+<script>
+    const inventoryUnits = [
+        "Pieces (pcs)",
+        "Boxes (box)",
+        "Cartons (ctn)",
+        "Sets (set)",
+        "Packs (pack)",
+        "Dozens (doz)",
+        "Pairs (pair)",
+        "Rolls (roll)",
+        "Liters (L)",
+        "Kilograms (kg)",
+        "Grams (g)",
+        "Metric tons (t)",
+        "Gallons (gal)",
+        "Meters (m)",
+        "Square meters (m²)",
+        "Cubic meters (m³)"
+    ];
+
+    const unitInput = document.getElementById("unitInput");
+    const unitList = document.getElementById("unitList");
+
+    unitInput.addEventListener("input", function() {
+        const inputValue = unitInput.value.trim().toLowerCase();
+        const matchedUnits = inventoryUnits.filter(unit => unit.toLowerCase().includes(inputValue));
+
+        displayMatchedUnits(matchedUnits);
+    });
+
+    function displayMatchedUnits(matchedUnits) {
+        unitList.innerHTML = ""; // Clear previous content
+
+        matchedUnits.forEach(unit => {
+            const unitItem = document.createElement("div");
+            unitItem.textContent = unit;
+            unitItem.classList.add("unitItem"); // Add class for styling
+            unitItem.addEventListener("click", function() {
+                unitInput.value = unit; // Set input value to selected unit
+                unitList.innerHTML = ""; // Clear list after selection
+            });
+            unitList.appendChild(unitItem);
+        });
+    }
+
+    // Close the dropdown when clicking outside of it
+    document.addEventListener("click", function(event) {
+        if (!event.target.matches(".unitItem") && !event.target.matches("#unitInput")) {
+            unitList.innerHTML = "";
+        }
+    });
+</script>
+
 
 
 </body>

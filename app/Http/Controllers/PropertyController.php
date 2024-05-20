@@ -11,6 +11,8 @@ use App\Models\PropCardModel;
 use App\Models\SemiModel;
 use App\Models\PropCardExtension_Model;
 use App\Models\StockCardExtension_Model;
+use App\Models\SemiExtension_Model;
+use App\Models\SEPLC_Model;
 
 
 class PropertyController extends Controller
@@ -26,14 +28,15 @@ class PropertyController extends Controller
             'reorder_point' => 'required',
             'unit_of_measurement' => 'required',
             'date' => 'required|date',
+            'item_code' => 'nullable',
             'reference' => 'required',
             'receipt_qty' => 'required',
             'receipt_unitcost' => 'required',
             'receipt_totalcost' => 'required',
-            'issue_qty' => 'required',
-            'issue_unitcost' => 'required',
-            'issue_totalcost' => 'required',
-            'no_of_days' => 'required',
+            'issue_qty' => 'nullable',
+            'issue_unitcost' => 'nullable',
+            'issue_totalcost' => 'nullable',
+            'no_of_days' => 'nullable',
         ], [
             // Custom validation messages
             'entity_name.required' => 'The entity name field is required.',
@@ -47,11 +50,7 @@ class PropertyController extends Controller
             'reference.required' => 'The reference field is required.',
             'receipt_qty.required' => 'The receipt_qty field is required.',
             'receipt_unitcost.required' => 'The receipt unitcost field is required.',
-            'receipt_totalcost.required' => 'The receipt totalcost field is required.',
-            'issue_qty.required' => 'The issue quantity field is required.',
-            'issue_unitcost.required' => 'The issue unitcost field is required.',
-            'issue_totalcost.required' => 'The issue totalcost field is required.',
-            'no_of_days.required' => 'The number of days field is required.'
+            'receipt_totalcost.required' => 'The receipt totalcost field is required.'
         ]);
 
         $scAndSlc = new PropertyModel();
@@ -115,7 +114,9 @@ class PropertyController extends Controller
 
     public function printStockPage($id) {
         $stock_cards = PropertyModel::find($id);
-        return view('property_division.printable-stock-page', compact('stock_cards'));
+        $stock_ext = StockCardExtension_Model::get();
+
+        return view('property_division.printable-stock-page', compact('stock_cards', 'stock_ext'));
     }
 
     public function printStockPageAcc($id) {
@@ -134,7 +135,8 @@ class PropertyController extends Controller
     public function getDataForSLC()
     {
         $stock_card = PropertyModel::get();
-        return view('accounting_division.all', ['stock_card' => $stock_card]);
+        $stock_ext = StockCardExtension_Model::get();
+        return view('accounting_division.all', compact('stock_card', 'stock_ext'));
     }
 
     public function edit_SLC(Request $request, $id)
@@ -200,7 +202,7 @@ class PropertyController extends Controller
         ->where('issue_qty', '!=', 0)
         ->pluck('office_officer')
         ->toArray();
-        
+
         return view('property_division.propertycards', compact('prop_card', 'prop_ext', 'filteredOfficers'));
 
     }
@@ -227,20 +229,33 @@ class PropertyController extends Controller
         $prop_cards = PropCardModel::find($id);
         return view('accounting_division.printable-page', compact('prop_cards'));
     }
+
     public function printPropPage($id) {
         $prop_cards = PropCardModel::find($id);
-        return view('property_division.printable-page', compact('prop_cards'));
+        $prop_ext = PropCardExtension_Model::get();
+        return view('property_division.printable-page', compact('prop_cards', 'prop_ext'));
+    }
+    public function printSEPPage($id) {
+        $sep_card = SemiModel::find($id);
+        $semi_ext = SemiExtension_Model::get();
+
+        return view('property_division.printable-sepc-page', compact('sep_card', 'semi_ext'));
     }
 
     public function getDataForPPELC()
     {
         $prop_card = PropCardModel::get();
-        return view('accounting_division.all-ppel-card', ['prop_card' => $prop_card]);
+        $prop_ext = PropCardExtension_Model::get();
+
+        return view('accounting_division.all-ppel-card', compact('prop_card','prop_ext'));
     }
+
     public function getDataForSELC()
     {
         $sep_card = SemiModel::get();
-        return view('accounting_division.SELC', ['sep_card' => $sep_card]);
+        $semi_ext = SemiExtension_Model::get();
+        // $seplc = SEPLC_Model::get();
+        return view('accounting_division.SEPLC', compact('sep_card', 'semi_ext',));
     }
 
     public function edit_PPELC(Request $request, $id)
@@ -270,24 +285,90 @@ class PropertyController extends Controller
     public function countCard(){
 
         $stockCards = PropertyModel::count();
-        $stockLedgerCards = PropertyModel::whereNotNull('bal_qty')->whereNotNull('bal_unitcost')->whereNotNull('bal_totalcost')->count();
+        $issuedSC = StockCardExtension_Model::join('sc_andslc', 'stock_card_extension.stock_id', '=', 'sc_andslc.id')
+                    ->select('sc_andslc.item_name', DB::raw('SUM(stock_card_extension.issue_qty) as total_issue_qty'))
+                    ->groupBy('sc_andslc.item_name')
+                    ->get();
+        $purchasedSC = PropertyModel::select('item_name', DB::raw('SUM(receipt_qty) as total_receipt_qty'))
+                    ->groupBy('item_name')
+                    ->get();
+
         $PPEC= PropCardModel::count();
-        $PPELC = PropCardModel::whereNotNull('obj_acc_code')
-        ->whereNotNull('est_useful_life')
-        ->whereNotNull('rate_of_dep')
-        ->whereNotNull('accumulated_dep')
-        ->whereNotNull('accumulated_impairment_losses')
-        ->whereNotNull('issue_transfers_adjustments')
-        ->whereNotNull('adjusted_code')
-        ->whereNotNull('repair_nature')
-        ->count();
+
+        $purchasePPE = PropCardModel::select('description', DB::raw('SUM(receipt_qty) as total_receipt_qty'))
+        ->groupBy('description')
+        ->get();
+        // Fetch issued data
+        $issuedData = PropCardExtension_Model::where('issue_transfer_disposal', '=', 'ISSUE')
+        ->join('property_card', 'property_card_extenstions.prop_id', '=', 'property_card.id')
+        ->select('property_card.description', DB::raw('SUM(property_card_extenstions.issue_qty) as total_qty'))
+        ->groupBy('property_card.description')
+        ->get();
+
+        // Fetch transferred data
+        $transferredData = PropCardExtension_Model::where('issue_transfer_disposal', '=', 'TRANSFER')
+        ->join('property_card', 'property_card_extenstions.prop_id', '=', 'property_card.id')
+        ->select('property_card.description', DB::raw('SUM(property_card_extenstions.issue_qty) as total_qty'))
+        ->groupBy('property_card.description')
+        ->get();
+
+        // Fetch returned data
+        $returnedData = PropCardExtension_Model::where('issue_transfer_disposal', '=', 'RETURN')
+        ->join('property_card', 'property_card_extenstions.prop_id', '=', 'property_card.id')
+        ->select('property_card.description', DB::raw('SUM(property_card_extenstions.issue_qty) as total_qty'))
+        ->groupBy('property_card.description')
+        ->get();
+
+        // Fetch disposed data
+        $disposedData = PropCardExtension_Model::whereIn('property_card_extenstions.remarks', ['DISPOSED', 'DISPOSE', 'NON SERVICEABLE', 'NS', 'NON-SERVICEABLE'])
+        ->join('property_card', 'property_card_extenstions.prop_id', '=', 'property_card.id')
+        ->select('property_card.description', DB::raw('SUM(property_card_extenstions.issue_qty) as total_qty'))
+        ->groupBy('property_card.description')
+        ->get();
+
 
         $sepCards = SemiModel::count();
+
+
+        $purchasedSep = SemiModel::select('desc', DB::raw('SUM(receipt_qty) as total_receipt_qty'))
+        ->groupBy('desc')
+        ->get();
+
+        // Fetch issued data
+        $issuedSep = SemiExtension_Model::where('issue_transfer_disposal', '=', 'ISSUE')
+        ->join('semitbl', 'semi_extension.semi_id', '=', 'semitbl.id')
+        ->select('semitbl.desc', DB::raw('SUM(semi_extension.issue_qty) as total_qty'))
+        ->groupBy('semitbl.desc')
+        ->get();
+
+        // Fetch transferred Sep
+        $transferredSep = SemiExtension_Model::where('issue_transfer_disposal', '=', 'TRANSFER')
+        ->join('semitbl', 'semi_extension.semi_id', '=', 'semitbl.id')
+        ->select('semitbl.desc', DB::raw('SUM(semi_extension.issue_qty) as total_qty'))
+        ->groupBy('semitbl.desc')
+        ->get();
+
+        // Fetch returned Sep
+        $returnedSep = SemiExtension_Model::where('issue_transfer_disposal', '=', 'RETURN')
+        ->join('semitbl', 'semi_extension.semi_id', '=', 'semitbl.id')
+        ->select('semitbl.desc', DB::raw('SUM(semi_extension.issue_qty) as total_qty'))
+        ->groupBy('semitbl.desc')
+        ->get();
+
+        // Fetch disposed Sep
+        $disposedSep = SemiExtension_Model::whereIn('semi_extension.remarks', ['DISPOSED', 'DISPOSE', 'NON SERVICEABLE', 'NS', 'NON-SERVICEABLE'])
+        ->join('semitbl', 'semi_extension.semi_id', '=', 'semitbl.id')
+        ->select('semitbl.desc', DB::raw('SUM(semi_extension.issue_qty) as total_qty'))
+        ->groupBy('semitbl.desc')
+        ->get();
+
+
+
         $stockCardRecent = PropertyModel::where('is_clicked', 0)->latest()->first();
         $semiCardRecent = SemiModel::where('is_clicked', 0)->latest()->first();
         $propCardRecent = PropCardModel::where('is_clicked', 0)->latest()->first();
 
-        return view('property_division.dash-prop' , compact('stockCards', 'stockLedgerCards', 'PPEC', 'PPELC', 'sepCards','stockCardRecent','semiCardRecent','propCardRecent'));
+        return view('property_division.dash-prop' , compact('purchasedSep','issuedSep', 'transferredSep', 'returnedSep', 'disposedSep','purchasePPE','issuedData', 'transferredData', 'returnedData', 'disposedData', 'stockCards', 'issuedSC', 'purchasedSC',  'PPEC', 'sepCards','stockCardRecent','semiCardRecent','propCardRecent'));
     }
 
     public function clickSC($id){
@@ -311,6 +392,7 @@ class PropertyController extends Controller
             return redirect()->back()->with('failed', 'ERROR');
         }
     }
+
     public function clickSep($id){
         $sepCardRecent = SemiModel::find($id);
 
@@ -337,10 +419,10 @@ class PropertyController extends Controller
                 'receipt_unitcost' => 'required',
                 'receipt_totalcost' => 'required',
                 'item_no' => 'required',
-                'issue_qty' => 'required',
-                'office_officer' => 'required',
-                'amount' => 'required',
-                'remarks' => 'required',
+                'issue_qty' => 'nullable',
+                'office_officer' => 'nullable',
+                'amount' => 'nullable',
+                'remarks' => 'nullable',
             ], [
                 'entity_name.required' => 'The entity name field is required.',
                 'fund_cluster.required' => 'The fund cluster field is required.',
@@ -353,11 +435,7 @@ class PropertyController extends Controller
                 'receipt_qty.required' => 'The receipt quantity field is required.',
                 'receipt_unitcost.required' => 'The receipt unit cost field is required.',
                 'receipt_totalcost.required' => 'The receipt total cost field is required.',
-                'item_no.required' => 'The item number field is required.',
-                'issue_qty.required' => 'The issue quantity field is required.',
-                'office_officer.required' => 'The office officer field is required.',
-                'amount.required' => 'The amount field is required.',
-                'remarks.required' => 'The remarks field is required.',
+
             ]);
 
             $SemipropCard = new SemiModel();
@@ -372,7 +450,7 @@ class PropertyController extends Controller
     public function getDataForSEPC()
     {
         $sep_card = SemiModel::get();
-        $semi_ext = StockCardExtension_Model::get();
+        $semi_ext = SemiExtension_Model::get();
 
         return view('property_division.SEC', compact('sep_card','semi_ext'));
     }
@@ -403,7 +481,7 @@ class PropertyController extends Controller
         ->whereNotNull('accumulated_dep')
         ->whereNotNull('accumulated_impairment_losses')
         ->whereNotNull('issue_transfers_adjustments')
-        ->whereNotNull('adjusted_code')
+        ->whereNotNull('adj_cost')
         ->whereNotNull('repair_nature')
         ->count();
         $stockCardRecent = PropertyModel::where('is_clicked', 0)->latest()->first();

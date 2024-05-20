@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('semi', function (Blueprint $table) {
+        Schema::create('semitbl', function (Blueprint $table) {
             $table->id();
             $table->string('entity_name');
             $table->string('desc');
@@ -29,6 +29,14 @@ return new class extends Migration
             $table->string('bal_qty');
             $table->float('amount');
             $table->string('remarks');
+            $table->string('uacs_obj_code');
+            $table->string('acctg_reference');
+            $table->string('particulars');
+            $table->float('it_adjustment');
+            $table->float('accu_impairment_losses');
+            $table->float('adj_cost');
+            $table->float('nature_of_repair');
+            $table->float('repair_amount');
             $table->timestamps();
         });
     }
@@ -38,6 +46,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('semi');
+        Schema::dropIfExists('semitbl');
     }
 };

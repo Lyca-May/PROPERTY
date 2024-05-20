@@ -5,30 +5,29 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class StockCardExtension_Model extends Model
+class SEPLC_Model extends Model
 {
     use HasFactory;
-
-    protected $table = 'stock_card_extension';
+    protected $table = 'seplc';
     protected $primaryKey = 'id';
     protected $fillable = [
-    'stock_id',
+    'seplc_id',
     'date',
     'reference',
-    'issue_qty',
-    'office_officer',
-    'bal_qty',
-    'bal_totalcost',
-    'no_of_days',
-    'acctg_reference',
+    'uacs_obj_code',
     'particulars',
-    'issue_unitcost',
-    'issue_totalcost',
     'receipt_qty',
     'receipt_unitcost',
     'receipt_totalcost',
-    'issue_unitcost',
-    'issue_totalcost',
-    'bal_unitcost',
+    'it_adjustment',
+    'accu_impairment_losses',
+    'nature_of_repair',
+    'repair_amount',
+    'status',
     ];
+
+    public function seplc()
+    {
+        return $this->belongsTo(SemiModel::class, 'seplc_id', 'id');
+    }
 }

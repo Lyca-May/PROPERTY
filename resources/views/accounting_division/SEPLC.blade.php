@@ -170,22 +170,22 @@
                                                                 <th>Entity Name</th>
                                                                 <th>Name</th>
                                                                 <th>Description</th>
-                                                                <th>Property Number</th>
+                                                                <th>Semi-Expendable Property Number</th>
                                                                 <th>Action</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            @foreach ($prop_card as $prop_cards)
+                                                            @foreach ($sep_card as $sep_cards)
                                                                 <tr>
-                                                                    <td>{{ $prop_cards->entity_name }}</td>
-                                                                    <td>{{ $prop_cards->prop_plant_eq }}</td>
-                                                                    <td>{{ $prop_cards->description }}</td>
-                                                                    <td>{{ $prop_cards->prop_no }}</td>
+                                                                    <td>{{ $sep_cards->entity_name }}</td>
+                                                                    <td>{{ $sep_cards->sep_name }}</td>
+                                                                    <td>{{ $sep_cards->desc }}</td>
+                                                                    <td>{{ $sep_cards->sep_no }}</td>
                                                                     <td>
                                                                         <!-- View icon to trigger modal -->
                                                                         <a href="#" class="view-icon"
                                                                             data-toggle="modal"
-                                                                            data-target="#editItemModal{{ $prop_cards->id }}">
+                                                                            data-target="#editItemModal{{ $sep_cards->id }}">
                                                                             <i class="fas fa-eye"></i>
                                                                         </a>
                                                                     </td>
@@ -198,14 +198,14 @@
                                         </div>
                                     </div>
                                     <div class="row card-row">
-                                        @foreach ($prop_card as $sep)
+                                        @foreach ($sep_card as $sep)
                                             <div class="modal fade" id="editItemModal{{ $sep->id }}" tabindex="-1"
                                                 role="dialog" aria-labelledby="editItemModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-lg modal-custom-width" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <h5 class="modal-title" id="editItemModalLabel">Create
-                                                                Property Ledger Card</h5>
+                                                                Semi-Expendable Property Ledger Card</h5>
                                                             <button type="button" class="close" data-dismiss="modal"
                                                                 aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
@@ -268,16 +268,15 @@
                                                                                     <!-- Added mb-3 class to add margin bottom -->
                                                                                     <div class="col-md-3">
                                                                                         <label
-                                                                                            class="col-form-label"><b>Property,
-                                                                                                Plant and
-                                                                                                Equipment:</b></label>
+                                                                                            class="col-form-label"><b>Semi-Expendable
+                                                                                                Property:</b></label>
                                                                                     </div>
                                                                                     <div class="col-md-3">
                                                                                         <input type="text"
                                                                                             name="prop_plant_eq"
                                                                                             class="form-control text-line"
                                                                                             style="padding-top: 4px; padding-bottom: 4px;"
-                                                                                            value="{{ $sep->prop_plant_eq }}"
+                                                                                            value="{{ $sep->sep_name }}"
                                                                                             readonly>
                                                                                         @error('prop_plant_eq')
                                                                                             <span
@@ -286,7 +285,7 @@
                                                                                     </div>
                                                                                     <div class="col-md-3">
                                                                                         <label
-                                                                                            class="col-form-label"><b>
+                                                                                            class="col-form-label"><b>Semi-Expendable
                                                                                                 Property
                                                                                                 Number:</b></label>
                                                                                     </div>
@@ -295,7 +294,7 @@
                                                                                             name="prop_no"
                                                                                             class="form-control text-line"
                                                                                             style="padding-top: 4px; padding-bottom: 4px;"
-                                                                                            value="{{ $sep->prop_no }}"
+                                                                                            value="{{ $sep->sep_no }}"
                                                                                             readonly>
                                                                                         @error('prop_no')
                                                                                             <span
@@ -311,10 +310,10 @@
                                                                                     </div>
                                                                                     <div class="col-md-3">
                                                                                         <input type="text"
-                                                                                            name="description"
+                                                                                            name="desc"
                                                                                             class="form-control text-line"
                                                                                             style="padding-top: 4px; padding-bottom: 4px;"
-                                                                                            value="{{ $sep->description }}"
+                                                                                            value="{{ $sep->desc }}"
                                                                                             readonly>
                                                                                         @error('desc')
                                                                                             <span
@@ -323,16 +322,15 @@
                                                                                     </div>
                                                                                     <div class="col-md-3">
                                                                                         <label
-                                                                                            class="col-form-label"><b>
-                                                                                                Object Account
-                                                                                                Code:</b></label>
+                                                                                            class="col-form-label"><b>UACS
+                                                                                                Object Code:</b></label>
                                                                                     </div>
                                                                                     <div class="col-md-3">
                                                                                         <input type="text"
-                                                                                            name="obj_acc_code"
+                                                                                            name="uacs_obj_code"
                                                                                             class="form-control text-line"
                                                                                             style="padding-top: 4px; padding-bottom: 4px;"
-                                                                                            value="{{ $sep->obj_acc_code }}">
+                                                                                            value="{{ $sep->uacs_obj_code }}">
                                                                                         @error('uacs_obj_code')
                                                                                             <span
                                                                                                 class="text-danger">{{ $message }}</span>
@@ -365,10 +363,6 @@
                                                                                                     colspan="3"
                                                                                                     style="text-align: center;">
                                                                                                     RECEIPT
-                                                                                                </th>
-                                                                                                <th scope="col"
-                                                                                                    colspan=""
-                                                                                                    style="text-align: center;">
                                                                                                 </th>
                                                                                                 <th scope="col"
                                                                                                     colspan=""
@@ -419,18 +413,13 @@
                                                                                                 </th>
                                                                                                 <th scope="col"
                                                                                                     style="text-align: center;">
-                                                                                                    ACCUMULATED
-                                                                                                    DEPRECIATION
+                                                                                                    ISSUE / TRANSFERS /
+                                                                                                    ADJUSTMENTS
                                                                                                 </th>
                                                                                                 <th scope="col"
                                                                                                     style="text-align: center;">
                                                                                                     ACCUMULATED
                                                                                                     IMPAIRMENT LOSSES
-                                                                                                </th>
-                                                                                                <th scope="col"
-                                                                                                    style="text-align: center;">
-                                                                                                    ISSUE / TRANSFERS /
-                                                                                                    ADJUSTMENTS
                                                                                                 </th>
                                                                                                 <th scope="col"
                                                                                                     style="text-align: center;">
@@ -452,28 +441,19 @@
                                                                                         </thead>
                                                                                         <tbody>
                                                                                             <tr>
-                                                                                                <td>
-                                                                                                    <input
+                                                                                                <td><input
                                                                                                         type="date"
-                                                                                                        value="{{ \Carbon\Carbon::parse($sep->date)->format('Y-m-d') }}"
-                                                                                                        id="dateInput"
+                                                                                                        value="{{ $sep->date }}"
                                                                                                         name="date"
-                                                                                                        class="form-control text-line date-input"
+                                                                                                        class="form-control text-line"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
-                                                                                                        placeholder="dd/mm/yyyy">
+                                                                                                        placeholder="">
                                                                                                 </td>
-
-                                                                                                <script>
-                                                                                                    flatpickr('#dateInput', {
-                                                                                                        dateFormat: "d/m/Y",
-                                                                                                    });
-                                                                                                </script>
                                                                                                 <td>
                                                                                                     <textarea type="text" name="acctg_reference" class="form-control text-line"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;" placeholder="">{{ $sep->acctg_reference }}</textarea>
                                                                                                 </td>
                                                                                                 <td>
-
                                                                                                     <textarea type="text" name="particulars" class="form-control text-line"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;" placeholder="">{{ $sep->particulars }}</textarea>
                                                                                                 </td>
@@ -505,8 +485,8 @@
                                                                                                 </td>
                                                                                                 <td><input
                                                                                                         type="text"
-                                                                                                        name="accu_dep"
-                                                                                                        value="{{ $sep->accu_dep }}"
+                                                                                                        name="it_adjustment"
+                                                                                                        value="{{ $sep->it_adjustment }}"
                                                                                                         class="form-control text-line"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                         placeholder="">
@@ -515,14 +495,6 @@
                                                                                                         type="text"
                                                                                                         name="accu_impairment_losses"
                                                                                                         value="{{ $sep->accu_impairment_losses }}"
-                                                                                                        class="form-control text-line"
-                                                                                                        style="padding-top: 4px; padding-bottom: 4px;"
-                                                                                                        placeholder="">
-                                                                                                </td>
-                                                                                                <td><input
-                                                                                                        type="text"
-                                                                                                        name="it_adjustment"
-                                                                                                        value="{{ $sep->it_adjustment }}"
                                                                                                         class="form-control text-line"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                         placeholder="">
@@ -567,7 +539,7 @@
                                                                                                     </a>
                                                                                                 </td>
                                                                                             </tr>
-                                                                                            @foreach ($prop_ext->where('prop_id', $sep->id) as $data)
+                                                                                            @foreach ($semi_ext->where('semi_id', $sep->id) as $data)
                                                                                                 <tr>
                                                                                                     <td>
                                                                                                         <input
@@ -632,8 +604,8 @@
                                                                                                     </td>
                                                                                                     <td><input
                                                                                                             type="text"
-                                                                                                            name="accu_dep"
-                                                                                                            value="{{ $data->accu_dep }}"
+                                                                                                            name="it_adjustment"
+                                                                                                            value="{{ $data->it_adjustment }}"
                                                                                                             class="form-control text-line"
                                                                                                             style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                             placeholder="">
@@ -646,19 +618,10 @@
                                                                                                             style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                             placeholder="">
                                                                                                     </td>
-                                                                                                    <td><input
-                                                                                                            type="text"
-                                                                                                            name="it_adjustment"
-                                                                                                            value="{{ $data->it_adjustment }}"
-                                                                                                            class="form-control text-line"
-                                                                                                            style="padding-top: 4px; padding-bottom: 4px;"
-                                                                                                            placeholder="">
-                                                                                                    </td>
                                                                                                     <td>
                                                                                                         <input
                                                                                                             type="text"
                                                                                                             name="adj_cost"
-                                                                                                            id="adjcost"
                                                                                                             value="{{ $data->adj_cost }}"
                                                                                                             class="form-control text-line"
                                                                                                             style="padding-top: 4px; padding-bottom: 4px;"
@@ -684,13 +647,11 @@
                                                                                                         <a class="edit-data"
                                                                                                             title="Edit"
                                                                                                             data-edit-seplc="{{ $data->id }}"
-                                                                                                            data-edit="{{ $sep->id }}"
                                                                                                             data-toggle="tooltip"><i
                                                                                                                 class="material-icons">&#xE254;</i></a>
                                                                                                         <a class="add-upd"
                                                                                                             title="Add"
                                                                                                             data-edit-id="{{ $data->id }}"
-                                                                                                            data-edit="{{ $sep->id }}"
                                                                                                             data-toggle="tooltip">
                                                                                                             <i
                                                                                                                 class="material-icons">check</i>
@@ -933,11 +894,9 @@
 
                     if (rowCount === 2) {
                         console.log("Two rows added.");
-                        var accu_dep = 0;
-
-                        // var $row = table.find("tr:last");
-                        // $row.find('select[name="transfer_from"]').val(0).hide();
-                        // calculateBalance();
+                        var $row = table.find("tr:last");
+                        $row.find('select[name="transfer_from"]').val(0).hide();
+                        calculateBalance();
                     } else if (rowCount > 2) {
                         console.log("more than 2 row added.");
 
@@ -1299,12 +1258,13 @@
                     console.log("Edit icon clicked");
                     var row = $(this).closest("tr");
                     var editId = $(this).data("edit-seplc");
+                    console.log(editId);
                     var clickedEdit = $(this); // Store reference to the clicked element
 
                     if (editId) {
                         $.ajax({
                             type: "GET",
-                            url: "/get-ppelc-data/" + editId,
+                            url: "/get-seplc-data/" + editId,
                             success: function(response) {
                                 var rowData = response;
                                 row.find("td:not(:last-child)").each(function() {
@@ -1357,9 +1317,8 @@
                     };
 
                     // Add the value of uacs_obj_code input field to rowData
-                    var ObjAccCodeValue = $('input[name="obj_acc_code"]').val();
-                    rowData["obj_acc_code"] = ObjAccCodeValue;
-                    console.log(ObjAccCodeValue);
+                    var uacsObjCodeValue = $('input[name="uacs_obj_code"]').val();
+                    rowData["uacs_obj_code"] = uacsObjCodeValue;
 
                     // Collect the updated data from the row
                     row.find('input[type="date"], textarea, input[type="text"]').each(function() {
@@ -1376,7 +1335,7 @@
                     // Perform an AJAX request to update the data on the server
                     $.ajax({
                         type: "POST",
-                        url: "/update-ppelc-data/" + propId, // Use editId in the URL
+                        url: "/update-seplc-data/" + propId, // Use editId in the URL
                         headers: {
                             "X-CSRF-TOKEN": csrfToken,
                         },
@@ -1401,25 +1360,16 @@
         {{-- FOR EDITING THE EXT SEPLC --}}
         <script>
             $(document).ready(function() {
-            var csrfToken = "{{ csrf_token() }}";
-
                 // Click event handler for the "edit" icon
                 $(document).on("click", ".edit-data", function() {
                     console.log("Edit icon clicked");
                     var row = $(this).closest("tr");
                     var editId = $(this).data("edit-seplc");
-                    var propId = $(this).data("edit");
                     console.log(editId);
-                    console.log(propId);
-
-                    var rowCount = $("table tbody tr").length;
-                    console.log("rowCount:", rowCount);
-
-
                     if (editId) {
                         $.ajax({
                             type: "GET",
-                            url: "/get-ppelc-ext-data/" + editId,
+                            url: "/get-seplc-ext-data/" + editId,
                             success: function(response) {
                                 var rowData = response;
                                 row.find("td:not(:last-child)").each(function() {
@@ -1447,17 +1397,83 @@
                                         }
                                     }
                                 });
+
+                                // Input event handler for it_adjustment
+                                $(document).on('input',
+                                    'input[name="it_adjustment"], input[name="accu_impairment_losses"]',
+                                    function() {
+                                        var currentInput = $(this);
+                                        var currentValue = parseFloat(currentInput.val()) || 0;
+                                        var row = currentInput.closest('tr');
+                                        var rowCount = $("table tbody tr").length;
+                                        console.log("rowCount:", rowCount);
+                                        if(rowCount = 12){
+                                            // Perform the AJAX request and update adj_cost for it_adjustment
+                                            $.ajax({
+                                                url: '/getLatestData/' + editId,
+                                                type: 'GET',
+                                                success: function(previousRow) {
+                                                    var adjCostPrev = parseFloat(
+                                                            previousRow.adj_cost) ||
+                                                        0;
+                                                    var adjustmentDifference =
+                                                        adjCostPrev - currentValue;
+                                                    var adjCostInputCurr = row.find(
+                                                        'input[name="adj_cost"]'
+                                                        );
+                                                    adjCostInputCurr.val(
+                                                        adjustmentDifference
+                                                        .toFixed(2));
+                                                    currentInput.data(
+                                                        'previous-value',
+                                                        currentValue);
+                                                },
+                                                error: function(xhr, status, error) {
+                                                    console.error(
+                                                        'Error fetching latest data:',
+                                                        error);
+                                                }
+                                            });
+                                        }else if (rowCount > 12){
+                                            $.ajax({
+                                                url: '/getLatestData/' + editId,
+                                                type: 'GET',
+                                                success: function(previousRow) {
+                                                    var adjCostPrev = parseFloat(
+                                                            previousRow.adj_cost) ||
+                                                        0;
+                                                    var adjustmentDifference =
+                                                        adjCostPrev - currentValue;
+                                                    var adjCostInputCurr = row.find(
+                                                        'input[name="adj_cost"]'
+                                                        );
+                                                    adjCostInputCurr.val(
+                                                        adjustmentDifference
+                                                        .toFixed(2));
+                                                    currentInput.data(
+                                                        'previous-value',
+                                                        currentValue);
+                                                },
+                                                error: function(xhr, status, error) {
+                                                    console.error(
+                                                        'Error fetching latest data:',
+                                                        error);
+                                                }
+                                            });
+                                        }
+
+                                    });
                             },
                             error: function(xhr, status, error) {
                                 // Handle error
                                 console.error(xhr.responseText);
                             },
                         });
-                        $(this).hide();
-                        $(".add-upd").show();
+
                     } else {
                         console.error("editId is undefined");
                     }
+
                 });
 
 
@@ -1465,10 +1481,8 @@
                 $(document).on("click", ".add-upd", function() {
                     console.log("Editadd icon clicked");
                     var row = $(this).closest("tr");
-                    var extId = $(this).data("edit-id");
-                    var propId = $(this).data("edit");
+                    var propId = $(this).data("edit-id");
                     console.log(propId);
-                    console.log(extId);
                     var rowData = {
                         prop_id: propId,
                     };
@@ -1487,7 +1501,7 @@
                     // Perform an AJAX request to update the data on the server
                     $.ajax({
                         type: "POST",
-                        url: "/update-ppelcext-data/" + extId, // Use editId in the URL
+                        url: "/update-seplcext-data/" + propId, // Use editId in the URL
                         headers: {
                             "X-CSRF-TOKEN": csrfToken,
                         },
@@ -1509,12 +1523,9 @@
             });
         </script>
 
-{{-- <script>
-    $(document).ready(function() {
 
-    });
-</script> --}}
-=
+
+
 
         @include('footer')
     </div>

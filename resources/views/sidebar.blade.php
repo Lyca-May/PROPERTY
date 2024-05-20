@@ -39,10 +39,10 @@
                 </li>
 
 
-                <li class="menu-header">ACCOUNTABILITY</li>
-                <li>
+                {{-- <li class="menu-header">ACCOUNTABILITY</li> --}}
+                {{-- <li>
                     <a href="{{ url ('/all-users') }}"><i class="ion ion-person"></i><span>Users</span></a>
-                </li>
+                </li> --}}
             </ul>
         </aside>
     </div>

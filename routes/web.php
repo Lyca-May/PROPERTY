@@ -2,10 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\PPELC_Controller;
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PropCardExtension_Controller;
 use App\Http\Controllers\StockCardExtension_Controller;
+use App\Http\Controllers\SemiExtension_Controller;
+use App\Http\Controllers\SEPLC_Controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,6 +63,7 @@ Route::get('/all-property', [PropertyController::class, 'getPropertyCards']);
 Route::get('/view-ppelc/{id}', [PropertyController::class, 'viewPPELC']);
 Route::get('/printable-prop-page/{id}', [PropertyController::class, 'printPropPage']);
 Route::get('/printable-prop-pageAcc/{id}', [PropertyController::class, 'printPropPageAcc']);
+Route::get('/printable-sepc-page/{id}', [PropertyController::class, 'printSEPPage']);
 Route::post('/edit-property-card/{id}', [PropertyController::class, 'edit_property_card']);
 Route::post('clicked-sep/{id}', [PropertyController::class, 'clickSep']);
 
@@ -79,14 +83,32 @@ Route::post('/update-stock-data/{id}', [PropertyController::class, 'saveEditedDa
 Route::delete('/delete-stock-data/{id}', [PropertyController::class, 'deleteStock']);
 
 
-
-
 //ppelc
 Route::get('/all-ppelc', [PropertyController::class, 'getDataForPPELC']);
-Route::post('/edit-ppelc-card/{id}', [PropertyController::class, 'edit_PPELC']);
+// Route::post('/edit-ppelc-card/{id}', [PropertyController::class, 'edit_PPELC']);
+Route::get('/get-ppelc-data/{id}', [PPELC_Controller::class, 'getPPELCData']);
+Route::post('/update-ppelc-data/{id}', [PPELC_Controller::class, 'updatePPELC']);
+Route::get('/get-ppelc-ext-data/{id}', [PPELC_Controller::class, 'getPPELC_EXTData']);
+Route::post('/update-ppelcext-data/{id}', [PPELC_Controller::class, 'updatePPELCext']);
+Route::get('/getPropAdjCost/{id}', [PPELC_Controller::class, 'getLatestData']);
+Route::get('/getPropExtAdjCost/{propId}', [PPELC_Controller::class, 'getPropExtData']);
+
+
+
+
 
 // semi-expandable ledger card
 Route::get('/all-semi-expandable-ledger', [PropertyController::class, 'getDataForSELC']);
+Route::get('/get-latest-adj-cost', [SEPLC_Controller::class, 'getLatestAdjCost']);
+// Route::post('/add-seplc-data', [SEPLC_Controller::class, 'createSEPLC']);
+Route::post('/update-seplc-data/{id}', [SEPLC_Controller::class, 'updateSEPLC']);
+Route::post('/update-seplcext-data/{id}', [SEPLC_Controller::class, 'updateSEPLCext']);
+Route::get('/get-seplc-data/{id}', [SEPLC_Controller::class, 'getSEPLCData']);
+Route::get('/get-seplc-ext-data/{id}', [SEPLC_Controller::class, 'getSEPLC_EXTData']);
+Route::get('/getLatestData/{id}', [SEPLC_Controller::class, 'getLatestData']);
+
+
+
 
 // users
 Route::get('/all-users', [UserController::class, 'getUsers']);
@@ -101,6 +123,16 @@ Route::get('/get-latest-issue-row', [PropCardExtension_Controller::class, 'getLa
 Route::get('/get-prop-id', [PropCardExtension_Controller::class, 'getPropID']);
 Route::get('/get-disposal-issue-qty', [PropCardExtension_Controller::class, 'getDisposalIssueQty']);
 
+//semiext
+Route::post('/add-semi-extension', [SemiExtension_Controller::class, 'addSemiExt']);
+Route::get('/get-semi-ext-data/{id}', [SemiExtension_Controller::class, 'getSemiExtData']);
+Route::post('/update-semi-ext-data/{id}', [SemiExtension_Controller::class, 'saveEditedData']);
+Route::delete('/delete-semiext-data/{id}', [SemiExtension_Controller::class, 'deleteSemiExt']);
+Route::get('/get-issue-qty/semicard', [SemiExtension_Controller::class, 'getOfficerIssueQty']);
+Route::get('/get-latest-issue', [SemiExtension_Controller::class, 'getLatestIssueRow']);
+Route::get('/get-semi-id', [SemiExtension_Controller::class, 'getSemiID']);
+Route::get('/get-disposal-issue-qty', [SemiExtension_Controller::class, 'getDisposalIssueQty']);
+
 
 //stock ext
 Route::post('/add-stock-extension', [StockCardExtension_Controller::class, 'addStockExt']);
@@ -108,3 +140,8 @@ Route::get('/get-stock-ext-data/{id}', [StockCardExtension_Controller::class, 'g
 Route::post('/update-stock-ext-data/{id}', [StockCardExtension_Controller::class, 'saveEditedData']);
 Route::delete('/delete-stockext-data/{id}', [StockCardExtension_Controller::class, 'deleteStockExt']);
 
+//slc
+Route::get('/get-slc-data/{id}', [StockCardExtension_Controller::class, 'getSLCData']);
+Route::post('/update-slc-data/{id}', [StockCardExtension_Controller::class, 'updateSLC']);
+Route::get('/get-slc/{id}', [StockCardExtension_Controller::class, 'getStockData']);
+Route::post('/update-slc/{id}', [StockCardExtension_Controller::class, 'saveEditedData']);

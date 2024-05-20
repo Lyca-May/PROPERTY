@@ -17,7 +17,7 @@ class PropCardExtension_Controller extends Controller
             'reference' => 'required',
             'issue_qty' => 'nullable',
             'office_officer' => 'required',
-            'issue_transfer_disposal' => 'required|in:ISSUE,TRANSFER,DISPOSAL',
+            'issue_transfer_disposal' => 'required|in:ISSUE,TRANSFER,RETURN',
             'transfer_dropdown' => 'nullable',
             'new_bal_qty' => 'nullable',
             'bal_amount' => 'nullable',

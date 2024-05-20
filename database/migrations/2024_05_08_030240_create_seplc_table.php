@@ -11,30 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('semi_extension', function (Blueprint $table) {
+        Schema::create('seplc', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('semi_id')->constrained('semi')->onDelete('cascade');
+            $table->foreignId('seplc_id')->constrained('semi')->onDelete('cascade');
+            $table->string('uacs_obj_code');
             $table->string('date');
             $table->string('reference');
-            $table->string('issue_qty');
+            $table->string('particulars');
             $table->string('receipt_qty');
             $table->string('receipt_unitcost');
             $table->string('receipt_totalcost');
-            $table->string('transfer_from');
-            $table->string('office_officer');
-            $table->string('issue_transfer_disposal');
-            $table->string('item_no');
-            $table->string('bal_qty');
-            $table->float('bal_amount');
-            $table->string('remarks');
-            $table->string('uacs_obj_code');
-            $table->string('acctg_reference');
-            $table->string('particulars');
             $table->float('it_adjustment');
             $table->float('accu_impairment_losses');
             $table->float('adj_cost');
             $table->float('nature_of_repair');
             $table->float('repair_amount');
+            $table->float('status');
             $table->timestamps();
         });
     }
@@ -44,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('semi_extension');
+        Schema::dropIfExists('seplc');
     }
 };

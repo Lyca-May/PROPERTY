@@ -9,6 +9,8 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
+
+    
     public function up(): void
     {
         Schema::create('property_card_extenstions', function (Blueprint $table) {
@@ -25,6 +27,18 @@ return new class extends Migration
             $table->string('bal_qty');
             $table->decimal('bal_amount');
             $table->string('remarks');
+            $table->string('transfer_dropdown');
+            $table->string('obj_acc_code')->nullable();
+            $table->string('est_useful_life')->nullable();
+            $table->string('rate_of_dep')->nullable();
+            $table->string('acctg_reference')->nullable();
+            $table->string('particulars')->nullable();
+            $table->string('accu_dep')->nullable();
+            $table->string('accu_impairment_losses')->nullable();
+            $table->string('it_adjustments')->nullable();
+            $table->string('adj_cost')->nullable();
+            $table->string('repair_nature')->nullable();
+            $table->string('repair_amount')->nullable();
             $table->timestamps();
         });
     }

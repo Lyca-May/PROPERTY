@@ -383,11 +383,21 @@
                                                                 <tbody>
                                                                     <tr>
                                                                         <td>
-                                                                            <input type="date" name="date" class="form-control text-line date-input" style="padding-top: 4px; padding-bottom: 4px; white-space: normal; width: 150px;" value="{{ $stock_cards->date }}" readonly>
-                                                                            @error('date')
-                                                                            <span class="text-danger">{{ $message }}</span>
-                                                                            @enderror
+                                                                            <input
+                                                                                type="date"
+                                                                                value="{{ \Carbon\Carbon::parse($stock_cards->date)->format('Y-m-d') }}"
+                                                                                id="dateInput"
+                                                                                name="date"
+                                                                                class="form-control text-line date-input"
+                                                                                style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                placeholder="dd/mm/yyyy">
                                                                         </td>
+
+                                                                        <script>
+                                                                            flatpickr('#dateInput', {
+                                                                                dateFormat: "d/m/Y",
+                                                                            });
+                                                                        </script>
                                                                         <td>
                                                                             <input type="text" name="reference" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" value="{{ $stock_cards->reference }}" readonly>
                                                                             @error('reference')

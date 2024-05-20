@@ -32,12 +32,14 @@ class PropCardModel extends Model
 
         // accounting
         'obj_acc_code',
+        'acctg_reference',
+        'particulars',
         'est_useful_life',
         'rate_of_dep',
         'accumulated_dep',
         'accumulated_impairment_losses',
         'issue_transfers_adjustments',
-        'adjusted_code',
+        'adj_cost',
         'repair_nature',
         'is_clicked',
     ];

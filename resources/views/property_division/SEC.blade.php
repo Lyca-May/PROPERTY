@@ -29,6 +29,10 @@
             margin-right: 4px;
         }
 
+        .centered-card {
+            margin: 0 auto;
+            max-width: 200%;
+        }
         table.table {
             table-layout: auto;
         }
@@ -130,7 +134,7 @@
             <div class="main-content">
                 <section class="section">
                     <h1 class="section-header">
-                        <div>Semi - Expandable Cards | Overview</div>
+                        <div>Semi - Expandable Property Cards | Overview</div>
                     </h1>
                     <div class="row">
                         <div class="card-body">
@@ -157,7 +161,7 @@
                                             <div class="col-md-12 mx-auto">
                                                 <a href="{{ url('/sec-form') }}" class="card">
                                                     <div class="card-body text-center" style="font-size: 20px">+ Add new
-                                                        semi - expandable card
+                                                       Semi-Expandable Property Card
                                                     </div>
                                                 </a>
                                             </div>
@@ -176,33 +180,46 @@
                                         </form>
                                     </div>
                                     <br>
+
+                                    <div class="centered-card">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="table-responsive">
+                                                    <table class="table table-bordered table-striped">
+                                                        <thead class="thead-dark">
+                                                            <tr>
+                                                                <th>Entity Name</th>
+                                                                <th>Name</th>
+                                                                <th>Description</th>
+                                                                <th>Semi-Expendable Property Number</th>
+                                                                <th>Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach ($sep_card as $sep_cards)
+                                                                <tr>
+                                                                    <td>{{ $sep_cards->entity_name }}</td>
+                                                                    <td>{{ $sep_cards->sep_name }}</td>
+                                                                    <td>{{ $sep_cards->desc }}</td>
+                                                                    <td>{{ $sep_cards->sep_no }}</td>
+                                                                    <td>
+                                                                        <!-- View icon to trigger modal -->
+                                                                        <a href="#" class="view-icon"
+                                                                            data-toggle="modal"
+                                                                            data-target="#editItemModal{{ $sep_cards->id }}">
+                                                                            <i class="fas fa-eye"></i>
+                                                                        </a>
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="row card-row">
                                         @foreach ($sep_card as $sep)
-                                            <div class="col-lg-3 col-md-6 col-sm-12 mb-12">
-                                                <!-- Modal trigger element -->
-                                                <a class="card2" href="#" data-toggle="modal"
-                                                    data-target="#editItemModal{{ $sep->id }}">
-                                                    <div class="card-body">
-                                                        <h3 class="card-title">ENTITY NAME:
-                                                            {{ $sep->entity_name }}
-                                                        </h3>
-                                                        <h3 class="card-title">FUND CLUSTERE:
-                                                            {{ $sep->fund_cluster }}
-                                                        </h3>
-                                                        <h3 class="card-text small">NAME:
-                                                            {{ $sep->sep_name }}
-                                                        </h3>
-                                                        <p class="card-text small">Property No/Object Account Code:
-                                                            {{ $sep->sep_no }}
-                                                        </p>
-                                                    </div>
-                                                    <div class="go-corner" href="#">
-                                                        <div class="go-arrow">
-                                                            →
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
                                             <div class="modal fade" id="editItemModal{{ $sep->id }}" tabindex="-1"
                                                 role="dialog" aria-labelledby="editItemModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-lg modal-custom-width" role="document">
@@ -234,7 +251,7 @@
                                                                                             name="entity_name"
                                                                                             class="form-control text-line"
                                                                                             style="padding-top: 4px; padding-bottom: 4px;"
-                                                                                            value="{{ $sep->entity_name }}">
+                                                                                            value="{{ $sep->entity_name }}" readonly>
                                                                                         @error('entity_name')
                                                                                             <span
                                                                                                 class="text-danger">{{ $message }}</span>
@@ -253,7 +270,7 @@
                                                                                             name="fund_cluster"
                                                                                             class="form-control text-line"
                                                                                             style="padding-top: 4px; padding-bottom: 4px;"
-                                                                                            value="{{ $sep->fund_cluster }}">
+                                                                                            value="{{ $sep->fund_cluster }}" readonly>
                                                                                         @error('fund_cluster')
                                                                                             <span
                                                                                                 class="text-danger">{{ $message }}</span>
@@ -276,7 +293,7 @@
                                                                                             name="prop_plant_eq"
                                                                                             class="form-control text-line"
                                                                                             style="padding-top: 4px; padding-bottom: 4px;"
-                                                                                            value="{{ $sep->sep_name }}">
+                                                                                            value="{{ $sep->sep_name }}" readonly>
                                                                                         @error('prop_plant_eq')
                                                                                             <span
                                                                                                 class="text-danger">{{ $message }}</span>
@@ -290,7 +307,7 @@
                                                                                             name="desc"
                                                                                             class="form-control text-line"
                                                                                             style="padding-top: 4px; padding-bottom: 4px;"
-                                                                                            value="{{ $sep->desc }}">
+                                                                                            value="{{ $sep->desc }}" readonly>
                                                                                         @error('desc')
                                                                                             <span
                                                                                                 class="text-danger">{{ $message }}</span>
@@ -306,7 +323,7 @@
                                                                                             name="prop_no"
                                                                                             class="form-control text-line"
                                                                                             style="padding-top: 4px; padding-bottom: 4px;"
-                                                                                            value="{{ $sep->sep_no }}"">
+                                                                                            value="{{ $sep->sep_no }}" readonly>
                                                                                         @error('prop_no')
                                                                                             <span
                                                                                                 class=" text-danger">{{ $message }}</span>
@@ -379,17 +396,17 @@
                                                                                                     QTY
                                                                                                 </th>
                                                                                                 <th scope="col"
+                                                                                                style="text-align: center;">
+                                                                                                CATEGORY
+                                                                                                </th>
+                                                                                                <th scope="col"
                                                                                                     style="text-align: center;">
-                                                                                                    TRANSFER FROM?
+                                                                                                    FROM WHO?
                                                                                                 </th>
                                                                                                 <th scope="col"
                                                                                                     style="text-align: center;">
                                                                                                     OFFICE
                                                                                                     OFFICER</th>
-                                                                                                <th scope="col"
-                                                                                                    style="text-align: center;">
-                                                                                                    CATEGORY
-                                                                                                </th>
                                                                                                 <th scope="col"
                                                                                                     style="text-align: center;">
                                                                                                     QTY
@@ -446,7 +463,7 @@
                                                                                                 </td>
                                                                                                 <td>
                                                                                                     <input
-                                                                                                        type="text"
+                                                                                                        type="number"
                                                                                                         name="receipt_unitcost"
                                                                                                         id="receipt_unitcost"
                                                                                                         class="form-control text-line receipt-input"
@@ -473,14 +490,14 @@
                                                                                                     @enderror
                                                                                                 </td>
                                                                                                 <td>
-                                                                                                    <input
+                                                                                                    <textarea
                                                                                                         type="text"
                                                                                                         name="item_no"
                                                                                                         id="item_no"
                                                                                                         class="form-control text-line"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                         placeholder=""
-                                                                                                        value="{{ $sep->item_no }}" hidden>
+                                                                                                        value="{{ $sep->item_no }}">{{ $sep->item_no }}</textarea>
                                                                                                     @error('item_no')
                                                                                                         <span
                                                                                                             class="text-danger">{{ $message }}</span>
@@ -558,13 +575,13 @@
                                                                                                 </td>
                                                                                                 <td>
                                                                                                     <input
-                                                                                                        type="number"
-                                                                                                        name="amount"
+                                                                                                        type="number" step="0.01" min="0" max="100"
+                                                                                                        name="bal_amount"
                                                                                                         class="form-control text-line"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                         placeholder="" hidden
-                                                                                                        value="{{ $sep->amount }}">
-                                                                                                    @error('amount')
+                                                                                                        value="{{ $sep->bal_amount }}">
+                                                                                                    @error('bal_amount')
                                                                                                         <span
                                                                                                             class="text-danger">{{ $message }}</span>
                                                                                                     @enderror
@@ -588,10 +605,6 @@
                                                                                                         data-edit-id=""
                                                                                                         data-toggle="tooltip"><i
                                                                                                             class="material-icons">&#xE254;</i></a>
-                                                                                                    <a class="delete"
-                                                                                                        title="Delete"
-                                                                                                        data-toggle="tooltip"><i
-                                                                                                            class="material-icons">&#xE872;</i></a>
                                                                                                 </td>
                                                                                             </tr>
                                                                                             @foreach ($semi_ext->where('semi_id', $sep->id) as $data)
@@ -615,7 +628,8 @@
                                                                                                         class="form-control text-line receipt-input"
                                                                                                         id="receipt-qty"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
-                                                                                                        placeholder="">
+                                                                                                        placeholder=""
+                                                                                                        hidden>
                                                                                                 </td>
                                                                                                 <td><input
                                                                                                         type="hidden"
@@ -624,14 +638,23 @@
                                                                                                         class="form-control text-line receipt-input"
                                                                                                         id="receipt-unitost"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
-                                                                                                        placeholder="">
+                                                                                                        placeholder=""
+                                                                                                        hidden>
                                                                                                 </td>
                                                                                                 <td><input
                                                                                                         type="hidden"
                                                                                                         name="receipt_totalcost"
                                                                                                         value=""
                                                                                                         class="form-control text-line receipt-total"
-                                                                                                        style="padding-top: 4px; padding-bottom: 4px;">
+                                                                                                        style="padding-top: 4px; padding-bottom: 4px;" hidden>
+                                                                                                </td>
+                                                                                                <td><input
+                                                                                                    type="text"
+                                                                                                    name="item_no"
+                                                                                                    value="{{ $sep->item_no }}"
+                                                                                                    class="form-control text-line"
+                                                                                                    style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                                    placeholder="" >
                                                                                                 </td>
                                                                                                 <td><input
                                                                                                         type="text"
@@ -640,6 +663,27 @@
                                                                                                         class="form-control text-line"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                         placeholder="">
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <input
+                                                                                                        type="text"
+                                                                                                        name="issue_transfer_disposal"
+                                                                                                        value="{{ $data->issue_transfer_disposal }}"
+                                                                                                        class="form-control text-line"
+                                                                                                        style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                                        placeholder=""
+                                                                                                        readonly>
+                                                                                                </td>
+
+                                                                                                <td>
+                                                                                                    <input
+                                                                                                        type="text"
+                                                                                                        name="transfer_from"
+                                                                                                        value="{{ $data->transfer_from }}"
+                                                                                                        class="form-control text-line"
+                                                                                                        style="padding-top: 4px; padding-bottom: 4px;"
+                                                                                                        placeholder=""
+                                                                                                        readonly>
                                                                                                 </td>
                                                                                                 <td><input
                                                                                                         type="text"
@@ -658,42 +702,41 @@
                                                                                                         value="{{ $data->bal_qty }}"
                                                                                                         class="form-control text-line"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
-                                                                                                        placeholder="">
+                                                                                                        placeholder=""
+                                                                                                    @if ($data->issue_transfer_disposal == 'TRANSFER' || $data->issue_transfer_disposal == 'RETURN') hidden @endif>
+
                                                                                                 </td>
                                                                                                 <td><input
                                                                                                         type="text"
-                                                                                                        name="bal_totalcost"
-                                                                                                        value="{{ $data->bal_totalcost }}"
+                                                                                                        name="bal_amount"
+                                                                                                        value="{{ $data->bal_amount }}"
                                                                                                         class="form-control text-line"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
-                                                                                                        placeholder="">
+                                                                                                        placeholder=""
+                                                                                                    @if ($data->issue_transfer_disposal == 'TRANSFER' || $data->issue_transfer_disposal == 'RETURN') hidden @endif>
+
                                                                                                 </td>
                                                                                                 <td><input
                                                                                                         type="text"
-                                                                                                        name="no_of_days"
-                                                                                                        value="{{ $data->no_of_days }}"
+                                                                                                        name="remarks"
+                                                                                                        value="{{ $data->remarks }}"
                                                                                                         class="form-control text-line"
                                                                                                         style="padding-top: 4px; padding-bottom: 4px;"
                                                                                                         placeholder="">
                                                                                                 </td>
                                                                                                 <td>
-                                                                                                    <a class="add"
-                                                                                                        title="Add"
-                                                                                                        data-edit-add-stockid="{{ $sep->id }} "
-                                                                                                        data-edit-id="{{ $data->id }}"
-                                                                                                        data-toggle="tooltip"><i
-                                                                                                            class="material-icons">&#xE03B;</i></a>
                                                                                                     <a class="edit"
-                                                                                                        title="Edit"
-                                                                                                        data-edit-id="{{ $data->id }}"
-                                                                                                        data-edit-id="{{ $sep->id }} "
-                                                                                                        data-toggle="tooltip"><i
-                                                                                                            class="material-icons">&#xE254;</i></a>
-                                                                                                    <a class="delete"
-                                                                                                        title="Delete"
-                                                                                                        data-edit-id="{{ $data->id }}"
-                                                                                                        data-toggle="tooltip"><i
-                                                                                                            class="material-icons">&#xE872;</i></a>
+                                                                                                    title="Edit"
+                                                                                                    data-edit-id="{{ $data->id }}"
+                                                                                                    data-edit-id="{{ $sep->id }} "
+                                                                                                    data-toggle="tooltip"><i
+                                                                                                        class="material-icons">&#xE254;</i></a>
+                                                                                                <a class="edit-add"
+                                                                                                    title="Add"
+                                                                                                    data-edit-add-propid="{{ $sep->id }} "
+                                                                                                    data-edit-id="{{ $data->id }}"
+                                                                                                    data-toggle="tooltip" hidden><i
+                                                                                                        class="material-icons">&#xE03B;</i></a>
                                                                                                 </td>
                                                                                             </tr>
                                                                                             <tr>
@@ -707,44 +750,49 @@
                                                                     </div>
                                                                 </div>
                                                                 <br>
-                                                                {{-- <div class="row">
+                                                                <div class="row">
                                                                     <div class="col-md-6">
 
-                                                                        <a type="button" class="btn btn-danger"
+                                                                        {{-- <a type="button" class="btn btn-danger"
                                                                             href="{{ url('/view-seplc/' . $sep->id) }}">View
-                                                                            SEP Ledger Card</a>
+                                                                            SEP Ledger Card</a> --}}
+                                                                            <button type="button"
+                                                                            data-semi-id="{{ $sep->id }}"
+                                                                            class="btn btn-info add-new"><i
+                                                                                class="fa fa-plus"></i>
+                                                                            Add New</button>
+                                                                        <br>
                                                                     </div>
                                                                     <div class="col-md-6 text-right">
 
-                                                                        <button type="submit"
+                                                                        {{-- <button type="submit"
                                                                             class="btn btn-primary">Save
-                                                                            Changes</button>
-                                                                        <button type="button"
-                                                                            onclick="navigateToPrintablePage()"
-                                                                            class="btn btn-success">Preview</button>
+                                                                            Changes</button> --}}
+                                                                            <button type="button" onclick="navigateToPrintablePage('{{ $sep->id }}')" class="btn btn-success">
+                                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-printer">
+                                                                                    <path d="M6 9V2H18V9"></path>
+                                                                                    <path d="M18 14H20V20H4V14H6"></path>
+                                                                                    <path d="M16 18H8"></path>
+                                                                                    <path d="M16 12H8"></path>
+                                                                                </svg>
+                                                                            </button>
+
+                                                                            <script>
+                                                                                function navigateToPrintablePage(propId) {
+                                                                                    window.location.href = '/printable-sepc-page/' + propId;
+                                                                                }
+                                                                            </script>
+
+
+
                                                                     </div>
-                                                                </div> --}}
+                                                                </div>
                                                             </form>
-                                                            <button type="button"
-                                                                data-semi-id="{{ $sep->id }}"
-                                                                class="btn btn-info add-new"><i
-                                                                    class="fa fa-plus"></i>
-                                                                Add New</button>
-                                                            <br>
+
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-
-                                            {{-- <script>
-                                                // Function to navigate to the printable page
-                                                function navigateToPrintablePage() {
-                                                    // Assuming 'sep_id' is the parameter to be passed
-                                                    var sep_id = '{{ $sep->id }}';
-                                                    // Navigate to the printable page
-                                                    window.location.href = '/printable-prop-page/' + sep_id;
-                                                }
-                                            </script> --}}
                                             <script>
                                                 // Select receipt input fields
                                                 const receiptInputs = document.querySelectorAll('.receipt-input');
@@ -832,102 +880,592 @@
 
 
         <script>
-             var csrfToken = "{{ csrf_token() }}";
-            $(document).ready(function() {
-                $('[data-toggle="tooltip"]').tooltip();
+            var csrfToken = "{{ csrf_token() }}";
+           $(document).ready(function() {
+               $('[data-toggle="tooltip"]').tooltip();
 
-                $(document).on('click', '.add-new', function(event) {
-                    event.preventDefault();
-                    var semiId = $(this).data("semi-id");
-                    var modal = $('#editItemModal' + semiId);
-                    var table = modal.find('.table-bordered.table-resizable tbody');
-                    var editId = $(this).data("edit-id");
-                    var actions =
-                        '<a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>' +
-                        '<a class="edit" title="Edit" data-edit-id="' + editId +
-                        '" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>' +
-                        '<a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>';
+               $(document).on('click', '.add-new', function(event) {
+                   event.preventDefault();
+                   var semiId = $(this).data("semi-id");
+                   var modal = $('#editItemModal' + semiId);
+                   var table = modal.find('.table-bordered.table-resizable tbody');
+                   var editId = $(this).data("edit-id");
+                   var actions =
+                       '<a class="add" title="Add" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>' +
+                       '<a class="edit" title="Edit" data-edit-id="' + editId +
+                       '" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>' +
+                       '<a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>';
 
-                        var row = $('<tr>').append(
-                            $('<td>').append('<input type="date" class="form-control text-line" name="date" style="padding-top: 4px; padding-bottom: 4px;" value="">'),
-                            $('<td>').append('<input type="text" name="ref" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">'),
-                            $('<td>').append('<input type="text" class="form-control text-line receipt-input" name="" id="receipt_qtyy" style="padding-top: 4px; padding-bottom: 4px;" placeholder="" value="">'),
-                            $('<td>').append('<input type="text" class="form-control text-line receipt-input" name="" id="receipt_unitcost" style="padding-top: 4px; padding-bottom: 4px;" placeholder="" value="">'),
-                            $('<td>').append('<input type="text" class="form-control text-line receipt-total" name="" id="receipt_totalcost" style="padding-top: 4px; padding-bottom: 4px;" value="">'),
-                            $('<td>').append('<input type="text" class="form-control text-line" name="item_no" style="padding-top: 4px; padding-bottom: 4px;" value="">'),
-                            $('<td>').append('<input type="text" class="form-control text-line" name="issue_qty" style="padding-top: 4px; padding-bottom: 4px;" value="">'),
-                                $('<td>').append(
-                                $('<select>').addClass('form-control text-line').attr('name', 'issue_transfer_disposal').css({'padding-top': '4px', 'padding-bottom': '4px'}).append(
-                                    $('<option>').val('WHO').text('TRANSFER FROM?')
-                                )
+                       var row = $('<tr>').append(
+                           $('<td>').append('<input  type="date" class="form-control text-line" name="date" style="padding-top: 4px; padding-bottom: 4px;" value="">'),
+                           $('<td>').append('<input  type="text" name="reference" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">'),
+                           $('<td>').append('<input hidden type="text" class="form-control text-line receipt-input" name="" id="receipt_qtyy" style="padding-top: 4px; padding-bottom: 4px;" placeholder="" value="">'),
+                           $('<td>').append('<input hidden type="text" class="form-control text-line receipt-input" name="" id="receipt_unitcost" style="padding-top: 4px; padding-bottom: 4px;" placeholder="" value="">'),
+                           $('<td>').append('<input hidden type="text" class="form-control text-line receipt-total" name="" id="receipt_totalcost" style="padding-top: 4px; padding-bottom: 4px;" value="">'),
+                           $('<td>').append('<input hidden type="text" class="form-control text-line" name="item_no" style="padding-top: 4px; padding-bottom: 4px;" value="">'),
+                           $('<td>').append('<input type="text" class="form-control text-line" name="issue_qty" style="padding-top: 4px; padding-bottom: 4px;" value="">'),
+                           $('<td>').append(
+                                $('<select>', {
+                                    'name': 'issue_transfer_disposal',
+                                    'id': 'issue_transfer_disposal',
+                                    'class': 'form-control text-line',
+                                    'style': 'padding-top: 4px; padding-bottom: 4px;'
+                                }).append(
+                                    $('<option>', {
+                                        value: '',
+                                        text: 'Select'
+                                    }),
+                                    $('<option>', {
+                                        value: 'ISSUE',
+                                        text: 'Issue'
+                                    }),
+                                    $('<option>', {
+                                        value: 'TRANSFER',
+                                        text: 'Transfer'
+                                    }),
+                                    $('<option>', {
+                                        value: 'RETURN',
+                                        text: 'Return'
+                                    })
+                                )),
+                                $('<td class="select">').append(
+                                $('<select>').attr({
+                                    'name': 'transfer_from',
+                                    'id': 'transfer_from',
+                                    'class': 'form-control text-line',
+                                    'style': 'padding-top: 4px; padding-bottom: 4px;'
+                                })
                             ),
-                                $('<td>').append('<input type="text" class="form-control text-line" name="office_officer" style="padding-top: 4px; padding-bottom: 4px;" value="">'),
-                            $('<td>').append(
-                                $('<select>').addClass('form-control text-line').attr('name', 'issue_transfer_disposal').css({'padding-top': '4px', 'padding-bottom': '4px'}).append(
-                                    $('<option>').val('ISSUE').text('Transfer'),
-                                    $('<option>').val('TRANSFER').text('Transfer'),
-                                    $('<option>').val('DISPOSAL').text('Disposal')
-                                )
-                            ),
-                            $('<td>').append('<input type="text" class="form-control text-line" name="bal_qty" style="padding-top: 4px; padding-bottom: 4px;" value="">'),
-                            $('<td>').append('<input type="text" class="form-control text-line" name="bal_amount" style="padding-top: 4px; padding-bottom: 4px;" placeholder="" value="">'),
-                            $('<td>').append('<input type="text" name="remarks" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">'),
-                            $('<td>').append(actions),
-                            $('<td>').append('<input type="text" name="semi_id" value="' + semiId + '" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">')
-                        );
+                               $('<td>').append('<input type="text" class="form-control text-line" name="office_officer" style="padding-top: 4px; padding-bottom: 4px;" value="">'),
+                           $('<td>').append('<input type="text" class="form-control text-line" name="bal_qty" style="padding-top: 4px; padding-bottom: 4px;" value="">'),
+                           $('<td>').append('<input type="text" class="form-control text-line" name="bal_amount" style="padding-top: 4px; padding-bottom: 4px;" placeholder="" value="">'),
+                           $('<td>').append('<input type="text" name="remarks" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">'),
+                           $('<td>').append(actions),
+                           $('<td hidden>').append('<input type="text" name="semi_id" value="' + semiId + '" class="form-control text-line" style="padding-top: 4px; padding-bottom: 4px;" placeholder="">')
+                       );
 
 
-                    $("table").append(row);
-                    var rowCount = table.find("tr").length;
-                    console.log("rowCount:", rowCount);
+                   $("table").append(row);
+                   var rowCount = table.find("tr").length;
+                   console.log("rowCount:", rowCount);
 
-                    if (rowCount === 2) {
-                        console.log("row 2 has been added.");
+                   if (rowCount === 2) {
+                            console.log("Two rows added.");
+                            var $row = table.find("tr:last");
+                            $row.find('select[name="transfer_from"]').val(0).hide();
+                            calculateBalance();
+                        } else if (rowCount > 2) {
+                            console.log("more than 2 row added.");
 
-                        $(document).on("input",
-                            '.modal-body input[name="receipt_qty"], .modal-body input[name="issue_qty"]',
-                            function() {
-                                console.log("Calculating balance...");
-                                var receiptQty = $(this).closest(".modal-body").find(
-                                    'input[name="receipt_qty"]').val() || 0;
-                                var unitCost = parseFloat($(this).closest(".modal-body").find(
-                                    'input[name="receipt_unitcost"]').val()) || 0;
-                                var issueQty = $(this).closest("tr").find('input[name="issue_qty"]')
-                                .val() || 0;
+                            function handleIssueTransferChange() {
+                                var issueTransferValue = $(this).val();
+                                var $row = $(this).closest("tr");
 
-                                var balanceQty = receiptQty - issueQty;
-                                var balanceTotal = unitCost * balanceQty;
+                                if (issueTransferValue === "TRANSFER") {
+                                    $row.find('input[name="bal_qty"]').val(0).prop("hidden", true);
+                                    $row.find('input[name="bal_amount"]').val(0).prop("hidden", true);
+                                    $.ajax({
+                                        url: '/get-semi-id',
+                                        method: 'GET',
+                                        data: {
+                                            semiId: semiId
+                                        },
+                                        success: function(response) {
+                                            $('td.select').empty();
 
-                                console.log("Balance calculated. Quantity:", balanceQty, "Amount:",
-                                    balanceTotal);
+                                            var selectDropdown = $('<select>').attr({
+                                                'name': 'transfer_from',
+                                                'id': 'transfer_from',
+                                                'class': 'form-control text-line',
+                                                'style': 'padding-top: 4px; padding-bottom: 4px;'
+                                            });
+                                            $.each(response, function(index, item) {
+                                                selectDropdown.append($('<option>').attr('value', item)
+                                                    .text(item));
+                                            });
+                                            $('td.select').append(selectDropdown);
+                                        },
+                                        error: function(xhr, status, error) {
+                                            console.error('Failed to fetch data:', error);
+                                        }
+                                    });
+                                    $(document).on("input", 'input[name="issue_qty"]', function() {
+                                        var $row = $(this).closest("tr");
+                                        var issueQty = parseFloat($(this).val());
+                                        var selectedOfficer = $row.find(
+                                                'select[name="transfer_from"]')
+                                            .val();
+                                        console.log("the selected officer is " + selectedOfficer);
+                                        var $matchingRow = $row.closest(".modal-body").find(
+                                            'input[name="office_officer"]').filter(function() {
+                                            return $(this).val() === selectedOfficer;
+                                        }).closest("tr");
 
-                                $(this).closest("tr").find('input[name="bal_qty"]').val(balanceQty);
-                                $(this).closest("tr").find('input[name="bal_amount"]').val(balanceTotal
-                                    .toFixed(2));
+                                        if ($matchingRow.length) {
+                                            var officeOfficer = $matchingRow.find(
+                                                    'input[name="office_officer"]').val()
+                                                .toString(); // Convert to string
+                                            console.log("the matched office officer is " +
+                                                officeOfficer);
+                                            $.ajax({
+                                                url: '/get-issue-qty/semicard',
+                                                method: 'GET',
+                                                data: {
+                                                    officer: selectedOfficer
+                                                },
+                                                success: function(response) {
+                                                    if (response.success) {
+                                                        var officerIssueQty = response
+                                                            .issue_qty;
+                                                        console.log(officerIssueQty);
+                                                        var newIssueQty = officerIssueQty -
+                                                            issueQty;
+                                                        console.log(newIssueQty);
+                                                        $(document).trigger(
+                                                            "issueQtyUpdated", [
+                                                                newIssueQty,
+                                                                selectedOfficer
+                                                            ]);
+                                                    } else {
+                                                        console.error(
+                                                            'Failed to fetch issue_qty for officer ' +
+                                                            selectedOfficer);
+                                                    }
+                                                },
+                                                error: function(xhr, status, error) {
+                                                    console.error(
+                                                        'Failed to fetch issue_qty for officer ' +
+                                                        selectedOfficer + ': ' + error);
+                                                }
+                                            });
+                                        } else {
+                                            console.log("No matching office officer found.");
+                                        }
+                                    });
+                                } else if (issueTransferValue === "ISSUE") {
+                                    $row.find('#transfer_from').hide();
+                                    $row.find('input[name="bal_qty"]').val(0).prop("hidden", false);
+                                    $row.find('input[name="bal_amount"]').val(0).prop("hidden", false);
+                                    console.log('ISSUE IS SELECTED');
+                                    $(document).ready(function() {
+                                        $(document).on("input", 'input[name="issue_qty"]', function() {
+                                            var $row = $(this).closest("tr");
+                                            var issueQty = $(this).val();
+                                            console.log("the current issueqty is " + issueQty);
+                                            var index = $row.index();
+                                            if (index > 1 && index < $("table tbody tr").length) {
+                                                $.ajax({
+                                                    url: "/get-latest-issue",
+                                                    method: "GET",
+                                                    success: function(response) {
+                                                        if (response.bal_qty) {
+                                                            console.log('ISSUE HAS BEEN FOUND!');
+                                                            var prevRowBalQty = parseFloat(response.bal_qty);
+                                                            var unitCost = parseFloat($row.closest(".modal-body").find(
+                                                                'input[name="receipt_unitcost"]').val()) || 0;
+                                                            var issueQty = parseFloat($row.find('input[name="issue_qty"]').val());
+                                                            var newBalQty = prevRowBalQty - issueQty;
+                                                            var newBalAm = unitCost * newBalQty;
+                                                            console.log(newBalQty, newBalAm);
+
+                                                            $row.find('input[name="bal_qty"]').val(newBalQty);
+                                                            $row.find('input[name="bal_amount"]').val(newBalAm.toFixed(2));
+                                                        } else {
+                                                            console.log("No previous row with ISSUE value found.");
+                                                        }
+                                                    },
+                                                    error: function(xhr, status, error) {
+                                                        console.error("Error fetching latest issue row:", error);
+                                                    }
+                                                });
+                                            }else{
+                                                console.log("error");
+                                            }
+                                        });
+                                    });
+                                }
+                                else if (issueTransferValue === "RETURN") {
+                                    $row.find('input[name="bal_qty"]').val(0).prop("hidden", true);
+                                    $row.find('input[name="bal_amount"]').val(0).prop("hidden", true);
+                                    $.ajax({
+                                        url: '/get-semi-id',
+                                        method: 'GET',
+                                        data: {
+                                            semiId: semiId
+                                        },
+                                        success: function(response) {
+                                            $('td.select').empty();
+
+                                            var selectDropdown = $('<select>').attr({
+                                                'name': 'transfer_from',
+                                                'id': 'transfer_from',
+                                                'class': 'form-control text-line',
+                                                'style': 'padding-top: 4px; padding-bottom: 4px;'
+                                            });
+                                            $.each(response, function(index, item) {
+                                                selectDropdown.append($('<option>').attr('value', item)
+                                                    .text(item));
+                                            });
+                                            $('td.select').append(selectDropdown);
+                                        },
+                                        error: function(xhr, status, error) {
+                                            console.error('Failed to fetch data:', error);
+                                        }
+                                    });
+                                    $(document).on("input", 'input[name="issue_qty"]', function() {
+                                        var $row = $(this).closest("tr");
+                                        var issueQty = parseFloat($(this).val());
+                                        var selectedOfficer = $row.find(
+                                                'select[name="transfer_from"]')
+                                            .val();
+                                        console.log("the selected officer is " + selectedOfficer);
+                                        var $matchingRow = $row.closest(".modal-body").find(
+                                            'input[name="office_officer"]').filter(function() {
+                                            return $(this).val() === selectedOfficer;
+                                        }).closest("tr");
+
+                                        if ($matchingRow.length) {
+                                            var officeOfficer = $matchingRow.find(
+                                                    'input[name="office_officer"]').val()
+                                                .toString(); // Convert to string
+                                            console.log("the matched office officer is " +
+                                                officeOfficer);
+                                            $.ajax({
+                                                url: '/get-issue-qty/semicard',
+                                                method: 'GET',
+                                                data: {
+                                                    officer: selectedOfficer
+                                                },
+                                                success: function(response) {
+                                                    if (response.success) {
+                                                        var officerIssueQty = response
+                                                            .issue_qty;
+                                                        console.log(officerIssueQty);
+                                                        var newIssueQty = officerIssueQty -
+                                                            issueQty;
+                                                        console.log(newIssueQty);
+                                                        $(document).trigger(
+                                                            "issueQtyUpdated", [
+                                                                newIssueQty,
+                                                                selectedOfficer
+                                                            ]);
+                                                    } else {
+                                                        console.error(
+                                                            'Failed to fetch issue_qty for officer ' +
+                                                            selectedOfficer);
+                                                    }
+                                                },
+                                                error: function(xhr, status, error) {
+                                                    console.error(
+                                                        'Failed to fetch issue_qty for officer ' +
+                                                        selectedOfficer + ': ' + error);
+                                                }
+                                            });
+                                        } else {
+                                            console.log("No matching office officer found.");
+                                        }
+                                    });
+                                }else{
+                                    console.log('error');
+                                }
+
+                                if (issueTransferValue === "TRANSFER") {
+                                    $row.find('#transfer_from').show();
+                                } else if (issueTransferValue === "RETURN") {
+                                    $row.find('#transfer_from').show();
+
+                                }
+                                else {
+                                    $row.find('#transfer_from').hide();
+                                    $row.find('select[name="transfer_from"]').val("");
+                                }
+                            }
+                            // Add event listener for change event on select element with name 'issue_transfer_disposal'
+                            $(document).on("change", 'select[name="issue_transfer_disposal"]',
+                                handleIssueTransferChange);
+                        }
+
+                        $('table tbody tr:last select[name="issue_transfer_disposal"]').trigger("change");
+                        $("table tbody tr:last-child").find(".add").show();
+                        $("table tbody tr:last-child").find(".edit").hide();
+                        $("table tbody tr:last-child").find(".edit-add").hide();
+                        $('[data-toggle="tooltip"]').tooltip();
+               });
+
+                //CALCULATION FOT THE 2ND ROW
+                function calculateBalance() {
+                    var receiptQty =
+                        parseFloat(
+                            $(this)
+                            .closest(".modal-body")
+                            .find('input[name="receipt_qty"]')
+                            .val()
+                        ) || 0;
+                    var unitCost =
+                        parseFloat(
+                            $(this)
+                            .closest(".modal-body")
+                            .find('input[name="receipt_unitcost"]')
+                            .val()
+                        ) || 0;
+                    var issueQty =
+                        parseFloat(
+                            $(this).closest("tr").find('input[name="issue_qty"]').val()
+                        ) || 0;
+
+                    var balanceQty = receiptQty - issueQty;
+                    var balanceAmount = unitCost * balanceQty;
+
+                    $(this).closest("tr").find('input[name="bal_qty"]').val(balanceQty);
+                    $(this)
+                        .closest("tr")
+                        .find('input[name="bal_amount"]')
+                        .val(balanceAmount.toFixed(2));
+                }
+                $(document).on(
+                    "input",
+                    '.modal-body input[name="receipt_qty"], .modal-body input[name="issue_qty"]',
+                    calculateBalance
+                );
+
+                $(document).on("issueQtyUpdated", function(event, newIssueQty, selectedOfficer) {
+                    $(document).on("click", ".add", function() {
+                        console.log("ADD BUTTON CLICKED");
+                        var rowData = {};
+                        var input = $(this).parents("tr").find(
+                            'input[type="text"], input[type="date"], textarea, select');
+                        input.each(function() {
+                            var name = $(this).attr("name");
+                            var value = $(this).val();
+                            rowData[name] = value;
+                        });
+                        $.ajax({
+                            type: "POST",
+                            url: "/add-semi-extension",
+                            headers: {
+                                "X-CSRF-TOKEN": csrfToken,
+                            },
+                            data: JSON.stringify({
+                                ...rowData,
+                                officer: selectedOfficer,
+                                newIssueQty: newIssueQty
+                            }),
+                            contentType: "application/json",
+                            success: function(response) {
+                                var newRow = "<tr>";
+                                Object.values(rowData).forEach(function(value) {
+                                    newRow += "<td>" + value + "</td>";
+                                });
+                                newRow += "<td>" + actions + "</td></tr>";
+                                $("table tbody").append(newRow);
+                            },
+                            error: function(xhr, status, error) {
+                                // Handle error
+                                console.error(xhr.responseText);
+                            },
+                        });
+
+                        $(this).parents("tr").find(".add, .edit").toggle();
+                        $(".add-new").removeAttr("disabled");
+                        $(".edit-add").removeAttr("disabled");
+                    });
+                });
+
+                //FOR DISPOSED
+                $(document).on("disposedQtyUpdated", function(event, newDisposalQty, selectedOfficer) {
+                    $(document).on("click", ".add", function() {
+                        console.log("ADD BUTTON CLICKED");
+                        var rowData = {};
+                        var input = $(this).parents("tr").find(
+                            'input[type="text"], input[type="date"], textarea, select');
+                        input.each(function() {
+                            var name = $(this).attr("name");
+                            var value = $(this).val();
+                            rowData[name] = value;
+                        });
+                        $.ajax({
+                            type: "POST",
+                            url: "/add-semi-extension",
+                            headers: {
+                                "X-CSRF-TOKEN": csrfToken,
+                            },
+                            data: JSON.stringify({
+                                ...rowData,
+                                officer: selectedOfficer,
+                                newIssueQty: newDisposalQty
+                            }),
+                            contentType: "application/json",
+                            success: function(response) {
+                                var newRow = "<tr>";
+                                Object.values(rowData).forEach(function(value) {
+                                    newRow += "<td>" + value + "</td>";
+                                });
+                                newRow += "<td>" + actions + "</td></tr>";
+                                $("table tbody").append(newRow);
+                            },
+                            error: function(xhr, status, error) {
+                                // Handle error
+                                console.error(xhr.responseText);
+                            },
+                        });
+
+                        $(this).parents("tr").find(".add, .edit").toggle();
+                        $(".add-new").removeAttr("disabled");
+                        $(".edit-add").removeAttr("disabled");
+                    });
+                });
+                $(document).on("click", ".add", function() {
+                    var rowData = {};
+                    var input = $(this).parents("tr").find(
+                        'input[type="text"], input[type="date"], textarea, select');
+                    input.each(function() {
+                        var name = $(this).attr("name");
+                        var value = $(this).val();
+                        rowData[name] = value;
+                    });
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/add-semi-extension",
+                        headers: {
+                            "X-CSRF-TOKEN": csrfToken,
+                        },
+                        data: rowData,
+                        success: function(response) {
+                            // Update table with new row data
+                            var newRow = "<tr>";
+                            Object.values(rowData).forEach(function(value) {
+                                newRow += "<td>" + value + "</td>";
                             });
-                    }else if(rowCount >2){
-                        console.log("More than 2 rows has been added");
+                            newRow += "<td>" + actions + "</td></tr>";
+                            $("table tbody").append(newRow);
+                            $(this).parents("tr").find(".add, .edit").toggle();
+                            $("table tbody tr:last-child").find(".edit-add").hide();
+                        },
+                        error: function(xhr, status, error) {
+                            // Handle error
+                            console.error(xhr.responseText);
+                        },
+                    });
+
+
+                    $(".add-new").removeAttr("disabled", "disabled");
+                });
+                $(document).on("click", ".edit", function() {
+                    var row = $(this).closest("tr");
+                    var editId = $(this).data("edit-id");
+
+                    if (editId) {
+                        $.ajax({
+                            type: "GET",
+                            url: "/get-semi-ext-data/" + editId,
+                            success: function(response) {
+                                var rowData = response;
+                                row.find("td:not(:last-child)").each(function() {
+                                    var fieldName = $(this).data("field-name");
+                                    if (fieldName) {
+                                        var value = rowData[fieldName];
+                                        if (fieldName === "issue_transfer_disposal") {
+                                            // Handle checkboxes
+                                            $(this).html(
+                                                '<input type="checkbox" name="' +
+                                                fieldName +
+                                                '" ' +
+                                                (value ? "checked" : "") +
+                                                ">"
+                                            );
+                                        } else {
+                                            // Handle other input fields
+                                            $(this).html(
+                                                '<input type="text" class="form-control" name="' +
+                                                fieldName +
+                                                '" value="' +
+                                                value +
+                                                '">'
+                                            );
+                                        }
+                                    }
+                                });
+
+                                // Show the save button and hide the edit button
+                                row.find(".edit-add").show();
+                                row.find(".edit").hide();
+                            },
+                            error: function(xhr, status, error) {
+                                // Handle error
+                                console.error(xhr.responseText);
+                            },
+                        });
+                    } else {
+                        console.error("editId is undefined");
+                    }
+                });
+
+                $(document).on("click", ".edit-add", function() {
+                    var row = $(this).closest("tr");
+                    var propId = $(this).data("edit-add-propid");
+                    var editId = $(this).data("edit-id");
+                    var rowData = {
+                        prop_id: propId,
+                    };
+
+                    // Collect the updated data from the row
+                    row.find('input[type="text"], input[type="checkbox"]').each(
+                        function() {
+                            var fieldName = $(this).attr("name");
+                            var value = $(this).is(":checkbox") ?
+                                $(this).is(":checked") :
+                                $(this).val();
+                            rowData[fieldName] = value;
+                        }
+                    );
+
+                    // Set the ID value if available
+                    if (editId) {
+                        rowData.id = editId;
                     }
 
-                    $("table tbody tr:last-child").find(".add").show();
-                    $("table tbody tr:last-child").find(".edit").hide();
-                    $('[data-toggle="tooltip"]').tooltip();
+                    // Perform an AJAX request to update the data on the server
+                    $.ajax({
+                        type: "POST",
+                        url: "/update-semi-ext-data/" + editId, // Use editId in the URL
+                        headers: {
+                            "X-CSRF-TOKEN": csrfToken,
+                        },
+                        data: rowData,
+                        success: function(response) {
+                            // Optionally, handle success response
+                            console.log("Data updated successfully!");
+                        },
+                        error: function(xhr, status, error) {
+                            // Handle error
+                            console.error(xhr.responseText);
+                        },
+                    });
+                    row.find(".edit").show();
+                    row.find(".add").hide();
                 });
+           });
+       </script>
 
-                // Add row on add button click
-                $(document).on("click", ".add", function() {
+        <script>
+            $(document).ready(function() {
+                $("#search-input").on("keyup", function() {
+                    var searchText = $(this).val().toLowerCase();
 
-                });
-                // Edit row on edit button click
-                $(document).on("click", ".edit", function() {
+                    $(".table tbody tr").each(function() {
+                        var rowData = $(this).text().toLowerCase();
 
-                });
-                // Delete row on delete button click
-                $(document).on("click", ".delete", function() {
-
+                        if (rowData.indexOf(searchText) === -1 && searchText !== "") {
+                            $(this).hide();
+                        } else {
+                            $(this).show();
+                        }
+                    });
                 });
             });
         </script>
+
 
         @include('footer')
     </div>

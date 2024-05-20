@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class SemiModel extends Model
 {
     use HasFactory;
-    protected $table = 'semi';
+    protected $table = 'semitbl';
     protected $primaryKey = 'id';
     protected $fillable = [
         'entity_name',
@@ -27,6 +27,19 @@ class SemiModel extends Model
         'bal_qty',
         'amount',
         'remarks',
+        'uacs_obj_code',
+       'bal_amount',
+       'remarks',
+       'uacs_obj_code',
+       'acctg_reference',
+       'particulars',
+       'it_adjustment',
+       'accu_impairment_losses',
+       'adj_cost',
+       'nature_of_repair',
+       'repair_amount',
+
+
         'is_clicked',
     ];
 
